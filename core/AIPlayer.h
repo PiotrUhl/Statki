@@ -3,6 +3,6 @@
 
 class AIPlayer : public Player {
 public:
-	//AIPlayer();
-	//~AIPlayer();
+	AIPlayer(int _BOARD_SIZE);
+	~AIPlayer();
 };

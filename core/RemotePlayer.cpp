@@ -1,7 +1,7 @@
 #ifdef NETMODULE
 #include "RemotePlayer.h"
 
-//RemotePlayer::RemotePlayer() {}
+RemotePlayer::RemotePlayer(int _BOARD_SIZE) : Player(_BOARD_SIZE) {}
 
-//RemotePlayer::~RemotePlayer() {}
+RemotePlayer::~RemotePlayer() {}
 #endif

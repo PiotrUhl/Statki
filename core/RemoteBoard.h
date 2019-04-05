@@ -4,7 +4,7 @@
 
 class RemoteBoard : public Board {
 public:
-	//RemoteBoard();
-	//~RemoteBoard();
+	RemoteBoard();
+	~RemoteBoard();
 };
 #endif

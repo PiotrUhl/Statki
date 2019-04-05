@@ -1,5 +1,5 @@
 #include "HumanPlayer.h"
 
-//HumanPlayer::HumanPlayer() {}
+HumanPlayer::HumanPlayer(int _BOARD_SIZE) : Player(_BOARD_SIZE) {}
 
-//HumanPlayer::~HumanPlayer() {}
+HumanPlayer::~HumanPlayer() {}

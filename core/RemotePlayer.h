@@ -4,7 +4,7 @@
 
 class RemotePlayer : public Player {
 public:
-	//RemotePlayer();
-	//~RemotePlayer();
+	RemotePlayer(int _BOARD_SIZE);
+	~RemotePlayer();
 };
 #endif

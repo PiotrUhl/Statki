@@ -3,7 +3,7 @@
 
 class HumanPlayer :	public Player {
 public:
-	//HumanPlayer();
-	//~HumanPlayer();
+	HumanPlayer(int _BOARD_SIZE);
+	~HumanPlayer();
 };
 
