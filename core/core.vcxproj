@@ -140,13 +140,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AIPlayer.h" />
+    <ClInclude Include="Board.h" />
     <ClInclude Include="DLLinterface.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="HumanPlayer.h" />
+    <ClInclude Include="ILogInterface.h" />
+    <ClInclude Include="INetInterface.h" />
+    <ClInclude Include="IUserInterface.h" />
+    <ClInclude Include="LocalBoard.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="RemoteBoard.h" />
+    <ClInclude Include="RemotePlayer.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AIPlayer.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="DLLinterface.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="HumanPlayer.cpp" />
+    <ClCompile Include="ILogInterface.cpp" />
+    <ClCompile Include="INetInterface.cpp" />
+    <ClCompile Include="IUserInterface.cpp" />
+    <ClCompile Include="LocalBoard.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RemoteBoard.cpp" />
+    <ClCompile Include="RemotePlayer.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

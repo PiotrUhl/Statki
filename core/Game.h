@@ -3,6 +3,7 @@
 
 class Game {
 public:
+	//Game();
+	//~Game();
 	static void run();
 };
-
