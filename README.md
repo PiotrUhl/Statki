@@ -1,2 +1,2 @@
-# pk4proj
+# Statki
 Projekt z przedmiotu Programowanie Komputerów 4
