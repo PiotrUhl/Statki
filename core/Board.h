@@ -2,7 +2,7 @@
 
 class Board {
 protected:
-	enum class ShotResult {SUNK, HIT, MISS};
+	enum ShotResult {SUNK, HIT, MISS};
 	const int BOARD_SIZE; //rozmiar planszy
 public:
 	//konstruktor
@@ -10,5 +10,5 @@ public:
 	//destruktor
 	virtual ~Board();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
-	virtual ShotResult shot(int x, int y);
+	virtual ShotResult shot(int x, int y) = 0;
 };

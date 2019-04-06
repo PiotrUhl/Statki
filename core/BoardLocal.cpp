@@ -7,4 +7,6 @@ BoardLocal::BoardLocal(int _BOARD_SIZE) : Board(_BOARD_SIZE), board(BOARD_SIZE, 
 BoardLocal::~BoardLocal() {}
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
-Board::ShotResult BoardLocal::shot(int x, int y) {}
+Board::ShotResult BoardLocal::shot(int x, int y) {
+	return ShotResult::MISS;
+}

@@ -1,11 +1,11 @@
 #pragma once
 #include "Board.h" //Board
-#include <memory> //std::shared_ptr
+#include <memory> //std::unique_ptr
 
 class Player {
 private:
 	const int BOARD_SIZE; //rozmiar planszy
-	Board myBoard; //w³asna plansza
+	std::unique_ptr<Board> myBoard; //w³asna plansza
 	Board* otherBoard; //plansza przeciwnika
 public:
 	//konstruktor
