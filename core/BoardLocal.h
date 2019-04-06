@@ -3,10 +3,10 @@
 #include "Square.h"
 #include <vector>
 
-class LocalBoard : public Board {
+class BoardLocal : public Board {
 private:
 	std::vector<std::vector<Square>> board;
 public:
-	LocalBoard(int _BOARD_SIZE);
-	~LocalBoard();
+	BoardLocal(int _BOARD_SIZE);
+	~BoardLocal();
 };

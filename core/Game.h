@@ -1,5 +1,6 @@
 #pragma once
 #include "UserInterface.h"
+#include "Player.h"
 #include <memory> //std::unique_ptr
 
 class Player;

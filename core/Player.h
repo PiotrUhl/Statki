@@ -1,13 +1,17 @@
 #pragma once
-#include "Board.h"
+#include "Board.h" //Board
 #include <memory> //std::shared_ptr
 
 class Player {
 private:
-	int BOARD_SIZE;
-	Board myBoard;
-	Board* otherBoard;
+	const int BOARD_SIZE; //rozmiar planszy
+	Board myBoard; //w³asna plansza
+	Board* otherBoard; //plansza przeciwnika
 public:
+	//konstruktor
 	Player(int _BOARD_SIZE);
+	//destruktor
 	virtual ~Player();
+	//gracz wykonuje swój ruch
+	virtual void move();
 };
