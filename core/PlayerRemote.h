@@ -8,7 +8,7 @@ public:
 	PlayerRemote(int _BOARD_SIZE);
 	//destruktor
 	~PlayerRemote();
-	//gracz wykonuje swój ruch (INetInterface In)
+	//gracz wykonuje swój ruch (INetInterface)
 	void move() override;
 };
 #endif

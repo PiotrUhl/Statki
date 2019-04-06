@@ -4,7 +4,11 @@
 
 class BoardRemote : public Board {
 public:
-	BoardRemote();
+	//konstruktor
+	BoardRemote(int _BOARD_SIZE);
+	//destruktor
 	~BoardRemote();
+	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat (INetInterface)
+	virtual ShotResult shot(int x, int y) override;
 };
 #endif
