@@ -9,6 +9,6 @@ public:
 	//destruktor
 	~BoardRemote();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat (INetInterface)
-	Board::ShotResult shot(int x, int y) override;
+	ShotResult shot(int x, int y) override;
 };
 #endif

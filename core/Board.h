@@ -2,7 +2,7 @@
 
 class Board {
 protected:
-	enum ShotResult {SUNK, HIT, MISS};
+	enum ShotResult { SUNK, HIT, MISS }; //rezultat strza³u
 	const int BOARD_SIZE; //rozmiar planszy
 public:
 	//konstruktor

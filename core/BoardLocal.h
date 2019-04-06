@@ -12,5 +12,5 @@ public:
 	//destruktor
 	~BoardLocal();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
-	Board::ShotResult shot(int x, int y) override;
+	ShotResult shot(int x, int y) override;
 };

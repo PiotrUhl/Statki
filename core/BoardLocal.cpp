@@ -8,5 +8,5 @@ BoardLocal::~BoardLocal() {}
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 Board::ShotResult BoardLocal::shot(int x, int y) {
-	return ShotResult::MISS;
+	return ShotResult::MISS; //temp
 }
