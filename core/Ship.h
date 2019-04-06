@@ -7,6 +7,8 @@ class Ship {
 private:
 	const int size; //rozmiar statku (1..4)
 	std::vector<Square*> location; //po³o¿enie statku (pola na których le¿y)
+	int damage; //iloœæ trafieñ przyjêtych przez statek
+	bool sunk; //czy statek jest zatopiony
 public:
 	//konstruktor
 	Ship(int _size);
@@ -14,4 +16,7 @@ public:
 	~Ship();
 	//trafiono w statek; zwraca czy zatopiono statek
 	bool hit();
+private:
+	//sprawdza czy statek jest zatopiony
+	bool checkSunk();
 };

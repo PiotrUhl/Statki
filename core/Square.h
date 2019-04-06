@@ -14,4 +14,7 @@ public:
 	~Square();
 	//strzelono w pole; zwraca rezultat
 	ShotResult shot();
+
+	//zmienia stan fragmentu statku w polu na "zatopiony"
+	void setToSunk();
 };
