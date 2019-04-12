@@ -10,14 +10,12 @@ Ship::~Ship() {}
 bool Ship::hit() {
 	damage++;
 	if (checkSunk()) {
-		for (auto k : location) {
+		for (auto k : location)
 			 k->setToSunk(); //informuje pola na planszy o zatopieniu statku
-		}
 		return true;
 	}
-	else {
+	else
 		return false;
-	}
 }
 
 //sprawdza czy statek jest zatopiony
