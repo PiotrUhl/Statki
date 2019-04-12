@@ -8,6 +8,8 @@ Ship::~Ship() {}
 
 //trafiono w statek; zwraca czy zatopiono statek
 bool Ship::hit() {
+	if (sunk == true)
+		throw std::logic_error("Ship already sunk");
 	damage++;
 	if (checkSunk()) {
 		for (auto k : location)
