@@ -1,6 +1,6 @@
 #pragma once
 #include "Player.h"
-
+#include <stdexcept>      // std::out_of_range; std::logic_error
 class PlayerHuman :	public Player {
 public:
 	//konstruktor

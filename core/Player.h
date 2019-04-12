@@ -3,7 +3,8 @@
 #include <memory> //std::unique_ptr
 
 class Player {
-private:
+protected:
+	enum ShotResult { SUNK, HIT, MISS }; //rezultat strza³u
 	const int BOARD_SIZE; //rozmiar planszy
 	std::unique_ptr<Board> myBoard; //w³asna plansza
 	Board* otherBoard; //plansza przeciwnika
