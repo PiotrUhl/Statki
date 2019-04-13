@@ -3,7 +3,8 @@
 
 namespace DLLinterface {
 	void runProgram() { //exported
-		Game::run();
+		Game game;
+		game.run();
 	}
 	//wyjœcie
 	bool outFlag = false;

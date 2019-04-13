@@ -10,8 +10,8 @@ PlayerHuman::~PlayerHuman() {}
 void PlayerHuman::move() {
 	int x, y; //wspó³rzêdne strza³u
 	//Interface - pobranie wspó³rzêdnych
-	int x = 0; //temp
-	int y = 0; //temp
+	x = 0; //temp
+	y = 0; //temp
 	Player::ShotResult shotResult;
 	//strza³ i obs³uga b³êdów
 	try {

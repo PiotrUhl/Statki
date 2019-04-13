@@ -13,6 +13,10 @@ public:
 	Player(int _BOARD_SIZE);
 	//destruktor
 	virtual ~Player();
+	//zwraca wskaŸnik na swoj¹ planszê
+	Board* getMyBoard();
+	//ustawia wskaŸnik na planszê przeciwnika
+	void setOtherBoard(Board* _otherBoard);
 	//gracz wykonuje swój ruch
 	virtual void move();
 };
