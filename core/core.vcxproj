@@ -142,6 +142,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Planner.h" />
+    <ClInclude Include="PlannerAI.h" />
+    <ClInclude Include="PlannerHuman.h" />
     <ClInclude Include="PlayerAI.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="DLLinterface.h" />
@@ -159,6 +162,9 @@
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Planner.cpp" />
+    <ClCompile Include="PlannerAI.cpp" />
+    <ClCompile Include="PlannerHuman.cpp" />
     <ClCompile Include="PlayerAI.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="DLLinterface.cpp" />
