@@ -9,9 +9,14 @@ Game::~Game() {}
 #include "PlayerRemote.h"
 
 void Game::run() {
-	int BOARDSIZE;
+	initialization();
+	char winner = loop();
+	ending(winner);
+}
+
+void Game::initialization() {
 	//Interface - pobierz ustawienia gry (typy graczy, rozmiar planszy)
-	//inicjalizacja pierwszego gracza
+//inicjalizacja pierwszego gracza
 	switch (player1Type) {
 	case playerType::HUMAN:
 		player1 = std::unique_ptr<Player>(new PlayerHuman(BOARDSIZE));
@@ -42,4 +47,19 @@ void Game::run() {
 	//Wymiana wskaŸników na plansze
 	player1->setOtherBoard(player2->getMyBoard());
 	player2->setOtherBoard(player1->getMyBoard());
+}
+
+char Game::loop() {
+	unsigned char winner = 0;
+	while (winner == 0) {
+		player1->move();
+		if (winner != 0)
+			break;
+		player2->move();
+	}
+	return winner;
+}
+
+void Game::ending(char winner) {
+
 }
