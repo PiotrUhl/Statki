@@ -6,6 +6,14 @@ Square::Square() : shooted(false) {}
 //destruktor
 Square::~Square() {}
 
+//przeci¹¿enie operatora != dla nullptr
+bool Square::operator!=(std::nullptr_t) {
+	if (ship == nullptr)
+		return false;
+	else
+		return true;
+}
+
 //umieszcza w polu statek 'newShip'
 void Square::set(std::shared_ptr<Ship>& newShip) {
 	ship = newShip;
