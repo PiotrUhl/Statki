@@ -5,3 +5,8 @@ PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE) {
 
 PlannerLocalAI::~PlannerLocalAI() {
 }
+
+//tworzy z u¿yciem interfejsu i zwraca utworzon¹ planszê
+std::unique_ptr<BoardLocal> PlannerLocalAI::makeBoard() {
+	return nullptr;
+}
