@@ -16,16 +16,16 @@ void Game::run() {
 
 void Game::initialization() {
 	//Interface - pobierz ustawienia gry (typy graczy, rozmiar planszy)
-//inicjalizacja pierwszego gracza
+	//inicjalizacja pierwszego gracza
 	switch (player1Type) {
 	case playerType::HUMAN:
-		player1 = std::unique_ptr<Player>(new PlayerHuman(BOARDSIZE));
+		player1 = std::make_unique<PlayerHuman>(BOARDSIZE);
 		break;
 	case playerType::AI:
-		player1 = std::unique_ptr<Player>(new PlayerAI(BOARDSIZE));
+		player1 = std::make_unique<PlayerAI>(BOARDSIZE);
 		break;
 	case playerType::REMOTE:
-		player1 = std::unique_ptr<Player>(new PlayerRemote(BOARDSIZE));
+		player1 = std::make_unique<PlayerRemote>(BOARDSIZE);
 		break;
 	default:
 		;//Interface - zg³oœ b³¹d
@@ -33,13 +33,13 @@ void Game::initialization() {
 	//inicjalizacja drugiego gracza
 	switch (player2Type) {
 	case playerType::HUMAN:
-		player2 = std::unique_ptr<Player>(new PlayerHuman(BOARDSIZE));
+		player2 = std::make_unique<PlayerHuman>(BOARDSIZE);
 		break;
 	case playerType::AI:
-		player2 = std::unique_ptr<Player>(new PlayerAI(BOARDSIZE));
+		player2 = std::make_unique<PlayerAI>(BOARDSIZE);
 		break;
 	case playerType::REMOTE:
-		player2 = std::unique_ptr<Player>(new PlayerRemote(BOARDSIZE));
+		player2 = std::make_unique<PlayerRemote>(BOARDSIZE);
 		break;
 	default:
 		;//Interface - zg³oœ b³¹d
@@ -50,11 +50,14 @@ void Game::initialization() {
 }
 
 char Game::loop() {
-	unsigned char winner = 0;
+	char winner = 0;
+	//todo: losowy wybór rozpoczynaj¹cego gracza
 	while (winner == 0) {
+		//interface - ruch gracza 1
 		player1->move();
 		if (winner != 0)
 			break;
+		//interface - ruch gracza 2
 		player2->move();
 	}
 	return winner;

@@ -6,10 +6,19 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "core\core.vcxproj", "{671C32FD-5171-40DB-8DBB-671E10F90A3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{A9CF38FB-E5AA-47C3-879A-DCECAF09DBED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{671C32FD-5171-40DB-8DBB-671E10F90A3B} = {671C32FD-5171-40DB-8DBB-671E10F90A3B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpCLI", "CsharpCLI\CsharpCLI.csproj", "{9D2CA7A1-1A4C-40ED-B917-5B1417360747}"
+	ProjectSection(ProjectDependencies) = postProject
+		{671C32FD-5171-40DB-8DBB-671E10F90A3B} = {671C32FD-5171-40DB-8DBB-671E10F90A3B}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppCLI", "CppCLI\CppCLI.vcxproj", "{A73D45B2-2828-42A2-8412-B3E50443351F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{671C32FD-5171-40DB-8DBB-671E10F90A3B} = {671C32FD-5171-40DB-8DBB-671E10F90A3B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
