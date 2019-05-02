@@ -11,6 +11,8 @@ std::vector<Square>& BoardLocal::operator [](int i) {
 	return board[i];
 }
 
+#include "Ship.h"
+
 //umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 	if ((x < 0) || (y < 0) || (direction = 'H' && x + shipSize >= BOARDSIZE) || (direction = 'V' && y + shipSize >= BOARDSIZE)) //próba umieszczenia statku poza plansz¹
