@@ -13,6 +13,8 @@ public:
 	Square();
 	//destruktor
 	~Square();
+	//umieszcza w polu statek 'newShip'
+	void set(std::shared_ptr<Ship>& newShip);
 	//strzelono w pole; zwraca rezultat; rzuca wyj¹tek std::logic_error("Square already shooted") je¿eli pole ju¿ postrzelone
 	ShotResult shot();
 	//zmienia stan fragmentu statku w polu na "zatopiony"
