@@ -26,7 +26,7 @@ bool PlannerLocal::checkPlacement(int shipSize, int x, int y, char direction = '
 			for (int k = -1; k < 2; k++) {
 				if (_x + j < 0 || _y + k < 0 || _x + j >= BOARDSIZE || _y + k >= BOARDSIZE) //je¿eli sprawdzane pole le¿y poza plansz¹, pomiñ
 					continue;
-				if (board[_x + j][_y + k] != nullptr)
+				if (board[_y + k][_x + j] != nullptr)
 					return false;
 			}
 		}

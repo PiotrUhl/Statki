@@ -3,10 +3,10 @@
 class Board {
 protected:
 	enum ShotResult { SUNK, HIT, MISS }; //rezultat strza³u
-	const int BOARD_SIZE; //rozmiar planszy
+	const int BOARDSIZE; //rozmiar planszy
 public:
 	//konstruktor
-	Board(int _BOARD_SIZE);
+	Board(int _BOARDSIZE);
 	//destruktor
 	virtual ~Board();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat

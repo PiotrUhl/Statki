@@ -11,7 +11,12 @@ public:
 	BoardLocal(int _BOARD_SIZE);
 	//destruktor
 	~BoardLocal();
+	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
+	bool placeShip(int shipSize, int x, int y, char direction);
+	//zwraca obraz tworzonej planszy
+	std::shared_ptr<char> getImage();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	ShotResult shot(int x, int y) override;
 };
 //todo: przeci¹¿yæ operator [][]
+//todo: getImage();
