@@ -1,0 +1,32 @@
+0 - empty/unshot square
+1 - shot share
+11 - unshoted, horizontal, 1-sized ship
+12 - unshoted, horizontal, 2-sized ship
+13 - unshoted, horizontal, 3-sized ship
+14 - unshoted, horizontal, 4-sized ship
+15 - unshoted, horizontal, 5-sized ship
+21 - unshoted, vertical, 1-sized ship
+22 - unshoted, vertical, 2-sized ship
+23 - unshoted, vertical, 3-sized ship
+24 - unshoted, vertical, 4-sized ship
+25 - unshoted, vertical, 5-sized ship
+111 - burning, horizontal, 1-sized ship //never used
+112 - burning, horizontal, 2-sized ship
+113 - burning, horizontal, 3-sized ship
+114 - burning, horizontal, 4-sized ship
+115 - burning, horizontal, 5-sized ship
+121 - burning, vertical, 1-sized ship
+122 - burning, vertical, 2-sized ship
+123 - burning, vertical, 3-sized ship
+124 - burning, vertical, 4-sized ship
+125 - burning, vertical, 5-sized ship
+211 - sunk, horizontal, 1-sized ship
+212 - sunk, horizontal, 2-sized ship
+213 - sunk, horizontal, 3-sized ship
+214 - sunk, horizontal, 4-sized ship
+215 - sunk, horizontal, 5-sized ship
+221 - sunk, vertical, 1-sized ship
+222 - sunk, vertical, 2-sized ship
+223 - sunk, vertical, 3-sized ship
+224 - sunk, vertical, 4-sized ship
+225 - sunk, vertical, 5-sized ship
