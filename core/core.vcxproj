@@ -84,7 +84,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level2</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>NETMODULE;WIN32;_DEBUG;CORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -141,9 +141,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Planner.h" />
-    <ClInclude Include="PlannerAI.h" />
-    <ClInclude Include="PlannerHuman.h" />
+    <ClInclude Include="PlannerLocal.h" />
+    <ClInclude Include="PlannerLocalAI.h" />
+    <ClInclude Include="PlannerLocalHuman.h" />
     <ClInclude Include="PlayerAI.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="DLLinterface.h" />
@@ -161,9 +161,9 @@
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Planner.cpp" />
-    <ClCompile Include="PlannerAI.cpp" />
-    <ClCompile Include="PlannerHuman.cpp" />
+    <ClCompile Include="PlannerLocal.cpp" />
+    <ClCompile Include="PlannerLocalAI.cpp" />
+    <ClCompile Include="PlannerLocalHuman.cpp" />
     <ClCompile Include="PlayerAI.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="DLLinterface.cpp" />

@@ -1,20 +1,10 @@
 #include "Player.h"
 
 //konstruktor
-Player::Player(int _BOARD_SIZE) : BOARD_SIZE(_BOARD_SIZE) {}
+Player::Player(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : BOARDSIZE(_BOARDSIZE), myBoard(_myBoard), otherBoard(_otherBoard) {}
 
 //destruktor
 Player::~Player() {}
-
-//zwraca wskaŸnik na swoj¹ planszê
-Board* Player::getMyBoard() {
-	return myBoard.get();
-}
-
-//ustawia wskaŸnik na planszê przeciwnika
-void Player::setOtherBoard(Board* _otherBoard) {
-	otherBoard = _otherBoard;
-}
 
 //gracz wykonuje swój ruch
 void Player::move() {}

@@ -72,13 +72,13 @@
     <ClInclude Include="BoardRemote.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Planner.h">
+    <ClInclude Include="PlannerLocal.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="PlannerAI.h">
+    <ClInclude Include="PlannerLocalAI.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="PlannerHuman.h">
+    <ClInclude Include="PlannerLocalHuman.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -128,13 +128,13 @@
     <ClCompile Include="BoardRemote.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Planner.cpp">
+    <ClCompile Include="PlannerLocal.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="PlannerAI.cpp">
+    <ClCompile Include="PlannerLocalAI.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="PlannerHuman.cpp">
+    <ClCompile Include="PlannerLocalHuman.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>

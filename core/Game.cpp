@@ -1,54 +1,39 @@
 #include "Game.h"
 
+//konstruktor
 Game::Game() {}
 
+//destruktor
 Game::~Game() {}
 
-#include "PlayerHuman.h"
-#include "PlayerAI.h"
-#include "PlayerRemote.h"
-
+//uruchom grê
 void Game::run() {
 	initialization();
 	char winner = loop();
 	ending(winner);
 }
 
+//czêœæ gry - inicjalizacja
 void Game::initialization() {
 	//Interface - pobierz ustawienia gry (typy graczy, rozmiar planszy)
-	//inicjalizacja pierwszego gracza
-	switch (player1Type) {
-	case playerType::HUMAN:
-		player1 = std::make_unique<PlayerHuman>(BOARDSIZE);
-		break;
-	case playerType::AI:
-		player1 = std::make_unique<PlayerAI>(BOARDSIZE);
-		break;
-	case playerType::REMOTE:
-		player1 = std::make_unique<PlayerRemote>(BOARDSIZE);
-		break;
-	default:
-		;//Interface - zg³oœ b³¹d
-	}
-	//inicjalizacja drugiego gracza
-	switch (player2Type) {
-	case playerType::HUMAN:
-		player2 = std::make_unique<PlayerHuman>(BOARDSIZE);
-		break;
-	case playerType::AI:
-		player2 = std::make_unique<PlayerAI>(BOARDSIZE);
-		break;
-	case playerType::REMOTE:
-		player2 = std::make_unique<PlayerRemote>(BOARDSIZE);
-		break;
-	default:
-		;//Interface - zg³oœ b³¹d
-	}
-	//Wymiana wskaŸników na plansze
-	player1->setOtherBoard(player2->getMyBoard());
-	player2->setOtherBoard(player1->getMyBoard());
+	//Tworzenie plansz graczy
+	board1 = makeBoard(player1Type);
+	board2 = makeBoard(player2Type);
+	//Sprawdzanie poprawnoœci utworzenia plansz
+	if (board1 == nullptr)
+		;//interface - zg³oœ b³¹d
+	if (board2 == nullptr)
+		;//interface - zg³oœ b³¹d
+	//Inicjalizacja graczy
+	initializePlayers();
+	//Sprawdzanie poprawnoœci inicjalizacji graczy
+	if (player1 == nullptr)
+		;//interface - zg³oœ b³¹d
+	if (player2 == nullptr)
+		;//interface - zg³oœ b³¹d
 }
 
+//czêœæ gry - g³ówna pêtla
 char Game::loop() {
 	char winner = 0;
 	//todo: losowy wybór rozpoczynaj¹cego gracza
@@ -63,6 +48,62 @@ char Game::loop() {
 	return winner;
 }
 
+//czêœæ gry - zakoñczenie
 void Game::ending(char winner) {
 
+}
+
+#include "BoardLocal.h"
+#include "BoardRemote.h"
+#include "PlannerLocalHuman.h"
+#include "PlannerLocalAI.h"
+//tworzy i zwraca planszê dla gracza o typie "plType"
+std::unique_ptr<Board> Game::makeBoard(Game::playerType plType) {
+	switch (plType) {
+	case playerType::HUMAN:
+		return PlannerLocalHuman(BOARDSIZE).makeBoard();
+		break;
+	case playerType::AI:
+		return PlannerLocalAI(BOARDSIZE).makeBoard();
+		break;
+	case playerType::REMOTE:
+		return std::make_unique<BoardRemote>(BOARDSIZE);
+		break;
+	default:
+		return nullptr;
+	}
+}
+
+#include "PlayerHuman.h"
+#include "PlayerAI.h"
+#include "PlayerRemote.h"
+//inicjalizuje graczy
+void Game::initializePlayers() {
+	switch (player1Type) {
+	case playerType::HUMAN:
+		player1 = std::make_unique<PlayerHuman>(BOARDSIZE, *board1, *board2);
+		break;
+	case playerType::AI:
+		player1 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);
+		break;
+	case playerType::REMOTE:
+		player1 = std::make_unique<PlayerRemote>(BOARDSIZE, *board1, *board2);
+		break;
+	default:
+		player1 = nullptr;
+	}
+	//inicjalizacja drugiego gracza
+	switch (player2Type) {
+	case playerType::HUMAN:
+		player2 = std::make_unique<PlayerHuman>(BOARDSIZE, *board1, *board2);
+		break;
+	case playerType::AI:
+		player2 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);
+		break;
+	case playerType::REMOTE:
+		player2 = std::make_unique<PlayerRemote>(BOARDSIZE, *board1, *board2);
+		break;
+	default:
+		player2 = nullptr;
+	}
 }

@@ -1,7 +1,7 @@
 #include "PlayerHuman.h"
 
 //konstruktor
-PlayerHuman::PlayerHuman(int _BOARD_SIZE) : Player(_BOARD_SIZE) {}
+PlayerHuman::PlayerHuman(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : Player(_BOARDSIZE, _myBoard, _otherBoard) {}
 
 //destruktor
 PlayerHuman::~PlayerHuman() {}
@@ -15,7 +15,7 @@ void PlayerHuman::move() {
 	Player::ShotResult shotResult;
 	//strza³ i obs³uga b³êdów
 	try {
-		shotResult = static_cast<Player::ShotResult>(otherBoard->shot(x, y));
+		shotResult = static_cast<Player::ShotResult>(otherBoard.shot(x, y));
 	}
 	catch (const std::out_of_range &exc) { //przekroczono zakres tablicy
 		//Interface - obs³uga b³êdnego zakresu tablicy

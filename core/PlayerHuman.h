@@ -4,7 +4,7 @@
 class PlayerHuman :	public Player {
 public:
 	//konstruktor
-	PlayerHuman(int _BOARD_SIZE);
+	PlayerHuman(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard);
 	//destruktor
 	~PlayerHuman();
 	//gracz wykonuje swój ruch (IUserInterface In)

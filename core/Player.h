@@ -5,18 +5,14 @@
 class Player {
 protected:
 	enum ShotResult { SUNK, HIT, MISS }; //rezultat strza³u
-	const int BOARD_SIZE; //rozmiar planszy
-	std::unique_ptr<Board> myBoard; //w³asna plansza
-	Board* otherBoard; //plansza przeciwnika
+	const int BOARDSIZE; //rozmiar planszy
+	Board& myBoard; //w³asna plansza
+	Board& otherBoard; //plansza przeciwnika
 public:
 	//konstruktor
-	Player(int _BOARD_SIZE);
+	Player(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard);
 	//destruktor
 	virtual ~Player();
-	//zwraca wskaŸnik na swoj¹ planszê
-	Board* getMyBoard();
-	//ustawia wskaŸnik na planszê przeciwnika
-	void setOtherBoard(Board* _otherBoard);
 	//gracz wykonuje swój ruch
 	virtual void move();
 };

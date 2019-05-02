@@ -1,15 +1,15 @@
 #pragma once
-#include "Board.h"
+#include "BoardLocal.h"
 #include <memory>
 
-class Planner {
+class PlannerLocal {
 protected:
 	const int BOARDSIZE; //rozmiar planszy
-	std::unique_ptr<Board> board; //tworzona plansza
+	std::unique_ptr<BoardLocal> board; //tworzona plansza
 	//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
-public:
-	Planner(int _BOARDSIZE); //konstruktor
-	~Planner();  //destruktor
+//public:
+	PlannerLocal(int _BOARDSIZE); //konstruktor
+	~PlannerLocal();  //destruktor
 	//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
 	bool checkPlacement(int shipSize, int x, int y, char direction);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
@@ -17,5 +17,5 @@ public:
 	//zwraca obraz tworzonej planszy
 	std::shared_ptr<char> getImage();
 	//zwraca tworzon¹ planszê
-	std::unique_ptr<Board> getBoard();
+	//std::unique_ptr<Board> getBoard();
 };

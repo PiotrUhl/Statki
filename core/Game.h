@@ -1,9 +1,8 @@
 #pragma once
-#include "UserInterface.h"
-#include "Player.h"
+//#include "UserInterface.h"
+#include "Player.h" //Player
+#include "Board.h" //Board
 #include <memory> //std::unique_ptr
-
-class Player;
 
 class Game {
 private:
@@ -11,6 +10,8 @@ private:
 	enum class playerType { NONE, HUMAN, AI, REMOTE };
 	playerType player1Type; //typ gracza 1
 	playerType player2Type; //typ gracza 2
+	std::unique_ptr<Board> board1; //plansza gracza nr 1
+	std::unique_ptr<Board> board2; //plansza gracza nr 2
 	std::unique_ptr<Player> player1; //gracz nr 1
 	std::unique_ptr<Player> player2; //gracz nr 2
 public:
@@ -27,4 +28,8 @@ private:
 	char loop();
 	//czêœæ gry - zakoñczenie
 	void ending(char winner);
+	//tworzy i zwraca planszê dla gracza o typie "plType"
+	std::unique_ptr<Board> makeBoard(playerType plType);
+	//inicjalizuje graczy; zwraca sukces/pora¿kê
+	void initializePlayers();
 };

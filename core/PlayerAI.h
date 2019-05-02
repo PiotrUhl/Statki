@@ -4,7 +4,7 @@
 class PlayerAI : public Player {
 public:
 	//konstruktor
-	PlayerAI(int _BOARD_SIZE);
+	PlayerAI(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard);
 	//destruktor
 	~PlayerAI();
 	//gracz wykonuje swój ruch
