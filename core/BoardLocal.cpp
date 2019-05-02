@@ -29,6 +29,10 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 	return true;
 }
 
+std::shared_ptr<char> BoardLocal::getImage() {
+	return nullptr;
+}
+
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 Board::ShotResult BoardLocal::shot(int x, int y) {
 	return static_cast<Board::ShotResult>(board.at(x).at(y).shot()); //strzel w dane pole
