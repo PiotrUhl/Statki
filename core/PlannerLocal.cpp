@@ -33,3 +33,14 @@ bool PlannerLocal::checkPlacement(int shipSize, int x, int y, char direction = '
 	}
 	return true;
 }
+//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
+bool PlannerLocal::place(int shipSize, int x, int y, char direction) {
+	if (checkPlacement(shipSize, x, y, direction) == false)
+		return false;
+	return board.placeShip(shipSize, x, y, direction);
+}
+
+//zwraca obraz tworzonej planszy
+std::shared_ptr<char> PlannerLocal::getImage() {
+	return board.getImage();
+}
