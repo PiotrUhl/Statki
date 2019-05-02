@@ -18,3 +18,4 @@ public:
 	//zmienia stan fragmentu statku w polu na "zatopiony"
 	void setToSunk();
 };
+//todo: przeci¹¿yæ operatory == !=

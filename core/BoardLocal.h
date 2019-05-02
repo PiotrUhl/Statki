@@ -14,3 +14,4 @@ public:
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	ShotResult shot(int x, int y) override;
 };
+//todo: przeci¹¿yæ operator [][]

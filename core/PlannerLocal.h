@@ -5,7 +5,7 @@
 class PlannerLocal {
 protected:
 	const int BOARDSIZE; //rozmiar planszy
-	std::unique_ptr<BoardLocal> board; //tworzona plansza
+	BoardLocal board; //tworzona plansza
 	//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
 //public:
 	PlannerLocal(int _BOARDSIZE); //konstruktor
