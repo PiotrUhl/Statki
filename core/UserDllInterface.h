@@ -16,6 +16,13 @@ private:
 	bool flagShootCoors; //przekazywanie wspó³rzêdnych strza³u
 	bool flagBoardChanged; //nieodczytana zmiana na planszy
 	bool flagGameEnded; //gra jest zakoñczona
+	//bufory
+	int coordX; //przekazywana wspó³rzêdna x (powi¹zane z flagShootCoords)
+	int coordY; //przekazywana wspó³rzêdna y (powi¹zane z flagShootCoords)
+	int idChangedBoard; //id zmienionej planszy (powi¹zane z flagBoardChanged)
+	char winner; //id zwyciêzcy; 3 dla remisu (powi¹zane z flagGameEnded)
+	//uchwyty
+	Board* currentlyEditedBoard; //uchwyt na obecnie edytowan¹ planszê (powi¹zane z flagMakeBoard)
 public:
 #pragma region IUserInterface	
 	//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
