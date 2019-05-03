@@ -13,7 +13,7 @@ public:
 private:
 	//flagi
 	bool flagMakeBoard; //tworzenie planszy
-	bool flagShootCoors; //przekazywanie wspó³rzêdnych strza³u
+	bool flagShootCoords; //przekazywanie wspó³rzêdnych strza³u
 	bool flagBoardChanged; //nieodczytana zmiana na planszy
 	bool flagGameEnded; //gra jest zakoñczona
 	//bufory
@@ -47,14 +47,14 @@ public:
 	bool placeShip(int shipSize, int x, int y, char direction);
 	//zeruje flagê MakeBoard (plansza jest utworzona)
 	void resetFlagMakeBoard();
-	//sprawdza czy ustawiona jest flaga ShootCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
+	//sprawdza czy ustawiona jest flaga ShootCoords (¿¹danie przekazania wspó³rzêdnych strza³u)
 	bool checkFlagShootCoords();
 	//ustawia wspó³rzêdn¹ x strza³u
-	int setShotCoordX();
+	void setShotCoordX(int);
 	//ustawia wspó³rzêdn¹ Y strza³u
-	int setShotCoordy();
-	//zeruje flagê ShootCoors (wspó³rzêdne strza³u przekazane)
-	void resetFlagShootCoors();
+	void setShotCoordY(int);
+	//zeruje flagê ShootCoords (wspó³rzêdne strza³u przekazane)
+	void resetFlagShootCoords();
 	//sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
 	int checkFlagBoardChanged();
 	//pobiera obraz planszy o numerze 'id'

@@ -14,11 +14,11 @@ namespace IDllInterface {
 	//sprawdza czy ustawiona jest flaga ShootCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
 	extern "C" __declspec(dllexport) bool checkFlagShootCoords();
 	//ustawia wspó³rzêdn¹ x strza³u
-	extern "C" __declspec(dllexport) int setShotCoordX();
+	extern "C" __declspec(dllexport) void setShotCoordX(int);
 	//ustawia wspó³rzêdn¹ y strza³u
-	extern "C" __declspec(dllexport) int setShotCoordy();
+	extern "C" __declspec(dllexport) void setShotCoordY(int);
 	//zeruje flagê ShootCoors (wspó³rzêdne strza³u przekazane)
-	extern "C" __declspec(dllexport) void resetFlagShootCoors();
+	extern "C" __declspec(dllexport) void resetFlagShootCoords();
 	//sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
 	extern "C" __declspec(dllexport) int checkFlagBoardChanged();
 	//pobiera obraz planszy o numerze 'id'

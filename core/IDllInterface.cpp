@@ -27,16 +27,16 @@ namespace IDllInterface {
 		return UserDllInterface::getInstance().checkFlagShootCoords();
 	}
 	//ustawia wspó³rzêdn¹ x strza³u
-	int setShotCoordX() {
-		return UserDllInterface::getInstance().setShotCoordX();
+	void setShotCoordX(int x) {
+		UserDllInterface::getInstance().setShotCoordX(x);
 	}
 	//ustawia wspó³rzêdn¹ y strza³u
-	int setShotCoordy() {
-		return UserDllInterface::getInstance().setShotCoordy();
+	void setShotCoordY(int y) {
+		UserDllInterface::getInstance().setShotCoordY(y);
 	}
 	//zeruje flagê ShootCoors (wspó³rzêdne strza³u przekazane)
-	void resetFlagShootCoors() {
-		UserDllInterface::getInstance().resetFlagShootCoors();
+	void resetFlagShootCoords() {
+		UserDllInterface::getInstance().resetFlagShootCoords();
 	}
 	//sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
 	int checkFlagBoardChanged() {

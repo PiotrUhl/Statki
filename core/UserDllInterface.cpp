@@ -12,11 +12,11 @@ void UserDllInterface::makeBoard(Board* board) {
 }
 //zwraca wspó³rzêdn¹ x strza³u
 int UserDllInterface::getShotCoordX() {
-	return 0;
+	return coordX;
 }
 //zwraca wspó³rzêdn¹ y strza³u
 int UserDllInterface::getShotCoordY() {
-	return 0;
+	return coordY;
 }
 //poinformuj interfejs o zmianie na planszy 'id'; waitForRespond wstrzymuje dzia³anie programu do otrzymania odpowiedzi (interfejs odczyta³ zmianê)
 void UserDllInterface::boardChanged(int id, bool waitForRespond = false) {
@@ -36,7 +36,7 @@ void UserDllInterface::runProgram() {
 }
 //sprawdza czy ustawiona jest flaga MakeBoard (¿¹danie utworzenia planszy)
 bool UserDllInterface::checkFlagMakeBoard() {
-	return false;
+	return flagMakeBoard;
 }
 //sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
 bool UserDllInterface::checkShipPlacement(int shipSize, int x, int y, char direction) {
@@ -48,23 +48,23 @@ bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 }
 //zeruje flagê MakeBoard (plansza jest utworzona)
 void UserDllInterface::resetFlagMakeBoard() {
-	
+	flagMakeBoard = false;
 }
 //sprawdza czy ustawiona jest flaga ShootCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
 bool UserDllInterface::checkFlagShootCoords() {
-	return false;
+	return flagShootCoords;
 }
 //ustawia wspó³rzêdn¹ x strza³u
-int UserDllInterface::setShotCoordX() {
-	return 0;
+void UserDllInterface::setShotCoordX(int x) {
+	coordX = x;
 }
 //ustawia wspó³rzêdn¹ Y strza³u
-int UserDllInterface::setShotCoordy() {
-	return 0;
+void UserDllInterface::setShotCoordY(int y) {
+	coordY = y;
 }
 //zeruje flagê ShootCoors (wspó³rzêdne strza³u przekazane)
-void UserDllInterface::resetFlagShootCoors() {
-	
+void UserDllInterface::resetFlagShootCoords() {
+	flagShootCoords = false;
 }
 //sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
 int UserDllInterface::checkFlagBoardChanged() {
@@ -76,10 +76,10 @@ int* UserDllInterface::getBoardImage(int id) {
 }
 //resetuje flagê BoardChanged (zg³oszeznie zmiany na planszy)
 void UserDllInterface::resetFlagBoardChanged() {
-
+	flagBoardChanged = false;
 }
 //sprawdza czy ustawiona jest flaga GameEnded (gra zakoñczona); zwraca numer zwyciêzcy
 char UserDllInterface::checkFlagGameEnded() {
-	return 0;
+	return flagGameEnded;
 }
 #pragma endregion
