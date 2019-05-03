@@ -40,10 +40,19 @@ char Game::loop() {
 	while (winner == 0) {
 		//interface - ruch gracza 1
 		player1->move();
-		if (winner != 0)
-			break;
 		//interface - ruch gracza 2
 		player2->move();
+		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
+			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
+				winner = 3; //remis
+			}
+			else {
+				winner = 1; //wygrywa gracz 1
+			}
+		}
+		else if (board1->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 1 s¹ zatopione
+			winner = 2; //wygrywa gracz 2
+		}
 	}
 	return winner;
 }
