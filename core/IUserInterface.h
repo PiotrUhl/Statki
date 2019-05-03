@@ -15,5 +15,5 @@ public:
 	//przekazuje informacje o zakoñczeniu gry
 	virtual void gameEnded(char winner) = 0;
 	//wirtualny destruktor
-	virtual ~IUserInterface() = 0;
+	//virtual ~IUserInterface() = 0;
 };

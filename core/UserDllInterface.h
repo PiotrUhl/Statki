@@ -3,14 +3,15 @@
 #include "IUserInterface.h"
 
 class UserDllInterface : public IUserInterface/*, public IDllInterface*/ {
-#pragma region singleton
-	UserDllInterface() = default;
-	UserDllInterface(const UserDllInterface&) = delete;
-	UserDllInterface& operator=(const UserDllInterface&) = delete;
+//singleton
+	static UserDllInterface&& instance; //jedyna instancja klasy
+	UserDllInterface(); //konstruktor
+	UserDllInterface(const UserDllInterface&) = delete; //konstruktor kopiuj¹cy
+	UserDllInterface& operator=(const UserDllInterface&) = delete; //kopiuj¹cy operator przypisania
 public:
-	static UserDllInterface& getInstance();
+	static UserDllInterface& getInstance(); //pobierz instancje klasy
 private:
-#pragma endregion
+
 public:
 #pragma region IUserInterface	
 	//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
