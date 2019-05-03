@@ -171,7 +171,6 @@
     <ClCompile Include="PlayerHuman.cpp" />
     <ClCompile Include="ILogInterface.cpp" />
     <ClCompile Include="INetInterface.cpp" />
-    <ClCompile Include="IUserInterface.cpp" />
     <ClCompile Include="BoardLocal.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="BoardRemote.cpp" />

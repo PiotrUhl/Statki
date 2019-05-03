@@ -1,8 +1,7 @@
 #pragma once
 #include "DLLinterface.h"
+#include "IUserInterface.h"
 
-class UserInterface /*: public IUserInterface*/ {
-public:
-	static void writeOut(int data);
-	static int readIn();
+class UserInterface : public IUserInterface {
+
 };

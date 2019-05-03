@@ -51,9 +51,6 @@
     <ClInclude Include="INetInterface.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="IUserInterface.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Ship.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
@@ -81,6 +78,9 @@
     <ClInclude Include="PlannerLocalHuman.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="IUserInterface.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -105,9 +105,6 @@
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="INetInterface.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="IUserInterface.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
