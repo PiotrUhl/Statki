@@ -27,5 +27,29 @@ public:
 #pragma region IDLLInterface
 	//uruchamia grê
 	void runProgram();
+	//sprawdza czy ustawiona jest flaga MakeBoard (¿¹danie utworzenia planszy)
+	bool checkFlagMakeBoard();
+	//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
+	bool checkShipPlacement(int shipSize, int x, int y, char direction);
+	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
+	bool placeShip(int shipSize, int x, int y, char direction);
+	//ustawia flagê BoardMade (plansza jest utworzona)
+	bool setFlagBoardMade();
+	//sprawdza czy ustawiona jest flaga GiveCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
+	bool checkFlagGiveCoords();
+	//ustawia wspó³rzêdn¹ x strza³u
+	int setShotCoordX();
+	//ustawia wspó³rzêdn¹ Y strza³u
+	int setShotCoordy();
+	//ustawia flagê CoordsGiven (wspó³rzêdne przekazane)
+	bool setFlagCoordsGiven();
+	//sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
+	int checkFlagBoardChanged();
+	//pobiera obraz planszy o numerze 'id'
+	int* getBoardImage(int id);
+	//resetuje flagê BoardChanged (zg³oszeznie zmiany na planszy)
+	void resetFlagBoardChanged();
+	//sprawdza czy ustawiona jest flaga GameEnded (gra zakoñczona); zwraca numer zwyciêzcy
+	char checkFlagGameEnded();
 #pragma endregion
 };
