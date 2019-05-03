@@ -46,12 +46,12 @@ bool UserDllInterface::checkShipPlacement(int shipSize, int x, int y, char direc
 bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 	return false;
 }
-//ustawia flagê BoardMade (plansza jest utworzona)
-bool UserDllInterface::setFlagBoardMade() {
-	return false;
+//zeruje flagê MakeBoard (plansza jest utworzona)
+void UserDllInterface::resetFlagMakeBoard() {
+	
 }
-//sprawdza czy ustawiona jest flaga GiveCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
-bool UserDllInterface::checkFlagGiveCoords() {
+//sprawdza czy ustawiona jest flaga ShootCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
+bool UserDllInterface::checkFlagShootCoords() {
 	return false;
 }
 //ustawia wspó³rzêdn¹ x strza³u
@@ -62,9 +62,9 @@ int UserDllInterface::setShotCoordX() {
 int UserDllInterface::setShotCoordy() {
 	return 0;
 }
-//ustawia flagê CoordsGiven (wspó³rzêdne przekazane)
-bool UserDllInterface::setFlagCoordsGiven() {
-	return false;
+//zeruje flagê ShootCoors (wspó³rzêdne strza³u przekazane)
+void UserDllInterface::resetFlagShootCoors() {
+	
 }
 //sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
 int UserDllInterface::checkFlagBoardChanged() {

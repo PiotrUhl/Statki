@@ -9,16 +9,16 @@ namespace IDllInterface {
 	extern "C" __declspec(dllexport) bool checkShipPlacement(int shipSize, int x, int y, char direction);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 	extern "C" __declspec(dllexport) bool placeShip(int shipSize, int x, int y, char direction);
-	//ustawia flagê BoardMade (plansza jest utworzona)
-	extern "C" __declspec(dllexport) bool setFlagBoardMade();
-	//sprawdza czy ustawiona jest flaga GiveCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
-	extern "C" __declspec(dllexport) bool checkFlagGiveCoords();
+	//zeruje flagê MakeBoard (plansza jest utworzona)
+	extern "C" __declspec(dllexport) void resetFlagMakeBoard();
+	//sprawdza czy ustawiona jest flaga ShootCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
+	extern "C" __declspec(dllexport) bool checkFlagShootCoords();
 	//ustawia wspó³rzêdn¹ x strza³u
 	extern "C" __declspec(dllexport) int setShotCoordX();
-	//ustawia wspó³rzêdn¹ Y strza³u
+	//ustawia wspó³rzêdn¹ y strza³u
 	extern "C" __declspec(dllexport) int setShotCoordy();
-	//ustawia flagê CoordsGiven (wspó³rzêdne przekazane)
-	extern "C" __declspec(dllexport) bool setFlagCoordsGiven();
+	//zeruje flagê ShootCoors (wspó³rzêdne strza³u przekazane)
+	extern "C" __declspec(dllexport) void resetFlagShootCoors();
 	//sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
 	extern "C" __declspec(dllexport) int checkFlagBoardChanged();
 	//pobiera obraz planszy o numerze 'id'

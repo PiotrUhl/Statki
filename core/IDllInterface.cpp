@@ -18,25 +18,25 @@ namespace IDllInterface {
 	bool placeShip(int shipSize, int x, int y, char direction) {
 		return UserDllInterface::getInstance().placeShip(shipSize, x, y, direction);
 	}
-	//ustawia flagê BoardMade (plansza jest utworzona)
-	bool setFlagBoardMade() {
-		return UserDllInterface::getInstance().setFlagBoardMade();
+	//zeruje flagê MakeBoard (plansza jest utworzona)
+	 void resetFlagMakeBoard() {
+		UserDllInterface::getInstance().resetFlagMakeBoard();
 	}
-	//sprawdza czy ustawiona jest flaga GiveCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
-	bool checkFlagGiveCoords() {
-		return UserDllInterface::getInstance().checkFlagGiveCoords();
+	 //sprawdza czy ustawiona jest flaga ShootCoors (¿¹danie przekazania wspó³rzêdnych strza³u)
+	 bool checkFlagShootCoords() {
+		return UserDllInterface::getInstance().checkFlagShootCoords();
 	}
 	//ustawia wspó³rzêdn¹ x strza³u
 	int setShotCoordX() {
 		return UserDllInterface::getInstance().setShotCoordX();
 	}
-	//ustawia wspó³rzêdn¹ Y strza³u
+	//ustawia wspó³rzêdn¹ y strza³u
 	int setShotCoordy() {
 		return UserDllInterface::getInstance().setShotCoordy();
 	}
-	//ustawia flagê CoordsGiven (wspó³rzêdne przekazane)
-	bool setFlagCoordsGiven() {
-		return UserDllInterface::getInstance().setFlagCoordsGiven();
+	//zeruje flagê ShootCoors (wspó³rzêdne strza³u przekazane)
+	void resetFlagShootCoors() {
+		UserDllInterface::getInstance().resetFlagShootCoors();
 	}
 	//sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
 	int checkFlagBoardChanged() {
