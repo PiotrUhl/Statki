@@ -19,7 +19,7 @@ private:
 public:
 #pragma region IUserInterface	
 	//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
-	void makeBoard(Board& board) override;
+	void makeBoard(Board* board) override;
 	//zwraca wspó³rzêdn¹ x strza³u
 	int getShotCoordX() override;
 	//zwraca wspó³rzêdn¹ y strza³u
