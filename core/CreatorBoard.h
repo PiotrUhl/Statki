@@ -1,9 +1,14 @@
 #pragma once
 #include <memory>
 #include "Game.h"
+#include "Board.h"
+#include "BoardLocal.h"
+#include "BoardRemote.h"
 
 class CreatorBoard {
+	const int BOARDSIZE;
 public:
+	CreatorBoard(int _BOARDSIZE);
 	std::unique_ptr<Board> makeBoard(Game::playerType playerType);
 private:
 	std::unique_ptr<Board> makeForHuman();
