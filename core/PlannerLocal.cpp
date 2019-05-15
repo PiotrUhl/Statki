@@ -41,3 +41,8 @@ bool PlannerLocal::place(int shipSize, int x, int y, char direction) {
 std::shared_ptr<char> PlannerLocal::getImage() {
 	return board.getImage();
 }
+
+//zwraca wskaŸnik na tworzon¹ planszê - niszczy obiekt
+BoardLocal PlannerLocal::getBoard() {
+	return std::move(board);
+}

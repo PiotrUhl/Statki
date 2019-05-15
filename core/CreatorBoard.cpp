@@ -3,11 +3,23 @@
 std::unique_ptr<Board> CreatorBoard::makeBoard(Game::playerType playerType) {
 	switch (playerType) {
 	case Game::playerType::HUMAN:
-		return nullptr;
+		return makeForHuman();
 	case Game::playerType::AI:
-		return nullptr;
+		return makeForAI();
 	case Game::playerType::REMOTE:
-		return nullptr;
+		return makeForRemote();
 	}
+	return nullptr;
+}
+
+std::unique_ptr<Board> CreatorBoard::makeForHuman() {
+	return nullptr;
+}
+
+std::unique_ptr<Board> CreatorBoard::makeForAI() {
+	return nullptr;
+}
+
+std::unique_ptr<Board> CreatorBoard::makeForRemote() {
 	return nullptr;
 }
