@@ -1,11 +1,11 @@
 #pragma once
 
-class Board; //Board
+class PlannerLocal; //PlannerLocal
 
 class IUserInterface {
 public:
-	//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
-	virtual void makeBoard(Board* board) = 0;
+	//przekazuje planer planszy do utworzenia planszy, wstrzymuje program do zakoñczenia tworzenia
+	virtual void makeBoard(PlannerLocal* planner) = 0;
 	//zwraca wspó³rzêdn¹ x strza³u
 	virtual int getShotCoordX() = 0;
 	//zwraca wspó³rzêdn¹ y strza³u

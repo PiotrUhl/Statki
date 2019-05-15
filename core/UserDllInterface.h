@@ -22,11 +22,11 @@ private:
 	int idChangedBoard; //id zmienionej planszy (powi¹zane z flagBoardChanged)
 	char winner; //id zwyciêzcy; 3 dla remisu (powi¹zane z flagGameEnded)
 	//uchwyty
-	Board* currentlyEditedBoard; //uchwyt na obecnie edytowan¹ planszê (powi¹zane z flagMakeBoard)
+	PlannerLocal* currentPlanner; //uchwyt na obecnie wybrany planer (powi¹zane z flagMakeBoard)
 public:
 #pragma region IUserInterface	
 	//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
-	void makeBoard(Board* board) override;
+	void makeBoard(PlannerLocal* planner) override;
 	//zwraca wspó³rzêdn¹ x strza³u
 	int getShotCoordX() override;
 	//zwraca wspó³rzêdn¹ y strza³u

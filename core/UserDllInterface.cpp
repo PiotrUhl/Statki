@@ -7,7 +7,7 @@ UserDllInterface& UserDllInterface::getInstance() { //pobierz instancje klasy
 }
 #pragma region IUserInterface
 //przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
-void UserDllInterface::makeBoard(Board* board) {
+void UserDllInterface::makeBoard(PlannerLocal* board) {
 
 }
 //zwraca wspó³rzêdn¹ x strza³u
