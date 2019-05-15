@@ -1,9 +1,6 @@
 #pragma once
 #include <memory>
 #include "Game.h"
-#include "Board.h"
-#include "BoardLocal.h"
-#include "BoardRemote.h"
 
 class CreatorBoard {
 	const int BOARDSIZE;

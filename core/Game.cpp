@@ -19,8 +19,8 @@ void Game::run() {
 void Game::initialization() {
 	//Interface - pobierz ustawienia gry (typy graczy, rozmiar planszy)
 	//Tworzenie plansz graczy
-	board1 = CreatorBoard().makeBoard(player1Type);
-	board2 = CreatorBoard().makeBoard(player2Type);
+	board1 = CreatorBoard(BOARDSIZE).makeBoard(player1Type);
+	board2 = CreatorBoard(BOARDSIZE).makeBoard(player2Type);
 	//Sprawdzanie poprawnoœci utworzenia plansz
 	if (board1 == nullptr)
 		;//interface - zg³oœ b³¹d

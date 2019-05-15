@@ -1,4 +1,11 @@
 #include "CreatorBoard.h"
+#include "Board.h"
+#include "BoardLocal.h"
+#include "BoardRemote.h"
+#include "PlannerLocal.h"
+#include "IUserInterface.h"
+#include "UserDllInterface.h"
+
 
 CreatorBoard::CreatorBoard(int _BOARDSIZE) : BOARDSIZE(_BOARDSIZE) {}
 
@@ -15,13 +22,16 @@ std::unique_ptr<Board> CreatorBoard::makeBoard(Game::playerType playerType) {
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForHuman() {
-	//todo: tworzenie planszy z interfejsu
-	return std::make_unique<BoardLocal>(BOARDSIZE);
+	PlannerLocal planner(BOARDSIZE);
+	IUserInterface& userInterface = UserDllInterface::getInstance();
+	userInterface.makeBoard(&planner);
+	return std::make_unique<BoardLocal>(planner.getBoard());
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForAI() {
+	PlannerLocal planner(BOARDSIZE);
 	//todo: tworzenie planszy z algorytmu
-	return std::make_unique<BoardLocal>(BOARDSIZE);
+	return std::make_unique<BoardLocal>(planner.getBoard());
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForRemote() {
