@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CreatorBoard.h" />
     <ClInclude Include="PlannerLocal.h" />
     <ClInclude Include="PlannerLocalAI.h" />
     <ClInclude Include="PlannerLocalHuman.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="UserDllInterface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CreatorBoard.cpp" />
     <ClCompile Include="PlannerLocal.cpp" />
     <ClCompile Include="PlannerLocalAI.cpp" />
     <ClCompile Include="PlannerLocalHuman.cpp" />

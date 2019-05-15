@@ -13,12 +13,14 @@ void Game::run() {
 	ending(winner);
 }
 
+#include "CreatorBoard.h"
+
 //czêœæ gry - inicjalizacja
 void Game::initialization() {
 	//Interface - pobierz ustawienia gry (typy graczy, rozmiar planszy)
 	//Tworzenie plansz graczy
-	board1 = makeBoard(player1Type);
-	board2 = makeBoard(player2Type);
+	board1 = CreatorBoard().makeBoard(player1Type);
+	board2 = CreatorBoard().makeBoard(player2Type);
 	//Sprawdzanie poprawnoœci utworzenia plansz
 	if (board1 == nullptr)
 		;//interface - zg³oœ b³¹d
@@ -32,6 +34,27 @@ void Game::initialization() {
 	if (player2 == nullptr)
 		;//interface - zg³oœ b³¹d
 }
+
+/*#include "BoardLocal.h"
+#include "BoardRemote.h"
+#include "PlannerLocalHuman.h"
+#include "PlannerLocalAI.h"
+//tworzy i zwraca planszê dla gracza o typie "plType" //deleted
+std::unique_ptr<Board> Game::makeBoard(Game::playerType plType) {
+	switch (plType) {
+	case playerType::HUMAN:
+		return PlannerLocalHuman(BOARDSIZE).makeBoard();
+		break;
+	case playerType::AI:
+		return PlannerLocalAI(BOARDSIZE).makeBoard();
+		break;
+	case playerType::REMOTE:
+		return std::make_unique<BoardRemote>(BOARDSIZE);
+		break;
+	default:
+		return nullptr;
+	}
+}*/
 
 //czêœæ gry - g³ówna pêtla
 char Game::loop() {
@@ -60,27 +83,6 @@ char Game::loop() {
 //czêœæ gry - zakoñczenie
 void Game::ending(char winner) {
 
-}
-
-#include "BoardLocal.h"
-#include "BoardRemote.h"
-#include "PlannerLocalHuman.h"
-#include "PlannerLocalAI.h"
-//tworzy i zwraca planszê dla gracza o typie "plType"
-std::unique_ptr<Board> Game::makeBoard(Game::playerType plType) {
-	switch (plType) {
-	case playerType::HUMAN:
-		return PlannerLocalHuman(BOARDSIZE).makeBoard();
-		break;
-	case playerType::AI:
-		return PlannerLocalAI(BOARDSIZE).makeBoard();
-		break;
-	case playerType::REMOTE:
-		return std::make_unique<BoardRemote>(BOARDSIZE);
-		break;
-	default:
-		return nullptr;
-	}
 }
 
 #include "PlayerHuman.h"

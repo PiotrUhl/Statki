@@ -81,6 +81,9 @@
     <ClInclude Include="UserDllInterface.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="CreatorBoard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="UserDllInterface.cpp">
       <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatorBoard.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

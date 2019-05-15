@@ -5,9 +5,10 @@
 #include <memory> //std::unique_ptr
 
 class Game {
+public:
+	enum class playerType { NONE, HUMAN, AI, REMOTE };
 private:
 	int BOARDSIZE; //rozmiar planszy
-	enum class playerType { NONE, HUMAN, AI, REMOTE };
 	playerType player1Type; //typ gracza 1
 	playerType player2Type; //typ gracza 2
 	std::unique_ptr<Board> board1; //plansza gracza nr 1
@@ -29,7 +30,7 @@ private:
 	//czêœæ gry - zakoñczenie
 	void ending(char winner);
 	//tworzy i zwraca planszê dla gracza o typie "plType"
-	std::unique_ptr<Board> makeBoard(playerType plType);
+	//std::unique_ptr<Board> makeBoard(playerType plType); //deleted
 	//inicjalizuje graczy; zwraca sukces/pora¿kê
 	void initializePlayers();
 };
