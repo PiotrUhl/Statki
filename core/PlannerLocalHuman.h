@@ -4,7 +4,6 @@
 class PlannerLocalHuman : public PlannerLocal {
 public:
 	PlannerLocalHuman(int _BOARDSIZE); //konstruktor
-	~PlannerLocalHuman(); //destruktor
 	//tworzy z u¿yciem interfejsu i zwraca utworzon¹ planszê
 	std::unique_ptr<BoardLocal> makeBoard();
 };
