@@ -11,9 +11,16 @@
 //6: 4H
 //7: 4V
 
-PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE), placeable(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE, 11111111)) {
+PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE), placeable(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
 	srand(time(NULL));
-	//inicjacja placeable
+}
+
+void PlannerLocalAI::initializeplaceable() {
+	for (auto k : placeable) { //ustawianie ca³oœci na 1
+		for (auto l : k) {
+			l.set();
+		}
+	}
 	for (int i = 0; i < BOARDSIZE; i++) { //ostatnia kolumna
 		placeable[BOARDSIZE - 1][i][6] = false; //4H
 		placeable[BOARDSIZE - 1][i][4] = false; //3H
@@ -42,6 +49,35 @@ PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE), place
 
 //tworzy za pomoc¹ algorytmu i zwraca planszê
 BoardLocal PlannerLocalAI::makeBoard() {
-
+	bool repeat = false;
+	do {
+		resetBoard();
+		repeat = !place4();
+		repeat = !place3();
+		repeat = !place3();
+		repeat = !place2();
+		repeat = !place2();
+		repeat = !place2();
+		repeat = !place1();
+		repeat = !place1();
+		repeat = !place1();
+		repeat = !place1();
+	} while (repeat == true);
 	return getBoard();
+}
+
+bool PlannerLocalAI::place4() {
+	return true;
+}
+bool PlannerLocalAI::place3() {
+	return true;
+}
+bool PlannerLocalAI::place2() {
+	return true;
+}
+bool PlannerLocalAI::place1() {
+	return true;
+}
+void PlannerLocalAI::resetBoard() {
+	initializeplaceable();
 }
