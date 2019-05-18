@@ -78,6 +78,9 @@
     <ClInclude Include="CreatorBoard.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="PlannerLocalAI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="CreatorBoard.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlannerLocalAI.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

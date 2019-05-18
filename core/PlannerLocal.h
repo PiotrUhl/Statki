@@ -3,6 +3,7 @@
 #include <memory>
 
 class PlannerLocal {
+protected:
 	const int BOARDSIZE; //rozmiar planszy
 	BoardLocal board; //tworzona plansza
 public:

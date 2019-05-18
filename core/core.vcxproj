@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="CreatorBoard.h" />
     <ClInclude Include="PlannerLocal.h" />
+    <ClInclude Include="PlannerLocalAI.h" />
     <ClInclude Include="PlayerAI.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="IDllInterface.h" />
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="CreatorBoard.cpp" />
     <ClCompile Include="PlannerLocal.cpp" />
+    <ClCompile Include="PlannerLocalAI.cpp" />
     <ClCompile Include="PlayerAI.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="IDllInterface.cpp" />
