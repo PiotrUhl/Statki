@@ -3,6 +3,7 @@
 #include "BoardLocal.h"
 #include "BoardRemote.h"
 #include "PlannerLocal.h"
+#include "PlannerLocalAI.h"
 #include "IUserInterface.h"
 #include "UserDllInterface.h"
 
@@ -29,9 +30,8 @@ std::unique_ptr<Board> CreatorBoard::makeForHuman() {
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForAI() {
-	PlannerLocal planner(BOARDSIZE);
-	//todo: tworzenie planszy z algorytmu
-	return std::make_unique<BoardLocal>(planner.getBoard());
+	PlannerLocalAI planner(BOARDSIZE);
+	return std::make_unique<BoardLocal>(planner.makeBoard());
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForRemote() {
