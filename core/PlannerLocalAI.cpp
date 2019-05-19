@@ -1,49 +1,54 @@
 #include "PlannerLocalAI.h"
 #include <ctime>
 
-//placeable:
-//0: 1H
-//1: 1V
-//2: 2H
-//3: 2V
-//4: 3H
-//5: 3V
-//6: 4H
-//7: 4V
-
-PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE), placeable(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
+PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE), placeableMap(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
+	int allSquares = BOARDSIZE * BOARDSIZE;
+	for (int i = 0; i < 8; i++)
+		placeableSquares[i] = allSquares;
 	srand(time(NULL));
 }
 
-void PlannerLocalAI::initializeplaceable() {
-	for (auto k : placeable) { //ustawianie ca³oœci na 1
+void PlannerLocalAI::initializeplaceableMap() {
+	for (auto k : placeableMap) { //ustawianie ca³oœci na 1
 		for (auto l : k) {
 			l.set();
 		}
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //ostatnia kolumna
-		placeable[BOARDSIZE - 1][i][6] = false; //4H
-		placeable[BOARDSIZE - 1][i][4] = false; //3H
-		placeable[BOARDSIZE - 1][i][2] = false; //2H
+		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H4)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
+		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H3)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
+		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H2)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H2)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //przedostatnia kolumna
-		placeable[BOARDSIZE - 2][i][6] = false; //4H
-		placeable[BOARDSIZE - 2][i][4] = false; //3H
+		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::H4)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
+		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::H3)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedostatnia kolumna
-		placeable[BOARDSIZE - 3][i][6] = false; //4H
+		placeableMap[BOARDSIZE - 3][i][static_cast<int>(ShipPlacement::H4)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //ostatni wiersz
-		placeable[i][BOARDSIZE - 1][7] = false; //4V
-		placeable[i][BOARDSIZE - 1][5] = false; //3V
-		placeable[i][BOARDSIZE - 1][3] = false; //2V
+		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V4)] = false; 
+		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
+		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V3)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::V3)]--;
+		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V2)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::V2)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //przedostatni wiersz
-		placeable[i][BOARDSIZE - 2][7] = false; //4V
-		placeable[i][BOARDSIZE - 2][5] = false; //3V
+		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::V4)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
+		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::V3)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::V3)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedostatni wiersz
-		placeable[i][BOARDSIZE - 3][7] = false; //4V
+		placeableMap[i][BOARDSIZE - 3][static_cast<int>(ShipPlacement::V4)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
 	}
 }
 
@@ -79,5 +84,6 @@ bool PlannerLocalAI::place1() {
 	return true;
 }
 void PlannerLocalAI::resetBoard() {
-	initializeplaceable();
+	initializeplaceableMap();
+	board.clear();
 }
