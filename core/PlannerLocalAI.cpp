@@ -1,11 +1,12 @@
 #include "PlannerLocalAI.h"
 #include <ctime>
+#include <cstdlib>
 
 PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE), placeableMap(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
 	int allSquares = BOARDSIZE * BOARDSIZE;
 	for (int i = 0; i < 8; i++)
 		placeableSquares[i] = allSquares;
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 }
 
 void PlannerLocalAI::initializeplaceableMap() {
@@ -77,33 +78,159 @@ BoardLocal PlannerLocalAI::makeBoard() {
 	bool repeat = false;
 	do {
 		resetBoard();
-		repeat = !place5();
-		repeat = !place4();
-		repeat = !place4();
-		repeat = !place3();
-		repeat = !place3();
-		repeat = !place3();
-		repeat = !place2();
-		repeat = !place2();
-		repeat = !place2();
-		repeat = !place2();
+		repeat = !placeShip(5);
+		repeat = !placeShip(4);
+		repeat = !placeShip(4);
+		repeat = !placeShip(3);
+		repeat = !placeShip(3);
+		repeat = !placeShip(3);
+		repeat = !placeShip(2);
+		repeat = !placeShip(2);
+		repeat = !placeShip(2);
+		repeat = !placeShip(2);
 	} while (repeat == true);
 	return getBoard();
 }
 
-bool PlannerLocalAI::place5() {
+//umieszcza na planszy statek o rozmiarze size
+bool PlannerLocalAI::placeShip(int size) {
+	char direction;
+	ShipPlacement placement;
+	if (randomNumber(2) == 1)
+		direction = 'H';
+	else
+		direction = 'V';
+	placement = encode(size, direction);
+	if (placeableSquares[static_cast<int>(placement)] == 0)
+		return false;
+	int pos = randomNumber(placeableSquares[static_cast<int>(placement)]);
+	Point point = convert(pos, placement);
+	if (place(size, point.x, point.y, direction) == false)
+		throw std::exception("PlannerLocalAI::place() tried to place ship in impossible place!"); //nie powinno nigdy wyst¹piæ
+	updatePlaceableMap(size, direction, point.x, point.y);
 	return true;
 }
-bool PlannerLocalAI::place4() {
-	return true;
-}
-bool PlannerLocalAI::place3() {
-	return true;
-}
-bool PlannerLocalAI::place2() {
-	return true;
-}
+
+//zaczyna tworzenie planszy od nowa
 void PlannerLocalAI::resetBoard() {
 	initializeplaceableMap();
 	board.clear();
+}
+
+//losuje losow¹ liczbê naturaln¹ z zakresu <1, b>
+int PlannerLocalAI::randomNumber(int b) {
+	return (rand() % b) + 1;
+}
+
+//konwertuje liczbê naturaln¹ "r" na punkt dla danego u³o¿enia statku "sp"
+PlannerLocalAI::Point PlannerLocalAI::convert(int r, ShipPlacement sp) {
+	for (int i = 0; i < BOARDSIZE; i++) {
+		for (int j = 0; j < BOARDSIZE; j++) {
+			if (placeableMap[i][j][static_cast<int>(sp)] == true) {
+				if (--r == 0) {
+					return Point(j, i);
+				}
+			}
+		}
+	}
+}
+
+//konwertuje rozmiar i kierunek na odpowiedni ShipPlacement
+PlannerLocalAI::ShipPlacement PlannerLocalAI::encode(int size, char direction) {
+	if (size == 5) {
+		if (direction == 'H') {
+			return ShipPlacement::H5;
+		}
+		else {
+			return ShipPlacement::V5;
+		}
+	}
+	else if (size == 4) {
+		if (direction == 'H') {
+			return ShipPlacement::H4;
+		}
+		else {
+			return ShipPlacement::V4;
+		}
+	}
+	else if (size == 3) {
+		if (direction == 'H') {
+			return ShipPlacement::H3;
+		}
+		else {
+			return ShipPlacement::V3;
+		}
+	}
+	else {
+		if (direction == 'H') {
+			return ShipPlacement::H2;
+		}
+		else {
+			return ShipPlacement::V2;
+		}
+	}
+}
+
+//aktualizuje tablicê placeableMap po postawieniu statku
+void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) {
+	int ysize = 1;
+	int xsize = 1;
+	if (direction == 'H')
+		xsize = size;
+	else
+		ysize = size;
+	//zerowanie pól granicz¹cych bezpoœrednio
+	for (int i = y - 1; i <= y + ysize; i++) {
+		for (int j = x - 1; j <= x + xsize; j++) {
+			if (i < 0 || i >= BOARDSIZE || j < 0 || j >= BOARDSIZE)
+				continue;
+			placeableMap[i][j].reset();
+		}
+	}
+	//zerowanie pól na lewo
+	for (int i = y - 1; i <= y + ysize; i++) {
+		if (i < 0 || i >= BOARDSIZE) //sprawdzenie wykroczenia w pionie
+			continue;
+		if (!(x - 2 < 0)) {
+			placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))] = false;
+			placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))] = false;
+			placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))] = false;
+			placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] = false;
+		}
+		if (!(x - 3 < 0)) {
+			placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))] = false;
+			placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))] = false;
+			placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))] = false;
+		}
+		if (!(x - 4 < 0)) {
+			placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))] = false;
+			placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))] = false;
+		}
+		if (!(x - 5 < 0)) {
+			placeableMap[i][x - 5][static_cast<int>(encode(5, 'H'))] = false;
+		}
+	}
+	//zerowanie pól na górze
+	for (int j = x - 1; j <= x + xsize; j++) {
+		if (j < 0 || j >= BOARDSIZE) //sprawdzenie wykroczenia w poziomie
+			continue;
+		if (!(y - 2 < 0)) {
+			placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))] = false;
+			placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))] = false;
+			placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))] = false;
+			placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))] = false;
+		}
+		if (!(y - 3 < 0)) {
+			placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))] = false;
+			placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))] = false;
+			placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))] = false;
+		}
+		if (!(y - 4 < 0)) {
+			placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))] = false;
+			placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))] = false;
+		}
+		if (!(y - 5 < 0)) {
+			placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))] = false;
+		}
+	}
 }
