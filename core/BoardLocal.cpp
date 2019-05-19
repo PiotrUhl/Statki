@@ -32,6 +32,12 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 	return true;
 }
 
+//usuwa statkek z pola (x, y)
+bool BoardLocal::removeShip(int x, int y) {
+	return board[y][x].removeShip();
+}
+
+//zwraca obraz planszy
 std::shared_ptr<char> BoardLocal::getImage() {
 	return nullptr;
 }
@@ -42,4 +48,13 @@ Board::ShotResult BoardLocal::shot(int x, int y) {
 	if (result == ShotResult::SUNK)
 		unsunkShips--;
 	return result;
+}
+
+//usuwa ca³¹ zawartoœæ planszy
+void BoardLocal::clear() {
+	for (auto k : board) {
+		for (auto l : k) {
+			l.reset();
+		}
+	}
 }

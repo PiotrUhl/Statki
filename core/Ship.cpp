@@ -20,6 +20,12 @@ bool Ship::hit() {
 		return false;
 }
 
+//usuwa statek z planszy
+void Ship::remove() {
+	for (auto k : location)
+		k->reset(); //usuwa statek z pól na których siê znajduje
+}
+
 //sprawdza czy statek jest zatopiony
 bool Ship::checkSunk() {
 	if (damage < size)

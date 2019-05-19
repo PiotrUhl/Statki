@@ -21,4 +21,8 @@ public:
 	ShotResult shot();
 	//zmienia stan fragmentu statku w polu na "zatopiony"
 	void setToSunk();
+	//usuwa statek le¿¹cy na polu; zwraca false je¿eli pole ju¿ puste
+	bool removeShip();
+	//przywraca domyœlny stan obiektu
+	void reset();
 };

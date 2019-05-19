@@ -45,3 +45,19 @@ Square::ShotResult Square::shot() {
 void Square::setToSunk() {
 	state = ShotResult::SUNK;
 }
+
+//usuwa statek le¿¹cy na polu; zwraca false je¿eli pole ju¿ puste
+bool Square::removeShip() {
+	if (ship == nullptr)
+		return false;
+	else {
+		ship->remove();
+		return true;
+	}
+}
+
+//przywraca domyœlny stan obiektu
+void Square::reset() {
+	ship = nullptr;
+	shooted = false;
+}

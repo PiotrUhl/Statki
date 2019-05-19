@@ -15,9 +15,13 @@ public:
 	std::vector<Square>& operator[](int);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 	bool placeShip(int shipSize, int x, int y, char direction);
-	//zwraca obraz tworzonej planszy
+	//usuwa statkek z pola ("x", "y")
+	bool removeShip(int x, int y);
+	//zwraca obraz planszy
 	std::shared_ptr<char> getImage();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	ShotResult shot(int x, int y) override;
+	//usuwa ca³¹ zawartoœæ planszy
+	void clear();
 };
 //todo: getImage();

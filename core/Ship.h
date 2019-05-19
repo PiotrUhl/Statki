@@ -16,6 +16,8 @@ public:
 	~Ship();
 	//trafiono w statek; zwraca czy zatopiono statek
 	bool hit();
+	//usuwa statek z planszy
+	void remove();
 private:
 	//sprawdza czy statek jest zatopiony
 	bool checkSunk();
