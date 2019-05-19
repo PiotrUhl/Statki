@@ -15,6 +15,8 @@ void PlannerLocalAI::initializeplaceableMap() {
 		}
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //ostatnia kolumna
+		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
 		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H4)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
 		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H3)] = false;
@@ -23,16 +25,26 @@ void PlannerLocalAI::initializeplaceableMap() {
 		placeableSquares[static_cast<int>(ShipPlacement::H2)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //przedostatnia kolumna
+		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::H5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
 		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::H4)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
 		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::H3)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedostatnia kolumna
+		placeableMap[BOARDSIZE - 3][i][static_cast<int>(ShipPlacement::H5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
 		placeableMap[BOARDSIZE - 3][i][static_cast<int>(ShipPlacement::H4)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
+		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
+	}
+	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedprzedostatnia kolumna
+		placeableMap[BOARDSIZE - 4][i][static_cast<int>(ShipPlacement::H5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //ostatni wiersz
+		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V5)] = false; 
+		placeableSquares[static_cast<int>(ShipPlacement::V5)]--;
 		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V4)] = false; 
 		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
 		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V3)] = false;
@@ -41,14 +53,22 @@ void PlannerLocalAI::initializeplaceableMap() {
 		placeableSquares[static_cast<int>(ShipPlacement::V2)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //przedostatni wiersz
+		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::V5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::V5)]--;
 		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::V4)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
 		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::V3)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V3)]--;
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedostatni wiersz
+		placeableMap[i][BOARDSIZE - 3][static_cast<int>(ShipPlacement::V5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::V5)]--;
 		placeableMap[i][BOARDSIZE - 3][static_cast<int>(ShipPlacement::V4)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
+	}
+	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedprzedostatni wiersz
+		placeableMap[i][BOARDSIZE - 4][static_cast<int>(ShipPlacement::V5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::V5)]--;
 	}
 }
 
@@ -57,20 +77,23 @@ BoardLocal PlannerLocalAI::makeBoard() {
 	bool repeat = false;
 	do {
 		resetBoard();
+		repeat = !place5();
+		repeat = !place4();
 		repeat = !place4();
 		repeat = !place3();
 		repeat = !place3();
+		repeat = !place3();
 		repeat = !place2();
 		repeat = !place2();
 		repeat = !place2();
-		repeat = !place1();
-		repeat = !place1();
-		repeat = !place1();
-		repeat = !place1();
+		repeat = !place2();
 	} while (repeat == true);
 	return getBoard();
 }
 
+bool PlannerLocalAI::place5() {
+	return true;
+}
 bool PlannerLocalAI::place4() {
 	return true;
 }
@@ -78,9 +101,6 @@ bool PlannerLocalAI::place3() {
 	return true;
 }
 bool PlannerLocalAI::place2() {
-	return true;
-}
-bool PlannerLocalAI::place1() {
 	return true;
 }
 void PlannerLocalAI::resetBoard() {
