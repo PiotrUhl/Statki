@@ -35,27 +35,6 @@ void Game::initialization() {
 		;//interface - zg³oœ b³¹d
 }
 
-/*#include "BoardLocal.h"
-#include "BoardRemote.h"
-#include "PlannerLocalHuman.h"
-#include "PlannerLocalAI.h"
-//tworzy i zwraca planszê dla gracza o typie "plType" //deleted
-std::unique_ptr<Board> Game::makeBoard(Game::playerType plType) {
-	switch (plType) {
-	case playerType::HUMAN:
-		return PlannerLocalHuman(BOARDSIZE).makeBoard();
-		break;
-	case playerType::AI:
-		return PlannerLocalAI(BOARDSIZE).makeBoard();
-		break;
-	case playerType::REMOTE:
-		return std::make_unique<BoardRemote>(BOARDSIZE);
-		break;
-	default:
-		return nullptr;
-	}
-}*/
-
 //czêœæ gry - g³ówna pêtla
 char Game::loop() {
 	char winner = 0;

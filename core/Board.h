@@ -1,8 +1,9 @@
 #pragma once
 
 class Board {
-protected:
+public:
 	enum ShotResult { SUNK, HIT, MISS }; //rezultat strza³u
+protected:
 	const int BOARDSIZE; //rozmiar planszy
 	int unsunkShips; //liczba niezatopnionych statków
 public:
