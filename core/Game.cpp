@@ -64,6 +64,7 @@ void Game::ending(char winner) {
 
 }
 
+#include "UserDllInterface.h"
 #include "PlayerHuman.h"
 #include "PlayerAI.h"
 #include "PlayerRemote.h"
@@ -71,7 +72,7 @@ void Game::ending(char winner) {
 void Game::initializePlayers() {
 	switch (player1Type) {
 	case playerType::HUMAN:
-		player1 = std::make_unique<PlayerHuman>(BOARDSIZE, *board1, *board2);
+		player1 = std::make_unique<PlayerHuman>(UserDllInterface::getInstance(), BOARDSIZE, *board1, *board2);
 		break;
 	case playerType::AI:
 		player1 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);
@@ -85,7 +86,7 @@ void Game::initializePlayers() {
 	//inicjalizacja drugiego gracza
 	switch (player2Type) {
 	case playerType::HUMAN:
-		player2 = std::make_unique<PlayerHuman>(BOARDSIZE, *board1, *board2);
+		player2 = std::make_unique<PlayerHuman>(UserDllInterface::getInstance(), BOARDSIZE, *board1, *board2);
 		break;
 	case playerType::AI:
 		player2 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);

@@ -1,7 +1,7 @@
 #include "PlayerHuman.h"
 
 //konstruktor
-PlayerHuman::PlayerHuman(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : Player(_BOARDSIZE, _myBoard, _otherBoard) {}
+PlayerHuman::PlayerHuman(IUserInterface& _userInterface, int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : Player(_BOARDSIZE, _myBoard, _otherBoard), userInterface(_userInterface) {}
 
 //destruktor
 PlayerHuman::~PlayerHuman() {}
@@ -9,9 +9,8 @@ PlayerHuman::~PlayerHuman() {}
 //gracz wykonuje swój ruch (IUserInterface In)
 void PlayerHuman::move() {
 	int x, y; //wspó³rzêdne strza³u
-	//Interface - pobranie wspó³rzêdnych
-	x = 0; //temp
-	y = 0; //temp
+	x = userInterface.getShotCoordX();
+	y = userInterface.getShotCoordY();
 	Player::ShotResult shotResult;
 	//strza³ i obs³uga b³êdów
 	try {
