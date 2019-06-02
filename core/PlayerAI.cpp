@@ -6,6 +6,14 @@ PlayerAI::PlayerAI(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : Player
 //destruktor
 PlayerAI::~PlayerAI() {}
 
+//przeci¹¿ony operator porównania
+bool PlayerAI::Point::operator==(const Point& other) {
+	if (x == other.x && y == other.y)
+		return true;
+	else
+		return false;
+}
+
 //gracz wykonuje swój ruch
 void PlayerAI::move() {
 	if (finishMode == false) {
@@ -16,12 +24,39 @@ void PlayerAI::move() {
 		updateShootableMap(point);
 	}
 	else {
-		//finishMode
+		Point point = chooseFinish();
+		Board::ShotResult result = otherBoard.shot(point.x, point.y);
+		finishList.remove(point); //usuñ punkt z listy
+		if (result == ShotResult::SUNK) {
+			finishMode = false;
+			finishList.clear();
+		}
+		else if (result == ShotResult::HIT) {
+			if (point.x == finishStart.x) { //trafiony w jednym pionie z pocz¹tkiem => statek u³o¿ony pionowo
+				finishList.remove_if([point](Point v) { //usuñ wszystkie punkty nie le¿¹ce w tym pionie
+					if (v.x != point.x)
+						return true;
+					else
+						return false;
+				});
+			}
+			else if (point.y == finishStart.y) { //trafiony w jednym poziomie z pocz¹tkiem => statek u³o¿ony poziomo
+				finishList.remove_if([point](Point v) { //usuñ wszystkie punkty nie le¿¹ce w tym poziomie
+					if (v.y != point.y)
+						return true;
+					else
+						return false;
+				});
+			}
+		}
+		updateShootableMap(point);
 	}
 }
 
+//przechodzi w tryb wykañczania z pocz¹tkiem w punkcie point
 void PlayerAI::setFinishMode(Point point) {
 	finishMode = true;
+	finishStart = point;
 	if (point.x - 1 >= 0)
 		finishList.push_back(Point(point.x - 1, point.y));
 	if (point.x + 1 < BOARDSIZE)
@@ -41,6 +76,17 @@ PlayerAI::Point PlayerAI::chooseSquare() {
 				return Point(j, i);
 		}
 	}
+	return Point(-1, -1); //error
+}
+
+//losuje punkt spoœród punktów w których mo¿e znajdowaæ siê reszta postrzelonego statku
+PlayerAI::Point PlayerAI::chooseFinish() {
+	int rand = randomNumber(finishList.size());
+	auto iter = finishList.begin();
+	for (int  i = 1; i < rand; i++) {
+		iter++;
+	}
+	return *iter;
 }
 
 //uzupe³nia tablicê shootableMap o wyniki strza³u w point
