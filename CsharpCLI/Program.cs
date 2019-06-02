@@ -4,6 +4,11 @@ using System.Threading;
 
 namespace CsharpCLI {
 	static class CoreDll {
+		[StructLayout(LayoutKind.Sequential)]
+		public struct Point {
+			public int x;
+			public int y;
+		}
 		#region DllImport
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern bool getOutFlag();

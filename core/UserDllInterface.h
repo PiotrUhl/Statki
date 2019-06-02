@@ -3,34 +3,23 @@
 #include "IUserInterface.h"
 
 class UserDllInterface : public IUserInterface/*, public IDllInterface*/ {
-//singleton
+#pragma region singleton
 	static UserDllInterface&& instance; //jedyna instancja klasy
 	UserDllInterface(); //konstruktor
 	UserDllInterface(const UserDllInterface&) = delete; //konstruktor kopiuj¹cy
 	UserDllInterface& operator=(const UserDllInterface&) = delete; //kopiuj¹cy operator przypisania
 public:
 	static UserDllInterface& getInstance(); //pobierz instancje klasy
+#pragma endregion
 private:
-	//flagi
-	bool flagMakeBoard; //tworzenie planszy
-	bool flagShootCoords; //przekazywanie wspó³rzêdnych strza³u
-	bool flagBoardChanged; //nieodczytana zmiana na planszy
-	bool flagGameEnded; //gra jest zakoñczona
-	//bufory
-	int coordX; //przekazywana wspó³rzêdna x (powi¹zane z flagShootCoords)
-	int coordY; //przekazywana wspó³rzêdna y (powi¹zane z flagShootCoords)
-	int idChangedBoard; //id zmienionej planszy (powi¹zane z flagBoardChanged)
-	char winner; //id zwyciêzcy; 3 dla remisu (powi¹zane z flagGameEnded)
-	//uchwyty
-	PlannerLocal* currentPlanner; //uchwyt na obecnie wybrany planer (powi¹zane z flagMakeBoard)
+	PlannerLocal* currentPlanner; //uchwyt na obecnie wybrany planer //dla PlannerLocal dla CreatorBoard dla PlayerType::HUMAN
+	IDllInterface::CallBacks callBack; //struktura wskaŸników na callBacki
 public:
 #pragma region IUserInterface	
 	//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
 	void makeBoard(PlannerLocal* planner) override;
-	//zwraca wspó³rzêdn¹ x strza³u
-	int getShotCoordX() override;
-	//zwraca wspó³rzêdn¹ y strza³u
-	int getShotCoordY() override;
+	//zwraca wspó³rzêdne strza³u
+	Point getShotCoords() override;
 	//poinformuj interfejs o zmianie na planszy 'id'; waitForRespond wstrzymuje dzia³anie programu do otrzymania odpowiedzi (interfejs odczyta³ zmianê)
 	void boardChanged(int id, bool waitForRespond) override;
 	//przekazuje informacje o zakoñczeniu gry
@@ -39,29 +28,11 @@ public:
 #pragma region IDLLInterface
 	//uruchamia grê
 	void runProgram();
-	//sprawdza czy ustawiona jest flaga MakeBoard (¿¹danie utworzenia planszy)
-	bool checkFlagMakeBoard();
 	//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
 	bool checkShipPlacement(int shipSize, int x, int y, char direction);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 	bool placeShip(int shipSize, int x, int y, char direction);
-	//zeruje flagê MakeBoard (plansza jest utworzona)
-	void resetFlagMakeBoard();
-	//sprawdza czy ustawiona jest flaga ShootCoords (¿¹danie przekazania wspó³rzêdnych strza³u)
-	bool checkFlagShootCoords();
-	//ustawia wspó³rzêdn¹ x strza³u
-	void setShotCoordX(int);
-	//ustawia wspó³rzêdn¹ Y strza³u
-	void setShotCoordY(int);
-	//zeruje flagê ShootCoords (wspó³rzêdne strza³u przekazane)
-	void resetFlagShootCoords();
-	//sprawdza czy ustawiona jest flaga BoardChanged (zg³oszeznie zmiany na planszy); zwraca id zmienionej planszy
-	int checkFlagBoardChanged();
 	//pobiera obraz planszy o numerze 'id'
 	int* getBoardImage(int id);
-	//resetuje flagê BoardChanged (zg³oszeznie zmiany na planszy)
-	void resetFlagBoardChanged();
-	//sprawdza czy ustawiona jest flaga GameEnded (gra zakoñczona); zwraca numer zwyciêzcy
-	char checkFlagGameEnded();
 #pragma endregion
 };
