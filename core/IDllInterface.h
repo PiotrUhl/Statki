@@ -1,28 +1,21 @@
 #pragma once
 #include "Point.hpp"
-
-struct ShipInfo {
-	int size;
-	int x;
-	int y;
-	char direction;
-	bool sunk;
-};
-
-struct ShipList {
-	ShipInfo* tab;
-	int size;
-};
+#include "Board.h"
 
 namespace IDllInterface {
+
+	struct BoardInfo {
+		Board::ShipInfo* tab;
+		int size;
+		bool** shotMap;
+	};
+
 	//wskaŸniki na callbacki
 	struct CallBacks {
 		//pobiera wspó³rzêdne
 		Point (__stdcall *out_getCoords)(void);
-		//wysy³a do wypisania listê statków
-		void (__stdcall *out_sendShipList)(ShipList);
-		//wysy³a do wypisania informacje w które pola na planszy strzelano
-		void (__stdcall *out_sendBoardShooted)(bool*);
+		//wysy³a do wypisania planszê
+		void (__stdcall *out_sendBoardInfo)(BoardInfo);
 	};
 
 	extern "C" {

@@ -1,6 +1,7 @@
 #pragma once
 #include "IDllInterface.h"
 #include "IUserInterface.h"
+#include "Board.h"
 
 class UserDllInterface : public IUserInterface/*, public IDllInterface*/ {
 #pragma region singleton
@@ -20,8 +21,8 @@ public:
 	void makeBoard(PlannerLocal* planner) override;
 	//zwraca wspó³rzêdne strza³u
 	Point getShotCoords() override;
-	//poinformuj interfejs o zmianie na planszy 'id'; waitForRespond wstrzymuje dzia³anie programu do otrzymania odpowiedzi (interfejs odczyta³ zmianê)
-	void boardChanged(int id, bool waitForRespond) override;
+	//poinformuj interfejs o zmianie na planszy
+	void boardChanged(std::list<Board::ShipInfo>&, bool**) override;
 	//przekazuje informacje o zakoñczeniu gry
 	void gameEnded(char winner) override;
 #pragma endregion

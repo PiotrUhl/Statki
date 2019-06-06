@@ -29,8 +29,6 @@ private:
 	char loop();
 	//czêœæ gry - zakoñczenie
 	void ending(char winner);
-	//tworzy i zwraca planszê dla gracza o typie "plType"
-	//std::unique_ptr<Board> makeBoard(playerType plType); //deleted
-	//inicjalizuje graczy; zwraca sukces/pora¿kê
+	//inicjalizuje graczy
 	void initializePlayers();
 };

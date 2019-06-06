@@ -9,8 +9,10 @@ Game::~Game() {}
 //uruchom grê
 void Game::run() {
 	initialization();
-	char winner = loop();
-	ending(winner);
+	//char winner = loop(); //tymczasowo wy³¹czone
+	//ending(winner); //tymczasowo wy³¹czone
+	player1Type = playerType::AI; //temp
+	player2Type = playerType::AI; //temp
 }
 
 #include "CreatorBoard.h"

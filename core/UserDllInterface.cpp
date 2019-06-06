@@ -14,9 +14,19 @@ void UserDllInterface::makeBoard(PlannerLocal* board) {
 Point UserDllInterface::getShotCoords() {
 	return callBack.out_getCoords();
 }
-//poinformuj interfejs o zmianie na planszy 'id'; waitForRespond wstrzymuje dzia³anie programu do otrzymania odpowiedzi (interfejs odczyta³ zmianê)
-void UserDllInterface::boardChanged(int id, bool waitForRespond = false) {
-	//wywo³anie delegaty
+//poinformuj interfejs o zmianie na planszy
+void UserDllInterface::boardChanged(std::list<Board::ShipInfo>& shipList, bool** shotMap) {
+	IDllInterface::BoardInfo boardInfo;
+	boardInfo.size = shipList.size();
+	boardInfo.tab = new Board::ShipInfo[boardInfo.size];
+	int i = 0;
+	for (auto k : shipList) {
+		boardInfo.tab[i++] = k;
+		//boardInfo.tab[i++] = std::move(k); //todo: przetestowaæ
+	}
+	boardInfo.shotMap = std::move(shotMap);
+	callBack.out_sendBoardInfo(boardInfo);
+	delete[] boardInfo.tab;
 }
 //przekazuje informacje o zakoñczeniu gry
 void UserDllInterface::gameEnded(char winner) {
