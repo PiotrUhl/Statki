@@ -1,5 +1,5 @@
 0 - empty/unshot square
-1 - shot share
+1 - shot square
 11 - unshoted, horizontal, 1-sized ship
 12 - unshoted, horizontal, 2-sized ship
 13 - unshoted, horizontal, 3-sized ship

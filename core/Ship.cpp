@@ -26,6 +26,15 @@ void Ship::remove() {
 		k->reset(); //usuwa statek z pól na których siê znajduje
 }
 
+//zwraca size
+int Ship::getSize() const {
+	return size;
+}
+//zwraca sunk
+bool Ship::getSunk() const {
+	return sunk;
+}
+
 //sprawdza czy statek jest zatopiony
 bool Ship::checkSunk() {
 	if (damage < size)

@@ -13,11 +13,13 @@ public:
 	Square();
 	//destruktor
 	~Square();
+	//przeciπøenie operatora == dla nullptr
+	bool operator==(std::nullptr_t);
 	//przeciπøenie operatora != dla nullptr
 	bool operator!=(std::nullptr_t);
 	//umieszcza w polu statek 'newShip'
 	void set(std::shared_ptr<Ship>& newShip);
-	//strzelono w pole; zwraca rezultat; rzuca wyjπtek std::logic_error("Square already shooted") jeøeli pole juø postrzelone
+	//strzelono w pole; zwraca rezultat
 	ShotResult shot();
 	//zmienia stan fragmentu statku w polu na "zatopiony"
 	void setToSunk();
@@ -25,4 +27,10 @@ public:
 	bool removeShip();
 	//przywraca domyúlny stan obiektu
 	void reset();
+	//zwraca shooted
+	bool getShooted() const;
+	//zwraca rozmiar statku leøπcego na danym polu (bπdü 0 jeúli pole puste)
+	int getSize() const;
+	//zwraca czy statek na danym polu jest zatopiony
+	bool getSunk() const;
 };

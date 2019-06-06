@@ -6,6 +6,14 @@ Square::Square() : shooted(false) {}
 //destruktor
 Square::~Square() {}
 
+//przeci¹¿enie operatora == dla nullptr
+bool Square::operator==(std::nullptr_t) {
+	if (ship == nullptr)
+		return true;
+	else
+		return false;
+}
+
 //przeci¹¿enie operatora != dla nullptr
 bool Square::operator!=(std::nullptr_t) {
 	if (ship == nullptr)
@@ -60,4 +68,23 @@ bool Square::removeShip() {
 void Square::reset() {
 	ship = nullptr;
 	shooted = false;
+}
+
+//zwraca shooted
+bool Square::getShooted() const {
+	return shooted;
+}
+//zwraca rozmiar statku le¿¹cego na danym polu (b¹dŸ 0 jeœli pole puste)
+int Square::getSize() const {
+	if (ship == nullptr)
+		return 0;
+	else
+		return ship->getSize();
+}
+//zwraca czy statek na danym polu jest zatopiony
+bool Square::getSunk() const {
+	if (ship == nullptr)
+		return false;
+	else
+		return ship->getSunk();
 }
