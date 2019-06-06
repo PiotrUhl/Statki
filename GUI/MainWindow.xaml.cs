@@ -12,11 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.InteropServices;
 
 namespace GUI {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
+
+	public class DllInterface {
+		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern void runProgram();
+		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern int addd(int a, int b);
+	}
 
 	struct Ship {
 		public int size;
@@ -26,7 +34,6 @@ namespace GUI {
 		public bool sunk;
 		public System.Windows.Shapes.Rectangle drawObj;
 	}
-
 	public partial class MainWindow : Window {
 		private Ship[] shipList = new Ship[10];
 		private bool[,] shootedMap = new bool[10,10];
@@ -44,6 +51,7 @@ namespace GUI {
 		private void TestButton_Click(object sender, RoutedEventArgs e) {
 			RenderNewShip(0);
 			LeftGrid.IsEnabled = true;
+
 		}
 
 		private void RenderNewShip(int number) {
