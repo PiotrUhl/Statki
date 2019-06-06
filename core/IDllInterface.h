@@ -19,8 +19,8 @@ namespace IDllInterface {
 	};
 
 	extern "C" {
-		//uruchamia grê
-		__declspec(dllexport) void runProgram();
+		//uruchamia grê, przyjmuje strukturê callBacków
+		__declspec(dllexport) void runProgram(CallBacks);
 		//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
 		__declspec(dllexport) bool checkShipPlacement(int shipSize, int x, int y, char direction);
 		//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat

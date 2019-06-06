@@ -36,7 +36,8 @@ void UserDllInterface::gameEnded(char winner) {
 #include "Game.h"
 #pragma region IDLLInterface
 //uruchamia grê
-void UserDllInterface::runProgram() {
+void UserDllInterface::runProgram(IDllInterface::CallBacks callBacks) {
+	callBack = callBacks;
 	Game game;
 	game.run();
 }
