@@ -19,11 +19,49 @@ namespace GUI {
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
 
+	[StructLayout(LayoutKind.Sequential)]
+	public struct Point {
+		public int x;
+		public int y;
+	}
 	public class DllInterface {
+
+		#region funkcje_dll
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void runProgram();
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int addd(int a, int b);
+		#endregion
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct ShipInfo {
+			public int size;
+			public int x;
+			public int y;
+			public char direction;
+			public bool sunk;
+		}
+		[StructLayout(LayoutKind.Sequential)]
+		public struct BoardInfo {
+			ShipInfo[] tab;
+			int size;
+			bool[][] shotMap;
+		};
+
+		#region delegaty
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate Point Dg_getCoords();
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate void Dg_sendBoardInfo(BoardInfo _);
+		#endregion
+
+		#region callBacki
+		[StructLayout(LayoutKind.Sequential)]
+		public struct CallBacks {
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_getCoords out_getCoords;
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_sendBoardInfo out_sendBoardInfo;
+		}
+		#endregion
 	}
 
 	struct Ship {
