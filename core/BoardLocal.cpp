@@ -29,11 +29,18 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 	else
 		throw (std::invalid_argument("Incorrect ship direction"));
 	unsunkShips++;
+	list.push_back(ShipInfo(shipSize, x, y, direction, false));
 	return true;
 }
 
 //usuwa statkek z pola (x, y)
 bool BoardLocal::removeShip(int x, int y) {
+	list.remove_if([x, y](ShipInfo v) { //usuñ statek z listy
+		if (v.x == x && v.y == y)
+			return true;
+		else
+			return false;
+	});
 	return board[y][x].removeShip();
 }
 
@@ -98,6 +105,7 @@ char BoardLocal::findDirection(int x, int y) {
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 Board::ShotResult BoardLocal::shot(int x, int y) {
+	shotMap[y][x] = true;
 	ShotResult result = static_cast<Board::ShotResult>(board.at(x).at(y).shot()); //strzel w dane pole
 	if (result == ShotResult::SUNK)
 		unsunkShips--;
@@ -109,6 +117,8 @@ void BoardLocal::clear() {
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
 			board[i][j].reset();
+			shotMap[i][j] = false;
 		}
 	}
+	list.clear();
 }
