@@ -3,73 +3,72 @@
 #include <cstdlib>
 
 PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE), placeableMap(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
-	int allSquares = BOARDSIZE * BOARDSIZE;
-	for (int i = 0; i < 8; i++)
-		placeableSquares[i] = allSquares;
 	srand((unsigned int)time(NULL));
 }
 
 void PlannerLocalAI::initializeplaceableMap() {
-	for (auto k : placeableMap) { //ustawianie ca³oœci na 1
-		for (auto l : k) {
-			l.set();
+	for (int i = 0; i < 8; i++)
+		placeableSquares[i] = BOARDSIZE * BOARDSIZE;
+	for (int i = 0; i < BOARDSIZE; i++) {
+		for (int j = 0; j < BOARDSIZE; j++) {
+			placeableMap[i][j].set();
 		}
 	}
 	for (int i = 0; i < BOARDSIZE; i++) { //ostatnia kolumna
-		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H5)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
-		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H4)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
-		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H3)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
-		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::H2)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H2)]--;
-	}
-	for (int i = 0; i < BOARDSIZE; i++) { //przedostatnia kolumna
-		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::H5)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
-		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::H4)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
-		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::H3)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
-	}
-	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedostatnia kolumna
-		placeableMap[BOARDSIZE - 3][i][static_cast<int>(ShipPlacement::H5)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
-		placeableMap[BOARDSIZE - 3][i][static_cast<int>(ShipPlacement::H4)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
-	}
-	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedprzedostatnia kolumna
-		placeableMap[BOARDSIZE - 4][i][static_cast<int>(ShipPlacement::H5)] = false;
-		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
-	}
-	for (int i = 0; i < BOARDSIZE; i++) { //ostatni wiersz
-		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V5)] = false; 
+		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::V5)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V5)]--;
-		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V4)] = false; 
+		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::V4)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
-		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V3)] = false;
+		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::V3)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V3)]--;
-		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::V2)] = false;
+		placeableMap[BOARDSIZE - 1][i][static_cast<int>(ShipPlacement::V2)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V2)]--;
 	}
-	for (int i = 0; i < BOARDSIZE; i++) { //przedostatni wiersz
-		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::V5)] = false;
+	for (int i = 0; i < BOARDSIZE; i++) { //przedostatnia kolumna
+		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::V5)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V5)]--;
-		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::V4)] = false;
+		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::V4)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
-		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::V3)] = false;
+		placeableMap[BOARDSIZE - 2][i][static_cast<int>(ShipPlacement::V3)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V3)]--;
 	}
-	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedostatni wiersz
-		placeableMap[i][BOARDSIZE - 3][static_cast<int>(ShipPlacement::V5)] = false;
+	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedostatnia kolumna
+		placeableMap[BOARDSIZE - 3][i][static_cast<int>(ShipPlacement::V5)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V5)]--;
-		placeableMap[i][BOARDSIZE - 3][static_cast<int>(ShipPlacement::V4)] = false;
+		placeableMap[BOARDSIZE - 3][i][static_cast<int>(ShipPlacement::V4)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V4)]--;
 	}
-	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedprzedostatni wiersz
-		placeableMap[i][BOARDSIZE - 4][static_cast<int>(ShipPlacement::V5)] = false;
+	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedprzedostatnia kolumna
+		placeableMap[BOARDSIZE - 4][i][static_cast<int>(ShipPlacement::V5)] = false;
 		placeableSquares[static_cast<int>(ShipPlacement::V5)]--;
+	}
+	for (int i = 0; i < BOARDSIZE; i++) { //ostatni wiersz
+		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::H5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
+		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::H4)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
+		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::H3)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
+		placeableMap[i][BOARDSIZE - 1][static_cast<int>(ShipPlacement::H2)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H2)]--;
+	}
+	for (int i = 0; i < BOARDSIZE; i++) { //przedostatni wiersz
+		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::H5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
+		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::H4)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
+		placeableMap[i][BOARDSIZE - 2][static_cast<int>(ShipPlacement::H3)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H3)]--;
+	}
+	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedostatni wiersz
+		placeableMap[i][BOARDSIZE - 3][static_cast<int>(ShipPlacement::H5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
+		placeableMap[i][BOARDSIZE - 3][static_cast<int>(ShipPlacement::H4)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H4)]--;
+	}
+	for (int i = 0; i < BOARDSIZE; i++) { //przedprzedprzedostatni wiersz
+		placeableMap[i][BOARDSIZE - 4][static_cast<int>(ShipPlacement::H5)] = false;
+		placeableSquares[static_cast<int>(ShipPlacement::H5)]--;
 	}
 }
 
@@ -133,6 +132,7 @@ PlannerLocalAI::Point PlannerLocalAI::convert(int r, ShipPlacement sp) {
 			}
 		}
 	}
+	throw std::exception("PlannerLocalAI::convert() place not found!"); //nie powinno nigdy wyst¹piæ
 }
 
 //konwertuje rozmiar i kierunek na odpowiedni ShipPlacement
@@ -184,7 +184,12 @@ void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) 
 		for (int j = x - 1; j <= x + xsize; j++) {
 			if (i < 0 || i >= BOARDSIZE || j < 0 || j >= BOARDSIZE)
 				continue;
-			placeableMap[i][j].reset();
+			for (int k = 0; k < 8; k++) {
+				if (placeableMap[i][j][k] == true) {
+					placeableMap[i][j][k] = false;
+					placeableSquares[k]--;
+				}
+			}
 		}
 	}
 	//zerowanie pól na lewo
@@ -192,22 +197,52 @@ void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) 
 		if (i < 0 || i >= BOARDSIZE) //sprawdzenie wykroczenia w pionie
 			continue;
 		if (!(x - 2 < 0)) {
-			placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))] = false;
-			placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))] = false;
-			placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))] = false;
-			placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] = false;
+			if (placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))] == true) {
+				placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(2, 'H'))]--;
+			}
+			if (placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))] == true) {
+				placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(3, 'H'))]--;
+			}
+			if (placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))] == true) {
+				placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
+			}
+			if (placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] == true) {
+				placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
+			}
 		}
 		if (!(x - 3 < 0)) {
-			placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))] = false;
-			placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))] = false;
-			placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))] = false;
+			if (placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))] == true) {
+				placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(3, 'H'))]--;
+			}
+			if (placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))] == true) {
+				placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
+			}
+			if (placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))] == true) {
+				placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
+			}
 		}
 		if (!(x - 4 < 0)) {
-			placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))] = false;
-			placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))] = false;
+			if (placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))] == true) {
+				placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
+			}
+			if (placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))] == true) {
+				placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
+			}
 		}
 		if (!(x - 5 < 0)) {
-			placeableMap[i][x - 5][static_cast<int>(encode(5, 'H'))] = false;
+			if (placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] == true) {
+				placeableMap[i][x - 5][static_cast<int>(encode(5, 'H'))] = false;
+				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
+			}
 		}
 	}
 	//zerowanie pól na górze
@@ -215,22 +250,52 @@ void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) 
 		if (j < 0 || j >= BOARDSIZE) //sprawdzenie wykroczenia w poziomie
 			continue;
 		if (!(y - 2 < 0)) {
-			placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))] = false;
-			placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))] = false;
-			placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))] = false;
-			placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))] = false;
+			if (placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))] == true) {
+				placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(2, 'V'))]--;
+			}
+			if (placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))] == true) {
+				placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(3, 'V'))]--;
+			}
+			if (placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))] == true) {
+				placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
+			}
+			if (placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))] == true) {
+				placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
+			}
 		}
 		if (!(y - 3 < 0)) {
-			placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))] = false;
-			placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))] = false;
-			placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))] = false;
+			if (placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))] == true) {
+				placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(3, 'V'))]--;
+			}
+			if (placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))] == true) {
+				placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
+			}
+			if (placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))] == true) {
+				placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
+			}
 		}
 		if (!(y - 4 < 0)) {
-			placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))] = false;
-			placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))] = false;
+			if (placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))] == true) {
+				placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
+			}
+			if (placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))] == true) {
+				placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
+			}
 		}
 		if (!(y - 5 < 0)) {
-			placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))] = false;
+			if (placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))] == true) {
+				placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))] = false;
+				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
+			}
 		}
 	}
 }
