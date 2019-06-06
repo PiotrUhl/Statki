@@ -5,8 +5,506 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Statki" Height="500" Width="1000">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="2*"/>
+		</Grid.ColumnDefinitions>
+		<Grid Name="LeftGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+				<RowDefinition Height="40"/>
+			</Grid.RowDefinitions>
+			<!-- Ramki współrzędnych -->
+			<Border BorderThickness="2,2,2,2" BorderBrush="Black" Grid.Column="1" Grid.ColumnSpan="10" Grid.Row="1" Grid.RowSpan="10"/>
+			<Border BorderThickness="0,0,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="1" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="2" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="3" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="4" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="5" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="6" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="7" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="8" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="9" Grid.Row="0"/>
+			<Border BorderThickness="0.5,0,1,0.5" BorderBrush="Black" Grid.Column="10" Grid.Row="0"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="1"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="2"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="3"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="4"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="5"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="6"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="7"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="8"/>
+			<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="9"/>
+			<Border BorderThickness="0,0.5,0.5,1" BorderBrush="Black" Grid.Column="0" Grid.Row="10"/>
+
+			<!-- Ramki pól -->		
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="1"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="2"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="2"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="2"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="2"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="2"/>
+			<Button Name="F2btn" Grid.Column="6" Grid.Row="2" Click="Square_Click"><Button.Template><ControlTemplate>
+				<Rectangle Fill="White" Stroke="Black"/>
+			</ControlTemplate></Button.Template></Button>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="2"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="2"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="2"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="2"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="3"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="4"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="5"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="6"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="7"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="8"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="9"/>
+			<Rectangle Stroke="Black" Grid.Column="1" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="2" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="3" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="4" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="5" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="6" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="7" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="8" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="9" Grid.Row="10"/>
+			<Rectangle Stroke="Black" Grid.Column="10" Grid.Row="10"/>
+
+			<!-- Współrzędne -->
+			<Label
+				Content="A"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="1"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="B"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="2"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="C"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="3"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="D"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="4"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="E"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="5"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="F"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="6"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="G"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="7"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="H"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="8"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="I"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="9"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="J"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="10"
+				Grid.Row="0"
+			/>
+			<Label
+				Content="1"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="1"
+			/>
+			<Label
+				Content="2"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="2"
+			/>
+			<Label
+				Content="3"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="3"
+			/>
+			<Label
+				Content="4"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="4"
+			/>
+			<Label
+				Content="5"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="5"
+			/>
+			<Label
+				Content="6"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="6"
+			/>
+			<Label
+				Content="7"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="7"
+			/>
+			<Label
+				Content="8"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="8"
+			/>
+			<Label
+				Content="9"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="9"
+			/>
+			<Label
+				Content="10"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="10"
+			/>
+
+			<!-- Statki -->
+			<!--Rectangle
+				Name="ShipTemplate"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/-->
+			<!--Rectangle
+				Name="Ship4_1"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/>
+			<Rectangle
+				Name="Ship4_2"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/>
+			<Rectangle
+				Name="Ship3_1"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/>
+			<Rectangle
+				Name="Ship3_2"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/>
+			<Rectangle
+				Name="Ship3_3"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/>
+			<Rectangle
+				Name="Ship2_1"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/>
+			<Rectangle
+				Name="Ship2_2"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/>
+			<Rectangle
+				Name="Ship2_3"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/>
+			<Rectangle
+				Name="Ship2_4"
+				Visibility="Hidden"
+				Margin="5"
+				Stroke="Black"
+				Fill="Black"
+				RadiusX="30" RadiusY="30"
+				Grid.RowSpan="1"
+				Grid.ColumnSpan="1"
+				Grid.Column="0"
+				Grid.Row="0"
+			/-->
+		</Grid>
+		<Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Button
+				Name="TestButton"
+				Content="test"
+				Grid.Column="0"
+				Grid.Row="0" Click="TestButton_Click"
+			/>
+		</Grid>
+	</Grid>
 </Window>
