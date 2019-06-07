@@ -22,7 +22,7 @@ public:
 	//zwraca wspó³rzêdne strza³u
 	Point getShotCoords() override;
 	//poinformuj interfejs o zmianie na planszy
-	void boardChanged(std::list<Board::ShipInfo>&, bool**) override;
+	void boardChanged(std::list<Board::ShipInfo>, std::vector<std::vector<bool>>) override;
 	//przekazuje informacje o zakoñczeniu gry
 	void gameEnded(char winner) override;
 #pragma endregion

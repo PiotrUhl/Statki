@@ -15,18 +15,18 @@ Point UserDllInterface::getShotCoords() {
 	return callBack.out_getCoords();
 }
 //poinformuj interfejs o zmianie na planszy
-void UserDllInterface::boardChanged(std::list<Board::ShipInfo>& shipList, bool** shotMap) {
-	IDllInterface::BoardInfo boardInfo;
-	boardInfo.size = shipList.size();
-	boardInfo.tab = new Board::ShipInfo[boardInfo.size];
+void UserDllInterface::boardChanged(std::list<Board::ShipInfo> shipList, std::vector<std::vector<bool>> shotMap) {
+	int size = shipList.size();
+	Board::ShipInfo** tab = new Board::ShipInfo*[size];
 	int i = 0;
 	for (auto k : shipList) {
-		boardInfo.tab[i++] = k;
-		//boardInfo.tab[i++] = std::move(k); //todo: przetestowaæ
+		Board::ShipInfo* temp = new Board::ShipInfo;
+		*temp = k;
+		tab[i++] = temp;
 	}
-	boardInfo.shotMap = std::move(shotMap);
-	callBack.out_sendBoardInfo(boardInfo);
-	delete[] boardInfo.tab;
+	//todo: dodaæ shotMap
+	callBack.out_sendBoardInfo(tab, size);
+	delete[] tab;
 }
 //przekazuje informacje o zakoñczeniu gry
 void UserDllInterface::gameEnded(char winner) {
@@ -34,12 +34,15 @@ void UserDllInterface::gameEnded(char winner) {
 }
 #pragma endregion
 #include "Game.h"
+#include "CreatorBoard.h" //debug
 #pragma region IDLLInterface
 //uruchamia grê
 void UserDllInterface::runProgram(IDllInterface::CallBacks callBacks) {
 	callBack = callBacks;
-	Game game;
-	game.run();
+	//Game game; //debug
+	//game.run(); //debug
+	std::unique_ptr<Board> board = CreatorBoard(10).makeBoard(Game::playerType::AI); //debug
+	boardChanged(board->getList(), board->getShotMap()); //debug
 }
 
 #include "PlannerLocal.h"

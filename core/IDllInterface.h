@@ -4,18 +4,12 @@
 
 namespace IDllInterface {
 
-	struct BoardInfo {
-		Board::ShipInfo* tab;
-		int size;
-		bool** shotMap;
-	};
-
 	//wskaŸniki na callbacki
 	struct CallBacks {
 		//pobiera wspó³rzêdne
 		Point (__stdcall *out_getCoords)(void);
 		//wysy³a do wypisania planszê
-		void (__stdcall *out_sendBoardInfo)(BoardInfo);
+		void (__stdcall *out_sendBoardInfo)(Board::ShipInfo**, int); //todo: add shotMap
 	};
 
 	extern "C" {

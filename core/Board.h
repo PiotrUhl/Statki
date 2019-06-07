@@ -1,7 +1,7 @@
 #pragma once
 #include "Ship.h"
 #include <list>
-#include <memory>
+#include <vector>
 
 class Board {
 public:
@@ -19,7 +19,7 @@ protected:
 	const int BOARDSIZE; //rozmiar planszy
 	int unsunkShips; //liczba niezatopnionych statków
 	std::list<ShipInfo> list; //lista statków
-	bool** shotMap; //mapa strza³ów
+	std::vector<std::vector<bool>> shotMap; //mapa strza³ów
 public:
 	//konstruktor
 	Board(int _BOARDSIZE);
@@ -30,7 +30,7 @@ public:
 	//zwraca listê statków na planszy
 	std::list<ShipInfo> getList();
 	//zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
-	bool** getShotMap();
+	std::vector<std::vector<bool>> getShotMap();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	virtual ShotResult shot(int x, int y) = 0;
 };
