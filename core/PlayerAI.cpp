@@ -18,14 +18,14 @@ bool PlayerAI::Point::operator==(const Point& other) {
 void PlayerAI::move() {
 	if (finishMode == false) {
 		Point point = chooseSquare();
-		Board::ShotResult result = otherBoard.shot(point.x, point.y);
+		ShotResult result = otherBoard.shot(point.x, point.y);
 		if (result == ShotResult::HIT)
 			setFinishMode(point);
 		updateShootableMap(point);
 	}
 	else {
 		Point point = chooseFinish();
-		Board::ShotResult result = otherBoard.shot(point.x, point.y);
+		ShotResult result = otherBoard.shot(point.x, point.y);
 		finishList.remove(point); //usuñ punkt z listy
 		if (result == ShotResult::SUNK) {
 			finishMode = false;

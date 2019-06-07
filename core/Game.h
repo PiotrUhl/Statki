@@ -2,11 +2,10 @@
 //#include "UserInterface.h"
 #include "Player.h" //Player
 #include "Board.h" //Board
+#include "enums.hpp"
 #include <memory> //std::unique_ptr
 
 class Game {
-public:
-	enum class PlayerType { NONE, HUMAN, AI, REMOTE };
 private:
 	int BOARDSIZE; //rozmiar planszy
 	PlayerType player1Type; //typ gracza 1

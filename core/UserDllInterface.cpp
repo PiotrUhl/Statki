@@ -41,7 +41,7 @@ void UserDllInterface::runProgram(IDllInterface::CallBacks callBacks) {
 	callBack = callBacks;
 	//Game game; //debug
 	//game.run(); //debug
-	std::unique_ptr<Board> board = CreatorBoard(10).makeBoard(Game::PlayerType::AI); //debug
+	std::unique_ptr<Board> board = CreatorBoard(10).makeBoard(PlayerType::AI); //debug
 	boardChanged(board->getList(), board->getShotMap()); //debug
 }
 

@@ -1,10 +1,10 @@
 #pragma once
 #include "Board.h" //Board
+#include "enums.hpp" //ShotResult
 #include <memory> //std::unique_ptr
 
 class Player {
 protected:
-	enum ShotResult { SUNK, HIT, MISS }; //rezultat strza³u
 	const int BOARDSIZE; //rozmiar planszy
 	Board& myBoard; //w³asna plansza
 	Board& otherBoard; //plansza przeciwnika

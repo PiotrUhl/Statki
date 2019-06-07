@@ -10,10 +10,10 @@ PlayerHuman::~PlayerHuman() {}
 //gracz wykonuje swój ruch (IUserInterface In)
 void PlayerHuman::move() {
 	Point point = userInterface.getShotCoords(); //wspó³rzêdne strza³u
-	Player::ShotResult shotResult;
+	ShotResult shotResult;
 	//strza³ i obs³uga b³êdów
 	try {
-		shotResult = static_cast<Player::ShotResult>(otherBoard.shot(point.x, point.y));
+		shotResult = otherBoard.shot(point.x, point.y);
 	}
 	catch (const std::out_of_range &exc) { //przekroczono zakres tablicy
 		//Interface - obs³uga b³êdnego zakresu tablicy

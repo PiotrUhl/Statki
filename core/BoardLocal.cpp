@@ -104,9 +104,9 @@ char BoardLocal::findDirection(int x, int y) {
 }
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
-Board::ShotResult BoardLocal::shot(int x, int y) {
+ShotResult BoardLocal::shot(int x, int y) {
 	shotMap[y][x] = true;
-	ShotResult result = static_cast<Board::ShotResult>(board.at(x).at(y).shot()); //strzel w dane pole
+	ShotResult result = board.at(x).at(y).shot(); //strzel w dane pole
 	if (result == ShotResult::SUNK)
 		unsunkShips--;
 	return result;

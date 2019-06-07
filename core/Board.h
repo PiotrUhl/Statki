@@ -1,11 +1,11 @@
 #pragma once
 #include "Ship.h"
+#include "enums.hpp"
 #include <list>
 #include <vector>
 
 class Board {
 public:
-	enum ShotResult { SUNK, HIT, MISS }; //rezultat strza³u
 	struct ShipInfo {
 		int size;
 		int x;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Board.h"
 #include "Square.h"
+#include "enums.hpp"
 #include <vector>
 
 class BoardLocal : public Board {
