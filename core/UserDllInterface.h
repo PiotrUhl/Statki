@@ -23,7 +23,7 @@ public:
 	//zwraca wspó³rzêdne strza³u
 	Point getShotCoords() override;
 	//poinformuj interfejs o zmianie na planszy
-	void boardChanged(std::list<Board::ShipInfo>, std::vector<std::vector<bool>>) override;
+	void boardChanged(std::list<Board::ShipInfo>, std::vector<std::vector<ShotResult>>) override;
 	//przekazuje informacje o zakoñczeniu gry
 	void gameEnded(char winner) override;
 #pragma endregion
@@ -34,7 +34,5 @@ public:
 	bool checkShipPlacement(int shipSize, int x, int y, char direction);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 	bool placeShip(int shipSize, int x, int y, char direction);
-	//pobiera obraz planszy o numerze 'id'
-	int* getBoardImage(int id);
 #pragma endregion
 };

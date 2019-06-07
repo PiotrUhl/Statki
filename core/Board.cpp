@@ -1,7 +1,7 @@
 #include "Board.h"
 
 //konstruktor
-Board::Board(int _BOARDSIZE) : BOARDSIZE(_BOARDSIZE), unsunkShips(0), shotMap(10, std::vector<bool>(10)) {}
+Board::Board(int _BOARDSIZE) : BOARDSIZE(_BOARDSIZE), unsunkShips(0), shotMap(10, std::vector<ShotResult>(10, ShotResult::NONE)) {}
 
 //destruktor
 Board::~Board() {}
@@ -17,6 +17,6 @@ std::list<Board::ShipInfo> Board::getList() {
 }
 
 //zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
-std::vector<std::vector<bool>> Board::getShotMap() {
+std::vector<std::vector<ShotResult>> Board::getShotMap() {
 	return shotMap;
 }

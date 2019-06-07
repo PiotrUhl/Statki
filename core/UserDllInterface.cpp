@@ -15,7 +15,7 @@ Point UserDllInterface::getShotCoords() {
 	return callBack.out_getCoords();
 }
 //poinformuj interfejs o zmianie na planszy
-void UserDllInterface::boardChanged(std::list<Board::ShipInfo> shipList, std::vector<std::vector<bool>> shotMap) {
+void UserDllInterface::boardChanged(std::list<Board::ShipInfo> shipList, std::vector<std::vector<ShotResult>> shotMap) {
 	int size = shipList.size();
 	Board::ShipInfo** tab = new Board::ShipInfo*[size];
 	int i = 0;

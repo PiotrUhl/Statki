@@ -105,11 +105,10 @@ char BoardLocal::findDirection(int x, int y) {
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 ShotResult BoardLocal::shot(int x, int y) {
-	shotMap[y][x] = true;
-	ShotResult result = board.at(x).at(y).shot(); //strzel w dane pole
-	if (result == ShotResult::SUNK)
+	shotMap[y][x] = board.at(x).at(y).shot(); //strzel w dane pole
+	if (shotMap[y][x] == ShotResult::SUNK)
 		unsunkShips--;
-	return result;
+	return shotMap[y][x];
 }
 
 //usuwa ca³¹ zawartoœæ planszy
@@ -117,7 +116,7 @@ void BoardLocal::clear() {
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
 			board[i][j].reset();
-			shotMap[i][j] = false;
+			shotMap[i][j] = NONE;
 		}
 	}
 	list.clear();
