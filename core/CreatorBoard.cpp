@@ -10,13 +10,13 @@
 
 CreatorBoard::CreatorBoard(int _BOARDSIZE) : BOARDSIZE(_BOARDSIZE) {}
 
-std::unique_ptr<Board> CreatorBoard::makeBoard(Game::playerType playerType) {
-	switch (playerType) {
-	case Game::playerType::HUMAN:
+std::unique_ptr<Board> CreatorBoard::makeBoard(Game::PlayerType PlayerType) {
+	switch (PlayerType) {
+	case Game::PlayerType::HUMAN:
 		return makeForHuman();
-	case Game::playerType::AI:
+	case Game::PlayerType::AI:
 		return makeForAI();
-	case Game::playerType::REMOTE:
+	case Game::PlayerType::REMOTE:
 		return makeForRemote();
 	}
 	return nullptr;

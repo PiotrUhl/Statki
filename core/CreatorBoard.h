@@ -6,7 +6,7 @@ class CreatorBoard {
 	const int BOARDSIZE;
 public:
 	CreatorBoard(int _BOARDSIZE);
-	std::unique_ptr<Board> makeBoard(Game::playerType playerType);
+	std::unique_ptr<Board> makeBoard(Game::PlayerType PlayerType);
 private:
 	std::unique_ptr<Board> makeForHuman();
 	std::unique_ptr<Board> makeForAI();

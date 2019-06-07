@@ -11,8 +11,8 @@ void Game::run() {
 	initialization();
 	//char winner = loop(); //tymczasowo wy³¹czone
 	//ending(winner); //tymczasowo wy³¹czone
-	player1Type = playerType::AI; //temp
-	player2Type = playerType::AI; //temp
+	player1Type = PlayerType::AI; //temp
+	player2Type = PlayerType::AI; //temp
 }
 
 #include "CreatorBoard.h"
@@ -73,13 +73,13 @@ void Game::ending(char winner) {
 //inicjalizuje graczy
 void Game::initializePlayers() {
 	switch (player1Type) {
-	case playerType::HUMAN:
+	case PlayerType::HUMAN:
 		player1 = std::make_unique<PlayerHuman>(UserDllInterface::getInstance(), BOARDSIZE, *board1, *board2);
 		break;
-	case playerType::AI:
+	case PlayerType::AI:
 		player1 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);
 		break;
-	case playerType::REMOTE:
+	case PlayerType::REMOTE:
 		player1 = std::make_unique<PlayerRemote>(BOARDSIZE, *board1, *board2);
 		break;
 	default:
@@ -87,13 +87,13 @@ void Game::initializePlayers() {
 	}
 	//inicjalizacja drugiego gracza
 	switch (player2Type) {
-	case playerType::HUMAN:
+	case PlayerType::HUMAN:
 		player2 = std::make_unique<PlayerHuman>(UserDllInterface::getInstance(), BOARDSIZE, *board1, *board2);
 		break;
-	case playerType::AI:
+	case PlayerType::AI:
 		player2 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);
 		break;
-	case playerType::REMOTE:
+	case PlayerType::REMOTE:
 		player2 = std::make_unique<PlayerRemote>(BOARDSIZE, *board1, *board2);
 		break;
 	default:

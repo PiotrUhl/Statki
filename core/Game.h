@@ -6,11 +6,11 @@
 
 class Game {
 public:
-	enum class playerType { NONE, HUMAN, AI, REMOTE };
+	enum class PlayerType { NONE, HUMAN, AI, REMOTE };
 private:
 	int BOARDSIZE; //rozmiar planszy
-	playerType player1Type; //typ gracza 1
-	playerType player2Type; //typ gracza 2
+	PlayerType player1Type; //typ gracza 1
+	PlayerType player2Type; //typ gracza 2
 	std::unique_ptr<Board> board1; //plansza gracza nr 1
 	std::unique_ptr<Board> board2; //plansza gracza nr 2
 	std::unique_ptr<Player> player1; //gracz nr 1
