@@ -39,7 +39,10 @@ namespace GUI {
 			dllInterface.initAndRun();
 		}
 		private void Square_Click(object sender, RoutedEventArgs e) {
-			MessageBox.Show(".");
+			Button square = (Button)sender;
+			int x = (int)square.GetValue(Grid.ColumnProperty);
+			int y = (int)square.GetValue(Grid.RowProperty);
+			MessageBox.Show("Kliknięto pole (" + x + "," + y + ").");
 		}
 		#endregion
 		#region private methods
@@ -51,7 +54,8 @@ namespace GUI {
 					leftGrid[i, j].SetValue(Grid.ColumnProperty, i+1);
 					leftGrid[i, j].SetValue(Grid.RowProperty, j+1);
 					leftGrid[i, j].Template = (ControlTemplate)FindResource("ButtonRectangle");
-					leftGrid[i, j].IsEnabled = false;
+					//leftGrid[i, j].IsEnabled = false;
+					leftGrid[i, j].Click += Square_Click;
 					LeftGrid.Children.Add(leftGrid[i,j]);
 				}
 			}
