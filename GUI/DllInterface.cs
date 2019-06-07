@@ -6,66 +6,73 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace GUI {
-	[StructLayout(LayoutKind.Sequential)]
-	public struct Point {
-		public int x;
-		public int y;
-	}
-
 	public class DllInterface {
-		public MainWindow window;
-		public DllInterface(MainWindow window) {
+		private MainWindow window; //okno głowne programu
+
+		//konstruktor
+		public DllInterface(MainWindow window)  {
 			this.window = window;
 		}
+		
+		//inicjalizuje i uruchamia program
+		public void initAndRun() {
+			CallBacks callBacks = new CallBacks { //inicjalizacja callbacków
+				out_sendBoardInfo = in_sendBoardInfo
+			};
+			runProgram(callBacks);
+		}
 
-		#region funkcje_dll
+		#region dll methods
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void runProgram(CallBacks _);
+		public static extern void runProgram(CallBacks _); //uruchamia program
 		#endregion
 
-		#region delegaty
+		#region callback
+		//struktura przechowująca callbacki
+		[StructLayout(LayoutKind.Sequential)]
+		public struct CallBacks {
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_getCoords out_getCoords; //pobiera współrzędne strzału
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_sendBoardInfo out_sendBoardInfo; //wyświetla planszę
+		}
+
+		//deklaracje delegat
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate Point Dg_getCoords();
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void Dg_sendBoardInfo([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] tab, int size);
-		#endregion
 
-		#region callBacki
-		[StructLayout(LayoutKind.Sequential)]
-		public struct CallBacks {
-			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_getCoords out_getCoords;
-			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_sendBoardInfo out_sendBoardInfo;
-		}
-		#endregion
-
-		#region metody_do_delegatów
-		private void sendBoardInfo(IntPtr[] tab, int size) {
-			//List<ShipInfo> tempList = new List<ShipInfo>();
+		//definicje metod przekazywanych do biblioteki .dll
+		//wyświetla planszę
+		private void in_sendBoardInfo(IntPtr[] tab, int size) {
 			for (int i = 0; i < size; i++) {
-				//tempList.Add((ShipInfo)Marshal.PtrToStructure(tab[i], typeof(ShipInfo)));
-				window.shipList.Add(new GUI.ShipInfo((DllInterface.ShipInfo)Marshal.PtrToStructure(tab[i], typeof(ShipInfo))));
+				window.shipList.Add((DllInterface.ShipInfo)Marshal.PtrToStructure(tab[i], typeof(ShipInfo)));
 			}
 			window.RenderShips();
 		}
-		#endregion
 
+		//inne techniczne
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-		public struct ShipInfo {
+		private struct ShipInfo { //informacje o pojedyńczym statku
 			public int size;
 			public int x;
 			public int y;
 			public byte direction;
 			public bool sunk;
+			public static implicit operator GUI.ShipInfo(DllInterface.ShipInfo self) {
+				return new GUI.ShipInfo {
+					size = self.size,
+					x = self.x + 1,
+					y = self.y + 1,
+					direction = (char)self.direction,
+					sunk = self.sunk,
+					drawObj = null
+				};
+			}
 		}
+		#endregion
 
-		public void initAndRun() {
-			CallBacks callBacks = new CallBacks {
-				out_sendBoardInfo = sendBoardInfo
-			};
-			runProgram(callBacks);
-		}
 
 	}
 }

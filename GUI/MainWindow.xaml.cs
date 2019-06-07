@@ -19,45 +19,33 @@ namespace GUI {
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
 
-	public struct ShipInfo {
-		public int size;
-		public int x;
-		public int y;
-		public char direction;
-		public bool sunk;
-		public System.Windows.Shapes.Rectangle drawObj;
-		public ShipInfo(DllInterface.ShipInfo other) {
-			size = other.size;
-			x = other.x+1;
-			y = other.y + 1; ;
-			direction = (char)other.direction;
-			sunk = other.sunk;
-			drawObj = null;
-		}
-	}
 	public partial class MainWindow : Window {
-		public List<ShipInfo> shipList = new List<ShipInfo>();
-		private bool[,] shootedMap = new bool[10,10];
+		#region fields
+		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
+		private bool[,] shotMap = new bool[10,10]; //informacja w które pola strzelano
+		#endregion
+		#region public methods
 		public MainWindow() {
-			#region Debug
-
-			#endregion
 			InitializeComponent();
 		}
 
-		private void TestButton_Click(object sender, RoutedEventArgs e) {
-			//RenderNewShip(0);
-			//LeftGrid.IsEnabled = true;
-			DllInterface dllInterface = new DllInterface(this);
-			dllInterface.initAndRun();
-		}
-
-		public void RenderShips() {
+		public void RenderShips() { //aktualizuje planszę rysując wszystkie statki z listy shipList
 			foreach (ShipInfo k in shipList) {
 				RenderShip(k);
 			}
 		}
-		private void RenderShip(ShipInfo ship) {
+		#endregion
+		#region event handlers
+		private void TestButton_Click(object sender, RoutedEventArgs e) {
+			DllInterface dllInterface = new DllInterface(this);
+			dllInterface.initAndRun();
+		}
+		private void Square_Click(object sender, RoutedEventArgs e) {
+			MessageBox.Show(".");
+		}
+		#endregion
+		#region private methods
+		private void RenderShip(ShipInfo ship) { //rysuje bądź aktualizuje statek "ship" na planszy
 			if (ship.drawObj == null) {
 				ship.drawObj = new Rectangle {
 					Margin = new Thickness(5),
@@ -79,9 +67,6 @@ namespace GUI {
 				ship.drawObj.SetValue(Grid.RowSpanProperty, ship.size);
 			}
 		}
-
-		private void Square_Click(object sender, RoutedEventArgs e) {
-			MessageBox.Show(".");
-		}
+		#endregion
 	}
 }
