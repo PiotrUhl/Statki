@@ -17,7 +17,8 @@ namespace GUI {
 		//inicjalizuje i uruchamia program
 		public void initAndRun() {
 			CallBacks callBacks = new CallBacks { //inicjalizacja callbacków
-				out_sendShipsInfo = in_sendShipsInfo
+				out_sendShipsInfo = in_sendShipsInfo,
+				out_sendShotMap = in_sendShotMap
 			};
 			runProgram(callBacks);
 		}
@@ -34,7 +35,9 @@ namespace GUI {
 			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_getCoords out_getCoords; //pobiera współrzędne strzału
 			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_sendShipsInfo out_sendShipsInfo; //wyświetla planszę
+			public Dg_sendShipsInfo out_sendShipsInfo; //wyświetla statki
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_sendShotMap out_sendShotMap; //wyświetla czy strzelono w pole
 		}
 
 		//deklaracje delegat
@@ -42,14 +45,27 @@ namespace GUI {
 		public delegate Point Dg_getCoords();
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void Dg_sendShipsInfo([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] tab, int size);
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate void Dg_sendShotMap(IntPtr tab, int size);
 
 		//definicje metod przekazywanych do biblioteki .dll
-		//wyświetla planszę
+		//wyświetla statki
 		private void in_sendShipsInfo(IntPtr[] tab, int size) {
 			for (int i = 0; i < size; i++) {
 				window.shipList.Add((DllInterface.ShipInfo)Marshal.PtrToStructure(tab[i], typeof(ShipInfo)));
 			}
 			window.RenderShips();
+		}
+		//wyświetla czy strzelono w pole
+		private void in_sendShotMap(IntPtr tab, int size) {
+
+			byte[] data = new byte[size];
+			Marshal.Copy(tab, data, 0, size);
+			for (int i = 0; i < 10; i++) {
+				for (int j = 0; j < 10; j++) {
+					window.shotMap[i,j] = (ShotResult)data[i * 10 + j];
+				}
+			}
 		}
 
 		//inne techniczne

@@ -16,17 +16,28 @@ Point UserDllInterface::getShotCoords() {
 }
 //poinformuj interfejs o zmianie na planszy
 void UserDllInterface::boardChanged(std::list<Board::ShipInfo> shipList, std::vector<std::vector<ShotResult>> shotMap) {
-	int size = shipList.size();
-	Board::ShipInfo** tab = new Board::ShipInfo*[size];
+#pragma region shipList
+	int shipSize = shipList.size();
+	Board::ShipInfo** shipTab = new Board::ShipInfo*[shipSize];
 	int i = 0;
 	for (auto k : shipList) {
 		Board::ShipInfo* temp = new Board::ShipInfo;
 		*temp = k;
-		tab[i++] = temp;
+		shipTab[i++] = temp;
 	}
-	callBack.out_sendShipsInfo(tab, size);
-	//wyœlij informacje o strza³ach
-	delete[] tab;
+#pragma endregion
+#pragma region shotMap
+	unsigned char* shotTab = new unsigned char[BOARDSIZE*BOARDSIZE];
+	for (int i = 0; i < BOARDSIZE; i++) {
+		for (int j = 0; j < BOARDSIZE; j++) {
+			shotTab[i*BOARDSIZE + j] = static_cast<unsigned char>(shotMap[i][j]);
+		}
+	}
+#pragma endregion
+	callBack.out_sendShipsInfo(shipTab, shipSize);
+	callBack.out_sendShotMap(shotTab, BOARDSIZE*BOARDSIZE);
+	delete[] shipTab;
+	delete[] shotTab;
 }
 //przekazuje informacje o zakoñczeniu gry
 void UserDllInterface::gameEnded(char winner) {

@@ -22,7 +22,7 @@ namespace GUI {
 	public partial class MainWindow : Window {
 		#region fields
 		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
-		private bool[,] shotMap = new bool[10,10]; //informacja w które pola strzelano
+		public ShotResult[,] shotMap = new ShotResult[10,10]; //informacja w które pola strzelano
 		#endregion
 		#region public methods
 		public MainWindow() {

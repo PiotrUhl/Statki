@@ -30,4 +30,6 @@ namespace GUI {
 		public bool sunk;
 		public System.Windows.Shapes.Rectangle drawObj;
 	}
+
+	public enum ShotResult { NONE = 0, MISS, HIT, SUNK } //informacje o wyniku strzału
 }

@@ -14,6 +14,7 @@ public:
 	static UserDllInterface& getInstance(); //pobierz instancje klasy
 #pragma endregion
 private:
+	int BOARDSIZE = 10; //rozmiar planszy //debug initialization
 	PlannerLocal* currentPlanner; //uchwyt na obecnie wybrany planer //dla PlannerLocal dla CreatorBoard dla PlayerType::HUMAN
 	IDllInterface::CallBacks callBack; //struktura wskaŸników na callBacki
 public:

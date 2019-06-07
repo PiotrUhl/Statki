@@ -11,7 +11,7 @@ namespace IDllInterface {
 		//wysy³a do wypisania informacje o statkach
 		void (__stdcall *out_sendShipsInfo)(Board::ShipInfo**, int);
 		//wysy³a do wypisania obraz planszy
-		void(__stdcall *out_sendBoardImage)(char*, int);
+		void(__stdcall *out_sendShotMap)(unsigned char*, int);
 	};
 
 	extern "C" {
