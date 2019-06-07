@@ -18,11 +18,13 @@ namespace GUI {
 	public partial class MainWindow : Window {
 		#region fields
 		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
-		public ShotResult[,] shotMap = new ShotResult[10,10]; //informacja w które pola strzelano
+		public ShotResult[,] shotMap = new ShotResult[10, 10]; //informacja w które pola strzelano
+		public Button[,] leftGrid = new Button[10, 10]; //lewa plansza
 		#endregion
 		#region public methods
 		public MainWindow() {
 			InitializeComponent();
+			InitializeLeftGrid();
 		}
 
 		public void RenderShips() { //aktualizuje planszę rysując wszystkie statki z listy shipList
@@ -41,7 +43,21 @@ namespace GUI {
 		}
 		#endregion
 		#region private methods
-		private void RenderShip(ShipInfo ship) { //rysuje bądź aktualizuje statek "ship" na planszy
+		//inicjalizuje lewą planszę
+		void InitializeLeftGrid() {
+			for (int i = 0; i < 10; i++) {
+				for (int j = 0; j < 10; j++) {
+					leftGrid[i, j] = new Button();
+					leftGrid[i, j].SetValue(Grid.ColumnProperty, i+1);
+					leftGrid[i, j].SetValue(Grid.RowProperty, j+1);
+					leftGrid[i, j].Template = (ControlTemplate)FindResource("ButtonRectangle");
+					leftGrid[i, j].IsEnabled = false;
+					LeftGrid.Children.Add(leftGrid[i,j]);
+				}
+			}
+		}
+		//rysuje bądź aktualizuje statek "ship" na planszy
+		private void RenderShip(ShipInfo ship) {
 			if (ship.drawObj == null) {
 				ship.drawObj = new Rectangle {
 					Margin = new Thickness(5),
