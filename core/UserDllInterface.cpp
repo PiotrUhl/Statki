@@ -24,8 +24,8 @@ void UserDllInterface::boardChanged(std::list<Board::ShipInfo> shipList, std::ve
 		*temp = k;
 		tab[i++] = temp;
 	}
-	//todo: dodaæ shotMap
 	callBack.out_sendShipsInfo(tab, size);
+	//wyœlij informacje o strza³ach
 	delete[] tab;
 }
 //przekazuje informacje o zakoñczeniu gry
@@ -53,9 +53,5 @@ bool UserDllInterface::checkShipPlacement(int shipSize, int x, int y, char direc
 //umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 	return currentPlanner->place(shipSize, x, y, direction);
-}
-//pobiera obraz planszy o numerze 'id'
-int* UserDllInterface::getBoardImage(int id) {
-	return nullptr;
 }
 #pragma endregion

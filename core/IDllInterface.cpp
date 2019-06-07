@@ -14,8 +14,4 @@ namespace IDllInterface {
 	bool placeShip(int shipSize, int x, int y, char direction) {
 		return UserDllInterface::getInstance().placeShip(shipSize, x, y, direction);
 	}
-	//pobiera obraz planszy o numerze 'id'
-	int* getBoardImage(int id) {
-		return UserDllInterface::getInstance().getBoardImage(id);
-	}
 }

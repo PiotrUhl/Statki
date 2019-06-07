@@ -8,8 +8,10 @@ namespace IDllInterface {
 	struct CallBacks {
 		//pobiera wspó³rzêdne
 		Point (__stdcall *out_getCoords)(void);
-		//wysy³a do wypisania planszê
-		void (__stdcall *out_sendShipsInfo)(Board::ShipInfo**, int); //todo: add shotMap
+		//wysy³a do wypisania informacje o statkach
+		void (__stdcall *out_sendShipsInfo)(Board::ShipInfo**, int);
+		//wysy³a do wypisania obraz planszy
+		void(__stdcall *out_sendBoardImage)(char*, int);
 	};
 
 	extern "C" {
