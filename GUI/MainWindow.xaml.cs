@@ -15,10 +15,6 @@ using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 
 namespace GUI {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-
 	public partial class MainWindow : Window {
 		#region fields
 		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
@@ -65,6 +61,11 @@ namespace GUI {
 			else {
 				ship.drawObj.SetValue(Grid.ColumnSpanProperty, 1);
 				ship.drawObj.SetValue(Grid.RowSpanProperty, ship.size);
+			}
+			if (ship.sunk == true) {
+				ship.drawObj.Opacity = 0.75;
+				ship.drawObj.Fill = Brushes.LightSlateGray;
+				ship.drawObj.Stroke = Brushes.LightSlateGray;
 			}
 		}
 		#endregion

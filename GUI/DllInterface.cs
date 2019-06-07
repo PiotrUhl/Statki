@@ -75,14 +75,14 @@ namespace GUI {
 			public int x;
 			public int y;
 			public byte direction;
-			public bool sunk;
+			public byte sunk;
 			public static implicit operator GUI.ShipInfo(DllInterface.ShipInfo self) {
 				return new GUI.ShipInfo {
 					size = self.size,
 					x = self.x + 1,
 					y = self.y + 1,
 					direction = (char)self.direction,
-					sunk = self.sunk,
+					sunk = Convert.ToBoolean(self.sunk),
 					drawObj = null
 				};
 			}
