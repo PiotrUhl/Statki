@@ -27,9 +27,10 @@ namespace GUI {
 			InitializeLeftGrid();
 		}
 
-		public void RenderShips() { //aktualizuje planszę rysując wszystkie statki z listy shipList
+		public void DrawShips() { //aktualizuje planszę rysując wszystkie statki z listy shipList
 			foreach (ShipInfo k in shipList) {
-				RenderShip(k);
+				DrawShip(k);
+				DisableSquaresUnderShip(k);
 			}
 		}
 		#endregion
@@ -60,8 +61,22 @@ namespace GUI {
 				}
 			}
 		}
+		//wyłącza pola pod stawianym statkiem
+		private void DisableSquaresUnderShip(ShipInfo ship) {
+			int x = ship.x - 1;
+			int y = ship.y - 1;
+			for (int i = 0; i < ship.size; i++) {
+				leftGrid[x, y].IsEnabled = false;
+				if (ship.direction == 'H')
+					x++;
+				else if (ship.direction == 'V')
+					y++;
+				else
+					throw new Exception("Invalid ship direction!");
+			}
+		}
 		//rysuje bądź aktualizuje statek "ship" na planszy
-		private void RenderShip(ShipInfo ship) {
+		private void DrawShip(ShipInfo ship) {
 			if (ship.drawObj == null) {
 				ship.drawObj = new Rectangle {
 					Margin = new Thickness(5),
