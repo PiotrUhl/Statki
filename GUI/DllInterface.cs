@@ -17,7 +17,7 @@ namespace GUI {
 		//inicjalizuje i uruchamia program
 		public void initAndRun() {
 			CallBacks callBacks = new CallBacks { //inicjalizacja callbacków
-				out_sendBoardInfo = in_sendBoardInfo
+				out_sendShipsInfo = in_sendShipsInfo
 			};
 			runProgram(callBacks);
 		}
@@ -34,18 +34,18 @@ namespace GUI {
 			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_getCoords out_getCoords; //pobiera współrzędne strzału
 			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_sendBoardInfo out_sendBoardInfo; //wyświetla planszę
+			public Dg_sendShipsInfo out_sendShipsInfo; //wyświetla planszę
 		}
 
 		//deklaracje delegat
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate Point Dg_getCoords();
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate void Dg_sendBoardInfo([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] tab, int size);
+		public delegate void Dg_sendShipsInfo([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] tab, int size);
 
 		//definicje metod przekazywanych do biblioteki .dll
 		//wyświetla planszę
-		private void in_sendBoardInfo(IntPtr[] tab, int size) {
+		private void in_sendShipsInfo(IntPtr[] tab, int size) {
 			for (int i = 0; i < size; i++) {
 				window.shipList.Add((DllInterface.ShipInfo)Marshal.PtrToStructure(tab[i], typeof(ShipInfo)));
 			}

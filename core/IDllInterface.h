@@ -9,7 +9,7 @@ namespace IDllInterface {
 		//pobiera wspó³rzêdne
 		Point (__stdcall *out_getCoords)(void);
 		//wysy³a do wypisania planszê
-		void (__stdcall *out_sendBoardInfo)(Board::ShipInfo**, int); //todo: add shotMap
+		void (__stdcall *out_sendShipsInfo)(Board::ShipInfo**, int); //todo: add shotMap
 	};
 
 	extern "C" {

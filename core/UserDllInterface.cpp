@@ -25,7 +25,7 @@ void UserDllInterface::boardChanged(std::list<Board::ShipInfo> shipList, std::ve
 		tab[i++] = temp;
 	}
 	//todo: dodaæ shotMap
-	callBack.out_sendBoardInfo(tab, size);
+	callBack.out_sendShipsInfo(tab, size);
 	delete[] tab;
 }
 //przekazuje informacje o zakoñczeniu gry
