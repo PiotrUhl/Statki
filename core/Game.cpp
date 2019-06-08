@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //konstruktor
-Game::Game(IUserInterface& _playerInterface) : mainInterface(_playerInterface) {}
+Game::Game(IUserInterface& _mainInterface) : mainInterface(_mainInterface) {}
 
 //destruktor
 Game::~Game() {}
@@ -21,8 +21,8 @@ void Game::run() {
 void Game::initialization() {
 	//Interface - pobierz ustawienia gry (typy graczy, rozmiar planszy)
 	//Tworzenie plansz graczy
-	board1 = CreatorBoard(BOARDSIZE).makeBoard(player1Type);
-	board2 = CreatorBoard(BOARDSIZE).makeBoard(player2Type);
+	board1 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player1Type);
+	board2 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player2Type);
 	//Sprawdzanie poprawnoœci utworzenia plansz
 	if (board1 == nullptr)
 		;//interface - zg³oœ b³¹d
@@ -66,7 +66,7 @@ void Game::ending(char winner) {
 
 }
 
-#include "UserDllInterface.h"
+//#include "UserDllInterface.h"
 #include "PlayerHuman.h"
 #include "PlayerAI.h"
 #include "PlayerRemote.h"
@@ -74,7 +74,7 @@ void Game::ending(char winner) {
 void Game::initializePlayers() {
 	switch (player1Type) {
 	case PlayerType::HUMAN:
-		player1 = std::make_unique<PlayerHuman>(UserDllInterface::getInstance(), BOARDSIZE, *board1, *board2);
+		player1 = std::make_unique<PlayerHuman>(mainInterface, BOARDSIZE, *board1, *board2);
 		break;
 	case PlayerType::AI:
 		player1 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);
@@ -88,7 +88,7 @@ void Game::initializePlayers() {
 	//inicjalizacja drugiego gracza
 	switch (player2Type) {
 	case PlayerType::HUMAN:
-		player2 = std::make_unique<PlayerHuman>(UserDllInterface::getInstance(), BOARDSIZE, *board1, *board2);
+		player2 = std::make_unique<PlayerHuman>(mainInterface, BOARDSIZE, *board1, *board2);
 		break;
 	case PlayerType::AI:
 		player2 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);

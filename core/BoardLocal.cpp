@@ -1,7 +1,7 @@
 #include "BoardLocal.h"
 
 //konstruktor
-BoardLocal::BoardLocal(int _BOARDSIZE) : Board(_BOARDSIZE), board(BOARDSIZE, std::vector<Square>(BOARDSIZE)) {}
+BoardLocal::BoardLocal(int _BOARDSIZE, IUserInterface& _outInterface) : Board(_BOARDSIZE, _outInterface), board(BOARDSIZE, std::vector<Square>(BOARDSIZE)) {}
 
 //destruktor
 BoardLocal::~BoardLocal() {}

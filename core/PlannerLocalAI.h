@@ -12,7 +12,7 @@ private:
 		Point(int _x, int _y) : x(_x), y(_y) {}
 	}; //punkt 2D
 public:
-	PlannerLocalAI(int _BOARDSIZE);
+	PlannerLocalAI(int _BOARDSIZE, IUserInterface&);
 	//tworzy za pomoc¹ algorytmu i zwraca planszê
 	BoardLocal makeBoard();
 private:

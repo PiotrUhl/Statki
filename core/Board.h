@@ -1,8 +1,11 @@
 #pragma once
 #include "Ship.h"
+//#include "IUserInterface.h"
 #include "enums.hpp"
 #include <list>
 #include <vector>
+
+class IUserInterface;
 
 class Board {
 public:
@@ -20,9 +23,10 @@ protected:
 	int unsunkShips; //liczba niezatopnionych statków
 	std::list<ShipInfo> list; //lista statków
 	std::vector<std::vector<ShotResult>> shotMap; //mapa strza³ów
+	IUserInterface& outInterface; //interfejs do wypisywania planszy
 public:
 	//konstruktor
-	Board(int _BOARDSIZE);
+	Board(int _BOARDSIZE, IUserInterface&);
 	//destruktor
 	virtual ~Board();
 	//zwraca wartoœæ pola unsunkShips

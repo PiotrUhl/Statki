@@ -1,6 +1,7 @@
 #pragma once
 #include "Point.hpp"
 #include "Board.h"
+#include <list>
 class PlannerLocal; //PlannerLocal
 
 class IUserInterface {

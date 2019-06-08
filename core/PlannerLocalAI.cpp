@@ -2,7 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 
-PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE) : PlannerLocal(_BOARDSIZE), placeableMap(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
+PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE, IUserInterface& _outInterface) : PlannerLocal(_BOARDSIZE, _outInterface), placeableMap(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
 	srand((unsigned int)time(NULL));
 }
 

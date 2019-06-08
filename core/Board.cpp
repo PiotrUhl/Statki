@@ -1,7 +1,7 @@
 #include "Board.h"
 
 //konstruktor
-Board::Board(int _BOARDSIZE) : BOARDSIZE(_BOARDSIZE), unsunkShips(0), shotMap(10, std::vector<ShotResult>(10, ShotResult::NONE)) {}
+Board::Board(int _BOARDSIZE, IUserInterface& _outInterface) : BOARDSIZE(_BOARDSIZE), outInterface(_outInterface), unsunkShips(0), shotMap(10, std::vector<ShotResult>(10, ShotResult::NONE)) {}
 
 //destruktor
 Board::~Board() {}
