@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //konstruktor
-Game::Game() {}
+Game::Game(IUserInterface& _playerInterface) : mainInterface(_playerInterface) {}
 
 //destruktor
 Game::~Game() {}

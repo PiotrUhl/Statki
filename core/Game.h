@@ -2,7 +2,8 @@
 //#include "UserInterface.h"
 #include "Player.h" //Player
 #include "Board.h" //Board
-#include "enums.hpp"
+#include "IUserInterface.h" //IUserInterface
+#include "enums.hpp" //PlayerType
 #include <memory> //std::unique_ptr
 
 class Game {
@@ -14,9 +15,10 @@ private:
 	std::unique_ptr<Board> board2; //plansza gracza nr 2
 	std::unique_ptr<Player> player1; //gracz nr 1
 	std::unique_ptr<Player> player2; //gracz nr 2
+	IUserInterface& mainInterface; //interfejs do komunikacji z graczem
 public:
 	//konstruktor
-	Game();
+	Game(IUserInterface&);
 	//destruktor
 	~Game();
 	//uruchom grê

@@ -50,7 +50,7 @@ void UserDllInterface::gameEnded(char winner) {
 //uruchamia grê
 void UserDllInterface::runProgram(IDllInterface::CallBacks callBacks) {
 	callBack = callBacks;
-	//Game game; //debug
+	//Game game(getInstance()); //debug
 	//game.run(); //debug
 	std::unique_ptr<Board> board = CreatorBoard(10).makeBoard(PlayerType::AI); //debug
 	boardChanged(board->getList(), board->getShotMap()); //debug
