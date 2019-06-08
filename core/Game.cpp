@@ -11,8 +11,6 @@ void Game::run() {
 	initialization();
 	//char winner = loop(); //tymczasowo wy³¹czone
 	//ending(winner); //tymczasowo wy³¹czone
-	player1Type = PlayerType::AI; //temp
-	player2Type = PlayerType::AI; //temp
 }
 
 #include "CreatorBoard.h"

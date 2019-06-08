@@ -40,4 +40,6 @@ namespace GUI {
 	public enum ShotResult { NONE = 0, MISS, HIT, SUNK } //informacje o wyniku strzału
 
 	public enum PlayerType { NONE = 0, HUMAN, AI, REMOTE } //typ gracza
+
+	public enum Mode { MENU = 0, PLANNER, GAME, ENDING } //aktywny tryb (część gry)
 }

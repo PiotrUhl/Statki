@@ -21,9 +21,6 @@ void UserDllInterface::registerBoard(int nr, int id) {
 #include <Windows.h>
 //przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
 void UserDllInterface::makeBoard(PlannerLocal* board) {
-	//wywo³anie delegaty
-	//callBack.out_error("UserDllInterface::makeBoard() unimplemented!", true);
-	//error("UserDllInterface::makeBoard() unimplemented!", true);
 	callBack.out_plannerMode();
 }
 

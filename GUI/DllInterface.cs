@@ -31,6 +31,7 @@ namespace GUI {
 				player2type = PlayerType.AI
 			};
 			dllThread = new Thread(() => runProgram(init, callBacks));
+			dllThread.IsBackground = true;
 			dllThread.Start();
 		}
 
@@ -83,7 +84,6 @@ namespace GUI {
 		}
 		//przechodzi w tryb tworzenia planszy
 		private void in_plannerMode() {
-			System.Windows.MessageBox.Show("PlannerMode enabled!");
 			window.enterPlannerMode();
 			waitingInPlannerMode.WaitOne();
 		}
