@@ -13,13 +13,14 @@ void UserDllInterface::registerBoard(int nr, int id) {
 //przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
 void UserDllInterface::makeBoard(PlannerLocal* board) {
 	//wywo³anie delegaty
+	throw "Unimplemented!";
 }
 //pobiera wspó³rzêdne strza³u
 Point UserDllInterface::getShotCoords() {
 	return callBack.out_getCoords();
 }
 //poinformuj interfejs o zmianie na planszy
-void UserDllInterface::boardChanged(std::list<Board::ShipInfo> shipList, std::vector<std::vector<ShotResult>> shotMap) {
+void UserDllInterface::boardChanged(int id, std::list<Board::ShipInfo> shipList, std::vector<std::vector<ShotResult>> shotMap) {
 #pragma region shipList
 	int shipSize = shipList.size();
 	Board::ShipInfo** shipTab = new Board::ShipInfo*[shipSize];
@@ -38,14 +39,15 @@ void UserDllInterface::boardChanged(std::list<Board::ShipInfo> shipList, std::ve
 		}
 	}
 #pragma endregion
-	callBack.out_sendShipsInfo(shipTab, shipSize);
-	callBack.out_sendShotMap(shotTab, BOARDSIZE*BOARDSIZE);
+	callBack.out_sendShipsInfo(shipTab, shipSize, id);
+	callBack.out_sendShotMap(shotTab, BOARDSIZE*BOARDSIZE, id);
 	delete[] shipTab;
 	delete[] shotTab;
 }
 //przekazuje informacje o zakoñczeniu gry
 void UserDllInterface::gameEnded(char winner) {
 	//wywo³anie delegaty
+	throw "Unimplemented!";
 }
 #pragma endregion
 #include "Game.h"
@@ -57,7 +59,8 @@ void UserDllInterface::runProgram(IDllInterface::CallBacks callBacks) {
 	//Game game(getInstance()); //debug
 	//game.run(); //debug
 	std::unique_ptr<Board> board = CreatorBoard(10, getInstance()).makeBoard(PlayerType::AI); //debug
-	boardChanged(board->getList(), board->getShotMap()); //debug
+	registerBoard(1, board->getId());
+	boardChanged(board->getId(), board->getList(), board->getShotMap()); //debug
 }
 
 #include "PlannerLocal.h"

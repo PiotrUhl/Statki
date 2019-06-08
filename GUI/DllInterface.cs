@@ -17,6 +17,7 @@ namespace GUI {
 		//inicjalizuje i uruchamia program
 		public void initAndRun() {
 			CallBacks callBacks = new CallBacks { //inicjalizacja callbacków
+				out_registerBoard = in_registerBoard,
 				out_sendShipsInfo = in_sendShipsInfo,
 				out_sendShotMap = in_sendShotMap
 			};
@@ -33,6 +34,8 @@ namespace GUI {
 		[StructLayout(LayoutKind.Sequential)]
 		public struct CallBacks {
 			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_registerBoard out_registerBoard; //rejestruje id planszy
+			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_getCoords out_getCoords; //pobiera współrzędne strzału
 			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_sendShipsInfo out_sendShipsInfo; //wyświetla statki
@@ -42,22 +45,39 @@ namespace GUI {
 
 		//deklaracje delegat
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate void Dg_registerBoard(int nr, int id);
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate Point Dg_getCoords();
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate void Dg_sendShipsInfo([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] tab, int size);
+		public delegate void Dg_sendShipsInfo([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] tab, int size, int id);
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate void Dg_sendShotMap(IntPtr tab, int size);
+		public delegate void Dg_sendShotMap(IntPtr tab, int size, int id);
 
 		//definicje metod przekazywanych do biblioteki .dll
+		//rejestruje id planszy
+		private void in_registerBoard(int nr, int id) {
+			if (nr == 1)
+				window.leftId = id;
+			else if (nr == 2)
+				window.rightId = id;
+			else
+				throw new Exception("Invalid board number!");
+		}
 		//wyświetla statki
-		private void in_sendShipsInfo(IntPtr[] tab, int size) {
+		private void in_sendShipsInfo(IntPtr[] tab, int size, int id) {
 			for (int i = 0; i < size; i++) {
 				window.shipList.Add((DllInterface.ShipInfo)Marshal.PtrToStructure(tab[i], typeof(ShipInfo)));
 			}
-			window.DrawShips(window.LeftGrid); //todo: rozróżnianie lewej i prawej planszy
+			if (id == window.leftId)
+				window.DrawShips(window.LeftGrid);
+			else if (id == window.rightId)
+				window.DrawShips(window.RightGrid);
+			else
+				throw new Exception("Invalid board id!");
+
 		}
 		//wyświetla czy strzelono w pole
-		private void in_sendShotMap(IntPtr tab, int size) {
+		private void in_sendShotMap(IntPtr tab, int size, int id) {
 
 			byte[] data = new byte[size];
 			Marshal.Copy(tab, data, 0, size);
@@ -88,7 +108,5 @@ namespace GUI {
 			}
 		}
 		#endregion
-
-
 	}
 }

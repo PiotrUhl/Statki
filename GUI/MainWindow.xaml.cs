@@ -20,6 +20,8 @@ namespace GUI {
 		public Grid mainGrid;
 		public Grid leftGrid;
 		public Grid rightGrid;
+		public int leftId;
+		public int rightId;
 		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
 		public Button[,] leftBoard = new Button[10, 10]; //lewa plansza
 		#endregion
