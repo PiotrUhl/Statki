@@ -84,9 +84,6 @@
     <ClInclude Include="Point.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="enums.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="structs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

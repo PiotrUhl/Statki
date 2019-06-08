@@ -1,9 +1,8 @@
 #pragma once
-//#include "UserInterface.h"
 #include "Player.h" //Player
 #include "Board.h" //Board
 #include "IUserInterface.h" //IUserInterface
-#include "enums.hpp" //PlayerType
+#include "structs.hpp" //PlayerType
 #include <memory> //std::unique_ptr
 
 class Game {

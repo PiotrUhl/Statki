@@ -2,7 +2,7 @@
 #include "IDllInterface.h"
 #include "IUserInterface.h"
 #include "Board.h"
-#include "enums.hpp"
+#include "structs.hpp"
 
 class UserDllInterface : public IUserInterface/*, public IDllInterface*/ {
 #pragma region singleton

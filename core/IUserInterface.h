@@ -1,6 +1,5 @@
 #pragma once
 #include "Point.hpp" //Point
-//#include "enums.hpp" //PlayerType, ShotResult
 #include "structs.hpp" //ShipInfo
 #include <list> //std::list
 

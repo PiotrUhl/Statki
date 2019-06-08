@@ -1,7 +1,6 @@
 #pragma once
 #include "Ship.h"
-#include "enums.hpp" //ShotResult
-#include "structs.hpp" //ShipInfo
+#include "structs.hpp" //ShipInfo, ShotResult
 #include <list> //std::list
 #include <vector> //std::vector
 

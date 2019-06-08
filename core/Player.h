@@ -1,6 +1,6 @@
 #pragma once
 #include "Board.h" //Board
-#include "enums.hpp" //ShotResult
+#include "structs.hpp" //ShotResult
 #include <memory> //std::unique_ptr
 
 class Player {

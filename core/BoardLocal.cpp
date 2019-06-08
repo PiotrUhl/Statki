@@ -116,7 +116,7 @@ void BoardLocal::clear() {
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
 			board[i][j].reset();
-			shotMap[i][j] = NONE;
+			shotMap[i][j] = ShotResult::NONE;
 		}
 	}
 	list.clear();

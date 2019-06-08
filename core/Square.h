@@ -1,5 +1,5 @@
 #pragma once
-#include "enums.hpp"
+#include "structs.hpp"
 #include <memory> //std::shared_ptr
 
 class Ship;

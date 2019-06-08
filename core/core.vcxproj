@@ -146,7 +146,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CreatorBoard.h" />
-    <ClInclude Include="enums.hpp" />
     <ClInclude Include="PlannerLocal.h" />
     <ClInclude Include="PlannerLocalAI.h" />
     <ClInclude Include="PlayerAI.h" />
