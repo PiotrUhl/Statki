@@ -281,7 +281,7 @@
 				/>
 			</StackPanel>
 			<Grid Name="BoardPlanner"
-				  Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+				  Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
 				<!-- Menu do tworzenia planszy -->
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="40"/>
@@ -298,10 +298,12 @@
 				<Border BorderThickness="2,2,2,2" BorderBrush="Black" Grid.ColumnSpan="2" Grid.RowSpan="6"/>
 				<Button Grid.Column="0" Grid.Row="0" Template="{StaticResource ButtonRectangle}" Click="Planner5_Click"/>
 				<Label
+					Name="PlannerLabel5"
 					Content="5"
 					FontFamily="Arial"
 					FontSize="26"
 					Margin="-10"
+					IsHitTestVisible="False"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="0"
@@ -309,10 +311,12 @@
 				/>
 				<Button Grid.Column="0" Grid.Row="1" Template="{StaticResource ButtonRectangle}" Click="Planner4_Click"/>
 				<Label
+					Name="PlannerLabel4"
 					Content="4"
 					FontFamily="Arial"
 					FontSize="26"
 					Margin="-10"
+					IsHitTestVisible="False"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="0"
@@ -320,10 +324,12 @@
 				/>
 				<Button Grid.Column="0" Grid.Row="2" Template="{StaticResource ButtonRectangle}" Click="Planner3_Click"/>
 				<Label
+					Name="PlannerLabel3"
 					Content="3"
 					FontFamily="Arial"
 					FontSize="26"
 					Margin="-10"
+					IsHitTestVisible="False"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="0"
@@ -331,10 +337,12 @@
 				/>
 				<Button Grid.Column="0" Grid.Row="3" Template="{StaticResource ButtonRectangle}" Click="Planner2_Click"/>
 				<Label
+					Name="PlannerLabel2"
 					Content="2"
 					FontFamily="Arial"
 					FontSize="26"
 					Margin="-10"
+					IsHitTestVisible="False"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="0"
@@ -346,6 +354,7 @@
 					FontFamily="Arial"
 					FontSize="24"
 					Margin="-10"
+					IsHitTestVisible="False"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="1"
@@ -357,6 +366,7 @@
 					FontFamily="Arial"
 					FontSize="24"
 					Margin="-10"
+					IsHitTestVisible="False"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="1"
@@ -368,6 +378,7 @@
 					FontFamily="Arial"
 					FontSize="24"
 					Margin="-10"
+					IsHitTestVisible="False"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="1"
@@ -379,6 +390,7 @@
 					FontFamily="Arial"
 					FontSize="24"
 					Margin="-10"
+					IsHitTestVisible="False"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="1"

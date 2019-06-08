@@ -17,18 +17,25 @@ using System.Runtime.InteropServices;
 namespace GUI {
 	public partial class MainWindow : Window {
 
-		private DllInterface dllInterface;
-
+		//handlery
 		public Grid mainGrid;
 		public Grid leftGrid;
 		public Grid rightGrid;
 		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
 		public Button[,] leftBoard = new Button[10, 10]; //lewa plansza
 
+		private DllInterface dllInterface;
 		public ShotResult[,] shotMap = new ShotResult[10, 10]; //informacja w które pola strzelano
 		public int leftId;
 		public int rightId;
-		Mode mode = Mode.MENU;
+		Mode mode = Mode.MENU; //aktywny tryb
+
+		//planner
+		int selectedShip = 0;
+		int ship5placed = 0;
+		int ship4placed = 0;
+		int ship3placed = 0;
+		int ship2placed = 0;
 
 		//aktualizuje planszę rysując wszystkie statki z listy shipList
 		public void DrawShips(Grid grid) {
@@ -42,6 +49,7 @@ namespace GUI {
 		public void enterPlannerMode() {
 			Dispatcher.Invoke(() => {
 				BoardPlanner.Visibility = Visibility.Visible;
+				setAllButtons(leftGrid, true);
 			});
 			mode = Mode.PLANNER;
 		}
@@ -126,6 +134,11 @@ namespace GUI {
 				ship.drawObj.Fill = Brushes.LightSlateGray;
 				ship.drawObj.Stroke = Brushes.LightSlateGray;
 			}
+		}
+
+		//usuwa statek z planszy
+		private void DeleteShip(Grid grid, ShipInfo ship) {
+			grid.Children.Remove(ship.drawObj);
 		}
 	}
 }

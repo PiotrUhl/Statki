@@ -36,8 +36,17 @@ namespace GUI {
 		}
 
 		#region dll methods
+		//uruchamia program
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void runProgram(InitData init, CallBacks callBacks); //uruchamia program
+		public static extern void runProgram(InitData init, CallBacks callBacks);
+
+		//sprawdza możliwość położenia statku o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
+		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern bool checkShipPlacement(int shipSize, int x, int y, char direction);
+
+		//umieszcza statkek o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
+		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern bool placeShip(int shipSize, int x, int y, char direction);
 		#endregion
 
 		#region callback

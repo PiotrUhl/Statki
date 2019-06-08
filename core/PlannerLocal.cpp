@@ -19,6 +19,8 @@ bool PlannerLocal::checkPlacement(int shipSize, int x, int y, char direction = '
 		}
 		else
 			throw (std::invalid_argument("Incorrect ship direction"));
+		if (_x < 0 || _y < 0 || _x >= BOARDSIZE || _y >= BOARDSIZE) //jeœli sprawdzane pole le¿y poza plansz¹
+			return false;
 		for (int j = -1; j < 2; j++) {
 			for (int k = -1; k < 2; k++) {
 				if (_x + j < 0 || _y + k < 0 || _x + j >= BOARDSIZE || _y + k >= BOARDSIZE) //je¿eli sprawdzane pole le¿y poza plansz¹, pomiñ

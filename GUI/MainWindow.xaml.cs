@@ -36,18 +36,54 @@ namespace GUI {
 			int x = (int)square.GetValue(Grid.ColumnProperty);
 			int y = (int)square.GetValue(Grid.RowProperty);
 			MessageBox.Show("Kliknięto pole (" + x + "," + y + ").");
+			if (mode == Mode.PLANNER && selectedShip > 0) {
+				ShipInfo ship = new ShipInfo {
+					size = selectedShip,
+					x = x,
+					y = y,
+					direction = 'H',
+					sunk = false
+				};
+				if (DllInterface.placeShip(ship.size, ship.x-1, ship.y-1, ship.direction) == true) {
+					DrawShip((Grid)square.Parent, ship);
+				}
+			}
 		}
 		private void Planner5_Click(object sender, RoutedEventArgs e) {
-			setAllButtons(leftGrid, true);
+			if (ship5placed < 1) {
+				selectedShip = 5;
+				PlannerLabel2.FontWeight = FontWeights.Normal;
+				PlannerLabel3.FontWeight = FontWeights.Normal;
+				PlannerLabel4.FontWeight = FontWeights.Normal;
+				PlannerLabel5.FontWeight = FontWeights.Bold;
+			}
 		}
 		private void Planner4_Click(object sender, RoutedEventArgs e) {
-			;
+			if (ship4placed < 2) {
+				selectedShip = 4;
+				PlannerLabel2.FontWeight = FontWeights.Normal;
+				PlannerLabel3.FontWeight = FontWeights.Normal;
+				PlannerLabel4.FontWeight = FontWeights.Bold;
+				PlannerLabel5.FontWeight = FontWeights.Normal;
+			}
 		}
 		private void Planner3_Click(object sender, RoutedEventArgs e) {
-			;
+			if (ship3placed < 3) {
+				selectedShip = 3;
+				PlannerLabel2.FontWeight = FontWeights.Normal;
+				PlannerLabel3.FontWeight = FontWeights.Bold;
+				PlannerLabel4.FontWeight = FontWeights.Normal;
+				PlannerLabel5.FontWeight = FontWeights.Normal;
+			}
 		}
 		private void Planner2_Click(object sender, RoutedEventArgs e) {
-			;
+			if (ship2placed < 4) {
+				selectedShip = 2;
+				PlannerLabel2.FontWeight = FontWeights.Bold;
+				PlannerLabel3.FontWeight = FontWeights.Normal;
+				PlannerLabel4.FontWeight = FontWeights.Normal;
+				PlannerLabel5.FontWeight = FontWeights.Normal;
+			}
 		}
 		private void ButtonPlannerConfirm_Click(object sender, RoutedEventArgs e) {
 			dllInterface.waitingInPlannerMode.Set();

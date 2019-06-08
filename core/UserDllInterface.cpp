@@ -20,7 +20,8 @@ void UserDllInterface::registerBoard(int nr, int id) {
 
 #include <Windows.h>
 //przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
-void UserDllInterface::makeBoard(PlannerLocal* board) {
+void UserDllInterface::makeBoard(PlannerLocal* planner) {
+	currentPlanner = planner;
 	callBack.out_plannerMode();
 }
 
