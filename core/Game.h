@@ -8,7 +8,7 @@
 
 class Game {
 private:
-	int BOARDSIZE; //rozmiar planszy
+	const int BOARDSIZE; //rozmiar planszy
 	PlayerType player1Type; //typ gracza 1
 	PlayerType player2Type; //typ gracza 2
 	std::unique_ptr<Board> board1; //plansza gracza nr 1

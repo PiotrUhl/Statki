@@ -31,5 +31,13 @@ namespace GUI {
 		public System.Windows.Shapes.Rectangle drawObj;
 	}
 
+	public struct InitData { 
+		public int boardsize;
+		public PlayerType player1type;
+		public PlayerType player2type;
+	};
+
 	public enum ShotResult { NONE = 0, MISS, HIT, SUNK } //informacje o wyniku strzału
+
+	public enum PlayerType { NONE = 0, HUMAN, AI, REMOTE } //typ gracza
 }

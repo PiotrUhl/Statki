@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //konstruktor
-Game::Game(InitData _init, IUserInterface& _mainInterface) : mainInterface(_mainInterface) {}
+Game::Game(InitData _init, IUserInterface& _mainInterface) : BOARDSIZE(_init.boardsize), player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface) {}
 
 //destruktor
 Game::~Game() {}

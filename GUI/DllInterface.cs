@@ -22,12 +22,17 @@ namespace GUI {
 				out_sendShotMap = in_sendShotMap,
 				out_error = in_error
 			};
-			runProgram(callBacks);
+			InitData init = new InitData {
+				boardsize = 10,
+				player1type = PlayerType.HUMAN,
+				player2type = PlayerType.AI
+			};
+			runProgram(init, callBacks);
 		}
 
 		#region dll methods
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void runProgram(CallBacks _); //uruchamia program
+		public static extern void runProgram(InitData init, CallBacks callBacks); //uruchamia program
 		#endregion
 
 		#region callback
