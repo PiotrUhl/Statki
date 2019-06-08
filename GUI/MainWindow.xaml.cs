@@ -16,20 +16,28 @@ using System.Runtime.InteropServices;
 
 namespace GUI {
 	public partial class MainWindow : Window {
-		#region fields
+		#region GUI handlers
+		public Grid mainGrid;
+		public Grid leftGrid;
+		public Grid rightGrid;
 		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
+		public Button[,] leftBoard = new Button[10, 10]; //lewa plansza
+		#endregion
+		#region fields
 		public ShotResult[,] shotMap = new ShotResult[10, 10]; //informacja w które pola strzelano
-		public Button[,] leftGrid = new Button[10, 10]; //lewa plansza
 		#endregion
 		#region public methods
 		public MainWindow() {
 			InitializeComponent();
-			InitializeLeftGrid();
+			mainGrid = (Grid)FindName("MainGrid");
+			leftGrid = (Grid)FindName("LeftGrid");
+			rightGrid = (Grid)FindName("RightGrid");
+			InitializeBoard(leftGrid);
 		}
 
-		public void DrawShips() { //aktualizuje planszę rysując wszystkie statki z listy shipList
+		public void DrawShips(Grid grid) { //aktualizuje planszę rysując wszystkie statki z listy shipList
 			foreach (ShipInfo k in shipList) {
-				DrawShip(k);
+				DrawShip(grid, k);
 				DisableSquaresUnderShip(k);
 			}
 		}
@@ -47,17 +55,17 @@ namespace GUI {
 		}
 		#endregion
 		#region private methods
-		//inicjalizuje lewą planszę
-		void InitializeLeftGrid() {
+		//inicjalizuje planszę
+		void InitializeBoard(Grid grid) {
 			for (int i = 0; i < 10; i++) {
 				for (int j = 0; j < 10; j++) {
-					leftGrid[i, j] = new Button();
-					leftGrid[i, j].SetValue(Grid.ColumnProperty, i+1);
-					leftGrid[i, j].SetValue(Grid.RowProperty, j+1);
-					leftGrid[i, j].Template = (ControlTemplate)FindResource("ButtonRectangle");
+					leftBoard[i, j] = new Button();
+					leftBoard[i, j].SetValue(Grid.ColumnProperty, i+1);
+					leftBoard[i, j].SetValue(Grid.RowProperty, j+1);
+					leftBoard[i, j].Template = (ControlTemplate)FindResource("ButtonRectangle");
 					//leftGrid[i, j].IsEnabled = false;
-					leftGrid[i, j].Click += Square_Click;
-					LeftGrid.Children.Add(leftGrid[i,j]);
+					leftBoard[i, j].Click += Square_Click;
+					grid.Children.Add(leftBoard[i,j]);
 				}
 			}
 		}
@@ -66,17 +74,17 @@ namespace GUI {
 			int x = ship.x - 1;
 			int y = ship.y - 1;
 			for (int i = 0; i < ship.size; i++) {
-				leftGrid[x, y].IsEnabled = false;
+				leftBoard[x, y].IsEnabled = false;
 				if (ship.direction == 'H')
 					x++;
 				else if (ship.direction == 'V')
 					y++;
 				else
-					throw new Exception("Invalid ship direction!");
+					throw new Exception("Invalid ship direction!"); //nie powinno nigdy wystąpić!
 			}
 		}
 		//rysuje bądź aktualizuje statek "ship" na planszy
-		private void DrawShip(ShipInfo ship) {
+		private void DrawShip(Grid grid, ShipInfo ship) {
 			if (ship.drawObj == null) {
 				ship.drawObj = new Rectangle {
 					Margin = new Thickness(5),
@@ -85,7 +93,7 @@ namespace GUI {
 					RadiusX = 30,
 					RadiusY = 30
 				};
-				LeftGrid.Children.Add(ship.drawObj);
+				grid.Children.Add(ship.drawObj);
 			}
 			ship.drawObj.SetValue(Grid.ColumnProperty, ship.x);
 			ship.drawObj.SetValue(Grid.RowProperty, ship.y);

@@ -54,7 +54,7 @@ namespace GUI {
 			for (int i = 0; i < size; i++) {
 				window.shipList.Add((DllInterface.ShipInfo)Marshal.PtrToStructure(tab[i], typeof(ShipInfo)));
 			}
-			window.DrawShips();
+			window.DrawShips(window.LeftGrid); //todo: rozróżnianie lewej i prawej planszy
 		}
 		//wyświetla czy strzelono w pole
 		private void in_sendShotMap(IntPtr tab, int size) {
