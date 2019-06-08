@@ -18,7 +18,7 @@ private:
 	IUserInterface& mainInterface; //interfejs do komunikacji z graczem
 public:
 	//konstruktor
-	Game(IUserInterface&);
+	Game(InitData, IUserInterface&);
 	//destruktor
 	~Game();
 	//uruchom grê

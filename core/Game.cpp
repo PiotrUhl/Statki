@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //konstruktor
-Game::Game(IUserInterface& _mainInterface) : mainInterface(_mainInterface) {}
+Game::Game(InitData _init, IUserInterface& _mainInterface) : mainInterface(_mainInterface) {}
 
 //destruktor
 Game::~Game() {}
@@ -19,7 +19,6 @@ void Game::run() {
 
 //czêœæ gry - inicjalizacja
 void Game::initialization() {
-	//Interface - pobierz ustawienia gry (typy graczy, rozmiar planszy)
 	//Tworzenie plansz graczy
 	board1 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player1Type);
 	board2 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player2Type);

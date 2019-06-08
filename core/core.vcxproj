@@ -164,6 +164,7 @@
     <ClInclude Include="Point.hpp" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Square.h" />
+    <ClInclude Include="structs.hpp" />
     <ClInclude Include="UserDllInterface.h" />
   </ItemGroup>
   <ItemGroup>

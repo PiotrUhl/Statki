@@ -20,7 +20,7 @@ bool Board::getUnsunkShips() {
 }
 
 //zwraca listê statków na planszy
-std::list<Board::ShipInfo> Board::getList() {
+std::list<ShipInfo> Board::getList() {
 	return list;
 }
 

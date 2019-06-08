@@ -30,12 +30,12 @@ Point UserDllInterface::getShotCoords() {
 }
 
 //poinformuj interfejs o zmianie na planszy
-void UserDllInterface::boardChanged(int id, std::list<Board::ShipInfo> shipList, std::vector<std::vector<ShotResult>> shotMap) {
+void UserDllInterface::boardChanged(int id, std::list<ShipInfo> shipList, std::vector<std::vector<ShotResult>> shotMap) {
 	int shipSize = shipList.size();
-	Board::ShipInfo** shipTab = new Board::ShipInfo*[shipSize];
+	ShipInfo** shipTab = new ShipInfo*[shipSize];
 	int i = 0;
 	for (auto k : shipList) {
-		Board::ShipInfo* temp = new Board::ShipInfo;
+		ShipInfo* temp = new ShipInfo;
 		*temp = k;
 		shipTab[i++] = temp;
 	}
@@ -64,9 +64,9 @@ void UserDllInterface::gameEnded(char winner) {
 #pragma region IDLLInterface
 
 //uruchamia grê
-void UserDllInterface::runProgram(IDllInterface::CallBacks callBacks) {
+void UserDllInterface::runProgram(InitData init, IDllInterface::CallBacks callBacks) {
 	callBack = callBacks;
-	Game game(getInstance());
+	Game game(init, getInstance());
 	game.run();
 	//std::unique_ptr<Board> board = CreatorBoard(10, getInstance()).makeBoard(PlayerType::AI); //debug
 	//registerBoard(1, board->getId()); //debug

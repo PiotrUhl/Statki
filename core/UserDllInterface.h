@@ -28,13 +28,13 @@ public:
 	//zwraca wspó³rzêdne strza³u
 	Point getShotCoords() override;
 	//poinformuj interfejs o zmianie na planszy
-	void boardChanged(int, std::list<Board::ShipInfo>, std::vector<std::vector<ShotResult>>) override;
+	void boardChanged(int, std::list<ShipInfo>, std::vector<std::vector<ShotResult>>) override;
 	//przekazuje informacje o zakoñczeniu gry
 	void gameEnded(char winner) override;
 #pragma endregion
 #pragma region IDLLInterface
 	//uruchamia grê
-	void runProgram(IDllInterface::CallBacks);
+	void runProgram(InitData, IDllInterface::CallBacks);
 	//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
 	bool checkShipPlacement(int shipSize, int x, int y, char direction);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
