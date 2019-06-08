@@ -23,11 +23,15 @@ void Game::initialization() {
 	//Tworzenie plansz graczy
 	board1 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player1Type);
 	board2 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player2Type);
-	//Sprawdzanie poprawnoœci utworzenia plansz
+	//Sprawdzanie poprawnoœci utworzenia plansz i rejestracja plansz w interfejsie
 	if (board1 == nullptr)
 		;//interface - zg³oœ b³¹d
+	else
+		mainInterface.registerBoard(1, board1->getId());
 	if (board2 == nullptr)
 		;//interface - zg³oœ b³¹d
+	else
+		mainInterface.registerBoard(2, board1->getId());
 	//Inicjalizacja graczy
 	initializePlayers();
 	//Sprawdzanie poprawnoœci inicjalizacji graczy

@@ -19,6 +19,8 @@ private:
 	IDllInterface::CallBacks callBack; //struktura wskaŸników na callBacki
 public:
 #pragma region IUserInterface	
+	//rejestruje id planszy w interfejsie
+	void registerBoard(int, int) override;
 	//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
 	void makeBoard(PlannerLocal* planner) override;
 	//zwraca wspó³rzêdne strza³u

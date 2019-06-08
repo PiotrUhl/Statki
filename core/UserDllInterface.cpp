@@ -6,6 +6,10 @@ UserDllInterface& UserDllInterface::getInstance() { //pobierz instancje klasy
 	return instance;
 }
 #pragma region IUserInterface
+//rejestruje id planszy w interfejsie
+void UserDllInterface::registerBoard(int nr, int id) {
+	callBack.out_registerBoard(nr, id);
+}
 //przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
 void UserDllInterface::makeBoard(PlannerLocal* board) {
 	//wywo³anie delegaty
