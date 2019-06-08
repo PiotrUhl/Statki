@@ -19,7 +19,8 @@ namespace GUI {
 			CallBacks callBacks = new CallBacks { //inicjalizacja callbacków
 				out_registerBoard = in_registerBoard,
 				out_sendShipsInfo = in_sendShipsInfo,
-				out_sendShotMap = in_sendShotMap
+				out_sendShotMap = in_sendShotMap,
+				out_error = in_error
 			};
 			runProgram(callBacks);
 		}
@@ -41,6 +42,8 @@ namespace GUI {
 			public Dg_sendShipsInfo out_sendShipsInfo; //wyświetla statki
 			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_sendShotMap out_sendShotMap; //wyświetla czy strzelono w pole
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_error out_error; ////wypisuje na ekranie błąd
 		}
 
 		//deklaracje delegat
@@ -52,6 +55,8 @@ namespace GUI {
 		public delegate void Dg_sendShipsInfo([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] tab, int size, int id);
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void Dg_sendShotMap(IntPtr tab, int size, int id);
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate void Dg_error(IntPtr error, byte critical);
 
 		//definicje metod przekazywanych do biblioteki .dll
 		//rejestruje id planszy
@@ -85,6 +90,15 @@ namespace GUI {
 				for (int j = 0; j < 10; j++) {
 					window.shotMap[i,j] = (ShotResult)data[i * 10 + j];
 				}
+			}
+		}
+
+		//wypisuje na ekranie błąd "error'; "critical" przerywa działanie programu
+		private void in_error(IntPtr error, byte critical) {
+			string errorString = Marshal.PtrToStringAnsi(error);
+			System.Windows.MessageBox.Show(errorString);
+			if (critical != 0) {
+				System.Windows.Application.Current.Shutdown();
 			}
 		}
 

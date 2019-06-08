@@ -2,10 +2,13 @@
 #include "Point.hpp"
 #include "Board.h"
 #include <list>
+
 class PlannerLocal; //PlannerLocal
 
 class IUserInterface {
 public:
+	//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
+	virtual void error(const char* error, bool critical) = 0;
 	//przekazuje planer planszy do utworzenia planszy, wstrzymuje program do zakoñczenia tworzenia
 	virtual void makeBoard(PlannerLocal*) = 0;
 	//rejestruje id planszy w interfejsie

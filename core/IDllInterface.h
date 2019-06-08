@@ -14,6 +14,8 @@ namespace IDllInterface {
 		void (__stdcall *out_sendShipsInfo)(Board::ShipInfo**, int, int);
 		//wysy³a do wypisania obraz planszy
 		void (__stdcall *out_sendShotMap)(unsigned char*, int, int);
+		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
+		void (__stdcall *out_error)(const char*, bool);
 	};
 
 	extern "C" {
