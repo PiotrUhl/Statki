@@ -18,6 +18,9 @@ public:
 		ShipInfo() = default;
 		ShipInfo(int _size, int _x, int _y, char _direction, bool _sunk = 0) : size(_size), x(_x), y(_y), direction(_direction), sunk(_sunk) {}
 	};
+private:
+	static int lastId; //najwy¿sze id planszy
+	int id; //numer identyfikacyjny planszy
 protected:
 	const int BOARDSIZE; //rozmiar planszy
 	int unsunkShips; //liczba niezatopnionych statków
@@ -29,6 +32,8 @@ public:
 	Board(int _BOARDSIZE, IUserInterface&);
 	//destruktor
 	virtual ~Board();
+	//zwraca numer identyfikacyjny planszy
+	int getId();
 	//zwraca wartoœæ pola unsunkShips
 	bool getUnsunkShips();
 	//zwraca listê statków na planszy
