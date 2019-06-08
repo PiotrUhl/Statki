@@ -25,20 +25,20 @@ void Game::initialization() {
 	board2 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player2Type);
 	//Sprawdzanie poprawnoœci utworzenia plansz i rejestracja plansz w interfejsie
 	if (board1 == nullptr)
-		;//interface - zg³oœ b³¹d
+		mainInterface.error("An error has occured during initialization board for player 1", true);
 	else
 		mainInterface.registerBoard(1, board1->getId());
 	if (board2 == nullptr)
-		;//interface - zg³oœ b³¹d
+		mainInterface.error("An error has occured during initialization board for player 2", true);
 	else
 		mainInterface.registerBoard(2, board1->getId());
 	//Inicjalizacja graczy
 	initializePlayers();
 	//Sprawdzanie poprawnoœci inicjalizacji graczy
 	if (player1 == nullptr)
-		;//interface - zg³oœ b³¹d
+		mainInterface.error("An error has occured during initialization player 1", true);
 	if (player2 == nullptr)
-		;//interface - zg³oœ b³¹d
+		mainInterface.error("An error has occured during initialization player 2", true);
 }
 
 //czêœæ gry - g³ówna pêtla

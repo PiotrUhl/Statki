@@ -98,7 +98,9 @@ namespace GUI {
 			string errorString = Marshal.PtrToStringAnsi(error);
 			System.Windows.MessageBox.Show(errorString);
 			if (critical != 0) {
-				System.Windows.Application.Current.Shutdown();
+				//System.Windows.Application.Current.Shutdown();
+				//window.Close();
+				Environment.Exit(-1);
 			}
 		}
 
