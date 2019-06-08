@@ -16,7 +16,8 @@
 			<ColumnDefinition Width="2*"/>
 			<ColumnDefinition Width="2*"/>
 		</Grid.ColumnDefinitions>
-		<Grid Name="LeftGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
+		<Grid Name="LeftGrid"
+			  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="40"/>
 				<ColumnDefinition Width="40"/>
@@ -269,20 +270,395 @@
 				Grid.Row="10"
 			/>
 		</Grid>
-		<Grid Name="RightGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-			<Button
-				Name="TestButton"
-				Content="test"
-				Grid.Column="0"
-				Grid.Row="0" Click="TestButton_Click"
+		<StackPanel Name="RightPannel" VerticalAlignment="Center" Grid.Column="1">
+			<StackPanel Name="Menu"
+						Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<!-- Menu wyboru opcji gry -->
+				<Button
+					Name="StartButton"
+					Content="Start game"
+					Click="StartButton_Click"
+				/>
+			</StackPanel>
+			<Grid Name="BoardPlanner"
+				  Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<!-- Menu do tworzenia planszy -->
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+				</Grid.RowDefinitions>
+				<Border BorderThickness="2,2,2,2" BorderBrush="Black" Grid.ColumnSpan="2" Grid.RowSpan="6"/>
+				<Button Grid.Column="0" Grid.Row="0" Template="{StaticResource ButtonRectangle}" Click="Planner5_Click"/>
+				<Label
+					Content="5"
+					FontFamily="Arial"
+					FontSize="26"
+					Margin="-10"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="0"
+					Grid.Row="0"
+				/>
+				<Button Grid.Column="0" Grid.Row="1" Template="{StaticResource ButtonRectangle}" Click="Planner4_Click"/>
+				<Label
+					Content="4"
+					FontFamily="Arial"
+					FontSize="26"
+					Margin="-10"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="0"
+					Grid.Row="1"
+				/>
+				<Button Grid.Column="0" Grid.Row="2" Template="{StaticResource ButtonRectangle}" Click="Planner3_Click"/>
+				<Label
+					Content="3"
+					FontFamily="Arial"
+					FontSize="26"
+					Margin="-10"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="0"
+					Grid.Row="2"
+				/>
+				<Button Grid.Column="0" Grid.Row="3" Template="{StaticResource ButtonRectangle}" Click="Planner2_Click"/>
+				<Label
+					Content="2"
+					FontFamily="Arial"
+					FontSize="26"
+					Margin="-10"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="0"
+					Grid.Row="3"
+				/>
+				<Button Grid.Column="1" Grid.Row="0" Template="{StaticResource ButtonRectangle}" Click="Planner5_Click"/>
+				<Label
+					Name="Count5"
+					FontFamily="Arial"
+					FontSize="24"
+					Margin="-10"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="1"
+					Grid.Row="0"
+				/>
+				<Button Grid.Column="1" Grid.Row="1" Template="{StaticResource ButtonRectangle}" Click="Planner4_Click"/>
+				<Label
+					Name="Count4"
+					FontFamily="Arial"
+					FontSize="24"
+					Margin="-10"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="1"
+					Grid.Row="1"
+				/>
+				<Button Grid.Column="1" Grid.Row="2" Template="{StaticResource ButtonRectangle}" Click="Planner3_Click"/>
+				<Label
+					Name="Count3"
+					FontFamily="Arial"
+					FontSize="24"
+					Margin="-10"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="1"
+					Grid.Row="2"
+				/>
+				<Button Grid.Column="1" Grid.Row="3" Template="{StaticResource ButtonRectangle}" Click="Planner2_Click"/>
+				<Label
+					Name="Count2"
+					FontFamily="Arial"
+					FontSize="24"
+					Margin="-10"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="1"
+					Grid.Row="3"
+				/>
+				<Button
+					Name="ButtonPlannerConfirm"
+					Content="Confirm"
+					IsEnabled="True"
+					FontSize="14"
+					Grid.Column="0"
+					Grid.Row="4"
+					Grid.ColumnSpan="2"
+					Click="ButtonPlannerConfirm_Click"
+				/>
+				<Button
+					Name="ButtonPlannerRandom"
+					Content="Random"
+					FontSize="14"
+					Grid.Column="0"
+					Grid.Row="5"
+					Grid.ColumnSpan="2"
+					Click="ButtonPlannerRandom_Click"
+				/>
+			</Grid>
+			<Grid Name="RightGrid"
+				  Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<!-- Prawa plansza -->
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+					<ColumnDefinition Width="40"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
+				</Grid.RowDefinitions>
+				<!-- Ramki współrzędnych -->
+				<Border BorderThickness="2,2,2,2" BorderBrush="Black" Grid.Column="1" Grid.ColumnSpan="10" Grid.Row="1" Grid.RowSpan="10"/>
+				<Border BorderThickness="0,0,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="1" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="2" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="3" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="4" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="5" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="6" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="7" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="8" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,0.5,0.5" BorderBrush="Black" Grid.Column="9" Grid.Row="0"/>
+				<Border BorderThickness="0.5,0,1,0.5" BorderBrush="Black" Grid.Column="10" Grid.Row="0"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="1"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="2"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="3"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="4"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="5"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="6"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="7"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="8"/>
+				<Border BorderThickness="0,0.5,0.5,0.5" BorderBrush="Black" Grid.Column="0" Grid.Row="9"/>
+				<Border BorderThickness="0,0.5,0.5,1" BorderBrush="Black" Grid.Column="0" Grid.Row="10"/>
+
+				<!-- Współrzędne -->
+				<Label
+				Content="A"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="1"
+				Grid.Row="0"
 			/>
-		</Grid>
+				<Label
+				Content="B"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="2"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="C"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="3"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="D"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="4"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="E"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="5"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="F"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="6"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="G"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="7"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="H"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="8"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="I"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="9"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="J"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="10"
+				Grid.Row="0"
+			/>
+				<Label
+				Content="1"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="1"
+			/>
+				<Label
+				Content="2"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="2"
+			/>
+				<Label
+				Content="3"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="3"
+			/>
+				<Label
+				Content="4"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="4"
+			/>
+				<Label
+				Content="5"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="5"
+			/>
+				<Label
+				Content="6"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="6"
+			/>
+				<Label
+				Content="7"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="7"
+			/>
+				<Label
+				Content="8"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="8"
+			/>
+				<Label
+				Content="9"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="9"
+			/>
+				<Label
+				Content="10"
+				FontFamily="Arial"
+				FontSize="30"
+				Margin="-10"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Grid.Row="10"
+			/>
+			</Grid>
+		</StackPanel>
 	</Grid>
 </Window>

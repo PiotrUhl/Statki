@@ -17,6 +17,8 @@ namespace IDllInterface {
 		void (__stdcall *out_sendShotMap)(unsigned char*, int, int);
 		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
 		void (__stdcall *out_error)(const char*, bool);
+		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
+		void(__stdcall *out_plannerMode)(void);
 	};
 
 	extern "C" {

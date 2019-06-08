@@ -23,7 +23,7 @@ public:
 	void error(const char*, bool) override;
 	//rejestruje id planszy w interfejsie
 	void registerBoard(int, int) override;
-	//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
+	//przekazuje planszê board do utworzenia
 	void makeBoard(PlannerLocal* planner) override;
 	//zwraca wspó³rzêdne strza³u
 	Point getShotCoords() override;

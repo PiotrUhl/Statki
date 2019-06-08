@@ -20,13 +20,14 @@ namespace GUI {
 		public Grid mainGrid;
 		public Grid leftGrid;
 		public Grid rightGrid;
-		public int leftId;
-		public int rightId;
 		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
 		public Button[,] leftBoard = new Button[10, 10]; //lewa plansza
 		#endregion
 		#region fields
 		public ShotResult[,] shotMap = new ShotResult[10, 10]; //informacja w które pola strzelano
+		public int leftId;
+		public int rightId;
+		private DllInterface dllInterface;
 		#endregion
 		#region public methods
 		public MainWindow() {
@@ -37,16 +38,25 @@ namespace GUI {
 			InitializeBoard(leftGrid);
 		}
 
-		public void DrawShips(Grid grid) { //aktualizuje planszę rysując wszystkie statki z listy shipList
+		//aktualizuje planszę rysując wszystkie statki z listy shipList
+		public void DrawShips(Grid grid) {
 			foreach (ShipInfo k in shipList) {
 				DrawShip(grid, k);
 				DisableSquaresUnderShip(k);
 			}
 		}
+
+		//wchodzi w tryb plannerMode
+		public void enterPlannerMode() {
+			Dispatcher.Invoke(() =>	{
+				BoardPlanner.Visibility = Visibility.Visible;
+			});
+		}
 		#endregion
 		#region event handlers
-		private void TestButton_Click(object sender, RoutedEventArgs e) {
-			DllInterface dllInterface = new DllInterface(this);
+		private void StartButton_Click(object sender, RoutedEventArgs e) {
+			dllInterface = new DllInterface(this);
+			Menu.Visibility = Visibility.Collapsed;
 			dllInterface.initAndRun();
 		}
 		private void Square_Click(object sender, RoutedEventArgs e) {
@@ -54,6 +64,24 @@ namespace GUI {
 			int x = (int)square.GetValue(Grid.ColumnProperty);
 			int y = (int)square.GetValue(Grid.RowProperty);
 			MessageBox.Show("Kliknięto pole (" + x + "," + y + ").");
+		}
+		private void Planner5_Click(object sender, RoutedEventArgs e) {
+			;
+		}
+		private void Planner4_Click(object sender, RoutedEventArgs e) {
+			;
+		}
+		private void Planner3_Click(object sender, RoutedEventArgs e) {
+			;
+		}
+		private void Planner2_Click(object sender, RoutedEventArgs e) {
+			;
+		}
+		private void ButtonPlannerConfirm_Click(object sender, RoutedEventArgs e) {
+			dllInterface.waitingInPlannerMode.Set();
+		}
+		private void ButtonPlannerRandom_Click(object sender, RoutedEventArgs e) {
+			;
 		}
 		#endregion
 		#region private methods

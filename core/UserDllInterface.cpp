@@ -18,10 +18,13 @@ void UserDllInterface::registerBoard(int nr, int id) {
 	callBack.out_registerBoard(nr, id);
 }
 
+#include <Windows.h>
 //przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
 void UserDllInterface::makeBoard(PlannerLocal* board) {
 	//wywo³anie delegaty
-	throw "Unimplemented!";
+	//callBack.out_error("UserDllInterface::makeBoard() unimplemented!", true);
+	//error("UserDllInterface::makeBoard() unimplemented!", true);
+	callBack.out_plannerMode();
 }
 
 //pobiera wspó³rzêdne strza³u
@@ -54,7 +57,7 @@ void UserDllInterface::boardChanged(int id, std::list<ShipInfo> shipList, std::v
 //przekazuje informacje o zakoñczeniu gry
 void UserDllInterface::gameEnded(char winner) {
 	//wywo³anie delegaty
-	throw "Unimplemented!";
+	callBack.out_error("UserDllInterface::gameEnded() unimplemented!", true);
 }
 
 #pragma endregion

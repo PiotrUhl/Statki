@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace GUI {
 	public class DllInterface {
 		private MainWindow window; //okno głowne programu
-
+		private Thread dllThread; //wątek z back-endem
+		public AutoResetEvent waitingInPlannerMode = new AutoResetEvent(false);
 		//konstruktor
 		public DllInterface(MainWindow window)  {
 			this.window = window;
@@ -20,14 +22,16 @@ namespace GUI {
 				out_registerBoard = in_registerBoard,
 				out_sendShipsInfo = in_sendShipsInfo,
 				out_sendShotMap = in_sendShotMap,
-				out_error = in_error
+				out_error = in_error,
+				out_plannerMode = in_plannerMode
 			};
 			InitData init = new InitData {
 				boardsize = 10,
 				player1type = PlayerType.HUMAN,
 				player2type = PlayerType.AI
 			};
-			runProgram(init, callBacks);
+			dllThread = new Thread(() => runProgram(init, callBacks));
+			dllThread.Start();
 		}
 
 		#region dll methods
@@ -48,10 +52,14 @@ namespace GUI {
 			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_sendShotMap out_sendShotMap; //wyświetla czy strzelono w pole
 			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_error out_error; ////wypisuje na ekranie błąd
+			public Dg_error out_error; //wypisuje na ekranie błąd
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_plannerMode out_plannerMode; //przechodzi w tryb tworzenia planszy
 		}
 
 		//deklaracje delegat
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate void Dg_plannerMode();
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void Dg_registerBoard(int nr, int id);
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
@@ -73,6 +81,12 @@ namespace GUI {
 			else
 				throw new Exception("Invalid board number!");
 		}
+		//przechodzi w tryb tworzenia planszy
+		private void in_plannerMode() {
+			System.Windows.MessageBox.Show("PlannerMode enabled!");
+			window.enterPlannerMode();
+			waitingInPlannerMode.WaitOne();
+		}
 		//wyświetla statki
 		private void in_sendShipsInfo(IntPtr[] tab, int size, int id) {
 			for (int i = 0; i < size; i++) {
@@ -88,7 +102,6 @@ namespace GUI {
 		}
 		//wyświetla czy strzelono w pole
 		private void in_sendShotMap(IntPtr tab, int size, int id) {
-
 			byte[] data = new byte[size];
 			Marshal.Copy(tab, data, 0, size);
 			for (int i = 0; i < 10; i++) {
