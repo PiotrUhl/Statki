@@ -23,8 +23,8 @@ void PlayerAI::move() {
 			setFinishMode(point);
 		updateShootableMap(point);
 		//lastShotPoint = point;
-		lastShotPoint.x = point.x;
-		lastShotPoint.y = point.y;
+		lastShotPoint.y = point.x;
+		lastShotPoint.x = point.y;
 		lastShotResult = result;
 	}
 	else {
@@ -55,8 +55,8 @@ void PlayerAI::move() {
 		}
 		updateShootableMap(point);
 		//lastShotPoint = point;
-		lastShotPoint.x = point.x;
-		lastShotPoint.y = point.y;
+		lastShotPoint.y = point.x;
+		lastShotPoint.x = point.y;
 		lastShotResult = result;
 	}
 }

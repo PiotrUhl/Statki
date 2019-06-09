@@ -86,8 +86,8 @@ namespace GUI {
 			else if (mode == Mode.GAME) {
 				square.IsEnabled = false;
 				shotPoint = new Point() {
-					x = x,
-					y = y
+					x = x-1,
+					y = y-1
 				};
 				dllInterface.waitingForCoords.Set();
 			}
@@ -141,7 +141,8 @@ namespace GUI {
 		private void ButtonPlannerConfirm_Click(object sender, RoutedEventArgs e) {
 			BoardPlanner.Visibility = Visibility.Collapsed;
 			rightGrid.Visibility = Visibility.Visible;
-			InitializeBoard(rightGrid);
+			setAllButtons(leftGrid, false);
+			InitializeBoard(rightGrid, true);
 			dllInterface.waitingInPlannerMode.Set();
 		}
 		private void ButtonPlannerRandom_Click(object sender, RoutedEventArgs e) {

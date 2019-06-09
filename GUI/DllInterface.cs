@@ -145,7 +145,14 @@ namespace GUI {
 		//wypisuje wyniki strzału
 		private void in_sendShotInfo(int id, Point point, ShotResult result) {
 			System.Windows.MessageBox.Show("Strzelono w (" + point.x + "," + point.y + ") z rezultatem: " + result); //debug
-			//todo
+			point.x++;
+			point.y++;
+			if (id == window.leftId)
+				window.MarkShooted(window.leftGrid, point, result);
+			else if (id == window.rightId)
+				window.MarkShooted(window.rightGrid, point, result);
+			else
+				throw new Exception("Invalid board id!");
 		}
 
 		//inne techniczne

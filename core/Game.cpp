@@ -28,7 +28,7 @@ void Game::initialization() {
 	if (board2 == nullptr)
 		mainInterface.error("An error has occured during initialization board for player 2", true);
 	else
-		mainInterface.registerBoard(2, board1->getId());
+		mainInterface.registerBoard(2, board2->getId());
 	//Inicjalizacja graczy
 	initializePlayers();
 	//Sprawdzanie poprawnoœci inicjalizacji graczy
@@ -89,13 +89,13 @@ void Game::initializePlayers() {
 	//inicjalizacja drugiego gracza
 	switch (player2Type) {
 	case PlayerType::HUMAN:
-		player2 = std::make_unique<PlayerHuman>(mainInterface, BOARDSIZE, *board1, *board2);
+		player2 = std::make_unique<PlayerHuman>(mainInterface, BOARDSIZE, *board2, *board1);
 		break;
 	case PlayerType::AI:
-		player2 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);
+		player2 = std::make_unique<PlayerAI>(BOARDSIZE, *board2, *board1);
 		break;
 	case PlayerType::REMOTE:
-		player2 = std::make_unique<PlayerRemote>(BOARDSIZE, *board1, *board2);
+		player2 = std::make_unique<PlayerRemote>(BOARDSIZE, *board2, *board1);
 		break;
 	default:
 		player2 = nullptr;

@@ -23,6 +23,7 @@ namespace GUI {
 		public Grid rightGrid;
 		public List<ShipInfo> shipList = new List<ShipInfo>(); //lista wszystkich statków na planszy
 		public Button[,] leftBoard = new Button[10, 10]; //lewa plansza
+		public Button[,] rightBoard = new Button[10, 10]; //right plansza
 
 		private DllInterface dllInterface;
 		public ShotResult[,] shotMap = new ShotResult[10, 10]; //informacja w które pola strzelano
@@ -60,11 +61,60 @@ namespace GUI {
 
 		//pobiera współrzędne strzału
 		public void enterShootingMode() {
-			Dispatcher.Invoke(() => {
+			/*Dispatcher.Invoke(() => {
 				setAllButtons(rightGrid, true);
-			});
+			});*/
 			mode = Mode.GAME;
 		}
+
+		public void MarkShooted(Grid grid, Point point, ShotResult result) {
+			switch (result) {
+				case ShotResult.MISS:
+					Dispatcher.Invoke(() => {
+						addLabel(grid, point, 'o');
+					});
+					break;
+				case ShotResult.HIT:
+					Dispatcher.Invoke(() => {
+						addLabel(grid, point, 'x');
+					});
+					break;
+				case ShotResult.SUNK:
+					Dispatcher.Invoke(() => {
+						addLabel(grid, point, 'v');
+					});
+					break;
+				default:
+					throw new Exception("Incorrect shotResult");
+			}
+		}
+
+		private void addLabel(Grid grid, Point point, char content) {
+			Label label = new Label();
+			label.Content = content;
+			label.FontFamily = new FontFamily("Arial");
+			label.FontSize = 26;
+			Thickness margin = new Thickness(-10, -10, -10, -10);
+			label.VerticalAlignment = VerticalAlignment.Center;
+			label.HorizontalAlignment = HorizontalAlignment.Center;
+			label.SetValue(Grid.ColumnProperty, point.x);
+			label.SetValue(Grid.RowProperty, point.y);
+			switch (content) {
+				case 'o':
+					label.Foreground = Brushes.Blue;
+					break;
+				case 'x':
+					label.Foreground = Brushes.Red;
+					break;
+				case 'v':
+					label.Foreground = Brushes.Yellow;
+					break;
+				default:
+					throw new Exception("Incorrect char content");
+			}
+			grid.Children.Add(label);
+		}
+
 		//zmienia parametr IsEnabled wszystkich przycisków na planszy
 		private void setAllButtons(Grid grid, bool val) {
 			Button[,] board;
@@ -82,12 +132,12 @@ namespace GUI {
 		}
 
 		//inicjalizuje planszę
-		private void InitializeBoard(Grid grid) {
+		private void InitializeBoard(Grid grid, bool isEnabled = false) {
 			Button[,] board;
 			if (grid.Name == "LeftGrid")
 				board = leftBoard;
 			else if (grid.Name == "RightGrid")
-				board = leftBoard;
+				board = rightBoard;
 			else
 				throw new Exception("Incorrect grid name");
 			for (int i = 0; i < 10; i++) {
@@ -96,9 +146,9 @@ namespace GUI {
 					board[i, j].SetValue(Grid.ColumnProperty, i + 1);
 					board[i, j].SetValue(Grid.RowProperty, j + 1);
 					board[i, j].Template = (ControlTemplate)FindResource("ButtonRectangle");
-					board[i, j].IsEnabled = false;
+					board[i, j].IsEnabled = isEnabled;
 					board[i, j].Click += Square_Click;
-					grid.Children.Add(leftBoard[i, j]);
+					grid.Children.Add(board[i, j]);
 				}
 			}
 		}
