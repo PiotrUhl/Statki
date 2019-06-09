@@ -35,17 +35,52 @@ namespace GUI {
 			Button square = (Button)sender;
 			int x = (int)square.GetValue(Grid.ColumnProperty);
 			int y = (int)square.GetValue(Grid.RowProperty);
-			MessageBox.Show("Kliknięto pole (" + x + "," + y + ").");
-			if (mode == Mode.PLANNER && selectedShip > 0) {
+			//MessageBox.Show("Kliknięto pole (" + x + "," + y + ").");
+			if (mode == Mode.PLANNER && selectedShip > 0 && selectedDirection != '0') {
 				ShipInfo ship = new ShipInfo {
 					size = selectedShip,
 					x = x,
 					y = y,
-					direction = 'H',
+					direction = selectedDirection,
 					sunk = false
 				};
 				if (DllInterface.placeShip(ship.size, ship.x-1, ship.y-1, ship.direction) == true) {
 					DrawShip((Grid)square.Parent, ship);
+					switch (ship.size) {
+						case 5:
+							PlannerCount5.Content = 1 - ++ship5placed;
+							if (ship5placed == 1) {
+								selectedShip = 0;
+								PlannerLabel5.FontWeight = FontWeights.Light;
+							}
+							break;
+						case 4:
+							PlannerCount4.Content = 2 - ++ship4placed;
+							if (ship4placed == 2) {
+								selectedShip = 0;
+								PlannerLabel4.FontWeight = FontWeights.Light;
+							}
+							break;
+						case 3:
+							PlannerCount3.Content = 3 - ++ship3placed;
+							if (ship3placed == 3) {
+								selectedShip = 0;
+								PlannerLabel3.FontWeight = FontWeights.Light;
+							}
+							break;
+						case 2:
+							PlannerCount2.Content = 4 - ++ship2placed;
+							if (ship2placed == 4) {
+								selectedShip = 0;
+								PlannerLabel2.FontWeight = FontWeights.Light;
+							}
+							break;
+						default:
+							throw new Exception("Incorrect ship size");
+					}
+					if (ship5placed == 1 && ship4placed == 2 && ship3placed == 3 && ship2placed == 4) {
+						ButtonPlannerConfirm.IsEnabled = true;
+					}
 				}
 			}
 		}
@@ -85,11 +120,22 @@ namespace GUI {
 				PlannerLabel5.FontWeight = FontWeights.Normal;
 			}
 		}
+		private void PlannerButtonH_Click(object sender, RoutedEventArgs e) {
+			selectedDirection = 'H';
+			PlannerLabelH.FontWeight = FontWeights.Bold;
+			PlannerLabelV.FontWeight = FontWeights.Normal;
+		}
+		private void PlannerButtonV_Click(object sender, RoutedEventArgs e) {
+			selectedDirection = 'V';
+			PlannerLabelH.FontWeight = FontWeights.Normal;
+			PlannerLabelV.FontWeight = FontWeights.Bold;
+		}
 		private void ButtonPlannerConfirm_Click(object sender, RoutedEventArgs e) {
+			BoardPlanner.Visibility = Visibility.Collapsed;
 			dllInterface.waitingInPlannerMode.Set();
 		}
 		private void ButtonPlannerRandom_Click(object sender, RoutedEventArgs e) {
-			;
+			MessageBox.Show("Not yet implemented!");
 		}
 	}
 }

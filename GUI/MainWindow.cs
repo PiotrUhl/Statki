@@ -32,6 +32,7 @@ namespace GUI {
 
 		//planner
 		int selectedShip = 0;
+		char selectedDirection = '0';
 		int ship5placed = 0;
 		int ship4placed = 0;
 		int ship3placed = 0;

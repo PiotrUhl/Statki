@@ -271,18 +271,18 @@
 			/>
 		</Grid>
 		<StackPanel Name="RightPannel" VerticalAlignment="Center" Grid.Column="1">
+			<!-- Menu wyboru opcji gry -->
 			<StackPanel Name="Menu"
 						Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
-			<!-- Menu wyboru opcji gry -->
 				<Button
 					Name="StartButton"
 					Content="Start game"
 					Click="StartButton_Click"
 				/>
 			</StackPanel>
-			<Grid Name="BoardPlanner"
-				  Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
-				<!-- Menu do tworzenia planszy -->
+			<!-- Menu do tworzenia planszy -->
+			<Grid Name="BoardPlanner" 
+				  Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="40"/>
 					<ColumnDefinition Width="40"/>
@@ -294,9 +294,36 @@
 					<RowDefinition Height="40"/>
 					<RowDefinition Height="40"/>
 					<RowDefinition Height="40"/>
+					<RowDefinition Height="40"/>
 				</Grid.RowDefinitions>
-				<Border BorderThickness="2,2,2,2" BorderBrush="Black" Grid.ColumnSpan="2" Grid.RowSpan="6"/>
-				<Button Grid.Column="0" Grid.Row="0" Template="{StaticResource ButtonRectangle}" Click="Planner5_Click"/>
+				<Border BorderThickness="2,2,2,2" BorderBrush="Black" Grid.ColumnSpan="2" Grid.RowSpan="7"/>
+				<Button Grid.Column="0" Grid.Row="0" Template="{StaticResource ButtonRectangle}" Click="PlannerButtonH_Click"/>
+				<Label
+					Name="PlannerLabelH"
+					Content="H"
+					FontFamily="Arial"
+					FontSize="26"
+					Margin="-10"
+					IsHitTestVisible="False"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="0"
+					Grid.Row="0"
+				/>
+				<Button Grid.Column="1" Grid.Row="0" Template="{StaticResource ButtonRectangle}" Click="PlannerButtonV_Click"/>
+				<Label
+					Name="PlannerLabelV"
+					Content="V"
+					FontFamily="Arial"
+					FontSize="26"
+					Margin="-10"
+					IsHitTestVisible="False"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="1"
+					Grid.Row="0"
+				/>
+				<Button Grid.Column="0" Grid.Row="1" Template="{StaticResource ButtonRectangle}" Click="Planner5_Click"/>
 				<Label
 					Name="PlannerLabel5"
 					Content="5"
@@ -307,9 +334,9 @@
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="0"
-					Grid.Row="0"
+					Grid.Row="1"
 				/>
-				<Button Grid.Column="0" Grid.Row="1" Template="{StaticResource ButtonRectangle}" Click="Planner4_Click"/>
+				<Button Grid.Column="0" Grid.Row="2" Template="{StaticResource ButtonRectangle}" Click="Planner4_Click"/>
 				<Label
 					Name="PlannerLabel4"
 					Content="4"
@@ -320,9 +347,9 @@
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="0"
-					Grid.Row="1"
+					Grid.Row="2"
 				/>
-				<Button Grid.Column="0" Grid.Row="2" Template="{StaticResource ButtonRectangle}" Click="Planner3_Click"/>
+				<Button Grid.Column="0" Grid.Row="3" Template="{StaticResource ButtonRectangle}" Click="Planner3_Click"/>
 				<Label
 					Name="PlannerLabel3"
 					Content="3"
@@ -333,9 +360,9 @@
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="0"
-					Grid.Row="2"
+					Grid.Row="3"
 				/>
-				<Button Grid.Column="0" Grid.Row="3" Template="{StaticResource ButtonRectangle}" Click="Planner2_Click"/>
+				<Button Grid.Column="0" Grid.Row="4" Template="{StaticResource ButtonRectangle}" Click="Planner2_Click"/>
 				<Label
 					Name="PlannerLabel2"
 					Content="2"
@@ -346,23 +373,12 @@
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center"
 					Grid.Column="0"
-					Grid.Row="3"
+					Grid.Row="4"
 				/>
-				<Button Grid.Column="1" Grid.Row="0" Template="{StaticResource ButtonRectangle}" Click="Planner5_Click"/>
+				<Button Grid.Column="1" Grid.Row="1" Template="{StaticResource ButtonRectangle}" Click="Planner5_Click"/>
 				<Label
-					Name="Count5"
-					FontFamily="Arial"
-					FontSize="24"
-					Margin="-10"
-					IsHitTestVisible="False"
-					VerticalAlignment="Center"
-					HorizontalAlignment="Center"
-					Grid.Column="1"
-					Grid.Row="0"
-				/>
-				<Button Grid.Column="1" Grid.Row="1" Template="{StaticResource ButtonRectangle}" Click="Planner4_Click"/>
-				<Label
-					Name="Count4"
+					Name="PlannerCount5"
+					Content="1"
 					FontFamily="Arial"
 					FontSize="24"
 					Margin="-10"
@@ -372,9 +388,10 @@
 					Grid.Column="1"
 					Grid.Row="1"
 				/>
-				<Button Grid.Column="1" Grid.Row="2" Template="{StaticResource ButtonRectangle}" Click="Planner3_Click"/>
+				<Button Grid.Column="1" Grid.Row="2" Template="{StaticResource ButtonRectangle}" Click="Planner4_Click"/>
 				<Label
-					Name="Count3"
+					Name="PlannerCount4"
+					Content="2"
 					FontFamily="Arial"
 					FontSize="24"
 					Margin="-10"
@@ -384,9 +401,10 @@
 					Grid.Column="1"
 					Grid.Row="2"
 				/>
-				<Button Grid.Column="1" Grid.Row="3" Template="{StaticResource ButtonRectangle}" Click="Planner2_Click"/>
+				<Button Grid.Column="1" Grid.Row="3" Template="{StaticResource ButtonRectangle}" Click="Planner3_Click"/>
 				<Label
-					Name="Count2"
+					Name="PlannerCount3"
+					Content="3"
 					FontFamily="Arial"
 					FontSize="24"
 					Margin="-10"
@@ -396,22 +414,36 @@
 					Grid.Column="1"
 					Grid.Row="3"
 				/>
+				<Button Grid.Column="1" Grid.Row="4" Template="{StaticResource ButtonRectangle}" Click="Planner2_Click"/>
+				<Label
+					Name="PlannerCount2"
+					Content="4"
+					FontFamily="Arial"
+					FontSize="24"
+					Margin="-10"
+					IsHitTestVisible="False"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Grid.Column="1"
+					Grid.Row="4"
+				/>
 				<Button
 					Name="ButtonPlannerConfirm"
 					Content="Confirm"
-					IsEnabled="True"
+					IsEnabled="False"
 					FontSize="14"
 					Grid.Column="0"
-					Grid.Row="4"
+					Grid.Row="5"
 					Grid.ColumnSpan="2"
 					Click="ButtonPlannerConfirm_Click"
 				/>
 				<Button
 					Name="ButtonPlannerRandom"
 					Content="Random"
+					IsEnabled="False"
 					FontSize="14"
 					Grid.Column="0"
-					Grid.Row="5"
+					Grid.Row="6"
 					Grid.ColumnSpan="2"
 					Click="ButtonPlannerRandom_Click"
 				/>
