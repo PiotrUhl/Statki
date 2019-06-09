@@ -44,7 +44,7 @@ void PlayerAI::move() {
 						return false;
 				});
 				if (point.y > finishStart.y) { //strzelono nad punktem pocz¹tkowym - dodaj do listy punkt nad punktem w który strzelono
-					if (point.y + 1 < BOARDSIZE) {
+					if (point.y + 1 < BOARDSIZE && shootableMap[point.y + 1][point.x] == true) {
 						Point newPoint;
 						newPoint.x = point.x;
 						newPoint.y = point.y + 1;
@@ -52,7 +52,7 @@ void PlayerAI::move() {
 					}
 				}
 				else {
-					if (point.y - 1 >= 0) { //strzelono pod punktem pocz¹tkowym - dodaj do listy punkt pod punktem w który strzelono
+					if (point.y - 1 >= 0 && shootableMap[point.y - 1][point.x] == true) { //strzelono pod punktem pocz¹tkowym - dodaj do listy punkt pod punktem w który strzelono
 						Point newPoint;
 						newPoint.x = point.x;
 						newPoint.y = point.y - 1;
@@ -68,7 +68,7 @@ void PlayerAI::move() {
 						return false;
 				});
 				if (point.x > finishStart.x) { //strzelono na prawo od punktu pocz¹tkowego - dodaj do listy punkt na prawo od punktu w który strzelono
-					if (point.x + 1 < BOARDSIZE) {
+					if (point.x + 1 < BOARDSIZE && shootableMap[point.y][point.x + 1] == true) {
 						Point newPoint;
 						newPoint.x = point.x + 1;
 						newPoint.y = point.y;
@@ -76,7 +76,7 @@ void PlayerAI::move() {
 					}
 				}
 				else {
-					if (point.x - 1 >= 0) { //strzelono na lewo od punktu pocz¹tkowego - dodaj do listy punkt na lewo od punktu w który strzelono
+					if (point.x - 1 >= 0 && shootableMap[point.y][point.x - 1] == true) { //strzelono na lewo od punktu pocz¹tkowego - dodaj do listy punkt na lewo od punktu w który strzelono
 						Point newPoint;
 						newPoint.x = point.x - 1;
 						newPoint.y = point.y;
@@ -98,13 +98,17 @@ void PlayerAI::setFinishMode(Point point) {
 	finishMode = true;
 	finishStart = point;
 	if (point.x - 1 >= 0)
-		finishList.push_back(Point(point.x - 1, point.y));
+		if (shootableMap[point.y][point.x - 1] == true)
+			finishList.push_back(Point(point.x - 1, point.y));
 	if (point.x + 1 < BOARDSIZE)
-		finishList.push_back(Point(point.x + 1, point.y));
+		if (shootableMap[point.y][point.x + 1] == true)
+			finishList.push_back(Point(point.x + 1, point.y));
 	if (point.y - 1 >= 0)
-		finishList.push_back(Point(point.x, point.y - 1));
+		if (shootableMap[point.y - 1][point.x] == true)
+			finishList.push_back(Point(point.x, point.y - 1));
 	if (point.y + 1 < BOARDSIZE)
-		finishList.push_back(Point(point.x, point.y + 1));
+		if (shootableMap[point.y + 1][point.x] == true)
+			finishList.push_back(Point(point.x, point.y + 1));
 }
 
 //losuje punkt w którym mo¿e znajdowaæ siê statek
