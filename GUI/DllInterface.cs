@@ -86,7 +86,7 @@ namespace GUI {
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void Dg_plannerMode();
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate void Dg_sendShotInfo(Point point, ShotResult result);
+		public delegate void Dg_sendShotInfo(int id, Point point, ShotResult result);
 
 		//definicje metod przekazywanych do biblioteki .dll
 		//pobiera współrzędne strzału
@@ -143,7 +143,7 @@ namespace GUI {
 		}
 
 		//wypisuje wyniki strzału
-		private void in_sendShotInfo(Point point, ShotResult result) {
+		private void in_sendShotInfo(int id, Point point, ShotResult result) {
 			System.Windows.MessageBox.Show("Strzelono w (" + point.x + "," + point.y + ") z rezultatem: " + result); //debug
 			//todo
 		}

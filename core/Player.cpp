@@ -18,3 +18,13 @@ Point Player::getLastShotPoint() {
 ShotResult Player::getLastShotResult() {
 	return lastShotResult;
 }
+
+//zwraca ID swojej planszy
+int Player::getMyBoardId() {
+	return myBoard.getId();
+}
+
+//zwraca ID planszy przeciwnika
+int Player::getOtherBoardId() {
+	return otherBoard.getId();
+}

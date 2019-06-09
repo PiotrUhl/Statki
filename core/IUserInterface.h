@@ -20,5 +20,5 @@ public:
 	//przekazuje informacje o zakoñczeniu gry
 	virtual void gameEnded(char winner) = 0;
 	//zg³asza do interfejsu wyniki strza³u
-	virtual void sendShotInfo(Point, ShotResult) = 0;
+	virtual void sendShotInfo(int, Point, ShotResult) = 0;
 };

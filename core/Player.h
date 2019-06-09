@@ -22,4 +22,8 @@ public:
 	Point getLastShotPoint();
 	//zwraca rezultat ostatniego strza³u
 	ShotResult getLastShotResult();
+	//zwraca ID swojej planszy
+	int getMyBoardId();
+	//zwraca ID planszy przeciwnika
+	int getOtherBoardId();
 };

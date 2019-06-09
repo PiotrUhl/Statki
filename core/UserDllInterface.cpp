@@ -58,8 +58,8 @@ void UserDllInterface::gameEnded(char winner) {
 }
 
 //zg³asza do interfejsu wyniki strza³u
-void UserDllInterface::sendShotInfo(Point point, ShotResult result) {
-	callBack.out_sendShotInfo(point, result);
+void UserDllInterface::sendShotInfo(int id, Point point, ShotResult result) {
+	callBack.out_sendShotInfo(id, point, result);
 }
 
 #pragma endregion

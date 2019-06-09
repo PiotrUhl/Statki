@@ -32,7 +32,7 @@ public:
 	//przekazuje informacje o zakoñczeniu gry
 	void gameEnded(char winner) override;
 	//zg³asza do interfejsu wyniki strza³u
-	void sendShotInfo(Point, ShotResult) override;
+	void sendShotInfo(int, Point, ShotResult) override;
 #pragma endregion
 #pragma region IDLLInterface
 	//uruchamia grê

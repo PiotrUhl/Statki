@@ -20,7 +20,7 @@ namespace IDllInterface {
 		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
 		void(__stdcall *out_plannerMode)(void);
 		//zg³asza do interfejsu wyniki strza³u
-		void(__stdcall *out_sendShotInfo)(Point, ShotResult);
+		void(__stdcall *out_sendShotInfo)(int, Point, ShotResult);
 	};
 
 	extern "C" {
