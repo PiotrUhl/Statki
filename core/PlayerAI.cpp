@@ -21,7 +21,7 @@ void PlayerAI::move() {
 		ShotResult result = otherBoard.shot(point.x, point.y);
 		if (result == ShotResult::HIT)
 			setFinishMode(point);
-		updateShootableMap(point);
+		updateShootableMap(point, result);
 		//lastShotPoint = point;
 		lastShotPoint.y = point.y;
 		lastShotPoint.x = point.x;
@@ -85,7 +85,7 @@ void PlayerAI::move() {
 				}
 			}
 		}
-		updateShootableMap(point);
+		updateShootableMap(point, result);
 		//lastShotPoint = point;
 		lastShotPoint.y = point.y;
 		lastShotPoint.x = point.x;
@@ -131,14 +131,22 @@ PlayerAI::Point PlayerAI::chooseFinish() {
 }
 
 //uzupe³nia tablicê shootableMap o wyniki strza³u w point
-void PlayerAI::updateShootableMap(Point point) {
-	for (int i = point.y - 1; i <= point.y + 1; i++) {
-		for (int j = point.x - 1; j <= point.x + 1; j++) {
-			if (i < 0 || i >= BOARDSIZE || j < 0 || j >= BOARDSIZE)
-				continue;
-			if (shootableMap.at(i).at(j) == true) {
-				shootableMap.at(i).at(j) = false;
-				shootableCount--;
+void PlayerAI::updateShootableMap(Point point, ShotResult result) {
+	if (result == ShotResult::MISS) {
+		if (shootableMap.at(point.y).at(point.x) == true) {
+			shootableMap.at(point.y).at(point.x) = false;
+			shootableCount--;
+		}
+	}
+	else {
+		for (int i = point.y - 1; i <= point.y + 1; i++) {
+			for (int j = point.x - 1; j <= point.x + 1; j++) {
+				if (i < 0 || i >= BOARDSIZE || j < 0 || j >= BOARDSIZE)
+					continue;
+				if (shootableMap.at(i).at(j) == true) {
+					shootableMap.at(i).at(j) = false;
+					shootableCount--;
+				}
 			}
 		}
 	}

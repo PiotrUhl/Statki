@@ -32,7 +32,7 @@ private:
 	//losuje punkt spoœród punktów w których mo¿e znajdowaæ siê reszta postrzelonego statku
 	Point chooseFinish();
 	//uzupe³nia tablicê shootableMap o wyniki strza³u w point
-	void updateShootableMap(Point point);
+	void updateShootableMap(Point point, ShotResult result);
 	//losuje losow¹ liczbê naturaln¹ z zakresu <1, b>
 	int randomNumber(int b);
 };
