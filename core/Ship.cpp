@@ -1,7 +1,7 @@
 #include "Ship.h"
 #include "Square.h"
 //konstruktor
-Ship::Ship(int _size) : size(_size), location(size) {}
+Ship::Ship(int _size) : size(_size), damage(0) {}
 
 //destruktor
 Ship::~Ship() {}
@@ -33,6 +33,11 @@ int Ship::getSize() const {
 //zwraca sunk
 bool Ship::getSunk() const {
 	return sunk;
+}
+
+//dodaje informacje o polu na którym le¿y statek
+void Ship::addLocation(Square* square) {
+	location.push_back(square);
 }
 
 //sprawdza czy statek jest zatopiony

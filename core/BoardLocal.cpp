@@ -21,10 +21,12 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 	if (direction == 'H')
 		for (int i = 0; i < shipSize; i++) {
 			board[y][x + i].set(newShip);
+			newShip->addLocation(&(board[y][x + i]));
 		}
 	else if (direction == 'V')
 		for (int i = 0; i < shipSize; i++) {
 			board[y + i][x].set(newShip);
+			newShip->addLocation(&(board[y + i][x]));
 		}
 	else
 		throw (std::invalid_argument("Incorrect ship direction"));

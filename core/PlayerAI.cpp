@@ -25,7 +25,7 @@ void PlayerAI::move() {
 		//lastShotPoint = point;
 		lastShotPoint.y = point.x;
 		lastShotPoint.x = point.y;
-		lastShotResult = result;
+		lastShotResult = result;;
 	}
 	else {
 		Point point = chooseFinish();

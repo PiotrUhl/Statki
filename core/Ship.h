@@ -22,6 +22,8 @@ public:
 	int getSize() const;
 	//zwraca sunk
 	bool getSunk() const;
+	//dodaje informacje o polu na którym le¿y statek
+	void addLocation(Square*);
 private:
 	//sprawdza czy statek jest zatopiony
 	bool checkSunk();
