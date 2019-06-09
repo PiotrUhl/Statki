@@ -9,8 +9,8 @@ Game::~Game() {}
 //uruchom grê
 void Game::run() {
 	initialization();
-	//char winner = loop(); //tymczasowo wy³¹czone
-	//ending(winner); //tymczasowo wy³¹czone
+	char winner = loop();
+	ending(winner);
 }
 
 #include "CreatorBoard.h"
@@ -45,8 +45,10 @@ char Game::loop() {
 	while (winner == 0) {
 		//interface - ruch gracza 1
 		player1->move();
+		
 		//interface - ruch gracza 2
 		player2->move();
+
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
 				winner = 3; //remis

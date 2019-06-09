@@ -11,6 +11,7 @@ namespace GUI {
 		private MainWindow window; //okno głowne programu
 		private Thread dllThread; //wątek z back-endem
 		public AutoResetEvent waitingInPlannerMode = new AutoResetEvent(false);
+		public AutoResetEvent waitingForCoords = new AutoResetEvent(false);
 		//konstruktor
 		public DllInterface(MainWindow window)  {
 			this.window = window;
@@ -23,7 +24,8 @@ namespace GUI {
 				out_sendShipsInfo = in_sendShipsInfo,
 				out_sendShotMap = in_sendShotMap,
 				out_error = in_error,
-				out_plannerMode = in_plannerMode
+				out_plannerMode = in_plannerMode,
+				out_getCoords = in_getCoords
 			};
 			InitData init = new InitData {
 				boardsize = 10,
@@ -69,8 +71,6 @@ namespace GUI {
 
 		//deklaracje delegat
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate void Dg_plannerMode();
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void Dg_registerBoard(int nr, int id);
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate Point Dg_getCoords();
@@ -80,8 +80,16 @@ namespace GUI {
 		public delegate void Dg_sendShotMap(IntPtr tab, int size, int id);
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void Dg_error(IntPtr error, byte critical);
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate void Dg_plannerMode();
 
 		//definicje metod przekazywanych do biblioteki .dll
+		//pobiera współrzędne strzału
+		Point in_getCoords() {
+			window.enterShootingMode();
+			waitingForCoords.WaitOne();
+			return window.shotPoint;
+		}
 		//rejestruje id planszy
 		private void in_registerBoard(int nr, int id) {
 			if (nr == 1)

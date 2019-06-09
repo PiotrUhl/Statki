@@ -38,6 +38,9 @@ namespace GUI {
 		int ship3placed = 0;
 		int ship2placed = 0;
 
+		//game
+		public Point shotPoint;
+		
 		//aktualizuje planszę rysując wszystkie statki z listy shipList
 		public void DrawShips(Grid grid) {
 			foreach (ShipInfo k in shipList) {
@@ -55,6 +58,13 @@ namespace GUI {
 			mode = Mode.PLANNER;
 		}
 
+		//pobiera współrzędne strzału
+		public void enterShootingMode() {
+			Dispatcher.Invoke(() => {
+				setAllButtons(rightGrid, true);
+			});
+			mode = Mode.GAME;
+		}
 		//zmienia parametr IsEnabled wszystkich przycisków na planszy
 		private void setAllButtons(Grid grid, bool val) {
 			Button[,] board;

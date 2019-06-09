@@ -20,6 +20,10 @@ namespace GUI {
 	public struct Point { //punkt w kartezjańskim układzie współrzędnych
 		public int x;
 		public int y;
+		/*public Point (int _x, int _y) {
+			x = _x;
+			y = _y;
+		}*/
 	}
 
 	public struct ShipInfo { //informacje o pojedyńczym statku

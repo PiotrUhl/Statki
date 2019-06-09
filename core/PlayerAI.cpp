@@ -1,7 +1,7 @@
 #include "PlayerAI.h"
 
 //konstruktor
-PlayerAI::PlayerAI(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : Player(_BOARDSIZE, _myBoard, _otherBoard), shootableCount(BOARDSIZE*BOARDSIZE), shootableMap(BOARDSIZE, std::vector<bool>(BOARDSIZE, true)) {}
+PlayerAI::PlayerAI(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : Player(_BOARDSIZE, _myBoard, _otherBoard), shootableCount(BOARDSIZE*BOARDSIZE), shootableMap(BOARDSIZE, std::vector<bool>(BOARDSIZE, true)), finishMode(false) {}
 
 //destruktor
 PlayerAI::~PlayerAI() {}
