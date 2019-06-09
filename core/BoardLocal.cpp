@@ -62,8 +62,8 @@ std::unique_ptr<std::unique_ptr<char[]>[]> BoardLocal::getImage() {
 
 //zwraca obraz pola ("x", "y")
 char BoardLocal::fillImageSquare(int x, int y) {
-	if (board[x][y] == nullptr) { //pole puste
-		if (board[x][y].getShooted() == true) { //pole puste i postrzelone
+	if (board[y][x] == nullptr) { //pole puste
+		if (board[y][x].getShooted() == true) { //pole puste i postrzelone
 			return 1;
 		}
 		else { //pole puste i niepostrzelone
@@ -78,15 +78,15 @@ char BoardLocal::fillImageSquare(int x, int y) {
 		else { //statek pionowo
 			ret += 20;
 		}
-		if (board[x][y].getShooted() == true) { //statek postrzelony
-			if (board[x][y].getSunk() == true) { //statek zatopiony
+		if (board[y][x].getShooted() == true) { //statek postrzelony
+			if (board[y][x].getSunk() == true) { //statek zatopiony
 				ret += 200;
 			}
 			else { //statek p³onie
 				ret += 100;
 			}
 		}
-		ret += board[x][y].getSize();
+		ret += board[y][x].getSize();
 		return ret;
 	}
 	return 255; //b³¹d
@@ -94,20 +94,20 @@ char BoardLocal::fillImageSquare(int x, int y) {
 
 //okreœla kierunek statku le¿¹cego na polu  ("x", "y")
 char BoardLocal::findDirection(int x, int y) {
-	if (x > 0 && board[x - 1][y] != nullptr)
+	if (x > 0 && board[y][x - 1] != nullptr)
 		return 'H';
-	if (x < BOARDSIZE - 1 && board[x + 1][y] != nullptr)
+	if (x < BOARDSIZE - 1 && board[y][x + 1] != nullptr)
 		return 'H';
-	if (y > 0 && board[x][y - 1] != nullptr)
+	if (y > 0 && board[y - 1][x] != nullptr)
 		return 'V';
-	if (y < BOARDSIZE - 1 && board[x][y + 1] != nullptr)
+	if (y < BOARDSIZE - 1 && board[y + 1][x] != nullptr)
 		return 'V';
 	return 255; //b³ad
 }
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 ShotResult BoardLocal::shot(int x, int y) {
-	shotMap[y][x] = board.at(x).at(y).shot(); //strzel w dane pole
+	shotMap[y][x] = board.at(y).at(x).shot(); //strzel w dane pole
 	if (shotMap[y][x] == ShotResult::SUNK)
 		unsunkShips--;
 	return shotMap[y][x];

@@ -23,8 +23,8 @@ void PlayerAI::move() {
 			setFinishMode(point);
 		updateShootableMap(point);
 		//lastShotPoint = point;
-		lastShotPoint.y = point.x;
-		lastShotPoint.x = point.y;
+		lastShotPoint.y = point.y;
+		lastShotPoint.x = point.x;
 		lastShotResult = result;;
 	}
 	else {
@@ -87,8 +87,8 @@ void PlayerAI::move() {
 		}
 		updateShootableMap(point);
 		//lastShotPoint = point;
-		lastShotPoint.y = point.x;
-		lastShotPoint.x = point.y;
+		lastShotPoint.y = point.y;
+		lastShotPoint.x = point.x;
 		lastShotResult = result;
 	}
 }
@@ -112,11 +112,12 @@ PlayerAI::Point PlayerAI::chooseSquare() {
 	int rand = randomNumber(shootableCount);
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
-			if (--rand == 0)
-				return Point(j, i);
+			if (shootableMap[i][j] == true)
+				if (--rand == 0)
+					return Point(j, i);
 		}
 	}
-	return Point(-1, -1); //error
+	throw "chooseSquare() error";
 }
 
 //losuje punkt spoœród punktów w których mo¿e znajdowaæ siê reszta postrzelonego statku
@@ -135,12 +136,17 @@ void PlayerAI::updateShootableMap(Point point) {
 		for (int j = point.x - 1; j <= point.x + 1; j++) {
 			if (i < 0 || i >= BOARDSIZE || j < 0 || j >= BOARDSIZE)
 				continue;
-			shootableMap.at(i).at(j) = false;
+			if (shootableMap.at(i).at(j) == true) {
+				shootableMap.at(i).at(j) = false;
+				shootableCount--;
+			}
 		}
 	}
 }
 
 //losuje losow¹ liczbê naturaln¹ z zakresu <1, b>
 int PlayerAI::randomNumber(int b) {
+	if (b < 1)
+		throw "Trying find random number from range 1:0";
 	return (rand() % b) + 1;
 }
