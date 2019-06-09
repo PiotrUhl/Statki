@@ -25,7 +25,8 @@ namespace GUI {
 				out_sendShotMap = in_sendShotMap,
 				out_error = in_error,
 				out_plannerMode = in_plannerMode,
-				out_getCoords = in_getCoords
+				out_getCoords = in_getCoords,
+				out_sendShotInfo = in_sendShotInfo
 			};
 			InitData init = new InitData {
 				boardsize = 10,
@@ -67,6 +68,8 @@ namespace GUI {
 			public Dg_error out_error; //wypisuje na ekranie błąd
 			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_plannerMode out_plannerMode; //przechodzi w tryb tworzenia planszy
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_sendShotInfo out_sendShotInfo; //przechodzi w tryb tworzenia planszy
 		}
 
 		//deklaracje delegat
@@ -82,6 +85,8 @@ namespace GUI {
 		public delegate void Dg_error(IntPtr error, byte critical);
 		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void Dg_plannerMode();
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		public delegate void Dg_sendShotInfo(Point point, ShotResult result);
 
 		//definicje metod przekazywanych do biblioteki .dll
 		//pobiera współrzędne strzału
@@ -133,10 +138,14 @@ namespace GUI {
 			string errorString = Marshal.PtrToStringAnsi(error);
 			System.Windows.MessageBox.Show(errorString);
 			if (critical != 0) {
-				//System.Windows.Application.Current.Shutdown();
-				//window.Close();
 				Environment.Exit(-1);
 			}
+		}
+
+		//wypisuje wyniki strzału
+		private void in_sendShotInfo(Point point, ShotResult result) {
+			System.Windows.MessageBox.Show("Strzelono w (" + point.x + "," + point.y + ") z rezultatem: " + result); //debug
+			//todo
 		}
 
 		//inne techniczne
