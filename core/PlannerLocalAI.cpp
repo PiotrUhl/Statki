@@ -3,7 +3,7 @@
 #include <cstdlib>
 
 PlannerLocalAI::PlannerLocalAI(int _BOARDSIZE, IUserInterface& _outInterface) : PlannerLocal(_BOARDSIZE, _outInterface), placeableMap(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
-	//srand((unsigned int)time(NULL)); //debug
+	srand((unsigned int)time(NULL));
 }
 
 void PlannerLocalAI::initializeplaceableMap() {

@@ -64,7 +64,12 @@ char Game::loop() {
 
 //czêœæ gry - zakoñczenie
 void Game::ending(char winner) {
-
+	if (winner == 1)
+		mainInterface.error("Wygrana", false);
+	else if (winner == 2)
+		mainInterface.error("Przegrana", false);
+	else
+		mainInterface.error("Remis", false);
 }
 
 //#include "UserDllInterface.h"
