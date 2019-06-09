@@ -1,8 +1,9 @@
 #pragma once
 #include "Player.h" //Player
-#include "Board.h" //Board
+//#include "Board.h" //Board
 #include "IUserInterface.h" //IUserInterface
-#include "structs.hpp" //PlayerType
+#include "structs.hpp" //PlayerType, ShotResut
+#include "Point.hpp" //Point
 #include <memory> //std::unique_ptr
 
 class Game {

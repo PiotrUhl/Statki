@@ -43,12 +43,10 @@ char Game::loop() {
 	char winner = 0;
 	//todo: losowy wybór rozpoczynaj¹cego gracza
 	while (winner == 0) {
-		//interface - ruch gracza 1
 		player1->move();
-		
-		//interface - ruch gracza 2
+		mainInterface.sendShotInfo(player1->getLastShotPoint(), player1->getLastShotResult());
 		player2->move();
-
+		mainInterface.sendShotInfo(player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
 				winner = 3; //remis

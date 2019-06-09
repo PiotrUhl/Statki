@@ -22,6 +22,10 @@ void PlayerAI::move() {
 		if (result == ShotResult::HIT)
 			setFinishMode(point);
 		updateShootableMap(point);
+		//lastShotPoint = point;
+		lastShotPoint.x = point.x;
+		lastShotPoint.y = point.y;
+		lastShotResult = result;
 	}
 	else {
 		Point point = chooseFinish();
@@ -50,6 +54,10 @@ void PlayerAI::move() {
 			}
 		}
 		updateShootableMap(point);
+		//lastShotPoint = point;
+		lastShotPoint.x = point.x;
+		lastShotPoint.y = point.y;
+		lastShotResult = result;
 	}
 }
 

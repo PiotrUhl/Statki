@@ -31,6 +31,8 @@ public:
 	void boardChanged(int, std::list<ShipInfo>, std::vector<std::vector<ShotResult>>) override;
 	//przekazuje informacje o zakoñczeniu gry
 	void gameEnded(char winner) override;
+	//zg³asza do interfejsu wyniki strza³u
+	void sendShotInfo(Point, ShotResult) override;
 #pragma endregion
 #pragma region IDLLInterface
 	//uruchamia grê

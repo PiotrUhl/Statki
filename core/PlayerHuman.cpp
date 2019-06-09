@@ -14,6 +14,8 @@ void PlayerHuman::move() {
 	//strza³ i obs³uga b³êdów
 	try {
 		shotResult = otherBoard.shot(point.x, point.y);
+		lastShotPoint = point;
+		lastShotResult = shotResult;
 	}
 	catch (const std::out_of_range &exc) { //przekroczono zakres tablicy
 		//Interface - obs³uga b³êdnego zakresu tablicy
@@ -24,5 +26,4 @@ void PlayerHuman::move() {
 	catch (...) {
 		//Interface - obs³uga nieoczekiwanego wyj¹tku
 	}
-	//Interface - przekazanie informacji o wyniku
 }
