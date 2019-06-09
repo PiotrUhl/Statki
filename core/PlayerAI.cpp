@@ -43,6 +43,22 @@ void PlayerAI::move() {
 					else
 						return false;
 				});
+				if (point.y > finishStart.y) { //strzelono nad punktem pocz¹tkowym - dodaj do listy punkt nad punktem w który strzelono
+					if (point.y + 1 < BOARDSIZE) {
+						Point newPoint;
+						newPoint.x = point.x;
+						newPoint.y = point.y + 1;
+						finishList.push_back(newPoint);
+					}
+				}
+				else {
+					if (point.y - 1 >= 0) { //strzelono pod punktem pocz¹tkowym - dodaj do listy punkt pod punktem w który strzelono
+						Point newPoint;
+						newPoint.x = point.x;
+						newPoint.y = point.y - 1;
+						finishList.push_back(newPoint);
+					}
+				}
 			}
 			else if (point.y == finishStart.y) { //trafiony w jednym poziomie z pocz¹tkiem => statek u³o¿ony poziomo
 				finishList.remove_if([point](Point v) { //usuñ wszystkie punkty nie le¿¹ce w tym poziomie
@@ -51,6 +67,22 @@ void PlayerAI::move() {
 					else
 						return false;
 				});
+				if (point.x > finishStart.x) { //strzelono na prawo od punktu pocz¹tkowego - dodaj do listy punkt na prawo od punktu w który strzelono
+					if (point.x + 1 < BOARDSIZE) {
+						Point newPoint;
+						newPoint.x = point.x + 1;
+						newPoint.y = point.y;
+						finishList.push_back(newPoint);
+					}
+				}
+				else {
+					if (point.x - 1 >= 0) { //strzelono na lewo od punktu pocz¹tkowego - dodaj do listy punkt na lewo od punktu w który strzelono
+						Point newPoint;
+						newPoint.x = point.x - 1;
+						newPoint.y = point.y;
+						finishList.push_back(newPoint);
+					}
+				}
 			}
 		}
 		updateShootableMap(point);
