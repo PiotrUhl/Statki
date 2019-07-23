@@ -81,10 +81,10 @@
     <ClInclude Include="PlannerLocalAI.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Point.hpp">
+    <ClInclude Include="structs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="structs.hpp">
+    <ClInclude Include="Point.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

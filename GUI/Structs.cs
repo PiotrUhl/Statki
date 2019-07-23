@@ -24,7 +24,7 @@ namespace GUI {
 			x = _x;
 			y = _y;
 		}*/
-	}
+	};
 
 	public struct ShipInfo { //informacje o pojedyńczym statku
 		public int size;
@@ -33,8 +33,9 @@ namespace GUI {
 		public char direction;
 		public bool sunk;
 		public System.Windows.Shapes.Rectangle drawObj;
-	}
+	};
 
+	[StructLayout(LayoutKind.Sequential)]
 	public struct InitData { 
 		public int boardsize;
 		public PlayerType player1type;
