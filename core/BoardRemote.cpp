@@ -2,7 +2,7 @@
 #include "BoardRemote.h"
 
 //konstruktor
-BoardRemote::BoardRemote(int _BOARDSIZE, IUserInterface& _outInterface) : Board(_BOARDSIZE, _outInterface) {}
+BoardRemote::BoardRemote(int _BOARDSIZE) : Board(_BOARDSIZE) {}
 
 //destruktor
 BoardRemote::~BoardRemote() {}

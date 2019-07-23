@@ -2,7 +2,7 @@
 #include <stdexcept>      // std::invalid_argument
 
 //konstruktor
-PlannerLocal::PlannerLocal(int _BOARDSIZE, IUserInterface& _outInterface) : BOARDSIZE(_BOARDSIZE), board(_BOARDSIZE, _outInterface) {}
+PlannerLocal::PlannerLocal(int _BOARDSIZE) : BOARDSIZE(_BOARDSIZE), board(_BOARDSIZE) {}
 
 //sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
 bool PlannerLocal::checkPlacement(int shipSize, int x, int y, char direction = 'H') {

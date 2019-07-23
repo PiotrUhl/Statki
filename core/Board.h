@@ -4,8 +4,6 @@
 #include <list> //std::list
 #include <vector> //std::vector
 
-class IUserInterface;
-
 class Board {
 private:
 	static int lastId; //najwy¿sze id planszy
@@ -15,10 +13,9 @@ protected:
 	int unsunkShips; //liczba niezatopnionych statków
 	std::list<ShipInfo> list; //lista statków
 	std::vector<std::vector<ShotResult>> shotMap; //mapa strza³ów
-	IUserInterface& outInterface; //interfejs do wypisywania planszy
 public:
 	//konstruktor
-	Board(int _BOARDSIZE, IUserInterface&);
+	Board(int _BOARDSIZE);
 	//destruktor
 	virtual ~Board();
 	//zwraca numer identyfikacyjny planszy

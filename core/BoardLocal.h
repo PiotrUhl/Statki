@@ -9,7 +9,7 @@ private:
 	std::vector<std::vector<Square>> board; //plansza
 public:
 	//konstruktor
-	BoardLocal(int _BOARDSIZE, IUserInterface&);
+	BoardLocal(int _BOARDSIZE);
 	//destruktor
 	~BoardLocal();
 	//przeci¹¿ony operator []

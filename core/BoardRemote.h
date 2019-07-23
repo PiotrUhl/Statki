@@ -5,7 +5,7 @@
 class BoardRemote : public Board {
 public:
 	//konstruktor
-	BoardRemote(int _BOARDSIZE, IUserInterface&);
+	BoardRemote(int _BOARDSIZE);
 	//destruktor
 	~BoardRemote();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat (INetInterface)
