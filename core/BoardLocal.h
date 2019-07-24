@@ -2,18 +2,18 @@
 #include "Board.h"
 #include "Square.h"
 #include "structs.hpp"
-#include <vector>
+#include <array>
 
 class BoardLocal : public Board {
 private:
-	std::vector<std::vector<Square>> board; //plansza
+	std::array<std::array<Square, BOARDSIZE>, BOARDSIZE> board; //plansza
 public:
 	//konstruktor
 	BoardLocal();
 	//destruktor
 	~BoardLocal();
 	//przeci¹¿ony operator []
-	std::vector<Square>& operator[](int);
+	std::array<Square, BOARDSIZE>& operator[](int);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 	bool placeShip(int shipSize, int x, int y, char direction);
 	//usuwa statkek z pola ("x", "y")

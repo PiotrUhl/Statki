@@ -1,7 +1,11 @@
 #include "PlayerAI.h"
 
 //konstruktor
-PlayerAI::PlayerAI(Board& _myBoard, Board& _otherBoard) : Player(_myBoard, _otherBoard), shootableCount(BOARDSIZE*BOARDSIZE), shootableMap(BOARDSIZE, std::vector<bool>(BOARDSIZE, true)), finishMode(false) {}
+PlayerAI::PlayerAI(Board& _myBoard, Board& _otherBoard) : Player(_myBoard, _otherBoard), shootableCount(BOARDSIZE*BOARDSIZE), finishMode(false) {
+	for (auto k : shootableMap) {
+		k.fill(true);
+	}
+}
 
 //destruktor
 PlayerAI::~PlayerAI() {}
@@ -44,7 +48,7 @@ void PlayerAI::move() {
 						return false;
 				});
 				if (point.y > finishStart.y) { //strzelono nad punktem pocz¹tkowym - dodaj do listy punkt nad punktem w który strzelono
-					if (point.y + 1 < BOARDSIZE && shootableMap[point.y + 1][point.x] == true) {
+					if (point.y + 1 < BOARDSIZE && shootableMap[point.y + 1][point.x]) {
 						Point newPoint;
 						newPoint.x = point.x;
 						newPoint.y = point.y + 1;
@@ -52,7 +56,7 @@ void PlayerAI::move() {
 					}
 				}
 				else {
-					if (point.y - 1 >= 0 && shootableMap[point.y - 1][point.x] == true) { //strzelono pod punktem pocz¹tkowym - dodaj do listy punkt pod punktem w który strzelono
+					if (point.y - 1 >= 0 && shootableMap[point.y - 1][point.x]) { //strzelono pod punktem pocz¹tkowym - dodaj do listy punkt pod punktem w który strzelono
 						Point newPoint;
 						newPoint.x = point.x;
 						newPoint.y = point.y - 1;
@@ -68,7 +72,7 @@ void PlayerAI::move() {
 						return false;
 				});
 				if (point.x > finishStart.x) { //strzelono na prawo od punktu pocz¹tkowego - dodaj do listy punkt na prawo od punktu w który strzelono
-					if (point.x + 1 < BOARDSIZE && shootableMap[point.y][point.x + 1] == true) {
+					if (point.x + 1 < BOARDSIZE && shootableMap[point.y][point.x + 1]) {
 						Point newPoint;
 						newPoint.x = point.x + 1;
 						newPoint.y = point.y;
@@ -76,7 +80,7 @@ void PlayerAI::move() {
 					}
 				}
 				else {
-					if (point.x - 1 >= 0 && shootableMap[point.y][point.x - 1] == true) { //strzelono na lewo od punktu pocz¹tkowego - dodaj do listy punkt na lewo od punktu w który strzelono
+					if (point.x - 1 >= 0 && shootableMap[point.y][point.x - 1]) { //strzelono na lewo od punktu pocz¹tkowego - dodaj do listy punkt na lewo od punktu w który strzelono
 						Point newPoint;
 						newPoint.x = point.x - 1;
 						newPoint.y = point.y;
@@ -98,16 +102,16 @@ void PlayerAI::setFinishMode(Point point) {
 	finishMode = true;
 	finishStart = point;
 	if (point.x - 1 >= 0)
-		if (shootableMap[point.y][point.x - 1] == true)
+		if (shootableMap[point.y][point.x - 1])
 			finishList.push_back(Point(point.x - 1, point.y));
 	if (point.x + 1 < BOARDSIZE)
-		if (shootableMap[point.y][point.x + 1] == true)
+		if (shootableMap[point.y][point.x + 1])
 			finishList.push_back(Point(point.x + 1, point.y));
 	if (point.y - 1 >= 0)
-		if (shootableMap[point.y - 1][point.x] == true)
+		if (shootableMap[point.y - 1][point.x])
 			finishList.push_back(Point(point.x, point.y - 1));
 	if (point.y + 1 < BOARDSIZE)
-		if (shootableMap[point.y + 1][point.x] == true)
+		if (shootableMap[point.y + 1][point.x])
 			finishList.push_back(Point(point.x, point.y + 1));
 }
 
@@ -116,7 +120,7 @@ PlayerAI::Point PlayerAI::chooseSquare() {
 	int rand = randomNumber(shootableCount);
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
-			if (shootableMap[i][j] == true)
+			if (shootableMap[i][j])
 				if (--rand == 0)
 					return Point(j, i);
 		}
@@ -137,7 +141,7 @@ PlayerAI::Point PlayerAI::chooseFinish() {
 //uzupe³nia tablicê shootableMap o wyniki strza³u w point
 void PlayerAI::updateShootableMap(Point point, ShotResult result) {
 	if (result == ShotResult::MISS) {
-		if (shootableMap.at(point.y).at(point.x) == true) {
+		if (shootableMap.at(point.y).at(point.x)) {
 			shootableMap.at(point.y).at(point.x) = false;
 			shootableCount--;
 		}
@@ -147,7 +151,7 @@ void PlayerAI::updateShootableMap(Point point, ShotResult result) {
 			for (int j = point.x - 1; j <= point.x + 1; j++) {
 				if (i < 0 || i >= BOARDSIZE || j < 0 || j >= BOARDSIZE)
 					continue;
-				if (shootableMap.at(i).at(j) == true) {
+				if (shootableMap.at(i).at(j)) {
 					shootableMap.at(i).at(j) = false;
 					shootableCount--;
 				}

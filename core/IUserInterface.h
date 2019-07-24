@@ -16,7 +16,7 @@ public:
 	//zwraca wspó³rzêdne strza³u
 	virtual Point getShotCoords() = 0;
 	//poinformuj interfejs o zmianie na planszy
-	virtual void boardChanged(int, std::list<ShipInfo>, std::vector<std::vector<ShotResult>>) = 0;
+	virtual void boardChanged(int, std::list<ShipInfo>, std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE>) = 0;
 	//przekazuje informacje o zakoñczeniu gry
 	virtual void gameEnded(char winner) = 0;
 	//zg³asza do interfejsu wyniki strza³u

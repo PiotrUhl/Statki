@@ -30,7 +30,7 @@ void Square::set(std::shared_ptr<Ship>& newShip) {
 #include "Ship.h" //ship->hit()
 //strzelono w pole; zwraca rezultat; rzuca wyj¹tek std::logic_error("Square already shooted") je¿eli pole ju¿ postrzelone
 ShotResult Square::shot() {
-	if (shooted == true)
+	if (shooted)
 		throw std::logic_error("Square already shot");
 	shooted = true;
 	if (ship == nullptr) {

@@ -2,7 +2,7 @@
 #include "Ship.h"
 #include "structs.hpp" //ShipInfo, ShotResult
 #include <list> //std::list
-#include <vector> //std::vector
+#include <array> //std::array
 
 class Board {
 private:
@@ -11,7 +11,7 @@ private:
 protected:
 	int unsunkShips; //liczba niezatopnionych statków
 	std::list<ShipInfo> list; //lista statków
-	std::vector<std::vector<ShotResult>> shotMap; //mapa strza³ów
+	std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> shotMap; //mapa strza³ów
 public:
 	//konstruktor
 	Board();
@@ -24,7 +24,7 @@ public:
 	//zwraca listê statków na planszy
 	std::list<ShipInfo> getList();
 	//zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
-	std::vector<std::vector<ShotResult>> getShotMap();
+	std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> getShotMap();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	virtual ShotResult shot(int x, int y) = 0;
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.h"
-#include <vector>
-#include <list>
+#include <array> //std::array
+#include <list> //std::list
 
 class PlayerAI : public Player {
 private:
@@ -12,7 +12,7 @@ private:
 		int x;
 		int y;
 	};
-	std::vector<std::vector<bool>> shootableMap;
+	std::array<std::array<bool, BOARDSIZE>, BOARDSIZE> shootableMap; //todo: przerobiæ na bitset
 	int shootableCount;
 	bool finishMode; //tryb wykañczania postrzelonego statku
 	Point finishStart; //punkt z którego zaczêto tryb wykañczania

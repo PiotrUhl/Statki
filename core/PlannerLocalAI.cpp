@@ -2,7 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 
-PlannerLocalAI::PlannerLocalAI() : PlannerLocal(), placeableMap(BOARDSIZE, std::vector<std::bitset<8>>(BOARDSIZE)) {
+PlannerLocalAI::PlannerLocalAI() : PlannerLocal() {
 	srand((unsigned int)time(NULL));
 }
 
@@ -87,7 +87,7 @@ BoardLocal PlannerLocalAI::makeBoard() {
 		repeat = !placeShip(2);
 		repeat = !placeShip(2);
 		repeat = !placeShip(2);
-	} while (repeat == true);
+	} while (repeat);
 	return getBoard();
 }
 
@@ -125,7 +125,7 @@ int PlannerLocalAI::randomNumber(int b) {
 PlannerLocalAI::Point PlannerLocalAI::convert(int r, ShipPlacement sp) {
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
-			if (placeableMap[i][j][static_cast<int>(sp)] == true) {
+			if (placeableMap[i][j][static_cast<int>(sp)]) {
 				if (--r == 0) {
 					return Point(j, i);
 				}
@@ -185,7 +185,7 @@ void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) 
 			if (i < 0 || i >= BOARDSIZE || j < 0 || j >= BOARDSIZE)
 				continue;
 			for (int k = 0; k < 8; k++) {
-				if (placeableMap[i][j][k] == true) {
+				if (placeableMap[i][j][k]) {
 					placeableMap[i][j][k] = false;
 					placeableSquares[k]--;
 				}
@@ -197,49 +197,49 @@ void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) 
 		if (i < 0 || i >= BOARDSIZE) //sprawdzenie wykroczenia w pionie
 			continue;
 		if (!(x - 2 < 0)) {
-			if (placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))] == true) {
+			if (placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))]) {
 				placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(2, 'H'))]--;
 			}
-			if (placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))] == true) {
+			if (placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))]) {
 				placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(3, 'H'))]--;
 			}
-			if (placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))] == true) {
+			if (placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))]) {
 				placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
 			}
-			if (placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] == true) {
+			if (placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))]) {
 				placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
 			}
 		}
 		if (!(x - 3 < 0)) {
-			if (placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))] == true) {
+			if (placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))]) {
 				placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(3, 'H'))]--;
 			}
-			if (placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))] == true) {
+			if (placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))]) {
 				placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
 			}
-			if (placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))] == true) {
+			if (placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))]) {
 				placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
 			}
 		}
 		if (!(x - 4 < 0)) {
-			if (placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))] == true) {
+			if (placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))]) {
 				placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
 			}
-			if (placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))] == true) {
+			if (placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))]) {
 				placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
 			}
 		}
 		if (!(x - 5 < 0)) {
-			if (placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] == true) {
+			if (placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))]) {
 				placeableMap[i][x - 5][static_cast<int>(encode(5, 'H'))] = false;
 				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
 			}
@@ -250,49 +250,49 @@ void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) 
 		if (j < 0 || j >= BOARDSIZE) //sprawdzenie wykroczenia w poziomie
 			continue;
 		if (!(y - 2 < 0)) {
-			if (placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))] == true) {
+			if (placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))]) {
 				placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(2, 'V'))]--;
 			}
-			if (placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))] == true) {
+			if (placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))]) {
 				placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(3, 'V'))]--;
 			}
-			if (placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))] == true) {
+			if (placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))]) {
 				placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
 			}
-			if (placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))] == true) {
+			if (placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))]) {
 				placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
 			}
 		}
 		if (!(y - 3 < 0)) {
-			if (placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))] == true) {
+			if (placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))]) {
 				placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(3, 'V'))]--;
 			}
-			if (placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))] == true) {
+			if (placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))]) {
 				placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
 			}
-			if (placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))] == true) {
+			if (placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))]) {
 				placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
 			}
 		}
 		if (!(y - 4 < 0)) {
-			if (placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))] == true) {
+			if (placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))]) {
 				placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
 			}
-			if (placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))] == true) {
+			if (placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))]) {
 				placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
 			}
 		}
 		if (!(y - 5 < 0)) {
-			if (placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))] == true) {
+			if (placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))]) {
 				placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))] = false;
 				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
 			}

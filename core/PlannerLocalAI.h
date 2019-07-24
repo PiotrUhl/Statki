@@ -5,7 +5,7 @@
 class PlannerLocalAI : private PlannerLocal {
 private:
 	enum class ShipPlacement {H2 = 0, V2, H3, V3, H4, V4, H5, V5};
-	std::vector<std::vector<std::bitset<8>>> placeableMap; //mapa pamiêtaj¹ca gdzie mo¿na postawiæ statek o danym rozmiarze w danym kierunku
+	std::array<std::array<std::bitset<8>, BOARDSIZE>, BOARDSIZE> placeableMap; //mapa pamiêtaj¹ca gdzie mo¿na postawiæ statek o danym rozmiarze w danym kierunku
 	int placeableSquares[8]; //iloœæ pól w których mo¿na postawiæ statek o danym rozmiarze w danym kierunku
 	struct Point {
 		int x; int y;

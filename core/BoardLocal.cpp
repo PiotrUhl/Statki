@@ -1,13 +1,13 @@
 #include "BoardLocal.h"
 
 //konstruktor
-BoardLocal::BoardLocal() : board(BOARDSIZE, std::vector<Square>(BOARDSIZE)) {}
+BoardLocal::BoardLocal() {}
 
 //destruktor
 BoardLocal::~BoardLocal() {}
 
 //przeci¹¿ony operator []
-std::vector<Square>& BoardLocal::operator [](int i) {
+std::array<Square, BOARDSIZE>& BoardLocal::operator [](int i) {
 	return board[i];
 }
 
@@ -63,7 +63,7 @@ std::unique_ptr<std::unique_ptr<char[]>[]> BoardLocal::getImage() {
 //zwraca obraz pola ("x", "y")
 char BoardLocal::fillImageSquare(int x, int y) {
 	if (board[y][x] == nullptr) { //pole puste
-		if (board[y][x].getShooted() == true) { //pole puste i postrzelone
+		if (board[y][x].getShooted()) { //pole puste i postrzelone
 			return 1;
 		}
 		else { //pole puste i niepostrzelone
@@ -78,8 +78,8 @@ char BoardLocal::fillImageSquare(int x, int y) {
 		else { //statek pionowo
 			ret += 20;
 		}
-		if (board[y][x].getShooted() == true) { //statek postrzelony
-			if (board[y][x].getSunk() == true) { //statek zatopiony
+		if (board[y][x].getShooted()) { //statek postrzelony
+			if (board[y][x].getSunk()) { //statek zatopiony
 				ret += 200;
 			}
 			else { //statek p³onie

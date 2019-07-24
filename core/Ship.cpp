@@ -1,14 +1,14 @@
 #include "Ship.h"
 #include "Square.h"
 //konstruktor
-Ship::Ship(int _size) : size(_size), damage(0) {}
+Ship::Ship(int _size) : size(_size), damage(0), sunk(false) {}
 
 //destruktor
 Ship::~Ship() {}
 
 //trafiono w statek; zwraca czy zatopiono statek
 bool Ship::hit() {
-	if (sunk == true)
+	if (sunk)
 		throw std::logic_error("Ship already sunk");
 	damage++;
 	if (checkSunk()) {
