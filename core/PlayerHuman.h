@@ -6,7 +6,7 @@ class PlayerHuman :	public Player {
 	IUserInterface& userInterface; //interfejs u¿ytkownika
 public:
 	//konstruktor
-	PlayerHuman(IUserInterface&, int _BOARDSIZE, Board& _myBoard, Board& _otherBoard);
+	PlayerHuman(IUserInterface&, Board& _myBoard, Board& _otherBoard);
 	//destruktor
 	~PlayerHuman();
 	//gracz wykonuje swój ruch (IUserInterface In)

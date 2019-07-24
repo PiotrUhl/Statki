@@ -9,13 +9,12 @@ private:
 	static int lastId; //najwy¿sze id planszy
 	int id; //numer identyfikacyjny planszy
 protected:
-	const int BOARDSIZE; //rozmiar planszy
 	int unsunkShips; //liczba niezatopnionych statków
 	std::list<ShipInfo> list; //lista statków
 	std::vector<std::vector<ShotResult>> shotMap; //mapa strza³ów
 public:
 	//konstruktor
-	Board(int _BOARDSIZE);
+	Board();
 	//destruktor
 	virtual ~Board();
 	//zwraca numer identyfikacyjny planszy

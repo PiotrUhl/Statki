@@ -29,7 +29,6 @@ namespace GUI {
 				out_sendShotInfo = in_sendShotInfo
 			};
 			InitData init = new InitData {
-				boardsize = 10,
 				player1type = PlayerType.HUMAN,
 				player2type = PlayerType.AI
 			};

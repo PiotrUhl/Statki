@@ -37,7 +37,6 @@ namespace GUI {
 
 	[StructLayout(LayoutKind.Sequential)]
 	public struct InitData { 
-		public int boardsize;
 		public PlayerType player1type;
 		public PlayerType player2type;
 	};

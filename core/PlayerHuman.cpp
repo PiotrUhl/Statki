@@ -2,7 +2,7 @@
 #include "Point.hpp"
 
 //konstruktor
-PlayerHuman::PlayerHuman(IUserInterface& _userInterface, int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : Player(_BOARDSIZE, _myBoard, _otherBoard), userInterface(_userInterface) {}
+PlayerHuman::PlayerHuman(IUserInterface& _userInterface, Board& _myBoard, Board& _otherBoard) : Player(_myBoard, _otherBoard), userInterface(_userInterface) {}
 
 //destruktor
 PlayerHuman::~PlayerHuman() {}

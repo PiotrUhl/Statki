@@ -4,7 +4,7 @@
 int Board::lastId = 0;
 
 //konstruktor
-Board::Board(int _BOARDSIZE) : BOARDSIZE(_BOARDSIZE), id(++lastId), unsunkShips(0), shotMap(10, std::vector<ShotResult>(10, ShotResult::NONE)) {}
+Board::Board() : id(++lastId), unsunkShips(0), shotMap(BOARDSIZE, std::vector<ShotResult>(BOARDSIZE, ShotResult::NONE)) {}
 
 //destruktor
 Board::~Board() {}

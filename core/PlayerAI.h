@@ -19,7 +19,7 @@ private:
 	std::list<Point> finishList; //lista punktów w których mo¿e znajdowaæ siê pozosta³a czêœæ postrzelonego statku
 public:
 	//konstruktor
-	PlayerAI(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard);
+	PlayerAI(Board& _myBoard, Board& _otherBoard);
 	//destruktor
 	~PlayerAI();
 	//gracz wykonuje swój ruch

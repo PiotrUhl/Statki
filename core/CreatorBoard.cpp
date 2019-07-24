@@ -8,7 +8,7 @@
 #include "UserDllInterface.h"
 
 
-CreatorBoard::CreatorBoard(int _BOARDSIZE, IUserInterface& _userInterface) : BOARDSIZE(_BOARDSIZE), userInterface(_userInterface){}
+CreatorBoard::CreatorBoard(IUserInterface& _userInterface) : userInterface(_userInterface){}
 
 std::unique_ptr<Board> CreatorBoard::makeBoard(PlayerType PlayerType) {
 	switch (PlayerType) {
@@ -23,17 +23,21 @@ std::unique_ptr<Board> CreatorBoard::makeBoard(PlayerType PlayerType) {
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForHuman() {
-	PlannerLocal planner(BOARDSIZE);
+	PlannerLocal planner;
 	userInterface.makeBoard(&planner);
 	return std::make_unique<BoardLocal>(planner.getBoard());
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForAI() {
-	PlannerLocalAI planner(BOARDSIZE);
+	PlannerLocalAI planner;
 	return std::make_unique<BoardLocal>(planner.makeBoard());
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForRemote() {
 	//todo: inicjalizacja planszy zdalnej
-	return std::make_unique<BoardRemote>(BOARDSIZE);
+#ifdef NETMODULE
+	return std::make_unique<BoardRemote>();
+#else
+	return nullptr;
+#endif
 }

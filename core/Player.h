@@ -6,14 +6,13 @@
 
 class Player {
 protected:
-	const int BOARDSIZE; //rozmiar planszy
 	Board& myBoard; //w³asna plansza
 	Board& otherBoard; //plansza przeciwnika
 	Point lastShotPoint; //miejsce ostatniego strza³u
 	ShotResult lastShotResult; //rezultat ostatniego strza³u
 public:
 	//konstruktor
-	Player(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard);
+	Player(Board& _myBoard, Board& _otherBoard);
 	//destruktor
 	virtual ~Player();
 	//gracz wykonuje swój ruch

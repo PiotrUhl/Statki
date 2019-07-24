@@ -5,7 +5,6 @@ enum class PlayerType { NONE = 0, HUMAN, AI, REMOTE };
 enum class ShotResult { NONE = 0, MISS, HIT, SUNK };
 
 struct InitData {
-	int boardsize;
 	PlayerType player1type;
 	PlayerType player2type;
 };

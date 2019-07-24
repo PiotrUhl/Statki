@@ -5,7 +5,7 @@
 class PlayerRemote : public Player {
 public:
 	//konstruktor
-	PlayerRemote(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard);
+	PlayerRemote(Board& _myBoard, Board& _otherBoard);
 	//destruktor
 	~PlayerRemote();
 	//gracz wykonuje swój ruch (INetInterface)

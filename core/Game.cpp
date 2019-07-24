@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //konstruktor
-Game::Game(InitData _init, IUserInterface& _mainInterface) : BOARDSIZE(_init.boardsize), player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface) {}
+Game::Game(InitData _init, IUserInterface& _mainInterface) : player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface) {}
 
 //destruktor
 Game::~Game() {}
@@ -18,8 +18,8 @@ void Game::run() {
 //czêœæ gry - inicjalizacja
 void Game::initialization() {
 	//Tworzenie plansz graczy
-	board1 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player1Type);
-	board2 = CreatorBoard(BOARDSIZE, mainInterface).makeBoard(player2Type);
+	board1 = CreatorBoard(mainInterface).makeBoard(player1Type);
+	board2 = CreatorBoard(mainInterface).makeBoard(player2Type);
 	//Sprawdzanie poprawnoœci utworzenia plansz i rejestracja plansz w interfejsie
 	if (board1 == nullptr)
 		mainInterface.error("An error has occured during initialization board for player 1", true);
@@ -80,28 +80,32 @@ void Game::ending(char winner) {
 void Game::initializePlayers() {
 	switch (player1Type) {
 	case PlayerType::HUMAN:
-		player1 = std::make_unique<PlayerHuman>(mainInterface, BOARDSIZE, *board1, *board2);
+		player1 = std::make_unique<PlayerHuman>(mainInterface, *board1, *board2);
 		break;
 	case PlayerType::AI:
-		player1 = std::make_unique<PlayerAI>(BOARDSIZE, *board1, *board2);
+		player1 = std::make_unique<PlayerAI>(*board1, *board2);
 		break;
+#ifdef NETMODULE
 	case PlayerType::REMOTE:
-		player1 = std::make_unique<PlayerRemote>(BOARDSIZE, *board1, *board2);
+		player1 = std::make_unique<PlayerRemote>(*board1, *board2);
 		break;
+#endif
 	default:
 		player1 = nullptr;
 	}
 	//inicjalizacja drugiego gracza
 	switch (player2Type) {
 	case PlayerType::HUMAN:
-		player2 = std::make_unique<PlayerHuman>(mainInterface, BOARDSIZE, *board2, *board1);
+		player2 = std::make_unique<PlayerHuman>(mainInterface, *board2, *board1);
 		break;
 	case PlayerType::AI:
-		player2 = std::make_unique<PlayerAI>(BOARDSIZE, *board2, *board1);
+		player2 = std::make_unique<PlayerAI>(*board2, *board1);
 		break;
+#ifdef NETMODULE
 	case PlayerType::REMOTE:
-		player2 = std::make_unique<PlayerRemote>(BOARDSIZE, *board2, *board1);
+		player2 = std::make_unique<PlayerRemote>(*board2, *board1);
 		break;
+#endif
 	default:
 		player2 = nullptr;
 	}

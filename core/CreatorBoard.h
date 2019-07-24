@@ -4,9 +4,8 @@
 #include "structs.hpp"
 
 class CreatorBoard {
-	const int BOARDSIZE;
 public:
-	CreatorBoard(int _BOARDSIZE, IUserInterface&);
+	CreatorBoard(IUserInterface&);
 	std::unique_ptr<Board> makeBoard(PlayerType PlayerType);
 	IUserInterface& userInterface;
 private:

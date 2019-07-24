@@ -1,7 +1,7 @@
 #include "Player.h"
 
 //konstruktor
-Player::Player(int _BOARDSIZE, Board& _myBoard, Board& _otherBoard) : BOARDSIZE(_BOARDSIZE), myBoard(_myBoard), otherBoard(_otherBoard) {}
+Player::Player(Board& _myBoard, Board& _otherBoard) : myBoard(_myBoard), otherBoard(_otherBoard) {}
 
 //destruktor
 Player::~Player() {}
