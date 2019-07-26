@@ -30,7 +30,7 @@ Point UserDllInterface::getShotCoords() {
 }
 
 //poinformuj interfejs o zmianie na planszy
-void UserDllInterface::boardChanged(int id, std::list<ShipInfo> shipList, std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> shotMap) {
+void UserDllInterface::boardChanged(int id, std::list<ShipInfo> shipList, boost::multi_array<ShotResult, 2> shotMap) {
 	int shipSize = shipList.size();
 	ShipInfo** shipTab = new ShipInfo*[shipSize];
 	int i = 0;

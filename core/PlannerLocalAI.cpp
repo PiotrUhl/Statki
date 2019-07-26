@@ -2,7 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 
-PlannerLocalAI::PlannerLocalAI() : PlannerLocal() {
+PlannerLocalAI::PlannerLocalAI() : PlannerLocal(), placeableMap(boost::extents[BOARDSIZE][BOARDSIZE]) {
 	srand((unsigned int)time(NULL));
 }
 
@@ -122,12 +122,12 @@ int PlannerLocalAI::randomNumber(int b) {
 }
 
 //konwertuje liczbê naturaln¹ "r" na punkt dla danego u³o¿enia statku "sp"
-PlannerLocalAI::Point PlannerLocalAI::convert(int r, ShipPlacement sp) {
+Point PlannerLocalAI::convert(int r, ShipPlacement sp) {
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
 			if (placeableMap[i][j][static_cast<int>(sp)]) {
 				if (--r == 0) {
-					return Point(j, i);
+					return Point{ j, i };
 				}
 			}
 		}

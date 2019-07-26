@@ -40,7 +40,7 @@ bool PlannerLocal::place(int shipSize, int x, int y, char direction) {
 }
 
 //zwraca obraz tworzonej planszy
-std::unique_ptr<std::unique_ptr<char[]>[]> PlannerLocal::getImage() {
+boost::multi_array<char, 2> PlannerLocal::getImage() {
 	return board.getImage();
 }
 

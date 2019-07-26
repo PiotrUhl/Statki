@@ -1,18 +1,11 @@
 #pragma once
 #include "Player.h"
-#include <array> //std::array
+#include "Point.hpp"
 #include <list> //std::list
 
 class PlayerAI : public Player {
 private:
-	struct Point {
-		Point() {}
-		Point(int _x, int _y) : x(_x), y(_y) {}
-		bool operator==(const Point&);
-		int x;
-		int y;
-	};
-	std::array<std::array<bool, BOARDSIZE>, BOARDSIZE> shootableMap; //todo: przerobiæ na bitset
+	boost::multi_array<bool, 2> shootableMap; //todo: przerobiæ na bitset
 	int shootableCount;
 	bool finishMode; //tryb wykañczania postrzelonego statku
 	Point finishStart; //punkt z którego zaczêto tryb wykañczania

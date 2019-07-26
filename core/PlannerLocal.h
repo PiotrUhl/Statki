@@ -12,7 +12,7 @@ public:
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 	bool place(int shipSize, int x, int y, char direction);
 	//zwraca obraz tworzonej planszy
-	std::unique_ptr<std::unique_ptr<char[]>[]> getImage();
+	boost::multi_array<char, 2> getImage();
 	//zwraca tworzon¹ planszê - niszczy obiekt
 	BoardLocal getBoard();
 };
