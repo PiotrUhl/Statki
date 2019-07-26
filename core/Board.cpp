@@ -4,7 +4,7 @@
 int Board::lastId = 0;
 
 //konstruktor
-Board::Board() : id(++lastId), unsunkShips(0), lastShotPoint(Point{BOARDSIZE, BOARDSIZE}) {
+Board::Board() : id(++lastId), unsunkShips(0), lastShotPoint(Point{BOARDSIZE, BOARDSIZE}), lastShotResult(ShotResult::NONE) {
 	for (auto k : shotMap)
 		k.fill(ShotResult::NONE);
 }
@@ -35,4 +35,9 @@ std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> Board::getShotMap() {
 //zwraca lastShotPoint
 Point Board::getLastShotPoint() const {
 	return lastShotPoint;
+}
+
+//zwraca lastShotResult
+ShotResult Board::getLastShotResult() const {
+	return lastShotResult;
 }

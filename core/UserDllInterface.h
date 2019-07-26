@@ -51,5 +51,7 @@ public:
 	int getLastShotBoard() const;
 	//zwraca miejsce ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca miejsce ostatniego strza³u
 	Point getLastShotPoint(int boardId) const;
+	//zwraca wynik ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strza³u
+	ShotResult getLastShotResult(int boardId) const;
 #pragma endregion
 };

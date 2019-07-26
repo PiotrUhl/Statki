@@ -23,7 +23,7 @@ int Game::getLastShotBoard() const {
 	return lastShotBoard;
 }
 
-//zwraca miejsce ostatniego strza³u w planszê 'boardId'
+//zwraca miejsce ostatniego strza³u w planszê 'boardId'; (BOARDSIZE, BOARDSIZE) w razie b³êdu
 Point Game::getLastShotPoint(int boardId) const {
 	switch (boardId) {
 	case 1:
@@ -32,6 +32,18 @@ Point Game::getLastShotPoint(int boardId) const {
 		return board2->getLastShotPoint();
 	default:
 		return Point{ BOARDSIZE, BOARDSIZE };
+	}
+}
+
+//zwraca wynik ostatniego strza³u w planszê 'boardId'
+ShotResult Game::getLastShotResult(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getLastShotResult();
+	case 2:
+		return board2->getLastShotResult();
+	default:
+		return ShotResult::NONE;
 	}
 }
 

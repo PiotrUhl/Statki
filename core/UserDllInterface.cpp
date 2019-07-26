@@ -105,4 +105,11 @@ Point UserDllInterface::getLastShotPoint(int boardId) const {
 	return game->getLastShotPoint(boardId);
 }
 
+//zwraca wynik ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strza³u
+ShotResult UserDllInterface::getLastShotResult(int boardId) const {
+	if (boardId == 0)
+		boardId = getLastShotBoard();
+	return game->getLastShotResult(boardId);
+}
+
 #pragma endregion

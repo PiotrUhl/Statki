@@ -111,6 +111,7 @@ ShotResult BoardLocal::shot(int x, int y) {
 	shotMap[y][x] = board.at(y).at(x).shot(); //strzel w dane pole
 	if (shotMap[y][x] == ShotResult::SUNK)
 		unsunkShips--;
+	lastShotResult = shotMap[y][x];
 	return shotMap[y][x];
 }
 

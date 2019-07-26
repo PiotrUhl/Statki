@@ -40,7 +40,8 @@ namespace IDllInterface {
 		__declspec(dllexport) int getLastShotBoard();
 		//zwraca miejsce ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca miejsce ostatniego strza³u
 		__declspec(dllexport) Point getLastShotPoint(int boardId);
-		//__declspec(dllexport) ShotResult getLastShotResult(int boardId);
+		//zwraca wynik ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strza³u
+		__declspec(dllexport) ShotResult getLastShotResult(int boardId);
 		//__declspec(dllexport) unsigned char* getBoardImage(int boardId);
 		//__declspec(dllexport) ShipInfo** getShipList(int boardId);
 		//__declspec(dllexport) unsigned char* getShotMap(int boardId);

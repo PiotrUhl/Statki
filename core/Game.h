@@ -34,6 +34,8 @@ public:
 	int getLastShotBoard() const;
 	//zwraca miejsce ostatniego strza³u w planszê 'boardId'; (BOARDSIZE, BOARDSIZE) w razie b³êdu
 	Point getLastShotPoint(int boardId) const;
+	//zwraca wynik ostatniego strza³u w planszê 'boardId'
+	ShotResult getLastShotResult(int boardId) const;
 private:
 	//czêœæ gry - inicjalizacja
 	void initialization();

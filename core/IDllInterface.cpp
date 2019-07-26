@@ -39,4 +39,9 @@ namespace IDllInterface {
 		return UserDllInterface::getInstance().getLastShotPoint(boardId);
 	}
 
+	//zwraca wynik ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strza³u
+	ShotResult getLastShotResult(int boardId) {
+		return UserDllInterface::getInstance().getLastShotResult(boardId);
+	}
+
 }

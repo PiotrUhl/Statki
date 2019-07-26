@@ -14,6 +14,7 @@ protected:
 	std::list<ShipInfo> list; //lista statków
 	std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> shotMap; //mapa strza³ów
 	Point lastShotPoint; //miejsce ostatniego strza³u w planszê; (BOARDSIZE, BOARDSIZE) je¿eli nie strzelano
+	ShotResult lastShotResult; //wynik ostatniego strza³u w planszê
 public:
 	//konstruktor
 	Board();
@@ -29,6 +30,8 @@ public:
 	std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> getShotMap();
 	//zwraca lastShotPoint
 	Point getLastShotPoint() const;
+	//zwraca lastShotResult
+	ShotResult getLastShotResult() const;
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	virtual ShotResult shot(int x, int y) = 0;
 };
