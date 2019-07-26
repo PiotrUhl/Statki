@@ -44,8 +44,10 @@ public:
 	bool placeShip(int shipSize, int x, int y, char direction);
 
 	//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
-	int getCurrentPlayer();
+	int getCurrentPlayer() const;
 	//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
-	PlayerType getPlayerType(int playerId);
+	PlayerType getPlayerType(int playerId) const;
+	//zwraca id planszy w któr¹ strzelono jako ostatni¹ (b¹dŸ 0 je¿eli nie strzelano)
+	int getLastShotBoard() const;
 #pragma endregion
 };

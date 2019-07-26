@@ -84,13 +84,18 @@ bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 }
 
 //zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
-int UserDllInterface::getCurrentPlayer() {
+int UserDllInterface::getCurrentPlayer() const {
 	return game->getCurrentPlayer();
 }
 
 //zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
-PlayerType UserDllInterface::getPlayerType(int playerId) {
+PlayerType UserDllInterface::getPlayerType(int playerId) const {
 	return game->getPlayerType(playerId);
+}
+
+//zwraca id planszy w któr¹ strzelono jako ostatni¹ (b¹dŸ 0 je¿eli nie strzelano)
+int UserDllInterface::getLastShotBoard() const {
+	return game->getLastShotBoard();
 }
 
 #pragma endregion

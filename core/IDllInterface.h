@@ -36,9 +36,10 @@ namespace IDllInterface {
 		__declspec(dllexport) int getCurrentPlayer();
 		//zwraca typ gracza 'playerId' bπdü NONE w przypadku niew≥aúciwego gracza
 		__declspec(dllexport) PlayerType getPlayerType(int playerId);
+		//zwraca id planszy w ktÛrπ strzelono jako ostatniπ (bπdü 0 jeøeli nie strzelano)
+		__declspec(dllexport) int getLastShotBoard();
 		//__declspec(dllexport) Point getLastShotPoint();
 		//__declspec(dllexport) ShotResult getLastShotResult();
-		//__declspec(dllexport) int getLastShotBoard();
 		//__declspec(dllexport) unsigned char* getBoardImage(int boardId);
 		//__declspec(dllexport) ShipInfo** getShipList(int boardId);
 		//__declspec(dllexport) unsigned char* getShotMap(int boardId);

@@ -28,4 +28,10 @@ namespace IDllInterface {
 	PlayerType getPlayerType(int playerId) {
 		return UserDllInterface::getInstance().getPlayerType(playerId);
 	}
+
+	//zwraca id planszy w któr¹ strzelono jako ostatni¹ (b¹dŸ 0 je¿eli nie strzelano)
+	int getLastShotBoard() {
+		return UserDllInterface::getInstance().getLastShotBoard();
+	}
+
 }

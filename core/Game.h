@@ -17,6 +17,7 @@ private:
 	IUserInterface& mainInterface; //interfejs do komunikacji z graczem
 
 	int currentPlayer; //gracz obecnie wykonuj¹cy ruch (0 dla pozosta³ych czêœci gry)
+	int lastShotBoard; //plansza w któr¹ strzelano jako ostatni¹
 public:
 	//konstruktor
 	Game(InitData, IUserInterface&);
@@ -29,6 +30,8 @@ public:
 	int getCurrentPlayer() const;
 	//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
 	PlayerType getPlayerType(int playerId) const;
+	//zwraca lastShotBoard
+	int getLastShotBoard() const;
 private:
 	//czêœæ gry - inicjalizacja
 	void initialization();

@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //konstruktor
-Game::Game(InitData _init, IUserInterface& _mainInterface) : player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface), currentPlayer(0) {}
+Game::Game(InitData _init, IUserInterface& _mainInterface) : player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface), currentPlayer(0), lastShotBoard(0) {}
 
 //destruktor
 Game::~Game() {}
@@ -16,6 +16,11 @@ void Game::run() {
 //zwraca currentPlayer
 int Game::getCurrentPlayer() const {
 	return currentPlayer;
+}
+
+//zwraca lastShotBoard
+int Game::getLastShotBoard() const {
+	return lastShotBoard;
 }
 
 //zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
@@ -61,9 +66,11 @@ char Game::loop() {
 	while (winner == 0) {
 		currentPlayer = 1;
 		player1->move();
+		lastShotBoard = 2;
 		mainInterface.sendShotInfo(player1->getOtherBoardId(), player1->getLastShotPoint(), player1->getLastShotResult());
 		currentPlayer = 2;
 		player2->move();
+		lastShotBoard = 1;
 		mainInterface.sendShotInfo(player2->getOtherBoardId(), player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
