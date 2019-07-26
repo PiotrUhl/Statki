@@ -4,9 +4,10 @@
 int Board::lastId = 0;
 
 //konstruktor
-Board::Board() : id(++lastId), unsunkShips(0), lastShotPoint(Point{BOARDSIZE, BOARDSIZE}), lastShotResult(ShotResult::NONE) {
+Board::Board() : id(++lastId), unsunkShips(0), shotMap(boost::extents[BOARDSIZE][BOARDSIZE]), lastShotPoint(Point{ BOARDSIZE, BOARDSIZE }), lastShotResult(ShotResult::NONE) {
 	for (auto k : shotMap)
-		k.fill(ShotResult::NONE);
+		for (auto l : k)
+			l = ShotResult::NONE;
 }
 
 //destruktor
@@ -28,7 +29,7 @@ std::list<ShipInfo> Board::getList() {
 }
 
 //zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
-std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> Board::getShotMap() {
+boost::multi_array<ShotResult, 2> Board::getShotMap() {
 	return shotMap;
 }
 

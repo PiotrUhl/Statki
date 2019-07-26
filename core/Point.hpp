@@ -10,4 +10,10 @@ public:
 	//Point(const Point&&) = default;
 	Point& operator=(const Point&) = default;
 	//Point& operator=(const Point&&) = default;*/
+	bool operator==(const Point& other) {
+		if (x == other.x && y == other.y)
+			return true;
+		else
+			return false;
+	}
 };

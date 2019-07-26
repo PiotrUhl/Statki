@@ -1,25 +1,23 @@
 #pragma once
 #include "Board.h"
 #include "Square.h"
-#include "structs.hpp"
-#include <array>
 
 class BoardLocal : public Board {
 private:
-	std::array<std::array<Square, BOARDSIZE>, BOARDSIZE> board; //plansza
+	boost::multi_array<Square, 2> board; //plansza
 public:
 	//konstruktor
 	BoardLocal();
 	//destruktor
 	~BoardLocal();
 	//przeci¹¿ony operator []
-	std::array<Square, BOARDSIZE>& operator[](int);
+	boost::multi_array<Square, 2>::array_view<1>::type operator[](size_t);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 	bool placeShip(int shipSize, int x, int y, char direction);
 	//usuwa statkek z pola ("x", "y")
 	bool removeShip(int x, int y);
 	//zwraca obraz planszy
-	std::unique_ptr<std::unique_ptr<char[]>[]> getImage();
+	boost::multi_array<char, 2> getImage();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	ShotResult shot(int x, int y) override;
 	//usuwa ca³¹ zawartoœæ planszy

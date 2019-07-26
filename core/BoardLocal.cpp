@@ -1,14 +1,14 @@
 #include "BoardLocal.h"
 
 //konstruktor
-BoardLocal::BoardLocal() {}
+BoardLocal::BoardLocal() : board(boost::extents[BOARDSIZE][BOARDSIZE]) {}
 
 //destruktor
 BoardLocal::~BoardLocal() {}
 
 //przeci¹¿ony operator []
-std::array<Square, BOARDSIZE>& BoardLocal::operator [](int i) {
-	return board[i];
+boost::multi_array<Square, 2>::array_view<1>::type BoardLocal::operator[](size_t index) {
+	return board[boost::indices[index][boost::multi_array_types::index_range(0, BOARDSIZE)]];
 }
 
 #include "Ship.h"
@@ -47,11 +47,8 @@ bool BoardLocal::removeShip(int x, int y) {
 }
 
 //zwraca obraz planszy
-std::unique_ptr<std::unique_ptr<char[]>[]> BoardLocal::getImage() {
-	std::unique_ptr<std::unique_ptr<char[]>[]> image = std::make_unique<std::unique_ptr<char[]>[]>(BOARDSIZE);
-	for (int i = 0; i < BOARDSIZE; i++) {
-		image[i] = std::make_unique<char[]>(BOARDSIZE);
-	}
+boost::multi_array<char, 2> BoardLocal::getImage() {
+	boost::multi_array<char, 2> image(boost::extents[BOARDSIZE][BOARDSIZE]);
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
 			image[i][j] = fillImageSquare(j, i);
@@ -108,7 +105,7 @@ char BoardLocal::findDirection(int x, int y) {
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 ShotResult BoardLocal::shot(int x, int y) {
 	lastShotPoint = Point{x, y};
-	shotMap[y][x] = board.at(y).at(x).shot(); //strzel w dane pole
+	shotMap[y][x] = board[y][x].shot(); //strzel w dane pole
 	if (shotMap[y][x] == ShotResult::SUNK)
 		unsunkShips--;
 	lastShotResult = shotMap[y][x];

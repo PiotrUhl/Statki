@@ -3,7 +3,9 @@
 #include "Point.hpp"
 #include "structs.hpp" //ShipInfo, ShotResult
 #include <list> //std::list
-#include <array> //std::array
+#pragma warning(push, 0)
+#include <boost/multi_array.hpp> //boost::multi_array
+#pragma warning(pop)
 
 class Board {
 private:
@@ -12,7 +14,7 @@ private:
 protected:
 	int unsunkShips; //liczba niezatopnionych statków
 	std::list<ShipInfo> list; //lista statków
-	std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> shotMap; //mapa strza³ów
+	boost::multi_array<ShotResult, 2> shotMap; //mapa strza³ów
 	Point lastShotPoint; //miejsce ostatniego strza³u w planszê; (BOARDSIZE, BOARDSIZE) je¿eli nie strzelano
 	ShotResult lastShotResult; //wynik ostatniego strza³u w planszê
 public:
@@ -27,11 +29,13 @@ public:
 	//zwraca listê statków na planszy
 	std::list<ShipInfo> getList();
 	//zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
-	std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> getShotMap();
+	boost::multi_array<ShotResult, 2> getShotMap();
 	//zwraca lastShotPoint
 	Point getLastShotPoint() const;
 	//zwraca lastShotResult
 	ShotResult getLastShotResult() const;
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	virtual ShotResult shot(int x, int y) = 0;
+	//zwraca obraz planszy
+	virtual boost::multi_array<char, 2> getImage() = 0;
 };

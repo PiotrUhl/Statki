@@ -1,22 +1,19 @@
 #include "PlayerAI.h"
 
 //konstruktor
-PlayerAI::PlayerAI(Board& _myBoard, Board& _otherBoard) : Player(_myBoard, _otherBoard), shootableCount(BOARDSIZE*BOARDSIZE), finishMode(false) {
-	for (auto k : shootableMap) {
-		k.fill(true);
+PlayerAI::PlayerAI(Board& _myBoard, Board& _otherBoard) : Player(_myBoard, _otherBoard), shootableMap(boost::extents[BOARDSIZE][BOARDSIZE]), shootableCount(BOARDSIZE*BOARDSIZE), finishMode(false) {
+	/*for (auto k : shootableMap)
+		for (auto l : k)
+			l = true;*/
+	for (size_t i = 0; i < BOARDSIZE; i++) {
+		for (size_t j = 0; j < BOARDSIZE; j++) {
+			shootableMap[i][j] = true;
+		}
 	}
 }
 
 //destruktor
 PlayerAI::~PlayerAI() {}
-
-//przeci¹¿ony operator porównania
-bool PlayerAI::Point::operator==(const Point& other) {
-	if (x == other.x && y == other.y)
-		return true;
-	else
-		return false;
-}
 
 //gracz wykonuje swój ruch
 void PlayerAI::move() {
@@ -90,9 +87,9 @@ void PlayerAI::move() {
 			}
 		}
 		updateShootableMap(point, result);
-		//lastShotPoint = point;
-		lastShotPoint.y = point.y;
-		lastShotPoint.x = point.x;
+		lastShotPoint = point;
+		//lastShotPoint.y = point.y;
+		//lastShotPoint.x = point.x;
 		lastShotResult = result;
 	}
 }
@@ -103,33 +100,33 @@ void PlayerAI::setFinishMode(Point point) {
 	finishStart = point;
 	if (point.x - 1 >= 0)
 		if (shootableMap[point.y][point.x - 1])
-			finishList.push_back(Point(point.x - 1, point.y));
+			finishList.push_back(Point{ point.x - 1, point.y });
 	if (point.x + 1 < BOARDSIZE)
 		if (shootableMap[point.y][point.x + 1])
-			finishList.push_back(Point(point.x + 1, point.y));
+			finishList.push_back(Point{ point.x + 1, point.y });
 	if (point.y - 1 >= 0)
 		if (shootableMap[point.y - 1][point.x])
-			finishList.push_back(Point(point.x, point.y - 1));
+			finishList.push_back(Point{ point.x, point.y - 1 });
 	if (point.y + 1 < BOARDSIZE)
 		if (shootableMap[point.y + 1][point.x])
-			finishList.push_back(Point(point.x, point.y + 1));
+			finishList.push_back(Point{ point.x, point.y + 1 });
 }
 
 //losuje punkt w którym mo¿e znajdowaæ siê statek
-PlayerAI::Point PlayerAI::chooseSquare() {
+Point PlayerAI::chooseSquare() {
 	int rand = randomNumber(shootableCount);
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
 			if (shootableMap[i][j])
 				if (--rand == 0)
-					return Point(j, i);
+					return Point{ j, i };
 		}
 	}
 	throw "chooseSquare() error";
 }
 
 //losuje punkt spoœród punktów w których mo¿e znajdowaæ siê reszta postrzelonego statku
-PlayerAI::Point PlayerAI::chooseFinish() {
+Point PlayerAI::chooseFinish() {
 	int rand = randomNumber(finishList.size());
 	auto iter = finishList.begin();
 	for (int  i = 1; i < rand; i++) {
@@ -141,8 +138,8 @@ PlayerAI::Point PlayerAI::chooseFinish() {
 //uzupe³nia tablicê shootableMap o wyniki strza³u w point
 void PlayerAI::updateShootableMap(Point point, ShotResult result) {
 	if (result == ShotResult::MISS) {
-		if (shootableMap.at(point.y).at(point.x)) {
-			shootableMap.at(point.y).at(point.x) = false;
+		if (shootableMap[point.y][point.x]) {
+			shootableMap[point.y][point.x] = false;
 			shootableCount--;
 		}
 	}
@@ -151,8 +148,8 @@ void PlayerAI::updateShootableMap(Point point, ShotResult result) {
 			for (int j = point.x - 1; j <= point.x + 1; j++) {
 				if (i < 0 || i >= BOARDSIZE || j < 0 || j >= BOARDSIZE)
 					continue;
-				if (shootableMap.at(i).at(j)) {
-					shootableMap.at(i).at(j) = false;
+				if (shootableMap[i][j]) {
+					shootableMap[i][j] = false;
 					shootableCount--;
 				}
 			}

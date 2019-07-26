@@ -29,7 +29,7 @@ public:
 	//pobiera wspó³rzêdne strza³u
 	Point getShotCoords() override;
 	//poinformuj interfejs o zmianie na planszy
-	void boardChanged(int, std::list<ShipInfo>, std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE>) override;
+	void boardChanged(int, std::list<ShipInfo>, boost::multi_array<ShotResult, 2>) override;
 	//przekazuje informacje o zakoñczeniu gry
 	void gameEnded(char winner) override;
 	//zg³asza do interfejsu wyniki strza³u
