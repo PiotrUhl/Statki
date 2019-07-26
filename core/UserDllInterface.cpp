@@ -47,6 +47,9 @@ void UserDllInterface::boardChanged(int id, std::list<ShipInfo> shipList, std::a
 	}
 	callBack.out_sendShipsInfo(shipTab, shipSize, id);
 	callBack.out_sendShotMap(shotTab, BOARDSIZE*BOARDSIZE, id);
+	for (int i = 0; i < shipSize; i++) {
+		delete[] shipTab[i];
+	}
 	delete[] shipTab;
 	delete[] shotTab;
 }
