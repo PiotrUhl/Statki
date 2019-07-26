@@ -98,4 +98,11 @@ int UserDllInterface::getLastShotBoard() const {
 	return game->getLastShotBoard();
 }
 
+//zwraca miejsce ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca miejsce ostatniego strza³u
+Point UserDllInterface::getLastShotPoint(int boardId) const {
+	if (boardId == 0)
+		boardId = getLastShotBoard();
+	return game->getLastShotPoint(boardId);
+}
+
 #pragma endregion

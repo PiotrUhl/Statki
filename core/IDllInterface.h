@@ -38,8 +38,9 @@ namespace IDllInterface {
 		__declspec(dllexport) PlayerType getPlayerType(int playerId);
 		//zwraca id planszy w któr¹ strzelono jako ostatni¹ (b¹dŸ 0 je¿eli nie strzelano)
 		__declspec(dllexport) int getLastShotBoard();
-		//__declspec(dllexport) Point getLastShotPoint();
-		//__declspec(dllexport) ShotResult getLastShotResult();
+		//zwraca miejsce ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca miejsce ostatniego strza³u
+		__declspec(dllexport) Point getLastShotPoint(int boardId);
+		//__declspec(dllexport) ShotResult getLastShotResult(int boardId);
 		//__declspec(dllexport) unsigned char* getBoardImage(int boardId);
 		//__declspec(dllexport) ShipInfo** getShipList(int boardId);
 		//__declspec(dllexport) unsigned char* getShotMap(int boardId);

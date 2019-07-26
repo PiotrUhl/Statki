@@ -107,6 +107,7 @@ char BoardLocal::findDirection(int x, int y) {
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 ShotResult BoardLocal::shot(int x, int y) {
+	lastShotPoint = Point{x, y};
 	shotMap[y][x] = board.at(y).at(x).shot(); //strzel w dane pole
 	if (shotMap[y][x] == ShotResult::SUNK)
 		unsunkShips--;

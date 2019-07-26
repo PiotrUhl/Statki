@@ -4,7 +4,7 @@
 int Board::lastId = 0;
 
 //konstruktor
-Board::Board() : id(++lastId), unsunkShips(0) {
+Board::Board() : id(++lastId), unsunkShips(0), lastShotPoint(Point{BOARDSIZE, BOARDSIZE}) {
 	for (auto k : shotMap)
 		k.fill(ShotResult::NONE);
 }
@@ -30,4 +30,9 @@ std::list<ShipInfo> Board::getList() {
 //zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
 std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> Board::getShotMap() {
 	return shotMap;
+}
+
+//zwraca lastShotPoint
+Point Board::getLastShotPoint() const {
+	return lastShotPoint;
 }

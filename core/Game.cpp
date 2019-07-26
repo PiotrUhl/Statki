@@ -23,6 +23,18 @@ int Game::getLastShotBoard() const {
 	return lastShotBoard;
 }
 
+//zwraca miejsce ostatniego strza≥u w planszÍ 'boardId'
+Point Game::getLastShotPoint(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getLastShotPoint();
+	case 2:
+		return board2->getLastShotPoint();
+	default:
+		return Point{ BOARDSIZE, BOARDSIZE };
+	}
+}
+
 //zwraca typ gracza 'playerId' bπdü NONE w przypadku niew≥aúciwego gracza
 PlayerType Game::getPlayerType(int playerId) const {
 	switch (playerId) {

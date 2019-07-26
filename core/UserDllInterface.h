@@ -49,5 +49,7 @@ public:
 	PlayerType getPlayerType(int playerId) const;
 	//zwraca id planszy w któr¹ strzelono jako ostatni¹ (b¹dŸ 0 je¿eli nie strzelano)
 	int getLastShotBoard() const;
+	//zwraca miejsce ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca miejsce ostatniego strza³u
+	Point getLastShotPoint(int boardId) const;
 #pragma endregion
 };
