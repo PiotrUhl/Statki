@@ -8,15 +8,15 @@ namespace IDllInterface {
 	//wskaŸniki na callbacki
 	struct CallBacks {
 		//rejestruje id planszy
-		void (__stdcall *out_registerBoard)(int, int);
+		void(__stdcall *out_registerBoard)(int, int);
 		//pobiera wspó³rzêdne
-		Point (__stdcall *out_getCoords)(void);
+		Point(__stdcall *out_getCoords)(void);
 		//wysy³a do wypisania informacje o statkach
-		void (__stdcall *out_sendShipsInfo)(ShipInfo**, int, int);
+		void(__stdcall *out_sendShipsInfo)(ShipInfo**, int, int);
 		//wysy³a do wypisania obraz planszy
-		void (__stdcall *out_sendShotMap)(unsigned char*, int, int);
+		void(__stdcall *out_sendShotMap)(unsigned char*, int, int);
 		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-		void (__stdcall *out_error)(const char*, bool);
+		void(__stdcall *out_error)(const char*, bool);
 		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
 		void(__stdcall *out_plannerMode)(void);
 		//zg³asza do interfejsu wyniki strza³u
@@ -30,5 +30,17 @@ namespace IDllInterface {
 		__declspec(dllexport) bool checkShipPlacement(int shipSize, int x, int y, char direction);
 		//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 		__declspec(dllexport) bool placeShip(int shipSize, int x, int y, char direction);
+
+		//todo: interfejs wyjœciowy
+		//__declspec(dllexport) int getCurrentPlayer();
+		//__declspec(dllexport) PlayerType getPlayerType(int playerId);
+		//__declspec(dllexport) Point getLastShotPoint();
+		//__declspec(dllexport) ShotResult getLastShotResult();
+		//__declspec(dllexport) int getLastShotBoard();
+		//__declspec(dllexport) unsigned char* getBoardImage(int boardId);
+		//__declspec(dllexport) ShipInfo** getShipList(int boardId);
+		//__declspec(dllexport) unsigned char* getShotMap(int boardId);
+		//__declspec(dllexport) ShipInfo getSquareShip(int boardId, Point point);
+		//__declspec(dllexport) ShotResult getSquareState(int boardId, Point point);
 	}
 }
