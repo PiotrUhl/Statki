@@ -34,7 +34,8 @@ namespace IDllInterface {
 		//todo: interfejs wyjœciowy
 		//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
 		__declspec(dllexport) int getCurrentPlayer();
-		//__declspec(dllexport) PlayerType getPlayerType(int playerId);
+		//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
+		__declspec(dllexport) PlayerType getPlayerType(int playerId);
 		//__declspec(dllexport) Point getLastShotPoint();
 		//__declspec(dllexport) ShotResult getLastShotResult();
 		//__declspec(dllexport) int getLastShotBoard();

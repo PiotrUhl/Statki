@@ -25,7 +25,10 @@ public:
 	//uruchom grê
 	void run();
 
+	//zwraca currentPlayer
 	int getCurrentPlayer() const;
+	//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
+	PlayerType getPlayerType(int playerId) const;
 private:
 	//czêœæ gry - inicjalizacja
 	void initialization();

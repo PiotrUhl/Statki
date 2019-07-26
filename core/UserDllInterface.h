@@ -45,6 +45,7 @@ public:
 
 	//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
 	int getCurrentPlayer();
-
+	//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
+	PlayerType getPlayerType(int playerId);
 #pragma endregion
 };

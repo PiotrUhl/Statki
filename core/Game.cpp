@@ -13,8 +13,21 @@ void Game::run() {
 	ending(winner);
 }
 
+//zwraca currentPlayer
 int Game::getCurrentPlayer() const {
 	return currentPlayer;
+}
+
+//zwraca typ gracza 'playerId' bπdü NONE w przypadku niew≥aúciwego gracza
+PlayerType Game::getPlayerType(int playerId) const {
+	switch (playerId) {
+	case 1:
+		return player1Type;
+	case 2:
+		return player2Type;
+	default:
+		return PlayerType::NONE;
+	}
 }
 
 #include "CreatorBoard.h"

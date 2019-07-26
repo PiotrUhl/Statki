@@ -23,4 +23,9 @@ namespace IDllInterface {
 	int getCurrentPlayer() {
 		return UserDllInterface::getInstance().getCurrentPlayer();
 	}
+
+	//zwraca typ gracza 'playerId' bπdü NONE w przypadku niew≥aúciwego gracza
+	PlayerType getPlayerType(int playerId) {
+		return UserDllInterface::getInstance().getPlayerType(playerId);
+	}
 }

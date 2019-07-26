@@ -83,9 +83,14 @@ bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 	return currentPlanner->place(shipSize, x, y, direction);
 }
 
-
+//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
 int UserDllInterface::getCurrentPlayer() {
 	return game->getCurrentPlayer();
+}
+
+//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
+PlayerType UserDllInterface::getPlayerType(int playerId) {
+	return game->getPlayerType(playerId);
 }
 
 #pragma endregion
