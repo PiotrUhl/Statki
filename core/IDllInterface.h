@@ -32,7 +32,8 @@ namespace IDllInterface {
 		__declspec(dllexport) bool placeShip(int shipSize, int x, int y, char direction);
 
 		//todo: interfejs wyjœciowy
-		//__declspec(dllexport) int getCurrentPlayer();
+		//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
+		__declspec(dllexport) int getCurrentPlayer();
 		//__declspec(dllexport) PlayerType getPlayerType(int playerId);
 		//__declspec(dllexport) Point getLastShotPoint();
 		//__declspec(dllexport) ShotResult getLastShotResult();

@@ -18,4 +18,9 @@ namespace IDllInterface {
 		__asm XOR EAX, EAX;
 		return ret;
 	}
+
+	//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
+	int getCurrentPlayer() {
+		return UserDllInterface::getInstance().getCurrentPlayer();
+	}
 }

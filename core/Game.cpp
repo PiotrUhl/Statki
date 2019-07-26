@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //konstruktor
-Game::Game(InitData _init, IUserInterface& _mainInterface) : player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface) {}
+Game::Game(InitData _init, IUserInterface& _mainInterface) : player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface), currentPlayer(0) {}
 
 //destruktor
 Game::~Game() {}
@@ -13,8 +13,11 @@ void Game::run() {
 	ending(winner);
 }
 
-#include "CreatorBoard.h"
+int Game::getCurrentPlayer() const {
+	return currentPlayer;
+}
 
+#include "CreatorBoard.h"
 //czêœæ gry - inicjalizacja
 void Game::initialization() {
 	//Tworzenie plansz graczy
@@ -43,8 +46,10 @@ char Game::loop() {
 	char winner = 0;
 	//todo: losowy wybór rozpoczynaj¹cego gracza
 	while (winner == 0) {
+		currentPlayer = 1;
 		player1->move();
 		mainInterface.sendShotInfo(player1->getOtherBoardId(), player1->getLastShotPoint(), player1->getLastShotResult());
+		currentPlayer = 2;
 		player2->move();
 		mainInterface.sendShotInfo(player2->getOtherBoardId(), player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
@@ -59,6 +64,7 @@ char Game::loop() {
 			winner = 2; //wygrywa gracz 2
 		}
 	}
+	currentPlayer = 0;
 	return winner;
 }
 

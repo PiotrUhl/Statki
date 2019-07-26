@@ -15,6 +15,8 @@ private:
 	std::unique_ptr<Player> player1; //gracz nr 1
 	std::unique_ptr<Player> player2; //gracz nr 2
 	IUserInterface& mainInterface; //interfejs do komunikacji z graczem
+
+	int currentPlayer; //gracz obecnie wykonuj¹cy ruch (0 dla pozosta³ych czêœci gry)
 public:
 	//konstruktor
 	Game(InitData, IUserInterface&);
@@ -22,6 +24,8 @@ public:
 	~Game();
 	//uruchom grê
 	void run();
+
+	int getCurrentPlayer() const;
 private:
 	//czêœæ gry - inicjalizacja
 	void initialization();

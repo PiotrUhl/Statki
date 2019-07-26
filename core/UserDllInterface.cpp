@@ -83,4 +83,9 @@ bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 	return currentPlanner->place(shipSize, x, y, direction);
 }
 
+
+int UserDllInterface::getCurrentPlayer() {
+	return game->getCurrentPlayer();
+}
+
 #pragma endregion
