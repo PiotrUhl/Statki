@@ -2,6 +2,7 @@
 #include "IDllInterface.h"
 #include "IUserInterface.h"
 #include "Board.h"
+#include "Game.h"
 #include "structs.hpp"
 
 class UserDllInterface : public IUserInterface/*, public IDllInterface*/ {
@@ -14,6 +15,7 @@ public:
 	static UserDllInterface& getInstance(); //pobierz instancje klasy
 #pragma endregion
 private:
+	std::unique_ptr<Game> game; //g³ówna klasa gry
 	PlannerLocal* currentPlanner; //uchwyt na obecnie wybrany planer //dla PlannerLocal dla CreatorBoard dla PlayerType::HUMAN
 	IDllInterface::CallBacks callBack; //struktura wskaŸników na callBacki
 public:
@@ -24,7 +26,7 @@ public:
 	void registerBoard(int, int) override;
 	//przekazuje planszê board do utworzenia
 	void makeBoard(PlannerLocal* planner) override;
-	//zwraca wspó³rzêdne strza³u
+	//pobiera wspó³rzêdne strza³u
 	Point getShotCoords() override;
 	//poinformuj interfejs o zmianie na planszy
 	void boardChanged(int, std::list<ShipInfo>, std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE>) override;

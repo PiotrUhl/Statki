@@ -63,19 +63,13 @@ void UserDllInterface::sendShotInfo(int id, Point point, ShotResult result) {
 }
 
 #pragma endregion
-
-#include "Game.h"
-#include "CreatorBoard.h" //debug
 #pragma region IDLLInterface
 
 //uruchamia grê
 void UserDllInterface::runProgram(InitData init, IDllInterface::CallBacks callBacks) {
 	callBack = callBacks;
-	Game game(init, getInstance());
-	game.run();
-	//std::unique_ptr<Board> board = CreatorBoard(10, getInstance()).makeBoard(PlayerType::AI); //debug
-	//registerBoard(1, board->getId()); //debug
-	//boardChanged(board->getId(), board->getList(), board->getShotMap()); //debug
+	game = std::make_unique<Game>(init, getInstance());
+	game->run();
 }
 
 #include "PlannerLocal.h"
