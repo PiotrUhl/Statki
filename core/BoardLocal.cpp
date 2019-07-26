@@ -47,8 +47,8 @@ bool BoardLocal::removeShip(int x, int y) {
 }
 
 //zwraca obraz planszy
-std::unique_ptr<std::unique_ptr<char[]>[]> BoardLocal::getImage() {
-	std::unique_ptr<std::unique_ptr<char[]>[]> image = std::make_unique<std::unique_ptr<char[]>[]>(BOARDSIZE);
+boost::multi_array<char, 2> BoardLocal::getImage() {
+	boost::multi_array<char, 2> image(boost::extents[BOARDSIZE][BOARDSIZE]);
 	for (int i = 0; i < BOARDSIZE; i++) {
 		image[i] = std::make_unique<char[]>(BOARDSIZE);
 	}

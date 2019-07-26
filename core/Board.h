@@ -3,6 +3,7 @@
 #include "structs.hpp" //ShipInfo, ShotResult
 #include <list> //std::list
 #include <array> //std::array
+#include <boost/multi_array.hpp> //boost::multi_array
 
 class Board {
 private:
@@ -27,4 +28,6 @@ public:
 	std::array<std::array<ShotResult, BOARDSIZE>, BOARDSIZE> getShotMap();
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	virtual ShotResult shot(int x, int y) = 0;
+	//zwraca obraz planszy
+	virtual boost::multi_array<char, 2> getImage() = 0;
 };
