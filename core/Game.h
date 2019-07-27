@@ -36,6 +36,8 @@ public:
 	Point getLastShotPoint(int boardId) const;
 	//zwraca wynik ostatniego strza³u w planszê 'boardId'
 	ShotResult getLastShotResult(int boardId) const;
+	//zwraca obraz planszy 'boardId'
+	boost::multi_array<char, 2> getBoardImage(int boardId) const;
 private:
 	//czêœæ gry - inicjalizacja
 	void initialization();
