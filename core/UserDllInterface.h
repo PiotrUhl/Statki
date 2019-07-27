@@ -53,7 +53,7 @@ public:
 	Point getLastShotPoint(int boardId) const;
 	//zwraca wynik ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strza³u
 	ShotResult getLastShotResult(int boardId) const;
-	//zwraca obraz planszy 'boardId'
-	unsigned char* getBoardImage(int boardId) const;
+	//zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
+	void getBoardImage(unsigned char* outbuffer, int boardId) const;
 #pragma endregion
 };

@@ -115,13 +115,10 @@ ShotResult UserDllInterface::getLastShotResult(int boardId) const {
 	return game->getLastShotResult(boardId);
 }
 
-//zwraca obraz planszy 'boardId'; alokuje pamiêæ, wymaga zwolnienia!
-//todo: funkcja do zwalniania pamiêci
-unsigned char* UserDllInterface::getBoardImage(int boardId) const {
-	boost::multi_array<char, 2> src = game->getBoardImage(boardId);
-	unsigned char* dest = new unsigned char[src.size()];
-	memcpy(dest, src.origin(), src.size()*sizeof(unsigned char));
-	return dest;
+//zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
+void UserDllInterface::getBoardImage(unsigned char* outbuffer, int boardId) const {
+	boost::multi_array<char, 2> image = game->getBoardImage(boardId);
+	memcpy(outbuffer, image.origin(), image.size()*sizeof(unsigned char));
 }
 
 #pragma endregion

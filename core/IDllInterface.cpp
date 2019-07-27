@@ -44,8 +44,8 @@ namespace IDllInterface {
 		return UserDllInterface::getInstance().getLastShotResult(boardId);
 	}
 
-	//zwraca obraz planszy 'boardId'
-	unsigned char* getBoardImage(int boardId) {
-		return UserDllInterface::getInstance().getBoardImage(boardId);
+	//zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
+	void getBoardImage(unsigned char* outbuffer, int boardId) {
+		return UserDllInterface::getInstance().getBoardImage(outbuffer, boardId);
 	}
 }

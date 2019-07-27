@@ -42,9 +42,8 @@ namespace IDllInterface {
 		__declspec(dllexport) Point getLastShotPoint(int boardId);
 		//zwraca wynik ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strza³u
 		__declspec(dllexport) ShotResult getLastShotResult(int boardId);
-		//zwraca obraz planszy 'boardId'
-		__declspec(dllexport) unsigned char* getBoardImage(int boardId);
-		//todo: funkcja do zwalniania pamiêci
+		//zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
+		__declspec(dllexport) void getBoardImage(unsigned char* outbuffer, int boardId);
 		//__declspec(dllexport) ShipInfo** getShipList(int boardId);
 		//__declspec(dllexport) unsigned char* getShotMap(int boardId);
 		//__declspec(dllexport) ShipInfo getSquareShip(int boardId, Point point);
