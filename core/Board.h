@@ -29,7 +29,9 @@ public:
 	//zwraca listê statków na planszy
 	std::list<ShipInfo> getList();
 	//zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
-	boost::multi_array<ShotResult, 2> getShotMap();
+	boost::multi_array<ShotResult, 2> getShotMap() const;
+	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+	ShotResult getSquareShot(Point point) const;
 	//zwraca lastShotPoint
 	Point getLastShotPoint() const;
 	//zwraca lastShotResult

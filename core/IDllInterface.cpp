@@ -57,5 +57,9 @@ namespace IDllInterface {
 	void getShotMap(unsigned char* outbuffer, int boardId) {
 		return UserDllInterface::getInstance().getShotMap(outbuffer, boardId);
 	}
+	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+	ShotResult getSquareShot(int boardId, Point point) {
+		return UserDllInterface::getInstance().getSquareShot(boardId, point);
+	}
 
 }

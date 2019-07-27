@@ -59,5 +59,7 @@ public:
 	unsigned char getSquareImage(int boardId, Point point) const;
 	//zapisuje mapê strza³ów planszy 'boardId' do bufora 'outbuffer'
 	void getShotMap(unsigned char* outbuffer, int boardId) const;
+	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+	ShotResult getSquareShot(int boardId, Point point) const;
 #pragma endregion
 };

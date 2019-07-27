@@ -94,6 +94,17 @@ boost::multi_array<ShotResult, 2> Game::getShotMap(int boardId) const {
 		return boost::multi_array<ShotResult, 2>(boost::extents[0][0]);
 	}
 }
+//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+ShotResult Game::getSquareShot(int boardId, Point point) const {
+	switch (boardId) {
+	case 1:
+		return board1->getSquareShot(point);
+	case 2:
+		return board2->getSquareShot(point);
+	default:
+		return ShotResult::NONE; //error!
+	}
+}
 
 #include "CreatorBoard.h"
 //czêœæ gry - inicjalizacja

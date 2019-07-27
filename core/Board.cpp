@@ -29,8 +29,13 @@ std::list<ShipInfo> Board::getList() {
 }
 
 //zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
-boost::multi_array<ShotResult, 2> Board::getShotMap() {
+boost::multi_array<ShotResult, 2> Board::getShotMap() const {
 	return shotMap;
+}
+
+//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+ShotResult Board::getSquareShot(Point point) const {
+	return shotMap[point.y][point.x];
 }
 
 //zwraca lastShotPoint

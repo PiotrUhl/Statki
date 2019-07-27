@@ -132,4 +132,8 @@ void UserDllInterface::getShotMap(unsigned char* outbuffer, int boardId) const {
 		outbuffer[i] = static_cast<unsigned char>(shotMap.origin()[i]);
 	}
 }
+//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+ShotResult UserDllInterface::getSquareShot(int boardId, Point point) const {
+	return game->getSquareShot(boardId, point);
+}
 #pragma endregion

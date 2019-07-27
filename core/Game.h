@@ -42,6 +42,8 @@ public:
 	unsigned char getSquareImage(int boardId, Point point) const;
 	//zwraca mapê strza³ów planszy 'boardId'
 	boost::multi_array<ShotResult, 2> getShotMap(int boardId) const;
+	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+	ShotResult getSquareShot(int boardId, Point point) const;
 private:
 	//czêœæ gry - inicjalizacja
 	void initialization();
