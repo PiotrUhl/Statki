@@ -71,6 +71,18 @@ boost::multi_array<char, 2> Game::getBoardImage(int boardId) const {
 	}
 }
 
+//zwraca mapê strza³ów planszy 'boardId'
+boost::multi_array<ShotResult, 2> Game::getShotMap(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getShotMap();
+	case 2:
+		return board2->getShotMap();
+	default:
+		return boost::multi_array<ShotResult, 2>(boost::extents[0][0]);
+	}
+}
+
 #include "CreatorBoard.h"
 //czêœæ gry - inicjalizacja
 void Game::initialization() {

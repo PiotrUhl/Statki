@@ -120,5 +120,12 @@ void UserDllInterface::getBoardImage(unsigned char* outbuffer, int boardId) cons
 	boost::multi_array<char, 2> image = game->getBoardImage(boardId);
 	memcpy(outbuffer, image.origin(), image.size()*sizeof(unsigned char));
 }
+//zapisuje mapê strza³ów planszy 'boardId' do bufora 'outbuffer'
+void UserDllInterface::getShotMap(unsigned char* outbuffer, int boardId) const {
+	boost::multi_array<ShotResult, 2> shotMap = game->getShotMap(boardId);
+	for (int i = 0; i < BOARDSIZE*BOARDSIZE; i++) {
+		outbuffer[i] = static_cast<unsigned char>(shotMap.origin()[i]);
+	}
+}
 
 #pragma endregion
