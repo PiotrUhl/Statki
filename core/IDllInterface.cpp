@@ -48,9 +48,14 @@ namespace IDllInterface {
 	void getBoardImage(unsigned char* outbuffer, int boardId) {
 		return UserDllInterface::getInstance().getBoardImage(outbuffer, boardId);
 	}
+	//zwraca obraz punktu 'point' na planszy 'boardId'
+	unsigned char getSquareImage(int boardId, Point point) {
+		return UserDllInterface::getInstance().getSquareImage(boardId, point);
+	}
 
 	//zapisuje mapê strza³ów planszy 'boardId' do bufora 'outbuffer'
 	void getShotMap(unsigned char* outbuffer, int boardId) {
 		return UserDllInterface::getInstance().getShotMap(outbuffer, boardId);
 	}
+
 }

@@ -71,6 +71,18 @@ boost::multi_array<char, 2> Game::getBoardImage(int boardId) const {
 	}
 }
 
+//zwraca obraz punktu 'point' na planszy 'boardId'
+unsigned char Game::getSquareImage(int boardId, Point point) const {
+	switch (boardId) {
+	case 1:
+		return board1->getSquareImage(point);
+	case 2:
+		return board2->getSquareImage(point);
+	default:
+		return 255;
+	}
+}
+
 //zwraca mapê strza³ów planszy 'boardId'
 boost::multi_array<ShotResult, 2> Game::getShotMap(int boardId) const {
 	switch (boardId) {

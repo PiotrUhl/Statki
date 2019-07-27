@@ -120,6 +120,11 @@ void UserDllInterface::getBoardImage(unsigned char* outbuffer, int boardId) cons
 	boost::multi_array<char, 2> image = game->getBoardImage(boardId);
 	memcpy(outbuffer, image.origin(), image.size()*sizeof(unsigned char));
 }
+//zwraca obraz punktu 'point' na planszy 'boardId'
+unsigned char UserDllInterface::getSquareImage(int boardId, Point point) const {
+	return game->getSquareImage(boardId, point);
+}
+
 //zapisuje mapê strza³ów planszy 'boardId' do bufora 'outbuffer'
 void UserDllInterface::getShotMap(unsigned char* outbuffer, int boardId) const {
 	boost::multi_array<ShotResult, 2> shotMap = game->getShotMap(boardId);
@@ -127,5 +132,4 @@ void UserDllInterface::getShotMap(unsigned char* outbuffer, int boardId) const {
 		outbuffer[i] = static_cast<unsigned char>(shotMap.origin()[i]);
 	}
 }
-
 #pragma endregion

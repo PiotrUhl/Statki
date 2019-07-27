@@ -17,7 +17,9 @@ public:
 	//usuwa statkek z pola ("x", "y")
 	bool removeShip(int x, int y);
 	//zwraca obraz planszy
-	boost::multi_array<char, 2> getImage();
+	boost::multi_array<char, 2> getImage() override;
+	//zwraca obraz pola 'point'
+	unsigned char getSquareImage(Point point) override;
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	ShotResult shot(int x, int y) override;
 	//usuwa ca³¹ zawartoœæ planszy

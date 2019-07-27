@@ -38,6 +38,8 @@ public:
 	ShotResult getLastShotResult(int boardId) const;
 	//zwraca obraz planszy 'boardId'
 	boost::multi_array<char, 2> getBoardImage(int boardId) const;
+	//zwraca obraz punktu 'point' na planszy 'boardId'
+	unsigned char getSquareImage(int boardId, Point point) const;
 	//zwraca mapê strza³ów planszy 'boardId'
 	boost::multi_array<ShotResult, 2> getShotMap(int boardId) const;
 private:

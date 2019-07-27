@@ -55,6 +55,8 @@ public:
 	ShotResult getLastShotResult(int boardId) const;
 	//zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
 	void getBoardImage(unsigned char* outbuffer, int boardId) const;
+	//zwraca obraz punktu 'point' na planszy 'boardId'
+	unsigned char getSquareImage(int boardId, Point point) const;
 	//zapisuje mapê strza³ów planszy 'boardId' do bufora 'outbuffer'
 	void getShotMap(unsigned char* outbuffer, int boardId) const;
 #pragma endregion

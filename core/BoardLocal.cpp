@@ -57,6 +57,11 @@ boost::multi_array<char, 2> BoardLocal::getImage() {
 	return image;
 }
 
+//zwraca obraz pola 'point'
+unsigned char BoardLocal::getSquareImage(Point point) {
+	return fillImageSquare(point.x, point.y);
+}
+//todo: scaliæ getSquareImage i fillImageSquare
 //zwraca obraz pola ("x", "y")
 char BoardLocal::fillImageSquare(int x, int y) {
 	if (board[y][x] == nullptr) { //pole puste
