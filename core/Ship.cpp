@@ -47,3 +47,14 @@ bool Ship::checkSunk() {
 	else
 		return true;
 }
+
+//zwraca strukturê z informacjami o statku
+ShipInfo Ship::getShipInfo() const {
+	ShipInfo ret;
+	ret.size = size;
+	ret.x = startingPoint.x;
+	ret.y = startingPoint.y;;
+	ret.direction = direction;
+	ret.sunk = sunk;
+	return ret;
+}

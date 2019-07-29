@@ -66,19 +66,13 @@ void UserDllInterface::sendShotInfo(int id, Point point, ShotResult result) {
 }
 
 #pragma endregion
-
-#include "Game.h"
-#include "CreatorBoard.h" //debug
 #pragma region IDLLInterface
 
 //uruchamia grê
 void UserDllInterface::runProgram(InitData init, IDllInterface::CallBacks callBacks) {
 	callBack = callBacks;
-	Game game(init, getInstance());
-	game.run();
-	//std::unique_ptr<Board> board = CreatorBoard(10, getInstance()).makeBoard(PlayerType::AI); //debug
-	//registerBoard(1, board->getId()); //debug
-	//boardChanged(board->getId(), board->getList(), board->getShotMap()); //debug
+	game = std::make_unique<Game>(init, getInstance());
+	game->run();
 }
 
 #include "PlannerLocal.h"
@@ -92,4 +86,73 @@ bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 	return currentPlanner->place(shipSize, x, y, direction);
 }
 
+//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
+int UserDllInterface::getCurrentPlayer() const {
+	return game->getCurrentPlayer();
+}
+
+//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
+PlayerType UserDllInterface::getPlayerType(int playerId) const {
+	return game->getPlayerType(playerId);
+}
+
+//zwraca id planszy w któr¹ strzelono jako ostatni¹ (b¹dŸ 0 je¿eli nie strzelano)
+int UserDllInterface::getLastShotBoard() const {
+	return game->getLastShotBoard();
+}
+
+//zwraca miejsce ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca miejsce ostatniego strza³u
+Point UserDllInterface::getLastShotPoint(int boardId) const {
+	if (boardId == 0)
+		boardId = getLastShotBoard();
+	return game->getLastShotPoint(boardId);
+}
+
+//zwraca wynik ostatniego strza³u w planszê 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strza³u
+ShotResult UserDllInterface::getLastShotResult(int boardId) const {
+	if (boardId == 0)
+		boardId = getLastShotBoard();
+	return game->getLastShotResult(boardId);
+}
+
+//zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
+void UserDllInterface::getBoardImage(unsigned char* outbuffer, int boardId) const {
+	boost::multi_array<char, 2> image = game->getBoardImage(boardId);
+	memcpy(outbuffer, image.origin(), image.size()*sizeof(unsigned char));
+}
+//zwraca obraz punktu 'point' na planszy 'boardId'
+unsigned char UserDllInterface::getSquareImage(int boardId, Point point) const {
+	return game->getSquareImage(boardId, point);
+}
+
+//zapisuje mapê strza³ów planszy 'boardId' do bufora 'outbuffer'
+void UserDllInterface::getShotMap(unsigned char* outbuffer, int boardId) const {
+	boost::multi_array<ShotResult, 2> shotMap = game->getShotMap(boardId);
+	for (int i = 0; i < BOARDSIZE*BOARDSIZE; i++) {
+		outbuffer[i] = static_cast<unsigned char>(shotMap.origin()[i]);
+	}
+}
+//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+ShotResult UserDllInterface::getSquareShot(int boardId, Point point) const {
+	return game->getSquareShot(boardId, point);
+}
+
+//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
+ShipInfo UserDllInterface::getSquareShip(int boardId, Point point) const {
+	return game->getSquareShip(boardId, point);
+}
+//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
+void UserDllInterface::getShipList(ShipInfo* outbuffer, int boardId) const {
+	std::list<ShipInfo> shipList = game->getShipList(boardId);
+	auto iter = shipList.begin(); //iterator
+	for (size_t i = 0; i < shipList.size(); i++) {
+		std::memcpy(&outbuffer[0], &*iter, sizeof(ShipInfo));
+		iter++;
+	}
+}
+
+//zwraca liczbê statków na planszy 'boardId'
+int UserDllInterface::getShipCount(int boardId) const {
+	return game->getShipCount(boardId);
+}
 #pragma endregion

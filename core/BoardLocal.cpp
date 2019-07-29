@@ -46,6 +46,11 @@ bool BoardLocal::removeShip(int x, int y) {
 	return board[y][x].removeShip();
 }
 
+//zwraca informacje o statku le¿¹cym na polu 'point'
+ShipInfo BoardLocal::getSquareShip(Point point) const {
+	return board[point.y][point.x].getShipInfo();
+}
+
 //zwraca obraz planszy
 boost::multi_array<char, 2> BoardLocal::getImage() {
 	boost::multi_array<char, 2> image(boost::extents[BOARDSIZE][BOARDSIZE]);
@@ -57,6 +62,11 @@ boost::multi_array<char, 2> BoardLocal::getImage() {
 	return image;
 }
 
+//zwraca obraz pola 'point'
+unsigned char BoardLocal::getSquareImage(Point point) {
+	return fillImageSquare(point.x, point.y);
+}
+//todo: scaliæ getSquareImage i fillImageSquare
 //zwraca obraz pola ("x", "y")
 char BoardLocal::fillImageSquare(int x, int y) {
 	if (board[y][x] == nullptr) { //pole puste
@@ -104,9 +114,11 @@ char BoardLocal::findDirection(int x, int y) {
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 ShotResult BoardLocal::shot(int x, int y) {
+	lastShotPoint = Point{x, y};
 	shotMap[y][x] = board[y][x].shot(); //strzel w dane pole
 	if (shotMap[y][x] == ShotResult::SUNK)
 		unsunkShips--;
+	lastShotResult = shotMap[y][x];
 	return shotMap[y][x];
 }
 

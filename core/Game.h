@@ -15,6 +15,9 @@ private:
 	std::unique_ptr<Player> player1; //gracz nr 1
 	std::unique_ptr<Player> player2; //gracz nr 2
 	IUserInterface& mainInterface; //interfejs do komunikacji z graczem
+
+	int currentPlayer; //gracz obecnie wykonuj¹cy ruch (0 dla pozosta³ych czêœci gry)
+	int lastShotBoard; //plansza w któr¹ strzelano jako ostatni¹
 public:
 	//konstruktor
 	Game(InitData, IUserInterface&);
@@ -22,6 +25,31 @@ public:
 	~Game();
 	//uruchom grê
 	void run();
+
+	//zwraca currentPlayer
+	int getCurrentPlayer() const;
+	//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
+	PlayerType getPlayerType(int playerId) const;
+	//zwraca lastShotBoard
+	int getLastShotBoard() const;
+	//zwraca miejsce ostatniego strza³u w planszê 'boardId'; (BOARDSIZE, BOARDSIZE) w razie b³êdu
+	Point getLastShotPoint(int boardId) const;
+	//zwraca wynik ostatniego strza³u w planszê 'boardId'
+	ShotResult getLastShotResult(int boardId) const;
+	//zwraca obraz planszy 'boardId'
+	boost::multi_array<char, 2> getBoardImage(int boardId) const;
+	//zwraca obraz punktu 'point' na planszy 'boardId'
+	unsigned char getSquareImage(int boardId, Point point) const;
+	//zwraca mapê strza³ów planszy 'boardId'
+	boost::multi_array<ShotResult, 2> getShotMap(int boardId) const;
+	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+	ShotResult getSquareShot(int boardId, Point point) const;
+	//zwraca listê informacji o wszystkich statkach na planszy 'boardId'
+	std::list<ShipInfo> getShipList(int boardId) const;
+	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
+	ShipInfo getSquareShip(int boardId, Point point) const;
+	//zwraca liczbê statków na planszy 'boardId'
+	int getShipCount(int boardId) const;
 private:
 	//czêœæ gry - inicjalizacja
 	void initialization();

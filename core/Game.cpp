@@ -1,7 +1,7 @@
 #include "Game.h"
 
 //konstruktor
-Game::Game(InitData _init, IUserInterface& _mainInterface) : player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface) {}
+Game::Game(InitData _init, IUserInterface& _mainInterface) : player1Type(_init.player1type), player2Type(_init.player2type), mainInterface(_mainInterface), currentPlayer(0), lastShotBoard(0) {}
 
 //destruktor
 Game::~Game() {}
@@ -13,8 +13,136 @@ void Game::run() {
 	ending(winner);
 }
 
-#include "CreatorBoard.h"
+//zwraca currentPlayer
+int Game::getCurrentPlayer() const {
+	return currentPlayer;
+}
 
+//zwraca lastShotBoard
+int Game::getLastShotBoard() const {
+	return lastShotBoard;
+}
+
+//zwraca miejsce ostatniego strza³u w planszê 'boardId'; (BOARDSIZE, BOARDSIZE) w razie b³êdu
+Point Game::getLastShotPoint(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getLastShotPoint();
+	case 2:
+		return board2->getLastShotPoint();
+	default:
+		return Point{ BOARDSIZE, BOARDSIZE }; //error!
+	}
+}
+
+//zwraca wynik ostatniego strza³u w planszê 'boardId'
+ShotResult Game::getLastShotResult(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getLastShotResult();
+	case 2:
+		return board2->getLastShotResult();
+	default:
+		return ShotResult::NONE; //error!
+	}
+}
+
+//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
+PlayerType Game::getPlayerType(int playerId) const {
+	switch (playerId) {
+	case 1:
+		return player1Type;
+	case 2:
+		return player2Type;
+	default:
+		return PlayerType::NONE; //error!
+	}
+}
+
+//zwraca obraz planszy 'boardId'
+boost::multi_array<char, 2> Game::getBoardImage(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getImage();
+	case 2:
+		return board2->getImage();
+	default:
+		return boost::multi_array<char, 2>(boost::extents[0][0]); //error!
+	}
+}
+
+//zwraca obraz punktu 'point' na planszy 'boardId'
+unsigned char Game::getSquareImage(int boardId, Point point) const {
+	switch (boardId) {
+	case 1:
+		return board1->getSquareImage(point);
+	case 2:
+		return board2->getSquareImage(point);
+	default:
+		return 255; //error!
+	}
+}
+
+//zwraca mapê strza³ów planszy 'boardId'
+boost::multi_array<ShotResult, 2> Game::getShotMap(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getShotMap();
+	case 2:
+		return board2->getShotMap();
+	default:
+		return boost::multi_array<ShotResult, 2>(boost::extents[0][0]); //error!
+	}
+}
+//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+ShotResult Game::getSquareShot(int boardId, Point point) const {
+	switch (boardId) {
+	case 1:
+		return board1->getSquareShot(point);
+	case 2:
+		return board2->getSquareShot(point);
+	default:
+		return ShotResult::NONE; //error!
+	}
+}
+
+//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
+ShipInfo Game::getSquareShip(int boardId, Point point) const {
+	switch (boardId) {
+	case 1:
+		return board1->getSquareShip(point);
+	case 2:
+		return board2->getSquareShip(point);
+	default:
+		return ShipInfo{ 0, 0, 0, 0, 0 }; //error!
+	}
+}
+
+//zwraca listê informacji o wszystkich statkach na planszy 'boardId'
+std::list<ShipInfo> Game::getShipList(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getShipList();
+	case 2:
+		return board2->getShipList();
+	default:
+		return std::list<ShipInfo>(); //error!
+	}
+}
+
+//zwraca liczbê statków na planszy 'boardId'
+int Game::getShipCount(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getShipCount();
+	case 2:
+		return board2->getShipCount();
+	default:
+		return -1; //error!
+	}
+}
+
+#include "CreatorBoard.h"
 //czêœæ gry - inicjalizacja
 void Game::initialization() {
 	//Tworzenie plansz graczy
@@ -43,9 +171,13 @@ char Game::loop() {
 	char winner = 0;
 	//todo: losowy wybór rozpoczynaj¹cego gracza
 	while (winner == 0) {
+		currentPlayer = 1;
 		player1->move();
+		lastShotBoard = 2;
 		mainInterface.sendShotInfo(player1->getOtherBoardId(), player1->getLastShotPoint(), player1->getLastShotResult());
+		currentPlayer = 2;
 		player2->move();
+		lastShotBoard = 1;
 		mainInterface.sendShotInfo(player2->getOtherBoardId(), player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
@@ -59,6 +191,7 @@ char Game::loop() {
 			winner = 2; //wygrywa gracz 2
 		}
 	}
+	currentPlayer = 0;
 	return winner;
 }
 

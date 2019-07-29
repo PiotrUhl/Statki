@@ -88,3 +88,11 @@ bool Square::getSunk() const {
 	else
 		return ship->getSunk();
 }
+
+//zwraca informacje o statku le¿¹cym na polu
+ShipInfo Square::getShipInfo() const {
+	if (ship == nullptr)
+		return ShipInfo{0,0,0,0,0};
+	else
+		return ship->getShipInfo();
+}
