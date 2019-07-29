@@ -30,7 +30,6 @@ namespace IDllInterface {
 		//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 		__declspec(dllexport) bool placeShip(int shipSize, int x, int y, char direction);
 
-		//todo: interfejs wyjœciowy
 		//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
 		__declspec(dllexport) int getCurrentPlayer();
 		//zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza

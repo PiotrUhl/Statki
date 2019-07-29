@@ -34,8 +34,8 @@ std::unique_ptr<Board> CreatorBoard::makeForAI() {
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForRemote() {
-	//todo: inicjalizacja planszy zdalnej
 #ifdef NETMODULE
+	//toadd: inicjalizacja planszy zdalnej
 	return std::make_unique<BoardRemote>();
 #else
 	return nullptr;
