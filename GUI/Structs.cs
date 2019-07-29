@@ -41,9 +41,9 @@ namespace GUI {
 		public PlayerType player2type;
 	};
 
-	public enum ShotResult { NONE = 0, MISS, HIT, SUNK } //informacje o wyniku strzału
+	public enum ShotResult : byte { NONE = 0, MISS, HIT, SUNK } //informacje o wyniku strzału
 
-	public enum PlayerType { NONE = 0, HUMAN, AI, REMOTE } //typ gracza
+	public enum PlayerType : byte { NONE = 0, HUMAN, AI, REMOTE } //typ gracza
 
-	public enum Mode { MENU = 0, PLANNER, GAME, ENDING } //aktywny tryb (część gry)
+	public enum Mode : byte { MENU = 0, PLANNER, GAME, ENDING } //aktywny tryb (część gry)
 }

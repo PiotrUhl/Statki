@@ -1,8 +1,8 @@
 #pragma once
 
-enum class PlayerType { NONE = 0, HUMAN, AI, REMOTE };
+enum class PlayerType : char { NONE = 0, HUMAN, AI, REMOTE };
 
-enum class ShotResult { NONE = 0, MISS, HIT, SUNK };
+enum class ShotResult : char { NONE = 0, MISS, HIT, SUNK };
 
 struct Point {
 	int x;
