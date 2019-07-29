@@ -11,7 +11,7 @@ private:
 	static int lastId; //najwy¿sze id planszy
 	int id; //numer identyfikacyjny planszy
 protected:
-	int shipCount; //liczba statków na planszy //todo: zaimplementowaæ obs³ugê
+	int shipCount; //liczba statków na planszy
 	int unsunkShips; //liczba niezatopnionych statków
 	boost::multi_array<ShotResult, 2> shotMap; //mapa strza³ów
 	Point lastShotPoint; //miejsce ostatniego strza³u w planszê; (BOARDSIZE, BOARDSIZE) je¿eli nie strzelano

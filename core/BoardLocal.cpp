@@ -31,18 +31,23 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 	else
 		throw (std::invalid_argument("Incorrect ship direction"));
 	unsunkShips++;
+	shipCount++;
 	list.push_back(ShipInfo{ shipSize, x, y, direction, false });
 	return true;
 }
 
 //usuwa statkek z pola (x, y)
 bool BoardLocal::removeShip(int x, int y) {
+	if (board[y][x].getSunk == false) {
+		unsunkShips--;
+	}
 	list.remove_if([x, y](ShipInfo v) { //usuñ statek z listy
 		if (v.x == x && v.y == y)
 			return true;
 		else
 			return false;
 	});
+	shipCount--;
 	return board[y][x].removeShip();
 }
 
