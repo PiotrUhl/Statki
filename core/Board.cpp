@@ -23,11 +23,6 @@ bool Board::getUnsunkShips() {
 	return unsunkShips;
 }
 
-//zwraca listê statków na planszy
-std::list<ShipInfo> Board::getList() {
-	return list;
-}
-
 //zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
 boost::multi_array<ShotResult, 2> Board::getShotMap() const {
 	return shotMap;
@@ -46,11 +41,6 @@ Point Board::getLastShotPoint() const {
 //zwraca lastShotResult
 ShotResult Board::getLastShotResult() const {
 	return lastShotResult;
-}
-
-//zwraca listê informacji o wszystkich statkach na planszy //todo: scaliæ z getList()
-std::list<ShipInfo> Board::getShipList() const {
-	return list;
 }
 
 //zwraca liczbê statków na planszy 'boardId'

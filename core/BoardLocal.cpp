@@ -122,6 +122,11 @@ ShotResult BoardLocal::shot(int x, int y) {
 	return shotMap[y][x];
 }
 
+//zwraca listê informacji o wszystkich statkach na planszy
+std::list<ShipInfo> BoardLocal::getShipList() const {
+	return list;
+}
+
 //usuwa ca³¹ zawartoœæ planszy
 void BoardLocal::clear() {
 	for (int i = 0; i < BOARDSIZE; i++) {

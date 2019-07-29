@@ -169,7 +169,7 @@ void Game::initialization() {
 //czêœæ gry - g³ówna pêtla
 char Game::loop() {
 	char winner = 0;
-	//todo: losowy wybór rozpoczynaj¹cego gracza
+	//toadd: losowy wybór rozpoczynaj¹cego gracza
 	while (winner == 0) {
 		currentPlayer = 1;
 		player1->move();

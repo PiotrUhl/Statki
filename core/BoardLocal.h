@@ -5,6 +5,7 @@
 class BoardLocal : public Board {
 private:
 	boost::multi_array<Square, 2> board; //plansza
+	std::list<ShipInfo> list; //lista statków
 public:
 	//konstruktor
 	BoardLocal();
@@ -23,7 +24,7 @@ public:
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	ShotResult shot(int x, int y) override;
 	//zwraca listê informacji o wszystkich statkach na planszy
-	//std::list<ShipInfo> getShipList() const; //zaimplementowaæ po przeniesieniu listy statków do klas potomnych
+	std::list<ShipInfo> getShipList() const; //zaimplementowaæ po przeniesieniu listy statków do klas potomnych
 	//zwraca informacje o statku le¿¹cym na polu 'point'
 	ShipInfo getSquareShip(Point point) const override;
 	//usuwa ca³¹ zawartoœæ planszy
