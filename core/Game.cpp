@@ -106,6 +106,18 @@ ShotResult Game::getSquareShot(int boardId, Point point) const {
 	}
 }
 
+//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
+ShipInfo Game::getSquareShip(int boardId, Point point) const {
+	switch (boardId) {
+	case 1:
+		return board1->getSquareShip(point);
+	case 2:
+		return board2->getSquareShip(point);
+	default:
+		return ShipInfo{ 0, 0, 0, 0, 0 }; //error!
+	}
+}
+
 #include "CreatorBoard.h"
 //czêœæ gry - inicjalizacja
 void Game::initialization() {

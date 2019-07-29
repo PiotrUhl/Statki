@@ -136,4 +136,9 @@ void UserDllInterface::getShotMap(unsigned char* outbuffer, int boardId) const {
 ShotResult UserDllInterface::getSquareShot(int boardId, Point point) const {
 	return game->getSquareShot(boardId, point);
 }
+
+//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
+ShipInfo UserDllInterface::getSquareShip(int boardId, Point point) const {
+	return game->getSquareShip(boardId, point);
+}
 #pragma endregion

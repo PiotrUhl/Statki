@@ -46,6 +46,11 @@ bool BoardLocal::removeShip(int x, int y) {
 	return board[y][x].removeShip();
 }
 
+//zwraca informacje o statku le¿¹cym na polu 'point'
+ShipInfo BoardLocal::getSquareShip(Point point) const {
+	return board[point.y][point.x].getShipInfo();
+}
+
 //zwraca obraz planszy
 boost::multi_array<char, 2> BoardLocal::getImage() {
 	boost::multi_array<char, 2> image(boost::extents[BOARDSIZE][BOARDSIZE]);

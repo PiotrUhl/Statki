@@ -42,4 +42,6 @@ public:
 	virtual boost::multi_array<char, 2> getImage() = 0; //todo: przerobiæ na unsigned char
 	//zwraca obraz pola 'point'
 	virtual unsigned char getSquareImage(Point point) = 0;
+	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
+	virtual ShipInfo getSquareShip(Point point) const = 0;
 };

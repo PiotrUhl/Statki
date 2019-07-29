@@ -22,6 +22,8 @@ public:
 	unsigned char getSquareImage(Point point) override;
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	ShotResult shot(int x, int y) override;
+	//zwraca informacje o statku le¿¹cym na polu 'point'
+	ShipInfo getSquareShip(Point point) const override;
 	//usuwa ca³¹ zawartoœæ planszy
 	void clear();
 private:
