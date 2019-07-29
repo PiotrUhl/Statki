@@ -31,7 +31,7 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 	else
 		throw (std::invalid_argument("Incorrect ship direction"));
 	unsunkShips++;
-	list.push_back(ShipInfo(shipSize, x, y, direction, false));
+	list.push_back(ShipInfo{ shipSize, x, y, direction, false });
 	return true;
 }
 
