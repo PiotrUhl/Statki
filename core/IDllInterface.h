@@ -1,5 +1,4 @@
 #pragma once
-#include "Point.hpp"
 #include "structs.hpp"
 #include "Board.h"
 

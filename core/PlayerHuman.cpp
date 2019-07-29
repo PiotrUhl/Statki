@@ -1,5 +1,4 @@
 #include "PlayerHuman.h"
-#include "Point.hpp"
 
 //konstruktor
 PlayerHuman::PlayerHuman(IUserInterface& _userInterface, Board& _myBoard, Board& _otherBoard) : Player(_myBoard, _otherBoard), userInterface(_userInterface) {}

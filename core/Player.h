@@ -1,7 +1,6 @@
 #pragma once
 #include "Board.h" //Board
-#include "structs.hpp" //ShotResult
-#include "Point.hpp"
+#include "structs.hpp" //ShotResult, Point
 #include <memory> //std::unique_ptr
 
 class Player {

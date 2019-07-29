@@ -1,6 +1,5 @@
 #pragma once
 #include "PlannerLocal.h"
-#include "point.hpp"
 #include <bitset>
 
 class PlannerLocalAI : private PlannerLocal {

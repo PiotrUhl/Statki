@@ -1,6 +1,5 @@
 #pragma once
-#include "Point.hpp" //Point
-#include "structs.hpp" //ShipInfo
+#include "structs.hpp" //ShipInfo, Point
 #include <list> //std::list
 
 class PlannerLocal; //PlannerLocal

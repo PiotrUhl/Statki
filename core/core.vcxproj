@@ -164,7 +164,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="BoardRemote.h" />
     <ClInclude Include="PlayerRemote.h" />
-    <ClInclude Include="Point.hpp" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="structs.hpp" />

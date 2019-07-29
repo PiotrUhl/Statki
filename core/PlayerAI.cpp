@@ -31,7 +31,13 @@ void PlayerAI::move() {
 	else {
 		Point point = chooseFinish();
 		ShotResult result = otherBoard.shot(point.x, point.y);
-		finishList.remove(point); //usuñ punkt z listy
+		//finishList.remove(point); //usuñ punkt z listy //Point nie ma przeci¹¿onego operatora == => u¿yto .remove_if
+		finishList.remove_if([point](Point v) {
+			if (v.x == point.x && v.y == point.y)
+				return true;
+			else
+				return false;
+		}); //usuñ punkt z listy
 		if (result == ShotResult::SUNK) {
 			finishMode = false;
 			finishList.clear();

@@ -1,7 +1,6 @@
 #pragma once
 #include "Ship.h"
-#include "Point.hpp"
-#include "structs.hpp" //ShipInfo, ShotResult
+#include "structs.hpp" //ShipInfo, ShotResult, Point
 #include <list> //std::list
 #pragma warning(push, 0)
 #include <boost/multi_array.hpp> //boost::multi_array

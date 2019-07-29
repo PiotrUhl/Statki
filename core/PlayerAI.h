@@ -1,6 +1,5 @@
 #pragma once
 #include "Player.h"
-#include "Point.hpp"
 #include <list> //std::list
 
 class PlayerAI : public Player {

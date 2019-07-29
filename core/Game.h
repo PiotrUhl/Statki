@@ -2,8 +2,7 @@
 #include "Player.h" //Player
 //#include "Board.h" //Board
 #include "IUserInterface.h" //IUserInterface
-#include "structs.hpp" //PlayerType, ShotResut
-#include "Point.hpp" //Point
+#include "structs.hpp" //PlayerType, ShotResut, Point
 #include <memory> //std::unique_ptr
 
 class Game {

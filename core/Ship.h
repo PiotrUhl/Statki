@@ -1,6 +1,5 @@
 #pragma once
 #include "structs.hpp"
-#include "Point.hpp"
 #include <vector> //std::vector
 
 class Square;
