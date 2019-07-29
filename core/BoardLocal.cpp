@@ -17,7 +17,7 @@ boost::multi_array<Square, 2>::array_view<1>::type BoardLocal::operator[](size_t
 bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 	if ((x < 0) || (y < 0) || (direction == 'H' && x + shipSize - 1 >= BOARDSIZE) || (direction == 'V' && y + shipSize - 1 >= BOARDSIZE)) //próba umieszczenia statku poza plansz¹
 		return false;
-	std::shared_ptr<Ship> newShip = std::make_shared<Ship>(shipSize);
+	std::shared_ptr<Ship> newShip = std::make_shared<Ship>(shipSize, Point{x, y}, direction);
 	if (direction == 'H')
 		for (int i = 0; i < shipSize; i++) {
 			board[y][x + i].set(newShip);

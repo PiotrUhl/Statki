@@ -10,12 +10,12 @@ private:
 	const int size; //rozmiar statku (2..5)
 	std::vector<Square*> location; //po³o¿enie statku (pola na których le¿y)
 	int damage; //iloœæ trafieñ przyjêtych przez statek
-	Point startingPoint; //undone: punkt pocz¹tkowy statku
-	char direction; //undone: kierunek statku
+	Point startingPoint; //punkt pocz¹tkowy statku (lewy górny)
+	char direction; //kierunek po³o¿enia statku {H, V}
 	bool sunk; //czy statek jest zatopiony
 public:
 	//konstruktor
-	Ship(int _size);
+	Ship(int _size, Point _point, char _direction);
 	//destruktor
 	~Ship();
 	//trafiono w statek; zwraca czy zatopiono statek
