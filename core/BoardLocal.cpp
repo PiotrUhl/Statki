@@ -52,8 +52,8 @@ ShipInfo BoardLocal::getSquareShip(Point point) const {
 }
 
 //zwraca obraz planszy
-boost::multi_array<char, 2> BoardLocal::getImage() {
-	boost::multi_array<char, 2> image(boost::extents[BOARDSIZE][BOARDSIZE]);
+boost::multi_array<unsigned char, 2> BoardLocal::getImage() {
+	boost::multi_array<unsigned char, 2> image(boost::extents[BOARDSIZE][BOARDSIZE]);
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
 			image[i][j] = fillImageSquare(j, i);

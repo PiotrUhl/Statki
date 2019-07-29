@@ -40,7 +40,7 @@ bool PlannerLocal::place(int shipSize, int x, int y, char direction) {
 }
 
 //zwraca obraz tworzonej planszy
-boost::multi_array<char, 2> PlannerLocal::getImage() {
+boost::multi_array<unsigned char, 2> PlannerLocal::getImage() {
 	return board.getImage();
 }
 

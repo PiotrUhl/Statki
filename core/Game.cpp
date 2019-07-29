@@ -60,14 +60,14 @@ PlayerType Game::getPlayerType(int playerId) const {
 }
 
 //zwraca obraz planszy 'boardId'
-boost::multi_array<char, 2> Game::getBoardImage(int boardId) const {
+boost::multi_array<unsigned char, 2> Game::getBoardImage(int boardId) const {
 	switch (boardId) {
 	case 1:
 		return board1->getImage();
 	case 2:
 		return board2->getImage();
 	default:
-		return boost::multi_array<char, 2>(boost::extents[0][0]); //error!
+		return boost::multi_array<unsigned char, 2>(boost::extents[0][0]); //error!
 	}
 }
 
