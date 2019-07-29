@@ -52,3 +52,8 @@ ShotResult Board::getLastShotResult() const {
 std::list<ShipInfo> Board::getShipList() const {
 	return list;
 }
+
+//zwraca liczbê statków na planszy 'boardId'
+int Board::getShipCount() const {
+	return shipCount;
+}

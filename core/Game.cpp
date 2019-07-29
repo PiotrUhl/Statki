@@ -130,6 +130,18 @@ std::list<ShipInfo> Game::getShipList(int boardId) const {
 	}
 }
 
+//zwraca liczbê statków na planszy 'boardId'
+int Game::getShipCount(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getShipCount();
+	case 2:
+		return board2->getShipCount();
+	default:
+		return -1; //error!
+	}
+}
+
 #include "CreatorBoard.h"
 //czêœæ gry - inicjalizacja
 void Game::initialization() {

@@ -54,5 +54,7 @@ namespace IDllInterface {
 		__declspec(dllexport) ShipInfo getSquareShip(int boardId, Point point);
 		//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
 		__declspec(dllexport) void getShipList(ShipInfo* outbuffer, int boardId);
+		//zwraca liczbê statków na planszy 'boardId'
+		__declspec(dllexport) int getShipCount(int boardId);
 	}
 }

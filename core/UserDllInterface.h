@@ -65,5 +65,7 @@ public:
 	ShipInfo getSquareShip(int boardId, Point point) const;
 	//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
 	void getShipList(ShipInfo* outbuffer, int boardId) const;
+	//zwraca liczbê statków na planszy 'boardId'
+	int getShipCount(int boardId) const;
 #pragma endregion
 };

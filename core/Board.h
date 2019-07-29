@@ -12,6 +12,7 @@ private:
 	static int lastId; //najwy¿sze id planszy
 	int id; //numer identyfikacyjny planszy
 protected:
+	int shipCount; //liczba statków na planszy //todo: zaimplementowaæ obs³ugê
 	int unsunkShips; //liczba niezatopnionych statków
 	std::list<ShipInfo> list; //lista statków //todo: przenieœæ do klas potomnych
 	boost::multi_array<ShotResult, 2> shotMap; //mapa strza³ów
@@ -46,4 +47,6 @@ public:
 	/*virtual */std::list<ShipInfo> getShipList() const/* = 0*/; //odkomentowaæ po przeniesieniu listy statków do klas potomnych
 	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
 	virtual ShipInfo getSquareShip(Point point) const = 0;
+	//zwraca liczbê statków na planszy 'boardId'
+	int getShipCount() const;
 };

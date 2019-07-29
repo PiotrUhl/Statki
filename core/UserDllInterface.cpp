@@ -150,4 +150,9 @@ void UserDllInterface::getShipList(ShipInfo* outbuffer, int boardId) const {
 		iter++;
 	}
 }
+
+//zwraca liczbê statków na planszy 'boardId'
+int UserDllInterface::getShipCount(int boardId) const {
+	return game->getShipCount(boardId);
+}
 #pragma endregion

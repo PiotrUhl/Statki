@@ -67,7 +67,11 @@ namespace IDllInterface {
 		return UserDllInterface::getInstance().getSquareShip(boardId, point);
 	}
 	//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
-	__declspec(dllexport) void getShipList(ShipInfo* outbuffer, int boardId) {
+	void getShipList(ShipInfo* outbuffer, int boardId) {
 		UserDllInterface::getInstance().getShipList(outbuffer, boardId);
+	}
+	//zwraca liczbê statków na planszy 'boardId'
+	int getShipCount(int boardId) {
+		return UserDllInterface::getInstance().getShipCount(boardId);
 	}
 }

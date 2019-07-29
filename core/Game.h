@@ -48,6 +48,8 @@ public:
 	std::list<ShipInfo> getShipList(int boardId) const;
 	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
 	ShipInfo getSquareShip(int boardId, Point point) const;
+	//zwraca liczbê statków na planszy 'boardId'
+	int getShipCount(int boardId) const;
 private:
 	//czêœæ gry - inicjalizacja
 	void initialization();
