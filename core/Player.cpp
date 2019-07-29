@@ -1,7 +1,7 @@
 #include "Player.h"
 
 //konstruktor
-Player::Player(Board& _myBoard, Board& _otherBoard) : myBoard(_myBoard), otherBoard(_otherBoard) {}
+Player::Player(Board& _myBoard, Board& _otherBoard) : myBoard(_myBoard), otherBoard(_otherBoard), lastShotPoint(Point({ BOARDSIZE, BOARDSIZE })) {}
 
 //destruktor
 Player::~Player() {}

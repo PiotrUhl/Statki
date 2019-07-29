@@ -1,6 +1,6 @@
 #include "UserDllInterface.h"
 
-UserDllInterface::UserDllInterface() {} //konstruktor
+UserDllInterface::UserDllInterface() : currentPlanner(nullptr) {} //konstruktor
 UserDllInterface& UserDllInterface::getInstance() { //pobierz instancje klasy
 	static UserDllInterface&& instance = UserDllInterface();
 	return instance;
