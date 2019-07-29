@@ -55,7 +55,7 @@ namespace IDllInterface {
 
 	//zapisuje mapê strza³ów planszy 'boardId' do bufora 'outbuffer'
 	void getShotMap(unsigned char* outbuffer, int boardId) {
-		return UserDllInterface::getInstance().getShotMap(outbuffer, boardId);
+		UserDllInterface::getInstance().getShotMap(outbuffer, boardId);
 	}
 	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
 	ShotResult getSquareShot(int boardId, Point point) {
@@ -65,5 +65,9 @@ namespace IDllInterface {
 	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
 	ShipInfo getSquareShip(int boardId, Point point) {
 		return UserDllInterface::getInstance().getSquareShip(boardId, point);
+	}
+	//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
+	__declspec(dllexport) void getShipList(ShipInfo* outbuffer, int boardId) {
+		UserDllInterface::getInstance().getShipList(outbuffer, boardId);
 	}
 }

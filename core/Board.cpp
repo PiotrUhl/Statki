@@ -47,3 +47,8 @@ Point Board::getLastShotPoint() const {
 ShotResult Board::getLastShotResult() const {
 	return lastShotResult;
 }
+
+//zwraca listê informacji o wszystkich statkach na planszy //todo: scaliæ z getList()
+std::list<ShipInfo> Board::getShipList() const {
+	return list;
+}

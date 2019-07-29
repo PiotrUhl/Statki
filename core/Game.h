@@ -44,6 +44,8 @@ public:
 	boost::multi_array<ShotResult, 2> getShotMap(int boardId) const;
 	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
 	ShotResult getSquareShot(int boardId, Point point) const;
+	//zwraca listê informacji o wszystkich statkach na planszy 'boardId'
+	std::list<ShipInfo> getShipList(int boardId) const;
 	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
 	ShipInfo getSquareShip(int boardId, Point point) const;
 private:

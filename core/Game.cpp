@@ -31,7 +31,7 @@ Point Game::getLastShotPoint(int boardId) const {
 	case 2:
 		return board2->getLastShotPoint();
 	default:
-		return Point{ BOARDSIZE, BOARDSIZE };
+		return Point{ BOARDSIZE, BOARDSIZE }; //error!
 	}
 }
 
@@ -43,7 +43,7 @@ ShotResult Game::getLastShotResult(int boardId) const {
 	case 2:
 		return board2->getLastShotResult();
 	default:
-		return ShotResult::NONE;
+		return ShotResult::NONE; //error!
 	}
 }
 
@@ -55,7 +55,7 @@ PlayerType Game::getPlayerType(int playerId) const {
 	case 2:
 		return player2Type;
 	default:
-		return PlayerType::NONE;
+		return PlayerType::NONE; //error!
 	}
 }
 
@@ -67,7 +67,7 @@ boost::multi_array<char, 2> Game::getBoardImage(int boardId) const {
 	case 2:
 		return board2->getImage();
 	default:
-		return boost::multi_array<char, 2>(boost::extents[0][0]);
+		return boost::multi_array<char, 2>(boost::extents[0][0]); //error!
 	}
 }
 
@@ -79,7 +79,7 @@ unsigned char Game::getSquareImage(int boardId, Point point) const {
 	case 2:
 		return board2->getSquareImage(point);
 	default:
-		return 255;
+		return 255; //error!
 	}
 }
 
@@ -91,7 +91,7 @@ boost::multi_array<ShotResult, 2> Game::getShotMap(int boardId) const {
 	case 2:
 		return board2->getShotMap();
 	default:
-		return boost::multi_array<ShotResult, 2>(boost::extents[0][0]);
+		return boost::multi_array<ShotResult, 2>(boost::extents[0][0]); //error!
 	}
 }
 //zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
@@ -115,6 +115,18 @@ ShipInfo Game::getSquareShip(int boardId, Point point) const {
 		return board2->getSquareShip(point);
 	default:
 		return ShipInfo{ 0, 0, 0, 0, 0 }; //error!
+	}
+}
+
+//zwraca listê informacji o wszystkich statkach na planszy 'boardId'
+std::list<ShipInfo> Game::getShipList(int boardId) const {
+	switch (boardId) {
+	case 1:
+		return board1->getShipList();
+	case 2:
+		return board2->getShipList();
+	default:
+		return std::list<ShipInfo>(); //error!
 	}
 }
 

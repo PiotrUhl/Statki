@@ -141,4 +141,13 @@ ShotResult UserDllInterface::getSquareShot(int boardId, Point point) const {
 ShipInfo UserDllInterface::getSquareShip(int boardId, Point point) const {
 	return game->getSquareShip(boardId, point);
 }
+//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
+void UserDllInterface::getShipList(ShipInfo* outbuffer, int boardId) const {
+	std::list<ShipInfo> shipList = game->getShipList(boardId);
+	auto iter = shipList.begin(); //iterator
+	for (size_t i = 0; i < shipList.size(); i++) {
+		std::memcpy(&outbuffer[0], &*iter, sizeof(ShipInfo));
+		iter++;
+	}
+}
 #pragma endregion

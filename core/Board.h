@@ -13,7 +13,7 @@ private:
 	int id; //numer identyfikacyjny planszy
 protected:
 	int unsunkShips; //liczba niezatopnionych statków
-	std::list<ShipInfo> list; //lista statków
+	std::list<ShipInfo> list; //lista statków //todo: przenieœæ do klas potomnych
 	boost::multi_array<ShotResult, 2> shotMap; //mapa strza³ów
 	Point lastShotPoint; //miejsce ostatniego strza³u w planszê; (BOARDSIZE, BOARDSIZE) je¿eli nie strzelano
 	ShotResult lastShotResult; //wynik ostatniego strza³u w planszê
@@ -42,6 +42,8 @@ public:
 	virtual boost::multi_array<char, 2> getImage() = 0; //todo: przerobiæ na unsigned char
 	//zwraca obraz pola 'point'
 	virtual unsigned char getSquareImage(Point point) = 0;
+	//zwraca listê informacji o wszystkich statkach na planszy
+	/*virtual */std::list<ShipInfo> getShipList() const/* = 0*/; //odkomentowaæ po przeniesieniu listy statków do klas potomnych
 	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
 	virtual ShipInfo getSquareShip(Point point) const = 0;
 };
