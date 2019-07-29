@@ -30,8 +30,6 @@ public:
 	//usuwa ca³¹ zawartoœæ planszy
 	void clear();
 private:
-	//zwraca obraz pola ("x", "y")
-	char fillImageSquare(int x, int y);
 	//okreœla kierunek statku le¿¹cego na polu  ("x", "y")
 	char findDirection(int x, int y);
 };

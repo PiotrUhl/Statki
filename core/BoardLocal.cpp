@@ -38,7 +38,7 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 
 //usuwa statkek z pola (x, y)
 bool BoardLocal::removeShip(int x, int y) {
-	if (board[y][x].getSunk == false) {
+	if (board[y][x].getSunk() == false) {
 		unsunkShips--;
 	}
 	list.remove_if([x, y](ShipInfo v) { //usuñ statek z listy
@@ -61,7 +61,7 @@ boost::multi_array<unsigned char, 2> BoardLocal::getImage() {
 	boost::multi_array<unsigned char, 2> image(boost::extents[BOARDSIZE][BOARDSIZE]);
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
-			image[i][j] = fillImageSquare(j, i);
+			image[i][j] = getSquareImage(Point{ j, i });
 		}
 	}
 	return image;
@@ -69,13 +69,8 @@ boost::multi_array<unsigned char, 2> BoardLocal::getImage() {
 
 //zwraca obraz pola 'point'
 unsigned char BoardLocal::getSquareImage(Point point) {
-	return fillImageSquare(point.x, point.y);
-}
-//todo: scaliæ getSquareImage i fillImageSquare
-//zwraca obraz pola ("x", "y")
-char BoardLocal::fillImageSquare(int x, int y) {
-	if (board[y][x] == nullptr) { //pole puste
-		if (board[y][x].getShooted()) { //pole puste i postrzelone
+	if (board[point.y][point.x] == nullptr) { //pole puste
+		if (board[point.y][point.x].getShooted()) { //pole puste i postrzelone
 			return 1;
 		}
 		else { //pole puste i niepostrzelone
@@ -84,24 +79,23 @@ char BoardLocal::fillImageSquare(int x, int y) {
 	}
 	else { //pole niepuste
 		char ret = 0;
-		if (findDirection(x, y) == 'H') { //statek poziomo
+		if (findDirection(point.x, point.y) == 'H') { //statek poziomo
 			ret += 10;
 		}
 		else { //statek pionowo
 			ret += 20;
 		}
-		if (board[y][x].getShooted()) { //statek postrzelony
-			if (board[y][x].getSunk()) { //statek zatopiony
+		if (board[point.y][point.x].getShooted()) { //statek postrzelony
+			if (board[point.y][point.x].getSunk()) { //statek zatopiony
 				ret += 200;
 			}
 			else { //statek p³onie
 				ret += 100;
 			}
 		}
-		ret += board[y][x].getSize();
+		ret += board[point.y][point.x].getSize();
 		return ret;
 	}
-	return 255; //b³¹d
 }
 
 //okreœla kierunek statku le¿¹cego na polu  ("x", "y")
@@ -141,4 +135,6 @@ void BoardLocal::clear() {
 		}
 	}
 	list.clear();
+	shipCount = 0;
+	unsunkShips = 0;
 }
