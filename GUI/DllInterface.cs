@@ -143,7 +143,7 @@ namespace GUI {
 
 		//wypisuje wyniki strzału
 		private void in_sendShotInfo(int id, Point point, ShotResult result) {
-			System.Windows.MessageBox.Show("Strzelono w (" + point.x + "," + point.y + ") z rezultatem: " + result); //debug
+			//System.Windows.MessageBox.Show("Strzelono w (" + point.x + "," + point.y + ") z rezultatem: " + result); //debug
 			point.x++;
 			point.y++;
 			if (id == window.leftId)
