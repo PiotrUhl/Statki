@@ -32,7 +32,7 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
 		throw (std::invalid_argument("Incorrect ship direction"));
 	unsunkShips++;
 	shipCount++;
-	list.push_back(ShipInfo{ shipSize, x, y, direction, false });
+	list.push_back(newShip);
 	return true;
 }
 
@@ -41,8 +41,9 @@ bool BoardLocal::removeShip(int x, int y) {
 	if (board[y][x].getSunk() == false) {
 		unsunkShips--;
 	}
-	list.remove_if([x, y](ShipInfo v) { //usuñ statek z listy
-		if (v.x == x && v.y == y)
+	list.remove_if([x, y](std::shared_ptr<Ship> v) { //usuñ statek z listy
+		Point point = v->getPoint();
+		if (point.x == x && point.y == y)
 			return true;
 		else
 			return false;
@@ -123,7 +124,11 @@ ShotResult BoardLocal::shot(int x, int y) {
 
 //zwraca listê informacji o wszystkich statkach na planszy
 std::list<ShipInfo> BoardLocal::getShipList() const {
-	return list;
+	std::list<ShipInfo> ret;
+	for (auto k : list) {
+		ret.push_back(k->getShipInfo());
+	}
+	return ret;
 }
 
 //usuwa ca³¹ zawartoœæ planszy

@@ -30,6 +30,10 @@ void Ship::remove() {
 int Ship::getSize() const {
 	return size;
 }
+//zwraca punkt pocz¹tkowy
+Point Ship::getPoint() const {
+	return startingPoint;
+}
 //zwraca sunk
 bool Ship::getSunk() const {
 	return sunk;

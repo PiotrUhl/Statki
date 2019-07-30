@@ -5,7 +5,7 @@
 class BoardLocal : public Board {
 private:
 	boost::multi_array<Square, 2> board; //plansza
-	std::list<ShipInfo> list; //lista statków
+	std::list<std::shared_ptr<Ship>> list; //lista statków
 public:
 	//konstruktor
 	BoardLocal();

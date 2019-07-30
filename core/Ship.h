@@ -23,6 +23,8 @@ public:
 	void remove();
 	//zwraca size
 	int getSize() const;
+	//zwraca punkt pocz¹tkowy
+	Point getPoint() const;
 	//zwraca sunk
 	bool getSunk() const;
 	//dodaje informacje o polu na którym le¿y statek
