@@ -49,6 +49,10 @@ namespace GUI {
 		//umieszcza statkek o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern bool placeShip(int shipSize, int x, int y, char direction);
+
+		//wypełnia planszę losowo używając algorytmu
+		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern void fillRandom();
 		#endregion
 
 		#region callback

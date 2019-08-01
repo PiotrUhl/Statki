@@ -440,7 +440,7 @@
 				<Button
 					Name="ButtonPlannerRandom"
 					Content="Random"
-					IsEnabled="False"
+					IsEnabled="True"
 					FontSize="14"
 					Grid.Column="0"
 					Grid.Row="6"

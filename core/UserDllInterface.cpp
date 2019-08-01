@@ -85,6 +85,11 @@ bool UserDllInterface::checkShipPlacement(int shipSize, int x, int y, char direc
 bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 	return currentPlanner->place(shipSize, x, y, direction);
 }
+#include "PlannerLocalAI.h"
+//wype³nia planszê losowo u¿ywaj¹c algorytmu
+void UserDllInterface::fillRandom() {
+	throw "Not yet implemented!"; //undone: UserDllInterface::fillRandom()
+}
 
 //zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
 int UserDllInterface::getCurrentPlayer() const {

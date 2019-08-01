@@ -19,6 +19,11 @@ namespace IDllInterface {
 		return ret;
 	}
 
+	//wype³nia planszê losowo u¿ywaj¹c algorytmu
+	void fillRandom() {
+		UserDllInterface::getInstance().fillRandom();
+	}
+
 	//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
 	int getCurrentPlayer() {
 		return UserDllInterface::getInstance().getCurrentPlayer();

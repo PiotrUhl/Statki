@@ -42,6 +42,8 @@ public:
 	bool checkShipPlacement(int shipSize, int x, int y, char direction);
 	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
 	bool placeShip(int shipSize, int x, int y, char direction);
+	//wype³nia planszê losowo u¿ywaj¹c algorytmu
+	void fillRandom();
 
 	//zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)
 	int getCurrentPlayer() const;

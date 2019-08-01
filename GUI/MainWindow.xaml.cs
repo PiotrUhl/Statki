@@ -146,7 +146,13 @@ namespace GUI {
 			dllInterface.waitingInPlannerMode.Set();
 		}
 		private void ButtonPlannerRandom_Click(object sender, RoutedEventArgs e) {
-			MessageBox.Show("Not yet implemented!");
+			MessageBox.Show("Not tested!");
+			DllInterface.fillRandom();
+			BoardPlanner.Visibility = Visibility.Collapsed;
+			rightGrid.Visibility = Visibility.Visible;
+			setAllButtons(leftGrid, false);
+			InitializeBoard(rightGrid, true);
+			dllInterface.waitingInPlannerMode.Set();
 		}
 	}
 }
