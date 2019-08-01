@@ -23,14 +23,16 @@ std::unique_ptr<Board> CreatorBoard::makeBoard(PlayerType PlayerType) {
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForHuman() {
-	PlannerLocal planner;
-	userInterface.makeBoard(&planner);
-	return std::make_unique<BoardLocal>(planner.getBoard());
+	std::unique_ptr<BoardLocal> board = std::make_unique<BoardLocal>();
+	userInterface.makeBoard(*board);
+	return board;
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForAI() {
-	PlannerLocalAI planner;
-	return std::make_unique<BoardLocal>(planner.makeBoard());
+	std::unique_ptr<BoardLocal> board = std::make_unique<BoardLocal>();
+	PlannerLocalAI planner(*board);
+	planner.makeBoard();
+	return board;
 }
 
 std::unique_ptr<Board> CreatorBoard::makeForRemote() {

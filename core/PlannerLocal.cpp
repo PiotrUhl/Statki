@@ -2,7 +2,7 @@
 #include <stdexcept>      // std::invalid_argument
 
 //konstruktor
-PlannerLocal::PlannerLocal() {}
+PlannerLocal::PlannerLocal(BoardLocal& _board) : board(_board) {}
 
 //sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
 bool PlannerLocal::checkPlacement(int shipSize, int x, int y, char direction = 'H') {
@@ -44,7 +44,7 @@ boost::multi_array<unsigned char, 2> PlannerLocal::getImage() {
 	return board.getImage();
 }
 
-//zwraca wskaŸnik na tworzon¹ planszê - niszczy obiekt
-BoardLocal PlannerLocal::getBoard() {
-	return std::move(board);
+//zwraca tworzon¹ planszê
+BoardLocal& PlannerLocal::getBoard() const {
+	return board;
 }

@@ -2,14 +2,14 @@
 #include "structs.hpp" //ShipInfo, Point
 #include <list> //std::list
 
-class PlannerLocal; //PlannerLocal
+class BoardLocal; //BoardLocal
 
 class IUserInterface {
 public:
 	//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
 	virtual void error(const char* error, bool critical = true) = 0;
-	//przekazuje planer planszy do utworzenia planszy
-	virtual void makeBoard(PlannerLocal*) = 0;
+	//przekazuje planszê 'board' do utworzenia
+	virtual void makeBoard(BoardLocal& board) = 0;
 	//rejestruje id planszy w interfejsie
 	virtual void registerBoard(int, int) = 0;
 	//zwraca wspó³rzêdne strza³u

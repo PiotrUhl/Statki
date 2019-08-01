@@ -18,9 +18,9 @@ void UserDllInterface::registerBoard(int nr, int id) {
 	callBack.out_registerBoard(nr, id);
 }
 
-//przekazuje planszê board do utworzenia, wstrzymuje program do zakoñczenia tworzenia
-void UserDllInterface::makeBoard(PlannerLocal* planner) {
-	currentPlanner = planner;
+//przekazuje planszê 'board' do utworzenia
+void UserDllInterface::makeBoard(BoardLocal& board) {
+	currentPlanner = std::make_unique<PlannerLocal>(board);
 	callBack.out_plannerMode();
 }
 
@@ -88,7 +88,9 @@ bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
 #include "PlannerLocalAI.h"
 //wype³nia planszê losowo u¿ywaj¹c algorytmu
 void UserDllInterface::fillRandom() {
-	throw "Not yet implemented!"; //undone: UserDllInterface::fillRandom()
+	//throw "Not yet implemented!"; //undone: UserDllInterface::fillRandom()
+	PlannerLocalAI temp(currentPlanner->getBoard());
+	temp.makeBoard();
 }
 
 //zwraca gracza obecnie wykonuj¹cego ruch (b¹dŸ 0 dla niew³aœciwej czêœci gry)

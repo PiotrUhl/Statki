@@ -2,7 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 
-PlannerLocalAI::PlannerLocalAI() : PlannerLocal(), placeableMap(boost::extents[BOARDSIZE][BOARDSIZE]) {
+PlannerLocalAI::PlannerLocalAI(BoardLocal& _board) : PlannerLocal(_board), placeableMap(boost::extents[BOARDSIZE][BOARDSIZE]) {
 	srand((unsigned int)time(NULL));
 }
 
@@ -72,8 +72,8 @@ void PlannerLocalAI::initializeplaceableMap() {
 	}
 }
 
-//tworzy za pomoc¹ algorytmu i zwraca planszê
-BoardLocal PlannerLocalAI::makeBoard() {
+//tworzy planszê za pomoc¹ algorytmu 
+void PlannerLocalAI::makeBoard() {
 	bool repeat = false;
 	do {
 		resetBoard();
@@ -88,7 +88,11 @@ BoardLocal PlannerLocalAI::makeBoard() {
 		repeat = !placeShip(2);
 		repeat = !placeShip(2);
 	} while (repeat);
-	return getBoard();
+}
+
+//zwraca tworzon¹ planszê
+BoardLocal& PlannerLocalAI::getBoard() const {
+	return board;
 }
 
 //umieszcza na planszy statek o rozmiarze size

@@ -5,6 +5,8 @@
 #include "Game.h"
 #include "structs.hpp"
 
+class PlannerLocal; //PlannelLocal
+
 class UserDllInterface : public IUserInterface/*, public IDllInterface*/ {
 #pragma region singleton
 	static UserDllInterface&& instance; //jedyna instancja klasy
@@ -16,7 +18,7 @@ public:
 #pragma endregion
 private:
 	std::unique_ptr<Game> game; //g³ówna klasa gry
-	PlannerLocal* currentPlanner; //uchwyt na obecnie wybrany planer //dla PlannerLocal dla CreatorBoard dla PlayerType::HUMAN
+	std::unique_ptr<PlannerLocal> currentPlanner; //uchwyt na obecnie wybrany planer //dla PlannerLocal dla CreatorBoard dla PlayerType::HUMAN
 	IDllInterface::CallBacks callBack; //struktura wskaŸników na callBacki
 public:
 #pragma region IUserInterface	
@@ -24,8 +26,8 @@ public:
 	void error(const char*, bool) override;
 	//rejestruje id planszy w interfejsie
 	void registerBoard(int, int) override;
-	//przekazuje planszê board do utworzenia
-	void makeBoard(PlannerLocal* planner) override;
+	//przekazuje planszê 'board' do utworzenia
+	void makeBoard(BoardLocal& board) override;
 	//pobiera wspó³rzêdne strza³u
 	Point getShotCoords() override;
 	//poinformuj interfejs o zmianie na planszy

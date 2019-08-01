@@ -8,9 +8,11 @@ private:
 	boost::multi_array<std::bitset<8>, 2> placeableMap; //mapa pamiêtaj¹ca gdzie mo¿na postawiæ statek o danym rozmiarze w danym kierunku
 	int placeableSquares[8]; //iloœæ pól w których mo¿na postawiæ statek o danym rozmiarze w danym kierunku
 public:
-	PlannerLocalAI();
-	//tworzy za pomoc¹ algorytmu i zwraca planszê
-	BoardLocal makeBoard();
+	PlannerLocalAI(BoardLocal&);
+	//tworzy planszê za pomoc¹ algorytmu
+	void makeBoard();
+	//zwraca tworzon¹ planszê
+	BoardLocal& getBoard() const;
 private:
 	void initializeplaceableMap(); //inicjalizuje placeable wartoœciami domyœlnymi
 	bool placeShip(int size); //umieszcza na planszy statek o rozmiarze size
