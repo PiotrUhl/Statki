@@ -58,7 +58,7 @@ ShipInfo BoardLocal::getSquareShip(Point point) const {
 }
 
 //zwraca obraz planszy
-boost::multi_array<unsigned char, 2> BoardLocal::getImage() {
+boost::multi_array<unsigned char, 2> BoardLocal::getImage() const {
 	boost::multi_array<unsigned char, 2> image(boost::extents[BOARDSIZE][BOARDSIZE]);
 	for (int i = 0; i < BOARDSIZE; i++) {
 		for (int j = 0; j < BOARDSIZE; j++) {
@@ -69,7 +69,7 @@ boost::multi_array<unsigned char, 2> BoardLocal::getImage() {
 }
 
 //zwraca obraz pola 'point'
-unsigned char BoardLocal::getSquareImage(Point point) {
+unsigned char BoardLocal::getSquareImage(Point point) const {
 	if (board[point.y][point.x] == nullptr) { //pole puste
 		if (board[point.y][point.x].getShooted()) { //pole puste i postrzelone
 			return 1;
@@ -100,7 +100,7 @@ unsigned char BoardLocal::getSquareImage(Point point) {
 }
 
 //okreœla kierunek statku le¿¹cego na polu  ("x", "y")
-char BoardLocal::findDirection(int x, int y) {
+char BoardLocal::findDirection(int x, int y) const {
 	if (x > 0 && board[y][x - 1] != nullptr)
 		return 'H';
 	if (x < BOARDSIZE - 1 && board[y][x + 1] != nullptr)

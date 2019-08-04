@@ -58,4 +58,7 @@ private:
 	void ending(char winner);
 	//inicjalizuje graczy
 	void initializePlayers();
+	//zwraca wskaŸnik na planszê o podanym id; gdy nie znajdzie zwraca nullptr
+	Board* findBoardById(int boardId);
+	const Board* findBoardById(int boardId) const;
 };
