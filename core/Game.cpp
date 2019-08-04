@@ -219,15 +219,15 @@ void Game::initializePlayers() {
 
 //zwraca referencje na planszê o podanym id
 Board* Game::findBoardById(int boardId) {
+	return const_cast<Board*>(const_cast<const Game*>(this)->findBoardById(boardId));
+}
+
+//zwraca referencje na planszê o podanym id
+const Board* Game::findBoardById(int boardId) const {
 	if (board1->getId() == boardId)
 		return board1.get();
 	else if (board2->getId() == boardId)
 		return board2.get();
 	else
 		return nullptr;
-}
-
-//zwraca referencje na planszê o podanym id
-const Board* Game::findBoardById(int boardId) const {
-	return findBoardById(boardId);
 }
