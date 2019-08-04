@@ -25,26 +25,20 @@ int Game::getLastShotBoard() const {
 
 //zwraca miejsce ostatniego strza³u w planszê 'boardId'; (BOARDSIZE, BOARDSIZE) w razie b³êdu
 Point Game::getLastShotPoint(int boardId) const {
-	switch (boardId) {
-	case 1:
-		return board1->getLastShotPoint();
-	case 2:
-		return board2->getLastShotPoint();
-	default:
-		return Point{ BOARDSIZE, BOARDSIZE }; //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return Point{ BOARDSIZE, BOARDSIZE };
+	else
+		return board->getLastShotPoint();
 }
 
 //zwraca wynik ostatniego strza³u w planszê 'boardId'
 ShotResult Game::getLastShotResult(int boardId) const {
-	switch (boardId) {
-	case 1:
-		return board1->getLastShotResult();
-	case 2:
-		return board2->getLastShotResult();
-	default:
-		return ShotResult::NONE; //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return ShotResult::NONE;
+	else
+		return board->getLastShotResult();
 }
 
 //zwraca typ gracza 'playerId' b¹dŸ NONE w przypadku niew³aœciwego gracza
@@ -61,85 +55,64 @@ PlayerType Game::getPlayerType(int playerId) const {
 
 //zwraca obraz planszy 'boardId'
 boost::multi_array<unsigned char, 2> Game::getBoardImage(int boardId) const {
-	switch (boardId) {
-	case 1:
-		return board1->getImage();
-	case 2:
-		return board2->getImage();
-	default:
-		return boost::multi_array<unsigned char, 2>(boost::extents[0][0]); //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return boost::multi_array<unsigned char, 2>(boost::extents[0][0]);
+	else
+		return board->getImage();
 }
 
 //zwraca obraz punktu 'point' na planszy 'boardId'
 unsigned char Game::getSquareImage(int boardId, Point point) const {
-	switch (boardId) {
-	case 1:
-		return board1->getSquareImage(point);
-	case 2:
-		return board2->getSquareImage(point);
-	default:
-		return 255; //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return 255;
+	else
+		return board->getSquareImage(point);
 }
 
 //zwraca mapê strza³ów planszy 'boardId'
 boost::multi_array<ShotResult, 2> Game::getShotMap(int boardId) const {
-	switch (boardId) {
-	case 1:
-		return board1->getShotMap();
-	case 2:
-		return board2->getShotMap();
-	default:
-		return boost::multi_array<ShotResult, 2>(boost::extents[0][0]); //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return boost::multi_array<ShotResult, 2>(boost::extents[0][0]);
+	else
+		return board->getShotMap();
 }
 //zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
 ShotResult Game::getSquareShot(int boardId, Point point) const {
-	switch (boardId) {
-	case 1:
-		return board1->getSquareShot(point);
-	case 2:
-		return board2->getSquareShot(point);
-	default:
-		return ShotResult::NONE; //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return ShotResult::NONE;
+	else
+		return board->getSquareShot(point);
 }
 
 //zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
 ShipInfo Game::getSquareShip(int boardId, Point point) const {
-	switch (boardId) {
-	case 1:
-		return board1->getSquareShip(point);
-	case 2:
-		return board2->getSquareShip(point);
-	default:
-		return ShipInfo{ 0, 0, 0, 0, 0 }; //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return ShipInfo{ 0, 0, 0, 0, 0 };
+	else
+		return board->getSquareShip(point);
 }
 
 //zwraca listê informacji o wszystkich statkach na planszy 'boardId'
 std::list<ShipInfo> Game::getShipList(int boardId) const {
-	switch (boardId) {
-	case 1:
-		return board1->getShipList();
-	case 2:
-		return board2->getShipList();
-	default:
-		return std::list<ShipInfo>(); //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return std::list<ShipInfo>();
+	else
+		return board->getShipList();
 }
 
 //zwraca liczbê statków na planszy 'boardId'
 int Game::getShipCount(int boardId) const {
-	switch (boardId) {
-	case 1:
-		return board1->getShipCount();
-	case 2:
-		return board2->getShipCount();
-	default:
-		return -1; //error!
-	}
+	const Board* board = findBoardById(boardId);
+	if (board == nullptr)
+		return -1;
+	else
+		return board->getShipCount();
 }
 
 #include "CreatorBoard.h"
@@ -242,4 +215,19 @@ void Game::initializePlayers() {
 	default:
 		player2 = nullptr;
 	}
+}
+
+//zwraca referencje na planszê o podanym id
+Board* Game::findBoardById(int boardId) {
+	return const_cast<Board*>(const_cast<const Game*>(this)->findBoardById(boardId));
+}
+
+//zwraca referencje na planszê o podanym id
+const Board* Game::findBoardById(int boardId) const {
+	if (board1->getId() == boardId)
+		return board1.get();
+	else if (board2->getId() == boardId)
+		return board2.get();
+	else
+		return nullptr;
 }

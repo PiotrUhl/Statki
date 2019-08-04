@@ -36,9 +36,9 @@ public:
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	virtual ShotResult shot(int x, int y) = 0;
 	//zwraca obraz planszy
-	virtual boost::multi_array<unsigned char, 2> getImage() = 0;
+	virtual boost::multi_array<unsigned char, 2> getImage() const = 0;
 	//zwraca obraz pola 'point'
-	virtual unsigned char getSquareImage(Point point) = 0;
+	virtual unsigned char getSquareImage(Point point) const = 0;
 	//zwraca listê informacji o wszystkich statkach na planszy
 	virtual std::list<ShipInfo> getShipList() const = 0;
 	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'

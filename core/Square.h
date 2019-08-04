@@ -15,9 +15,9 @@ public:
 	//destruktor
 	~Square();
 	//przeci¹¿enie operatora == dla nullptr
-	bool operator==(std::nullptr_t);
+	bool operator==(std::nullptr_t) const;
 	//przeci¹¿enie operatora != dla nullptr
-	bool operator!=(std::nullptr_t);
+	bool operator!=(std::nullptr_t) const;
 	//umieszcza w polu statek 'newShip'
 	void set(std::shared_ptr<Ship>& newShip);
 	//strzelono w pole; zwraca rezultat

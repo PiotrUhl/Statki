@@ -7,7 +7,7 @@ Square::Square() : shooted(false), state(ShotResult::NONE) {}
 Square::~Square() {}
 
 //przeci¹¿enie operatora == dla nullptr
-bool Square::operator==(std::nullptr_t) {
+bool Square::operator==(std::nullptr_t) const {
 	if (ship == nullptr)
 		return true;
 	else
@@ -15,7 +15,7 @@ bool Square::operator==(std::nullptr_t) {
 }
 
 //przeci¹¿enie operatora != dla nullptr
-bool Square::operator!=(std::nullptr_t) {
+bool Square::operator!=(std::nullptr_t) const {
 	if (ship == nullptr)
 		return false;
 	else

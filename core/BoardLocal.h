@@ -18,9 +18,9 @@ public:
 	//usuwa statkek z pola ("x", "y")
 	bool removeShip(int x, int y);
 	//zwraca obraz planszy
-	boost::multi_array<unsigned char, 2> getImage() override;
+	boost::multi_array<unsigned char, 2> getImage() const override;
 	//zwraca obraz pola 'point'
-	unsigned char getSquareImage(Point point) override;
+	unsigned char getSquareImage(Point point) const override;
 	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
 	ShotResult shot(int x, int y) override;
 	//zwraca listê informacji o wszystkich statkach na planszy
@@ -31,5 +31,5 @@ public:
 	void clear();
 private:
 	//okreœla kierunek statku le¿¹cego na polu  ("x", "y")
-	char findDirection(int x, int y);
+	char findDirection(int x, int y) const;
 };
