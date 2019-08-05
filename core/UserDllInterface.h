@@ -22,8 +22,8 @@ private:
 	IDllInterface::CallBacks callBack; //struktura wskaŸników na callBacki
 public:
 #pragma region IUserInterface	
-	//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-	void error(const char*, bool) override;
+	//wysy³a do interfejsu wiadomoœæ o treœci 'msg' o typie 'type'; je¿eli 'critical' przerywa dzia³anie programu
+	void msg(const char* msg, MsgType type, bool critical = true) override;
 	//przekazuje planszê 'board' do utworzenia
 	void makeBoard(BoardLocal& board) override;
 	//pobiera wspó³rzêdne strza³u

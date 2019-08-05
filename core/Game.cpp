@@ -123,16 +123,16 @@ void Game::initialization() {
 	board2 = CreatorBoard(mainInterface).makeBoard(player2Type);
 	//Sprawdzanie poprawnoœci utworzenia plansz i rejestracja plansz w interfejsie
 	if (board1 == nullptr)
-		mainInterface.error("An error has occured during initialization board for player 1", true);
+		mainInterface.msg("An error has occured during initialization board for player 1", MsgType::ERROR, true);
 	if (board2 == nullptr)
-		mainInterface.error("An error has occured during initialization board for player 2", true);
+		mainInterface.msg("An error has occured during initialization board for player 2", MsgType::ERROR, true);
 	//Inicjalizacja graczy
 	initializePlayers();
 	//Sprawdzanie poprawnoœci inicjalizacji graczy
 	if (player1 == nullptr)
-		mainInterface.error("An error has occured during initialization player 1", true);
+		mainInterface.msg("An error has occured during initialization player 1", MsgType::ERROR, true);
 	if (player2 == nullptr)
-		mainInterface.error("An error has occured during initialization player 2", true);
+		mainInterface.msg("An error has occured during initialization player 2", MsgType::ERROR, true);
 }
 
 //czêœæ gry - g³ówna pêtla
@@ -167,11 +167,11 @@ char Game::loop() {
 //czêœæ gry - zakoñczenie
 void Game::ending(char winner) {
 	if (winner == 1)
-		mainInterface.error("Wygrana", false);
+		mainInterface.msg("Wygrana", MsgType::INFO, false);
 	else if (winner == 2)
-		mainInterface.error("Przegrana", false);
+		mainInterface.msg("Przegrana", MsgType::INFO, false);
 	else
-		mainInterface.error("Remis", false);
+		mainInterface.msg("Remis", MsgType::INFO, false);
 }
 
 //#include "UserDllInterface.h"

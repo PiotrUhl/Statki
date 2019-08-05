@@ -6,18 +6,20 @@ namespace IDllInterface {
 
 	//wskaŸniki na callbacki
 	struct CallBacks {
+		//wysy³a do interfejsu wiadomoœæ o treœci 'msg' o typie 'type'; je¿eli 'critical' przerywa dzia³anie programu
+		void(__stdcall *out_msg)(const char* msg, MsgType type, bool critical);
 		//pobiera wspó³rzêdne
-		Point(__stdcall *out_getCoords)(void);
+		Point (__stdcall *out_getCoords)(void);
 		//wysy³a do wypisania informacje o statkach
-		void(__stdcall *out_sendShipsInfo)(ShipInfo**, int, int);
+		void (__stdcall *out_sendShipsInfo)(ShipInfo**, int, int);
 		//wysy³a do wypisania obraz planszy
-		void(__stdcall *out_sendShotMap)(unsigned char*, int, int);
+		void (__stdcall *out_sendShotMap)(unsigned char*, int, int);
 		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-		void(__stdcall *out_error)(const char*, bool);
+		void (__stdcall *out_error)(const char*, bool);
 		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-		void(__stdcall *out_plannerMode)(void);
+		void (__stdcall *out_plannerMode)(void);
 		//zg³asza do interfejsu wyniki strza³u
-		void(__stdcall *out_sendShotInfo)(int, Point, ShotResult);
+		void (__stdcall *out_sendShotInfo)(int, Point, ShotResult);
 	};
 
 	extern "C" {

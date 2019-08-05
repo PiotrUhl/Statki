@@ -1,13 +1,13 @@
 #pragma once
-#include "structs.hpp" //ShipInfo, Point
+#include "structs.hpp" //ShipInfo, Point, ShotResult
 #include <list> //std::list
 
 class BoardLocal; //BoardLocal
 
 class IUserInterface {
 public:
-	//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-	virtual void error(const char* error, bool critical = true) = 0;
+	//wysy³a do interfejsu wiadomoœæ o treœci 'msg' o typie 'type'; je¿eli 'critical' przerywa dzia³anie programu
+	virtual void msg(const char* msg, MsgType type, bool critical = true) = 0;
 	//przekazuje planszê 'board' do utworzenia
 	virtual void makeBoard(BoardLocal& board) = 0;
 	//zwraca wspó³rzêdne strza³u

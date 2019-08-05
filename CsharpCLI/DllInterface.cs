@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 namespace CsharpCLI {
 	class DllInterface {
 		public struct CallBacks {
-			//rejestruje id planszy
+			//wysyła do interfejsu wiadomość o treści 'msg' o typie 'type'; jeżeli 'critical' przerywa działanie programu
 			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-			public delegate void Dg_registerBoard(int nr, int id);
+			public delegate void Dg_msg(IntPtr msg, MsgType type, byte critical);
 			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_registerBoard call_registerBoard;
+			public Dg_msg call_msg;
 
 			//pobiera współrzędne
 			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
@@ -98,5 +98,4 @@ namespace CsharpCLI {
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		private static extern int getShipCount(int boardId);
 	}
-}
 }

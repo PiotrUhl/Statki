@@ -8,9 +8,9 @@ UserDllInterface& UserDllInterface::getInstance() { //pobierz instancje klasy
 
 #pragma region IUserInterface
 
-//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-void UserDllInterface::error(const char* error, bool critical) {
-	callBack.out_error(error, critical);
+//wysy³a do interfejsu wiadomoœæ o treœci 'msg' o typie 'type'; je¿eli 'critical' przerywa dzia³anie programu
+void UserDllInterface::msg(const char* msg, MsgType type, bool critical) {
+	callBack.out_msg(msg, type, critical);
 }
 
 //przekazuje planszê 'board' do utworzenia

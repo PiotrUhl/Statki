@@ -5,7 +5,9 @@ namespace CsharpCLI {
 	public enum PlayerType : byte { NONE = 0, HUMAN, AI, REMOTE };
 
 	public enum ShotResult : byte { NONE = 0, MISS, HIT, SUNK };
-	
+
+	public enum MsgType : byte { NONE = 0, INFO, WARNING, ERROR }; //typ wiadomości dla metody IUserInterface::msg()
+
 	[StructLayout(LayoutKind.Sequential)]
 	public struct Point {
 		public int x;
