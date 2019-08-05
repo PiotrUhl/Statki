@@ -12,8 +12,10 @@ public:
 	virtual void makeBoard(BoardLocal& board) = 0;
 	//zwraca wspó³rzêdne strza³u
 	virtual Point getShotCoords() = 0;
-	//zg³asza informacje o strzale
+	//event - ruch gracza 'playerId'
 	virtual void event_playerMoved(int playerId) = 0;
+	//event - ukoñczono tworzenie planszy 'boardId'
+	virtual void event_boardCreated(int boardId) = 0;
 	//poinformuj interfejs o zmianie na planszy
 	virtual void boardChanged(int, std::list<ShipInfo>, boost::multi_array<ShotResult, 2>) = 0;
 	//przekazuje informacje o zakoñczeniu gry

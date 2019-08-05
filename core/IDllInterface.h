@@ -10,8 +10,10 @@ namespace IDllInterface {
 		void(__stdcall *out_msg)(const char* msg, MsgType type, bool critical);
 		//pobiera wspó³rzêdne
 		Point (__stdcall *out_getCoords)(void);
-		//zg³asza informacje o strzale
+		//event - ruch gracza 'playerId'
 		void(__stdcall *out_event_playerMoved)(int playerId);
+		//event - ukoñczono tworzenie planszy 'boardId'
+		void(__stdcall *out_event_boardCreated)(int boardId);
 
 		//wysy³a do wypisania informacje o statkach
 		void (__stdcall *out_sendShipsInfo)(ShipInfo**, int, int);

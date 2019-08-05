@@ -19,10 +19,13 @@ namespace CsharpCLI {
 
 			//event - ruch gracza 'playerId'
 			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-			public delegate void Dg_event_playerMoved(int playerId);
+			public delegate void Dg_event_int(int playerId);
 			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_event_playerMoved event_playerMoved;
+			public Dg_event_int event_playerMoved;
 
+			//event - ukończono tworzenie planszy 'boardId'
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_event_int event_boardCreated;
 
 
 			//wyświetla statki

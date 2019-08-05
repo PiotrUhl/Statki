@@ -24,10 +24,16 @@ Point UserDllInterface::getShotCoords() {
 	return callBack.out_getCoords();
 }
 
-//zg³asza informacje o strzale
+//event - ruch gracza 'playerId'
 void UserDllInterface::event_playerMoved(int playerId) {
 	if (callBack.out_event_playerMoved != nullptr)
 		callBack.out_event_playerMoved(playerId);
+}
+
+//event - ukoñczono tworzenie planszy 'boardId'
+void UserDllInterface::event_boardCreated(int boardId) {
+	if (callBack.out_event_playerMoved != nullptr)
+		callBack.out_event_playerMoved(boardId);
 }
 
 //poinformuj interfejs o zmianie na planszy
