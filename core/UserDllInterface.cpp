@@ -16,7 +16,7 @@ void UserDllInterface::msg(const char* msg, MsgType type, bool critical) {
 //przekazuje planszê 'board' do utworzenia
 void UserDllInterface::makeBoard(BoardLocal& board) {
 	currentPlanner = std::make_unique<PlannerLocal>(board);
-	callBack.out_plannerMode();
+	callBack.out_enterPlannerMode();
 }
 
 //pobiera wspó³rzêdne strza³u
@@ -34,42 +34,6 @@ void UserDllInterface::event_playerMoved(int playerId) {
 void UserDllInterface::event_boardCreated(int boardId) {
 	if (callBack.out_event_playerMoved != nullptr)
 		callBack.out_event_playerMoved(boardId);
-}
-
-//poinformuj interfejs o zmianie na planszy
-void UserDllInterface::boardChanged(int id, std::list<ShipInfo> shipList, boost::multi_array<ShotResult, 2> shotMap) {
-	int shipSize = shipList.size();
-	ShipInfo** shipTab = new ShipInfo*[shipSize];
-	int i = 0;
-	for (auto k : shipList) {
-		ShipInfo* temp = new ShipInfo;
-		*temp = k;
-		shipTab[i++] = temp;
-	}
-	unsigned char* shotTab = new unsigned char[BOARDSIZE*BOARDSIZE];
-	for (int i = 0; i < BOARDSIZE; i++) {
-		for (int j = 0; j < BOARDSIZE; j++) {
-			shotTab[i*BOARDSIZE + j] = static_cast<unsigned char>(shotMap[i][j]);
-		}
-	}
-	callBack.out_sendShipsInfo(shipTab, shipSize, id);
-	callBack.out_sendShotMap(shotTab, BOARDSIZE*BOARDSIZE, id);
-	for (int i = 0; i < shipSize; i++) {
-		delete[] shipTab[i];
-	}
-	delete[] shipTab;
-	delete[] shotTab;
-}
-
-//przekazuje informacje o zakoñczeniu gry
-void UserDllInterface::gameEnded(char winner) {
-	//wywo³anie delegaty
-	callBack.out_error("UserDllInterface::gameEnded() unimplemented!", true);
-}
-
-//zg³asza do interfejsu wyniki strza³u
-void UserDllInterface::sendShotInfo(int id, Point point, ShotResult result) {
-	callBack.out_sendShotInfo(id, point, result);
 }
 
 #pragma endregion

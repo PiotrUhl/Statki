@@ -16,10 +16,4 @@ public:
 	virtual void event_playerMoved(int playerId) = 0;
 	//event - ukoñczono tworzenie planszy 'boardId'
 	virtual void event_boardCreated(int boardId) = 0;
-	//poinformuj interfejs o zmianie na planszy
-	virtual void boardChanged(int, std::list<ShipInfo>, boost::multi_array<ShotResult, 2>) = 0;
-	//przekazuje informacje o zakoñczeniu gry
-	virtual void gameEnded(char winner) = 0;
-	//zg³asza do interfejsu wyniki strza³u
-	virtual void sendShotInfo(int, Point, ShotResult) = 0;
 };

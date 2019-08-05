@@ -32,12 +32,6 @@ public:
 	void event_playerMoved(int playerId) override;
 	//event - ukoñczono tworzenie planszy 'boardId'
 	void event_boardCreated(int boardId) override;
-	//poinformuj interfejs o zmianie na planszy
-	void boardChanged(int, std::list<ShipInfo>, boost::multi_array<ShotResult, 2>) override;
-	//przekazuje informacje o zakoñczeniu gry
-	void gameEnded(char winner) override;
-	//zg³asza do interfejsu wyniki strza³u
-	void sendShotInfo(int, Point, ShotResult) override;
 #pragma endregion
 #pragma region IDLLInterface
 	//uruchamia grê
