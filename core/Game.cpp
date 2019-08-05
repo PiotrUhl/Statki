@@ -143,11 +143,13 @@ char Game::loop() {
 		currentPlayer = 1;
 		player1->move();
 		lastShotBoard = 2;
-		mainInterface.sendShotInfo(2, player1->getLastShotPoint(), player1->getLastShotResult());
+		mainInterface.event_playerMoved(1);
+		//mainInterface.sendShotInfo(2, player1->getLastShotPoint(), player1->getLastShotResult());
 		currentPlayer = 2;
 		player2->move();
 		lastShotBoard = 1;
-		mainInterface.sendShotInfo(1, player2->getLastShotPoint(), player2->getLastShotResult());
+		mainInterface.event_playerMoved(2);
+		//mainInterface.sendShotInfo(1, player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
 				winner = 3; //remis

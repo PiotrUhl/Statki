@@ -28,6 +28,8 @@ public:
 	void makeBoard(BoardLocal& board) override;
 	//pobiera wspó³rzêdne strza³u
 	Point getShotCoords() override;
+	//zg³asza informacje o strzale
+	void event_playerMoved(int playerId) override;
 	//poinformuj interfejs o zmianie na planszy
 	void boardChanged(int, std::list<ShipInfo>, boost::multi_array<ShotResult, 2>) override;
 	//przekazuje informacje o zakoñczeniu gry

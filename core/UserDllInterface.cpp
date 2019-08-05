@@ -24,6 +24,12 @@ Point UserDllInterface::getShotCoords() {
 	return callBack.out_getCoords();
 }
 
+//zg³asza informacje o strzale
+void UserDllInterface::event_playerMoved(int playerId) {
+	if (callBack.out_event_playerMoved != nullptr)
+		callBack.out_event_playerMoved(playerId);
+}
+
 //poinformuj interfejs o zmianie na planszy
 void UserDllInterface::boardChanged(int id, std::list<ShipInfo> shipList, boost::multi_array<ShotResult, 2> shotMap) {
 	int shipSize = shipList.size();

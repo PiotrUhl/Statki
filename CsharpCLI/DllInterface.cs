@@ -17,12 +17,20 @@ namespace CsharpCLI {
 			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_getCoords call_getCoords;
 
+			//event - ruch gracza 'playerId'
+			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+			public delegate void Dg_event_playerMoved(int playerId);
+			[MarshalAs(UnmanagedType.FunctionPtr)]
+			public Dg_event_playerMoved event_playerMoved;
+
+
+
 			//wyświetla statki
 			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 			public delegate void Dg_sendShipsInfo([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IntPtr[] tab, int size, int id);
 			[MarshalAs(UnmanagedType.FunctionPtr)]
 			public Dg_sendShipsInfo call_sendShipsInfo;
-
+			
 			//wyświetla czy strzelono w pole
 			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 			public delegate void Dg_sendShotMap(IntPtr tab, int size, int id);
