@@ -10,8 +10,6 @@ public:
 	virtual void error(const char* error, bool critical = true) = 0;
 	//przekazuje planszê 'board' do utworzenia
 	virtual void makeBoard(BoardLocal& board) = 0;
-	//rejestruje id planszy w interfejsie
-	virtual void registerBoard(int, int) = 0;
 	//zwraca wspó³rzêdne strza³u
 	virtual Point getShotCoords() = 0;
 	//poinformuj interfejs o zmianie na planszy

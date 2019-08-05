@@ -7,9 +7,6 @@
 #pragma warning(pop)
 
 class Board {
-private:
-	static int lastId; //najwy¿sze id planszy
-	int id; //numer identyfikacyjny planszy
 protected:
 	int shipCount; //liczba statków na planszy
 	int unsunkShips; //liczba niezatopnionych statków
@@ -21,13 +18,12 @@ public:
 	Board();
 	//destruktor
 	virtual ~Board();
-	//zwraca numer identyfikacyjny planszy
-	int getId();
+
 	//zwraca wartoœæ pola unsunkShips
 	bool getUnsunkShips();
 	//zwraca tablicê zawieraj¹c¹ informacje o postrzelonych polach
 	boost::multi_array<ShotResult, 2> getShotMap() const;
-	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
+	//zwraca informacjê o strzale w pole 'point'
 	ShotResult getSquareShot(Point point) const;
 	//zwraca lastShotPoint
 	Point getLastShotPoint() const;
@@ -41,8 +37,8 @@ public:
 	virtual unsigned char getSquareImage(Point point) const = 0;
 	//zwraca listê informacji o wszystkich statkach na planszy
 	virtual std::list<ShipInfo> getShipList() const = 0;
-	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
+	//zwraca informacje o statku le¿¹cym na polu 'point'
 	virtual ShipInfo getSquareShip(Point point) const = 0;
-	//zwraca liczbê statków na planszy 'boardId'
+	//zwraca liczbê statków na planszy
 	int getShipCount() const;
 };

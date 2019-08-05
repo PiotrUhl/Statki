@@ -13,11 +13,6 @@ void UserDllInterface::error(const char* error, bool critical) {
 	callBack.out_error(error, critical);
 }
 
-//rejestruje id planszy w interfejsie
-void UserDllInterface::registerBoard(int nr, int id) {
-	callBack.out_registerBoard(nr, id);
-}
-
 //przekazuje planszê 'board' do utworzenia
 void UserDllInterface::makeBoard(BoardLocal& board) {
 	currentPlanner = std::make_unique<PlannerLocal>(board);

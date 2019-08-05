@@ -124,12 +124,8 @@ void Game::initialization() {
 	//Sprawdzanie poprawnoœci utworzenia plansz i rejestracja plansz w interfejsie
 	if (board1 == nullptr)
 		mainInterface.error("An error has occured during initialization board for player 1", true);
-	else
-		mainInterface.registerBoard(1, board1->getId());
 	if (board2 == nullptr)
 		mainInterface.error("An error has occured during initialization board for player 2", true);
-	else
-		mainInterface.registerBoard(2, board2->getId());
 	//Inicjalizacja graczy
 	initializePlayers();
 	//Sprawdzanie poprawnoœci inicjalizacji graczy
@@ -147,11 +143,11 @@ char Game::loop() {
 		currentPlayer = 1;
 		player1->move();
 		lastShotBoard = 2;
-		mainInterface.sendShotInfo(player1->getOtherBoardId(), player1->getLastShotPoint(), player1->getLastShotResult());
+		mainInterface.sendShotInfo(2, player1->getLastShotPoint(), player1->getLastShotResult());
 		currentPlayer = 2;
 		player2->move();
 		lastShotBoard = 1;
-		mainInterface.sendShotInfo(player2->getOtherBoardId(), player2->getLastShotPoint(), player2->getLastShotResult());
+		mainInterface.sendShotInfo(1, player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
 				winner = 3; //remis
@@ -224,10 +220,12 @@ Board* Game::findBoardById(int boardId) {
 
 //zwraca referencje na planszê o podanym id
 const Board* Game::findBoardById(int boardId) const {
-	if (board1->getId() == boardId)
+	switch (boardId) {
+	case 1:
 		return board1.get();
-	else if (board2->getId() == boardId)
+	case 2:
 		return board2.get();
-	else
+	default:
 		return nullptr;
+	}
 }

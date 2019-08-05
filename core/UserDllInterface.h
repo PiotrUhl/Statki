@@ -24,8 +24,6 @@ public:
 #pragma region IUserInterface	
 	//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
 	void error(const char*, bool) override;
-	//rejestruje id planszy w interfejsie
-	void registerBoard(int, int) override;
 	//przekazuje planszê 'board' do utworzenia
 	void makeBoard(BoardLocal& board) override;
 	//pobiera wspó³rzêdne strza³u

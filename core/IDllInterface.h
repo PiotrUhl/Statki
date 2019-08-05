@@ -6,8 +6,6 @@ namespace IDllInterface {
 
 	//wskaŸniki na callbacki
 	struct CallBacks {
-		//rejestruje id planszy
-		void(__stdcall *out_registerBoard)(int, int);
 		//pobiera wspó³rzêdne
 		Point(__stdcall *out_getCoords)(void);
 		//wysy³a do wypisania informacje o statkach
