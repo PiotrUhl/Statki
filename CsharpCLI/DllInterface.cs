@@ -1,101 +1,108 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace CsharpCLI {
+
+	using static Const;
+
 	class DllInterface {
-		public struct CallBacks {
-			//wysyła do interfejsu wiadomość o treści 'msg' o typie 'type'; jeżeli 'critical' przerywa działanie programu
-			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-			public delegate void Dg_msg(IntPtr msg, MsgType type, byte critical);
-			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_msg call_msg;
 
-			//pobiera współrzędne
-			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-			public delegate Point Dg_getCoords();
-			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_getCoords call_getCoords;
-
-			//przechodzi w tryb tworzenia planszy
-			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-			public delegate void Dg_enterPlannerMode();
-			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_enterPlannerMode call_enterPlannerMode;
-
-			//event - ruch gracza 'playerId'
-			[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-			public delegate void Dg_event_int(int playerId);
-			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_event_int event_playerMoved;
-
-			//event - ukończono tworzenie planszy 'boardId'
-			[MarshalAs(UnmanagedType.FunctionPtr)]
-			public Dg_event_int event_boardCreated;
+		//uruchamia grę, przyjmuje strukturę callBacków i dane inicjalizacyjne
+		public void runProgram(InitData initData, CallBacks callBacks) {
+			DllImports.runProgram(initData, callBacks);
 		}
-		#region dllImports
-		//uruchamia grę, przyjmuje strukturę callBacków
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void runProgram(InitData initData, CallBacks callBacks);
 
 		//sprawdza możliwość położenia statku o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool checkShipPlacement(int shipSize, int x, int y, char direction);
+		public bool checkShipPlacement(int shipSize, int x, int y, char direction) {
+			return DllImports.checkShipPlacement(shipSize, x, y, direction);
+		}
 
 		//umieszcza statkek o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool placeShip(int shipSize, int x, int y, char direction);
+		public bool placeShip(int shipSize, int x, int y, char direction) {
+			return DllImports.placeShip(shipSize, x, y, direction);
+		}
 
 		//wypełnia planszę losowo używając algorytmu
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void fillRandom();
+		public void fillRandom() {
+			DllImports.fillRandom();
+		}
 
 		//zwraca gracza obecnie wykonującego ruch (bądź 0 dla niewłaściwej części gry)
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern int getCurrentPlayer();
+		public int getCurrentPlayer() {
+			return DllImports.getCurrentPlayer();
+		}
 
 		//zwraca typ gracza 'playerId' bądź NONE w przypadku niewłaściwego gracza
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern PlayerType getPlayerType(int playerId);
+		public PlayerType getPlayerType(int playerId) {
+			return DllImports.getPlayerType(playerId);
+		}
 
 		//zwraca id planszy w którą strzelono jako ostatnią (bądź 0 jeżeli nie strzelano)
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern int getLastShotBoard();
+		public int getLastShotBoard() {
+			return DllImports.getLastShotBoard();
+		}
 
 		//zwraca miejsce ostatniego strzału w planszę 'boardId'; dla 'boardId' = 0 zwraca miejsce ostatniego strzału
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern Point getLastShotPoint(int boardId);
+		public Point getLastShotPoint(int boardId) {
+			return DllImports.getLastShotPoint(boardId);
+		}
 
 		//zwraca wynik ostatniego strzału w planszę 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strzału
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern ShotResult getLastShotResult(int boardId);
+		public ShotResult getLastShotResult(int boardId) {
+			return DllImports.getLastShotResult(boardId);
+		}
 
-		//zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void getBoardImage(IntPtr outbuffer, int boardId);
+		//zwraca obraz planszy 'boardId'
+		public unsafe byte[ , ] getBoardImage(int boardId) {
+			byte[,] tab = new byte[BOARDSIZE, BOARDSIZE];
+			fixed (void* ptr = &tab[0,0]) {
+				DllImports.getBoardImage(new IntPtr(ptr), boardId);
+			}
+			return tab;
+		}
 
 		//zwraca obraz punktu 'point' na planszy 'boardId'
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern byte getSquareImage(int boardId, Point point);
+		public byte getSquareImage(int boardId, Point point) {
+			return DllImports.getSquareImage(boardId, point);
+		}
 
-		//zapisuje mapę strzałów planszy 'boardId' do bufora 'outbuffer'
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void getShotMap(IntPtr outbuffer, int boardId);
+		//zwraca mapę strzałów planszy 'boardId'
+		public unsafe ShotResult[ , ] getShotMap(int boardId) {
+			ShotResult[,] tab = new ShotResult[BOARDSIZE, BOARDSIZE];
+			fixed (void* ptr = &tab[0, 0]) {
+				DllImports.getShotMap(new IntPtr(ptr), boardId);
+			}
+			return tab;
+		}
 
 		//zwraca informację o strzale w pole 'point' na planszy 'boardId'
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern ShotResult getSquareShot(int boardId, Point point);
+		public ShotResult getSquareShot(int boardId, Point point) {
+			return DllImports.getSquareShot(boardId, point);
+		}
 
 		//zwraca informacje o statku leżącym na polu 'point' na planszy 'boardId'
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern ShipInfo getSquareShip(int boardId, Point point);
+		public ShipInfo getSquareShip(int boardId, Point point) {
+			return DllImports.getSquareShip(boardId, point);
+		}
 
-		//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void getShipList(IntPtr outbuffer, int boardId);
+		//zwraca listę informacji o wszystkich statkach na planszy 'boardId'
+		public unsafe List<ShipInfo> getShipList(int boardId) {
+			int shipCount = DllImports.getShipCount(boardId);
+			ShipInfo[] tab = new ShipInfo[shipCount];
+			fixed (void* ptr = &tab[0]) {
+				DllImports.getShipList(new IntPtr(ptr), boardId);
+			}
+			List<ShipInfo> list = new List<ShipInfo>(shipCount);
+			foreach (ShipInfo k in tab) {
+				list.Add(k);
+			}
+			return list;
+		}
 
 		//zwraca liczbę statków na planszy 'boardId'
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		private static extern int getShipCount(int boardId);
-		#endregion
+		public int getShipCount(int boardId) {
+			return DllImports.getShipCount(boardId);
+		}
 	}
 }
