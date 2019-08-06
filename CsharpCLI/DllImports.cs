@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 
 namespace CsharpCLI {
+
 	static class DllImports {
 
 		//uruchamia grę, przyjmuje strukturę callBacków
@@ -68,4 +69,5 @@ namespace CsharpCLI {
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int getShipCount(int boardId);
 	}
+
 }

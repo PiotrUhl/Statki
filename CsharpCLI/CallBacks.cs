@@ -2,33 +2,28 @@
 using System.Runtime.InteropServices;
 
 namespace CsharpCLI {
+
+	[StructLayout(LayoutKind.Sequential)]
 	struct CallBacks {
 		//wysyła do interfejsu wiadomość o treści 'msg' o typie 'type'; jeżeli 'critical' przerywa działanie programu
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate void Dg_msg(IntPtr msg, MsgType type, byte critical);
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		public Dg_msg call_msg;
+		public DllExports.Dg_void_IntPtr_MsgType_byte dll_call_msg;
 
 		//pobiera współrzędne
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate Point Dg_getCoords();
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		public Dg_getCoords call_getCoords;
+		public DllExports.Dg_Point_void dll_call_getCoords;
 
 		//przechodzi w tryb tworzenia planszy
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate void Dg_enterPlannerMode();
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		public Dg_enterPlannerMode call_enterPlannerMode;
+		public DllExports.Dg_void_void dll_call_enterPlannerMode;
 
 		//event - ruch gracza 'playerId'
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate void Dg_event_int(int playerId);
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		public Dg_event_int event_playerMoved;
+		public DllExports.Dg_void_int dll_event_playerMoved;
 
 		//event - ukończono tworzenie planszy 'boardId'
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		public Dg_event_int event_boardCreated;
+		public DllExports.Dg_void_int dll_event_boardCreated;
 	}
+
 }

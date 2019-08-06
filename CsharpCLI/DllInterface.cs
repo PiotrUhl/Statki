@@ -8,9 +8,26 @@ namespace CsharpCLI {
 
 	class DllInterface {
 
+		DllExports dllExports;
+
+		//konstruktor
+		public DllInterface() { dllExports = new DllExports(); }
+
+		#region callBacks
+		public void setCall_msg(DllExports.Dg_void_string_MsgType_bool dg) { dllExports.call_msg = dg; }
+		public void setCall_getCoords(DllExports.Dg_Point_void dg) { dllExports.call_getCoords = dg; }
+		public void setCall_enterPlannerMode(DllExports.Dg_void_void dg) { dllExports.call_enterPlannerMode = dg; }
+		public void setEvent_playerMoved(DllExports.Dg_void_int dg) { dllExports.event_playerMoved = dg; }
+		public void setEvent_boardCreated(DllExports.Dg_void_int dg) { dllExports.event_boardCreated = dg; }
+		#endregion
+
+		#region dllFunctions
 		//uruchamia grę, przyjmuje strukturę callBacków i dane inicjalizacyjne
-		public void runProgram(InitData initData, CallBacks callBacks) {
-			DllImports.runProgram(initData, callBacks);
+		public void runProgram(InitData initData) {
+			if (dllExports.call_msg == null || dllExports.call_getCoords == null || dllExports.call_enterPlannerMode == null)
+				throw new InvalidOperationException("Necessary callback uninitialized");
+			else
+				DllImports.runProgram(initData, dllExports.callBacks);
 		}
 
 		//sprawdza możliwość położenia statku o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
@@ -104,5 +121,7 @@ namespace CsharpCLI {
 		public int getShipCount(int boardId) {
 			return DllImports.getShipCount(boardId);
 		}
+		#endregion
+
 	}
 }

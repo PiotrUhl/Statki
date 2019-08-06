@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallBacks.cs" />
+    <Compile Include="DllExports.cs" />
     <Compile Include="DllImports.cs" />
     <Compile Include="DllInterface.cs" />
     <Compile Include="Program.cs" />
