@@ -6,24 +6,24 @@ namespace CsharpCLI {
 
 	using static Const;
 
-	class DllInterface {
+	static class DllInterface {
 
-		DllExports dllExports;
+		static DllExports dllExports;
 
 		//konstruktor
-		public DllInterface() { dllExports = new DllExports(); }
+		static DllInterface() { dllExports = new DllExports(); }
 
 		#region callBacks
-		public void setCall_msg(DllExports.Dg_void_string_MsgType_bool dg) { dllExports.call_msg = dg; }
-		public void setCall_getCoords(DllExports.Dg_Point_void dg) { dllExports.call_getCoords = dg; }
-		public void setCall_enterPlannerMode(DllExports.Dg_void_void dg) { dllExports.call_enterPlannerMode = dg; }
-		public void setEvent_playerMoved(DllExports.Dg_void_int dg) { dllExports.event_playerMoved = dg; }
-		public void setEvent_boardCreated(DllExports.Dg_void_int dg) { dllExports.event_boardCreated = dg; }
+		static public void setCall_msg(DllExports.Dg_void_string_MsgType_bool dg) { dllExports.call_msg = dg; }
+		static public void setCall_getCoords(DllExports.Dg_Point_void dg) { dllExports.call_getCoords = dg; }
+		static public void setCall_enterPlannerMode(DllExports.Dg_void_void dg) { dllExports.call_enterPlannerMode = dg; }
+		static public void setEvent_playerMoved(DllExports.Dg_void_int dg) { dllExports.event_playerMoved = dg; }
+		static public void setEvent_boardCreated(DllExports.Dg_void_int dg) { dllExports.event_boardCreated = dg; }
 		#endregion
 
 		#region dllFunctions
 		//uruchamia grę, przyjmuje strukturę callBacków i dane inicjalizacyjne
-		public void runProgram(InitData initData) {
+		static public void runProgram(InitData initData) {
 			if (dllExports.call_msg == null || dllExports.call_getCoords == null || dllExports.call_enterPlannerMode == null)
 				throw new InvalidOperationException("Necessary callback uninitialized");
 			else
@@ -31,47 +31,47 @@ namespace CsharpCLI {
 		}
 
 		//sprawdza możliwość położenia statku o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
-		public bool checkShipPlacement(int shipSize, int x, int y, char direction) {
+		static public bool checkShipPlacement(int shipSize, int x, int y, char direction) {
 			return DllImports.checkShipPlacement(shipSize, x, y, direction);
 		}
 
 		//umieszcza statkek o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
-		public bool placeShip(int shipSize, int x, int y, char direction) {
+		static public bool placeShip(int shipSize, int x, int y, char direction) {
 			return DllImports.placeShip(shipSize, x, y, direction);
 		}
 
 		//wypełnia planszę losowo używając algorytmu
-		public void fillRandom() {
+		static public void fillRandom() {
 			DllImports.fillRandom();
 		}
 
 		//zwraca gracza obecnie wykonującego ruch (bądź 0 dla niewłaściwej części gry)
-		public int getCurrentPlayer() {
+		static public int getCurrentPlayer() {
 			return DllImports.getCurrentPlayer();
 		}
 
 		//zwraca typ gracza 'playerId' bądź NONE w przypadku niewłaściwego gracza
-		public PlayerType getPlayerType(int playerId) {
+		static public PlayerType getPlayerType(int playerId) {
 			return DllImports.getPlayerType(playerId);
 		}
 
 		//zwraca id planszy w którą strzelono jako ostatnią (bądź 0 jeżeli nie strzelano)
-		public int getLastShotBoard() {
+		static public int getLastShotBoard() {
 			return DllImports.getLastShotBoard();
 		}
 
 		//zwraca miejsce ostatniego strzału w planszę 'boardId'; dla 'boardId' = 0 zwraca miejsce ostatniego strzału
-		public Point getLastShotPoint(int boardId) {
+		static public Point getLastShotPoint(int boardId = 0) {
 			return DllImports.getLastShotPoint(boardId);
 		}
 
 		//zwraca wynik ostatniego strzału w planszę 'boardId'; dla 'boardId' = 0 zwraca wynik ostatniego strzału
-		public ShotResult getLastShotResult(int boardId) {
+		static public ShotResult getLastShotResult(int boardId = 0) {
 			return DllImports.getLastShotResult(boardId);
 		}
 
 		//zwraca obraz planszy 'boardId'
-		public unsafe byte[ , ] getBoardImage(int boardId) {
+		static public unsafe byte[ , ] getBoardImage(int boardId) {
 			byte[,] tab = new byte[BOARDSIZE, BOARDSIZE];
 			fixed (void* ptr = &tab[0,0]) {
 				DllImports.getBoardImage(new IntPtr(ptr), boardId);
@@ -80,12 +80,12 @@ namespace CsharpCLI {
 		}
 
 		//zwraca obraz punktu 'point' na planszy 'boardId'
-		public byte getSquareImage(int boardId, Point point) {
+		static public byte getSquareImage(int boardId, Point point) {
 			return DllImports.getSquareImage(boardId, point);
 		}
 
 		//zwraca mapę strzałów planszy 'boardId'
-		public unsafe ShotResult[ , ] getShotMap(int boardId) {
+		static public unsafe ShotResult[ , ] getShotMap(int boardId) {
 			ShotResult[,] tab = new ShotResult[BOARDSIZE, BOARDSIZE];
 			fixed (void* ptr = &tab[0, 0]) {
 				DllImports.getShotMap(new IntPtr(ptr), boardId);
@@ -94,17 +94,17 @@ namespace CsharpCLI {
 		}
 
 		//zwraca informację o strzale w pole 'point' na planszy 'boardId'
-		public ShotResult getSquareShot(int boardId, Point point) {
+		static public ShotResult getSquareShot(int boardId, Point point) {
 			return DllImports.getSquareShot(boardId, point);
 		}
 
 		//zwraca informacje o statku leżącym na polu 'point' na planszy 'boardId'
-		public ShipInfo getSquareShip(int boardId, Point point) {
+		static public ShipInfo getSquareShip(int boardId, Point point) {
 			return DllImports.getSquareShip(boardId, point);
 		}
 
 		//zwraca listę informacji o wszystkich statkach na planszy 'boardId'
-		public unsafe List<ShipInfo> getShipList(int boardId) {
+		static public unsafe List<ShipInfo> getShipList(int boardId) {
 			int shipCount = DllImports.getShipCount(boardId);
 			ShipInfo[] tab = new ShipInfo[shipCount];
 			fixed (void* ptr = &tab[0]) {
@@ -118,7 +118,7 @@ namespace CsharpCLI {
 		}
 
 		//zwraca liczbę statków na planszy 'boardId'
-		public int getShipCount(int boardId) {
+		static public int getShipCount(int boardId) {
 			return DllImports.getShipCount(boardId);
 		}
 		#endregion
