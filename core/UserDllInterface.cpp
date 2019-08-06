@@ -96,7 +96,7 @@ ShotResult UserDllInterface::getLastShotResult(int boardId) const {
 //zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
 void UserDllInterface::getBoardImage(unsigned char* outbuffer, int boardId) const {
 	boost::multi_array<unsigned char, 2> image = game->getBoardImage(boardId);
-	memcpy(outbuffer, image.origin(), image.size()*sizeof(unsigned char));
+	memcpy(outbuffer, image.origin(), image.num_elements()*sizeof(unsigned char));
 }
 //zwraca obraz punktu 'point' na planszy 'boardId'
 unsigned char UserDllInterface::getSquareImage(int boardId, Point point) const {

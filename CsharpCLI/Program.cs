@@ -2,12 +2,12 @@
 
 namespace CsharpCLI {
 
+	using static Const;
+
 	static class Const { public const int BOARDSIZE = 10; }; //rozmiar planszy - stała globalna - C# jest upośledzony
 
 	class Program {
 		static void Main(string[] args) {
-			Console.WriteLine("Hello World!");
-			Console.ReadKey();
 			DllInterface.setCall_msg(fun_msg);
 			DllInterface.setCall_enterPlannerMode(fun_enterPlannerMode);
 			DllInterface.setCall_getCoords(fun_getCoords);
@@ -18,6 +18,15 @@ namespace CsharpCLI {
 				player2type = PlayerType.AI
 			};
 			DllInterface.runProgram(initData);
+		}
+
+		static void printBoardImage(byte[ , ] image) {
+			for (int i = 0; i < BOARDSIZE; i++) {
+				for (int j = 0; j < BOARDSIZE; j++) {
+					Console.Write("{0,3} ", image[i, j]);
+				}
+				Console.WriteLine();
+			}
 		}
 
 		static void fun_msg(string msg, MsgType type, bool critical) {
@@ -43,12 +52,14 @@ namespace CsharpCLI {
 
 		static void fun_boardCreated(int boardId) {
 			Console.WriteLine("Board {0} created", boardId);
+			printBoardImage(DllInterface.getBoardImage(boardId));
 		}
 
 		static void fun_playerMoved(int playerId) {
 			Point point = DllInterface.getLastShotPoint();
 			ShotResult result = DllInterface.getLastShotResult();
 			Console.WriteLine("Player " + playerId + " shooted field (" + point.x + ", " + point.y + ") with result: " + result + ".");
+			printBoardImage(DllInterface.getBoardImage(DllInterface.getLastShotBoard()));
 		}
 	}
 

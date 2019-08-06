@@ -138,9 +138,4 @@
       <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="BoardImageRules.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-  </ItemGroup>
 </Project>

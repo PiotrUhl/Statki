@@ -192,9 +192,6 @@
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="UserDllInterface.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="BoardImageRules.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
