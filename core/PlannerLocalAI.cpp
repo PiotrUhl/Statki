@@ -4,6 +4,7 @@
 
 PlannerLocalAI::PlannerLocalAI(BoardLocal& _board) : PlannerLocal(_board), placeableMap(boost::extents[BOARDSIZE][BOARDSIZE]) {
 	srand((unsigned int)time(NULL));
+	initializeplaceableMap();
 }
 
 void PlannerLocalAI::initializeplaceableMap() {
