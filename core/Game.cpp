@@ -129,7 +129,7 @@ void Game::initialization() {
 	if (board2 == nullptr)
 		mainInterface.msg("An error has occured during initialization board for player 2", MsgType::ERROR, true);
 	else
-		mainInterface.event_boardCreated(1);
+		mainInterface.event_boardCreated(2);
 	//Inicjalizacja graczy
 	initializePlayers();
 	//Sprawdzanie poprawnoœci inicjalizacji graczy

@@ -32,8 +32,8 @@ void UserDllInterface::event_playerMoved(int playerId) {
 
 //event - ukoñczono tworzenie planszy 'boardId'
 void UserDllInterface::event_boardCreated(int boardId) {
-	if (callBack.out_event_playerMoved != nullptr)
-		callBack.out_event_playerMoved(boardId);
+	if (callBack.out_event_boardCreated != nullptr)
+		callBack.out_event_boardCreated(boardId);
 }
 
 #pragma endregion
