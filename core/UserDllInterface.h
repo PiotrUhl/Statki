@@ -36,10 +36,10 @@ public:
 #pragma region IDLLInterface
 	//uruchamia grê
 	void runProgram(InitData, IDllInterface::CallBacks);
-	//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction
-	bool checkShipPlacement(int shipSize, int x, int y, Direction direction);
-	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction; zwraca rezultat
-	bool placeShip(int shipSize, int x, int y, Direction direction);
+	//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze 'shipSize' w polu 'point', w kierunku 'direction'
+	bool checkShipPlacement(int shipSize, Point point, Direction direction);
+	//umieszcza statkek o rozmiarze 'shipSize' w polu 'point', w kierunku 'direction'; zwraca rezultat
+	bool placeShip(int shipSize, Point point, Direction direction);
 	//wype³nia planszê losowo u¿ywaj¹c algorytmu
 	void fillRandom();
 

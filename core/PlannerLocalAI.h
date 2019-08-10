@@ -21,5 +21,5 @@ private:
 	int randomNumber(int b); //losuje losow¹ liczbê naturaln¹ z zakresu <1, b>
 	Point convert(int r, ShipPlacement sp); //konwertuje liczbê naturaln¹ "r" na punkt dla danego u³o¿enia statku "sp"
 	ShipPlacement encode(int size, Direction direction); //konwertuje rozmiar i kierunek na odpowiedni ShipPlacement
-	void updatePlaceableMap(int size, Direction direction, int x, int y); //aktualizuje tablicê placeableMap po postawieniu statku
+	void updatePlaceableMap(int size, Direction direction, Point point); //aktualizuje tablicê placeableMap po postawieniu statku
 };

@@ -29,8 +29,8 @@ public:
 	Point getLastShotPoint() const;
 	//zwraca lastShotResult
 	ShotResult getLastShotResult() const;
-	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
-	virtual ShotResult shot(int x, int y) = 0;
+	//strzela w pole 'point'; zwraca rezultat
+	virtual ShotResult shot(Point point) = 0;
 	//zwraca obraz planszy
 	virtual boost::multi_array<unsigned char, 2> getImage() const = 0;
 	//zwraca obraz pola 'point'

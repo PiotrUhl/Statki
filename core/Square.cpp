@@ -96,7 +96,7 @@ Direction Square::getDirection() const {
 //zwraca informacje o statku le¿¹cym na polu
 ShipInfo Square::getShipInfo() const {
 	if (ship == nullptr)
-		return ShipInfo{ 0, 0, 0, Direction::NONE, false };
+		return ShipInfo{ 0, { 0, 0 }, Direction::NONE, false };
 	else
 		return ship->getShipInfo();
 }

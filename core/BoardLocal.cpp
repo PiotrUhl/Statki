@@ -10,23 +10,26 @@ BoardLocal::~BoardLocal() {}
 boost::multi_array<Square, 2>::array_view<1>::type BoardLocal::operator[](size_t index) {
 	return board[boost::indices[index][boost::multi_array_types::index_range(0, BOARDSIZE)]];
 }
+Square & BoardLocal::operator[](Point point) {
+	return board[point.y][point.x];
+}
 
 #include "Ship.h"
 
-//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction; zwraca rezultat
-bool BoardLocal::placeShip(int shipSize, int x, int y, Direction direction) {
-	if ((x < 0) || (y < 0) || (direction == Direction::HORIZONTAL && x + shipSize - 1 >= BOARDSIZE) || (direction == Direction::VERTICAL && y + shipSize - 1 >= BOARDSIZE)) //próba umieszczenia statku poza plansz¹
+//umieszcza statkek o rozmiarze "shipSize" w polu 'point', w kierunku direction; zwraca rezultat
+bool BoardLocal::placeShip(int shipSize, Point point, Direction direction) {
+	if ((point.x < 0) || (point.y < 0) || (direction == Direction::HORIZONTAL && point.x + shipSize - 1 >= BOARDSIZE) || (direction == Direction::VERTICAL && point.y + shipSize - 1 >= BOARDSIZE)) //próba umieszczenia statku poza plansz¹
 		return false;
-	std::shared_ptr<Ship> newShip = std::make_shared<Ship>(shipSize, Point{x, y}, direction);
+	std::shared_ptr<Ship> newShip = std::make_shared<Ship>(shipSize, point, direction);
 	if (direction == Direction::HORIZONTAL)
 		for (int i = 0; i < shipSize; i++) {
-			board[y][x + i].set(newShip);
-			newShip->addLocation(&(board[y][x + i]));
+			board[point.y][point.x + i].set(newShip);
+			newShip->addLocation(&(board[point.y][point.x + i]));
 		}
 	else if (direction == Direction::VERTICAL)
 		for (int i = 0; i < shipSize; i++) {
-			board[y + i][x].set(newShip);
-			newShip->addLocation(&(board[y + i][x]));
+			board[point.y + i][point.x].set(newShip);
+			newShip->addLocation(&(board[point.y + i][point.x]));
 		}
 	else
 		throw (std::invalid_argument("Incorrect ship direction"));
@@ -36,20 +39,20 @@ bool BoardLocal::placeShip(int shipSize, int x, int y, Direction direction) {
 	return true;
 }
 
-//usuwa statkek z pola (x, y)
-bool BoardLocal::removeShip(int x, int y) {
-	if (board[y][x].getSunk() == false) {
+//usuwa statkek z pola 'point'
+bool BoardLocal::removeShip(Point point) {
+	if (board[point.y][point.x].getSunk() == false) {
 		unsunkShips--;
 	}
-	list.remove_if([x, y](std::shared_ptr<Ship> v) { //usuñ statek z listy
-		Point point = v->getPoint();
-		if (point.x == x && point.y == y)
+	list.remove_if([point](std::shared_ptr<Ship> v) { //usuñ statek z listy
+		Point vPoint = v->getPoint();
+		if (vPoint.x == point.x && vPoint.y == point.y)
 			return true;
 		else
 			return false;
 	});
 	shipCount--;
-	return board[y][x].removeShip();
+	return board[point.y][point.x].removeShip();
 }
 
 //zwraca informacje o statku le¿¹cym na polu 'point'
@@ -99,14 +102,14 @@ unsigned char BoardLocal::getSquareImage(Point point) const {
 	}
 }
 
-//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
-ShotResult BoardLocal::shot(int x, int y) {
-	lastShotPoint = Point{x, y};
-	shotMap[y][x] = board[y][x].shot(); //strzel w dane pole
-	if (shotMap[y][x] == ShotResult::SUNK)
+//strzela w pole 'point'; zwraca rezultat
+ShotResult BoardLocal::shot(Point point) {
+	lastShotPoint = point;
+	shotMap[point.y][point.x] = board[point.y][point.x].shot(); //strzel w dane pole
+	if (shotMap[point.y][point.x] == ShotResult::SUNK)
 		unsunkShips--;
-	lastShotResult = shotMap[y][x];
-	return shotMap[y][x];
+	lastShotResult = shotMap[point.y][point.x];
+	return shotMap[point.y][point.x];
 }
 
 //zwraca listê informacji o wszystkich statkach na planszy

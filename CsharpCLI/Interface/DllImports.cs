@@ -9,13 +9,13 @@ namespace CsharpCLI {
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void runProgram(InitData initData, CallBacks callBacks);
 
-		//sprawdza możliwość położenia statku o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction
+		//sprawdza możliwość położenia statku o rozmiarze 'shipSize' w polu 'point', w kierunku 'direction'
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern bool checkShipPlacement(int shipSize, int x, int y, Direction direction);
+		public static extern bool checkShipPlacement(int shipSize, Point point, Direction direction);
 
-		//umieszcza statkek o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction; zwraca rezultat
+		//umieszcza statkek o rozmiarze 'shipSize' w polu 'point', w kierunku 'direction'; zwraca rezultat
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern bool placeShip(int shipSize, int x, int y, Direction direction);
+		public static extern bool placeShip(int shipSize, Point point, Direction direction);
 
 		//wypełnia planszę losowo używając algorytmu
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]

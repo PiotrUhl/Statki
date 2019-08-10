@@ -25,8 +25,7 @@ namespace CsharpCLI {
 	[StructLayout(LayoutKind.Sequential)]
 	public struct ShipInfo {
 		public int size;
-		public int x;
-		public int y;
+		public Point point;
 		public Direction direction;
 		public bool sunk;
 	};

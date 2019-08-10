@@ -7,8 +7,8 @@ BoardRemote::BoardRemote() : Board() {}
 //destruktor
 BoardRemote::~BoardRemote() {}
 
-//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat (INetInterface)
-ShotResult BoardRemote::shot(int x, int y) {
+//strzela w pole 'point'; zwraca rezultat (INetInterface)
+ShotResult BoardRemote::shot(Point point) {
 	return ShotResult::MISS; //temp
 }
 #endif

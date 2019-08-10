@@ -19,7 +19,7 @@ PlayerAI::~PlayerAI() {}
 void PlayerAI::move() {
 	if (finishMode == false) {
 		Point point = chooseSquare();
-		ShotResult result = otherBoard.shot(point.x, point.y);
+		ShotResult result = otherBoard.shot(point);
 		if (result == ShotResult::HIT)
 			setFinishMode(point);
 		updateShootableMap(point, result);
@@ -30,7 +30,7 @@ void PlayerAI::move() {
 	}
 	else {
 		Point point = chooseFinish();
-		ShotResult result = otherBoard.shot(point.x, point.y);
+		ShotResult result = otherBoard.shot(point);
 		//finishList.remove(point); //usuñ punkt z listy //Point nie ma przeci¹¿onego operatora == => u¿yto .remove_if
 		finishList.remove_if([point](Point v) {
 			if (v.x == point.x && v.y == point.y)
@@ -94,8 +94,6 @@ void PlayerAI::move() {
 		}
 		updateShootableMap(point, result);
 		lastShotPoint = point;
-		//lastShotPoint.y = point.y;
-		//lastShotPoint.x = point.x;
 		lastShotResult = result;
 	}
 }

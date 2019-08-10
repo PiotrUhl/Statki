@@ -20,8 +20,7 @@ struct InitData {
 
 struct ShipInfo {
 	int size;
-	int x;
-	int y;
+	Point point;
 	Direction direction;
 	bool sunk;
 };

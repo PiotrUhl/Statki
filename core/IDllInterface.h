@@ -22,10 +22,10 @@ namespace IDllInterface {
 	extern "C" {
 		//uruchamia grê, przyjmuje strukturê callBacków
 		__declspec(dllexport) void runProgram(InitData, CallBacks);
-		//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction
-		__declspec(dllexport) bool checkShipPlacement(int shipSize, int x, int y, Direction direction);
-		//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction; zwraca rezultat
-		__declspec(dllexport) bool placeShip(int shipSize, int x, int y, Direction direction);
+		//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu 'point', w kierunku direction
+		__declspec(dllexport) bool checkShipPlacement(int shipSize, Point point, Direction direction);
+		//umieszcza statkek o rozmiarze "shipSize" w polu 'point', w kierunku direction; zwraca rezultat
+		__declspec(dllexport) bool placeShip(int shipSize, Point point, Direction direction);
 		//wype³nia planszê losowo u¿ywaj¹c algorytmu
 		__declspec(dllexport) void fillRandom(void);
 

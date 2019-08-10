@@ -61,8 +61,7 @@ bool Ship::checkSunk() {
 ShipInfo Ship::getShipInfo() const {
 	ShipInfo ret;
 	ret.size = size;
-	ret.x = startingPoint.x;
-	ret.y = startingPoint.y;;
+	ret.point = startingPoint;
 	ret.direction = direction;
 	ret.sunk = sunk;
 	return ret;

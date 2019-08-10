@@ -92,7 +92,7 @@ ShotResult Game::getSquareShot(int boardId, Point point) const {
 ShipInfo Game::getSquareShip(int boardId, Point point) const {
 	const Board* board = findBoardById(boardId);
 	if (board == nullptr)
-		return ShipInfo{ 0, 0, 0, Direction::NONE, false };
+		return ShipInfo{ 0, { 0, 0 }, Direction::NONE, false };
 	else
 		return board->getSquareShip(point);
 }

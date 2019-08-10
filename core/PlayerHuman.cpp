@@ -12,7 +12,7 @@ void PlayerHuman::move() {
 	ShotResult shotResult;
 	//strza³ i obs³uga b³êdów
 	try {
-		shotResult = otherBoard.shot(point.x, point.y);
+		shotResult = otherBoard.shot(point);
 		lastShotPoint = point;
 		lastShotResult = shotResult;
 	}

@@ -31,7 +31,7 @@ namespace CsharpCLI {
 
 		static void printShipList(List<ShipInfo> list) {
 			foreach (ShipInfo k in list) {
-				Console.WriteLine("Size: " + k.size + "; Point: (" + k.x + "," + k.y + "); Direction: " + k.direction + "; Sunk: " + k.sunk + ".");
+				Console.WriteLine("Size: " + k.size + "; Point: (" + k.point.x + "," + k.point.y + "); Direction: " + k.direction + "; Sunk: " + k.sunk + ".");
 			}
 		}
 

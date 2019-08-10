@@ -13,16 +13,17 @@ public:
 	~BoardLocal();
 	//przeci¹¿ony operator []
 	boost::multi_array<Square, 2>::array_view<1>::type operator[](size_t);
-	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction; zwraca rezultat
-	bool placeShip(int shipSize, int x, int y, Direction direction);
-	//usuwa statkek z pola ("x", "y")
-	bool removeShip(int x, int y);
+	Square& operator[](Point);
+	//umieszcza statkek o rozmiarze "shipSize" w polu 'point', w kierunku direction; zwraca rezultat
+	bool placeShip(int shipSize, Point point, Direction direction);
+	//usuwa statkek z pola 'point;
+	bool removeShip(Point point);
 	//zwraca obraz planszy
 	boost::multi_array<unsigned char, 2> getImage() const override;
 	//zwraca obraz pola 'point'
 	unsigned char getSquareImage(Point point) const override;
-	//strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
-	ShotResult shot(int x, int y) override;
+	//strzela w pole 'point'; zwraca rezultat
+	ShotResult shot(Point point) override;
 	//zwraca listê informacji o wszystkich statkach na planszy
 	std::list<ShipInfo> getShipList() const; //zaimplementowaæ po przeniesieniu listy statków do klas potomnych
 	//zwraca informacje o statku le¿¹cym na polu 'point'
