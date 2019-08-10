@@ -1,10 +1,7 @@
 #include "Board.h"
 
-//najwy¿sze id planszy
-int Board::lastId = 0;
-
 //konstruktor
-Board::Board() : id(++lastId), shipCount(0), unsunkShips(0), shotMap(boost::extents[BOARDSIZE][BOARDSIZE]), lastShotPoint(Point{ BOARDSIZE, BOARDSIZE }), lastShotResult(ShotResult::NONE) {
+Board::Board() : shipCount(0), unsunkShips(0), shotMap(boost::extents[BOARDSIZE][BOARDSIZE]), lastShotPoint(Point{ BOARDSIZE, BOARDSIZE }), lastShotResult(ShotResult::NONE) {
 	for (auto k : shotMap)
 		for (auto l : k)
 			l = ShotResult::NONE;
@@ -12,11 +9,6 @@ Board::Board() : id(++lastId), shipCount(0), unsunkShips(0), shotMap(boost::exte
 
 //destruktor
 Board::~Board() {}
-
-//zwraca numer identyfikacyjny planszy
-int Board::getId() {
-	return id;
-}
 
 //zwraca wartoœæ pola unsunkShips
 bool Board::getUnsunkShips() {

@@ -1,55 +1,73 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace CsharpCLI {
-	static class CoreDll {
-		[StructLayout(LayoutKind.Sequential)]
-		public struct Point {
-			public int x;
-			public int y;
-		}
-		#region DllImport
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern bool getOutFlag();
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int getOutBuffer();
-		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void resetOutFlag();
-		[DllImport(@"C:\Users\Piotr\source\repos\Statki\Debug\core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void runProgram();
-		#endregion
+	using System.Collections.Generic;
+	using static Const;
 
-		private static Thread gameThread; //wątek wykonujący główny proces gry
-		//uruchamia główny proces gry na wątku gameThread
-		public static void runCore() {
-			gameThread = new Thread(runProgram);
-			gameThread.Start();
-		}
-		//czeka aż w buforze wyjściowym będą dane i zwraca je
-		public static int readOut() {
-			while (gameThread.IsAlive && getOutFlag() == false);
-			if (gameThread.IsAlive == false)
-				throw new InvalidOperationException("gameThread is dead");
-			int data = getOutBuffer();
-			resetOutFlag();
-			return data;
-		}
-		//zwraca wartość flagi bufora wyjściowego
-		public static bool tryOut() {
-			if (!gameThread.IsAlive)
-				throw new InvalidOperationException("gameThread is dead");
-			else
-				return getOutFlag();
-		}
-		//zwraca informacje czy wątek gameThread jest aktywny
-		public static bool IsAlive() {
-			return gameThread.IsAlive;
-		}
-	}
+	static class Const { public const int BOARDSIZE = 10; }; //rozmiar planszy - stała globalna - C# jest upośledzony
+
 	class Program {
 		static void Main(string[] args) {
-				
+			DllInterface.setCall_msg(fun_msg);
+			DllInterface.setCall_enterPlannerMode(fun_enterPlannerMode);
+			DllInterface.setCall_getCoords(fun_getCoords);
+			DllInterface.setEvent_boardCreated(fun_boardCreated);
+			DllInterface.setEvent_playerMoved(fun_playerMoved);
+			InitData initData = new InitData {
+				player1type = PlayerType.HUMAN,
+				player2type = PlayerType.AI
+			};
+			DllInterface.runProgram(initData);
+		}
+
+		static void printBoardImage(byte[ , ] image) {
+			for (int i = 0; i < BOARDSIZE; i++) {
+				for (int j = 0; j < BOARDSIZE; j++) {
+					Console.Write("{0,3} ", image[i, j]);
+				}
+				Console.WriteLine();
+			}
+		}
+
+		static void printShipList(List<ShipInfo> list) {
+			foreach (ShipInfo k in list) {
+				Console.WriteLine("Size: " + k.size + "; Point: (" + k.x + "," + k.y + "); Direction: " + Convert.ToChar(k.direction) + "; Sunk: " + k.sunk + ".");
+			}
+		}
+
+		static void fun_msg(string msg, MsgType type, bool critical) {
+			Console.WriteLine(msg);
+			if (critical)
+				Environment.Exit(1);
+		}
+
+		static void fun_enterPlannerMode() {
+			Console.WriteLine("Entered into Planner Mode");
+			DllInterface.fillRandom();
+			Console.WriteLine("Filled Randomly");
+		}
+
+		static Point fun_getCoords() {
+			Console.Write("(x, y): ");
+			string[] input = Console.ReadLine().TrimStart().Split(' ');
+			Point ret = new Point();
+			ret.x = Convert.ToInt32(input[0]);
+			ret.y = Convert.ToInt32(input[1]);
+			return ret;
+		}
+
+		static void fun_boardCreated(int boardId) {
+			Console.WriteLine("Board {0} created", boardId);
+			printBoardImage(DllInterface.getBoardImage(boardId));
+		}
+
+		static void fun_playerMoved(int playerId) {
+			Point point = DllInterface.getLastShotPoint();
+			ShotResult result = DllInterface.getLastShotResult();
+			Console.WriteLine("Player " + playerId + " shooted field (" + point.x + ", " + point.y + ") with result: " + result + ".");
+			printBoardImage(DllInterface.getBoardImage(DllInterface.getLastShotBoard()));
+			//printShipList(DllInterface.getShipList(DllInterface.getLastShotBoard()));
 		}
 	}
+
 }

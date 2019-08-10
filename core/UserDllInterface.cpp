@@ -8,20 +8,15 @@ UserDllInterface& UserDllInterface::getInstance() { //pobierz instancje klasy
 
 #pragma region IUserInterface
 
-//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-void UserDllInterface::error(const char* error, bool critical) {
-	callBack.out_error(error, critical);
-}
-
-//rejestruje id planszy w interfejsie
-void UserDllInterface::registerBoard(int nr, int id) {
-	callBack.out_registerBoard(nr, id);
+//wysy³a do interfejsu wiadomoœæ o treœci 'msg' o typie 'type'; je¿eli 'critical' przerywa dzia³anie programu
+void UserDllInterface::msg(const char* msg, MsgType type, bool critical) {
+	callBack.out_msg(msg, type, critical);
 }
 
 //przekazuje planszê 'board' do utworzenia
 void UserDllInterface::makeBoard(BoardLocal& board) {
 	currentPlanner = std::make_unique<PlannerLocal>(board);
-	callBack.out_plannerMode();
+	callBack.out_enterPlannerMode();
 }
 
 //pobiera wspó³rzêdne strza³u
@@ -29,40 +24,16 @@ Point UserDllInterface::getShotCoords() {
 	return callBack.out_getCoords();
 }
 
-//poinformuj interfejs o zmianie na planszy
-void UserDllInterface::boardChanged(int id, std::list<ShipInfo> shipList, boost::multi_array<ShotResult, 2> shotMap) {
-	int shipSize = shipList.size();
-	ShipInfo** shipTab = new ShipInfo*[shipSize];
-	int i = 0;
-	for (auto k : shipList) {
-		ShipInfo* temp = new ShipInfo;
-		*temp = k;
-		shipTab[i++] = temp;
-	}
-	unsigned char* shotTab = new unsigned char[BOARDSIZE*BOARDSIZE];
-	for (int i = 0; i < BOARDSIZE; i++) {
-		for (int j = 0; j < BOARDSIZE; j++) {
-			shotTab[i*BOARDSIZE + j] = static_cast<unsigned char>(shotMap[i][j]);
-		}
-	}
-	callBack.out_sendShipsInfo(shipTab, shipSize, id);
-	callBack.out_sendShotMap(shotTab, BOARDSIZE*BOARDSIZE, id);
-	for (int i = 0; i < shipSize; i++) {
-		delete[] shipTab[i];
-	}
-	delete[] shipTab;
-	delete[] shotTab;
+//event - ruch gracza 'playerId'
+void UserDllInterface::event_playerMoved(int playerId) {
+	if (callBack.out_event_playerMoved != nullptr)
+		callBack.out_event_playerMoved(playerId);
 }
 
-//przekazuje informacje o zakoñczeniu gry
-void UserDllInterface::gameEnded(char winner) {
-	//wywo³anie delegaty
-	callBack.out_error("UserDllInterface::gameEnded() unimplemented!", true);
-}
-
-//zg³asza do interfejsu wyniki strza³u
-void UserDllInterface::sendShotInfo(int id, Point point, ShotResult result) {
-	callBack.out_sendShotInfo(id, point, result);
+//event - ukoñczono tworzenie planszy 'boardId'
+void UserDllInterface::event_boardCreated(int boardId) {
+	if (callBack.out_event_boardCreated != nullptr)
+		callBack.out_event_boardCreated(boardId);
 }
 
 #pragma endregion
@@ -125,7 +96,7 @@ ShotResult UserDllInterface::getLastShotResult(int boardId) const {
 //zapisuje obraz planszy 'boardId' do bufora 'outbuffer'
 void UserDllInterface::getBoardImage(unsigned char* outbuffer, int boardId) const {
 	boost::multi_array<unsigned char, 2> image = game->getBoardImage(boardId);
-	memcpy(outbuffer, image.origin(), image.size()*sizeof(unsigned char));
+	memcpy(outbuffer, image.origin(), image.num_elements()*sizeof(unsigned char));
 }
 //zwraca obraz punktu 'point' na planszy 'boardId'
 unsigned char UserDllInterface::getSquareImage(int boardId, Point point) const {
@@ -153,7 +124,7 @@ void UserDllInterface::getShipList(ShipInfo* outbuffer, int boardId) const {
 	std::list<ShipInfo> shipList = game->getShipList(boardId);
 	auto iter = shipList.begin(); //iterator
 	for (size_t i = 0; i < shipList.size(); i++) {
-		std::memcpy(&outbuffer[0], &*iter, sizeof(ShipInfo));
+		std::memcpy(&outbuffer[i], &*iter, sizeof(ShipInfo));
 		iter++;
 	}
 }

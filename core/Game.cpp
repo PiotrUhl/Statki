@@ -118,25 +118,24 @@ int Game::getShipCount(int boardId) const {
 #include "CreatorBoard.h"
 //czêœæ gry - inicjalizacja
 void Game::initialization() {
-	//Tworzenie plansz graczy
+	//Tworzenie plansz graczy i kontrola poprawnoœci
 	board1 = CreatorBoard(mainInterface).makeBoard(player1Type);
-	board2 = CreatorBoard(mainInterface).makeBoard(player2Type);
-	//Sprawdzanie poprawnoœci utworzenia plansz i rejestracja plansz w interfejsie
 	if (board1 == nullptr)
-		mainInterface.error("An error has occured during initialization board for player 1", true);
+		mainInterface.msg("An error has occured during initialization board for player 1", MsgType::ERROR, true);
 	else
-		mainInterface.registerBoard(1, board1->getId());
+		mainInterface.event_boardCreated(1);
+	board2 = CreatorBoard(mainInterface).makeBoard(player2Type);
 	if (board2 == nullptr)
-		mainInterface.error("An error has occured during initialization board for player 2", true);
+		mainInterface.msg("An error has occured during initialization board for player 2", MsgType::ERROR, true);
 	else
-		mainInterface.registerBoard(2, board2->getId());
+		mainInterface.event_boardCreated(2);
 	//Inicjalizacja graczy
 	initializePlayers();
 	//Sprawdzanie poprawnoœci inicjalizacji graczy
 	if (player1 == nullptr)
-		mainInterface.error("An error has occured during initialization player 1", true);
+		mainInterface.msg("An error has occured during initialization player 1", MsgType::ERROR, true);
 	if (player2 == nullptr)
-		mainInterface.error("An error has occured during initialization player 2", true);
+		mainInterface.msg("An error has occured during initialization player 2", MsgType::ERROR, true);
 }
 
 //czêœæ gry - g³ówna pêtla
@@ -147,11 +146,13 @@ char Game::loop() {
 		currentPlayer = 1;
 		player1->move();
 		lastShotBoard = 2;
-		mainInterface.sendShotInfo(player1->getOtherBoardId(), player1->getLastShotPoint(), player1->getLastShotResult());
+		mainInterface.event_playerMoved(1);
+		//mainInterface.sendShotInfo(2, player1->getLastShotPoint(), player1->getLastShotResult());
 		currentPlayer = 2;
 		player2->move();
 		lastShotBoard = 1;
-		mainInterface.sendShotInfo(player2->getOtherBoardId(), player2->getLastShotPoint(), player2->getLastShotResult());
+		mainInterface.event_playerMoved(2);
+		//mainInterface.sendShotInfo(1, player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
 				winner = 3; //remis
@@ -171,11 +172,11 @@ char Game::loop() {
 //czêœæ gry - zakoñczenie
 void Game::ending(char winner) {
 	if (winner == 1)
-		mainInterface.error("Wygrana", false);
+		mainInterface.msg("Wygrana", MsgType::INFO, false);
 	else if (winner == 2)
-		mainInterface.error("Przegrana", false);
+		mainInterface.msg("Przegrana", MsgType::INFO, false);
 	else
-		mainInterface.error("Remis", false);
+		mainInterface.msg("Remis", MsgType::INFO, false);
 }
 
 //#include "UserDllInterface.h"
@@ -224,10 +225,12 @@ Board* Game::findBoardById(int boardId) {
 
 //zwraca referencje na planszê o podanym id
 const Board* Game::findBoardById(int boardId) const {
-	if (board1->getId() == boardId)
+	switch (boardId) {
+	case 1:
 		return board1.get();
-	else if (board2->getId() == boardId)
+	case 2:
 		return board2.get();
-	else
+	default:
 		return nullptr;
+	}
 }

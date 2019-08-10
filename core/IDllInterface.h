@@ -6,20 +6,17 @@ namespace IDllInterface {
 
 	//wskaŸniki na callbacki
 	struct CallBacks {
-		//rejestruje id planszy
-		void(__stdcall *out_registerBoard)(int, int);
+		//wysy³a do interfejsu wiadomoœæ o treœci 'msg' o typie 'type'; je¿eli 'critical' przerywa dzia³anie programu
+		void(__stdcall *out_msg)(const char* msg, MsgType type, bool critical);
 		//pobiera wspó³rzêdne
-		Point(__stdcall *out_getCoords)(void);
-		//wysy³a do wypisania informacje o statkach
-		void(__stdcall *out_sendShipsInfo)(ShipInfo**, int, int);
-		//wysy³a do wypisania obraz planszy
-		void(__stdcall *out_sendShotMap)(unsigned char*, int, int);
-		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-		void(__stdcall *out_error)(const char*, bool);
-		//wypisuje na ekranie b³¹d "error'; "critical" przerywa dzia³anie programu
-		void(__stdcall *out_plannerMode)(void);
-		//zg³asza do interfejsu wyniki strza³u
-		void(__stdcall *out_sendShotInfo)(int, Point, ShotResult);
+		Point (__stdcall *out_getCoords)(void);
+		//przechodzi w tryb rêcznego tworzenia planszy
+		void(__stdcall *out_enterPlannerMode)(void);
+
+		//event - ruch gracza 'playerId'
+		void(__stdcall *out_event_playerMoved)(int playerId);
+		//event - ukoñczono tworzenie planszy 'boardId'
+		void(__stdcall *out_event_boardCreated)(int boardId);
 	};
 
 	extern "C" {
