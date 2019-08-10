@@ -64,10 +64,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CallBacks.cs" />
-    <Compile Include="DllExports.cs" />
-    <Compile Include="DllImports.cs" />
-    <Compile Include="DllInterface.cs" />
+    <Compile Include="Interface\CallBacks.cs" />
+    <Compile Include="Interface\DllExports.cs" />
+    <Compile Include="Interface\DllImports.cs" />
+    <Compile Include="Interface\DllInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="structs.cs" />
