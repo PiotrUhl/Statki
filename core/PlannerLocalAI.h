@@ -3,6 +3,7 @@
 #include <bitset>
 
 class PlannerLocalAI : private PlannerLocal {
+	static bool randomInitialized; //czy zainicjalizowano generator liczb losowych
 private:
 	enum class ShipPlacement {H2 = 0, V2, H3, V3, H4, V4, H5, V5};
 	boost::multi_array<std::bitset<8>, 2> placeableMap; //mapa pamiêtaj¹ca gdzie mo¿na postawiæ statek o danym rozmiarze w danym kierunku

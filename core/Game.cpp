@@ -118,14 +118,13 @@ int Game::getShipCount(int boardId) const {
 #include "CreatorBoard.h"
 //czêœæ gry - inicjalizacja
 void Game::initialization() {
-	//Tworzenie plansz graczy
+	//Tworzenie plansz graczy i kontrola poprawnoœci
 	board1 = CreatorBoard(mainInterface).makeBoard(player1Type);
-	board2 = CreatorBoard(mainInterface).makeBoard(player2Type);
-	//Sprawdzanie poprawnoœci utworzenia plansz
 	if (board1 == nullptr)
 		mainInterface.msg("An error has occured during initialization board for player 1", MsgType::ERROR, true);
-	else 
+	else
 		mainInterface.event_boardCreated(1);
+	board2 = CreatorBoard(mainInterface).makeBoard(player2Type);
 	if (board2 == nullptr)
 		mainInterface.msg("An error has occured during initialization board for player 2", MsgType::ERROR, true);
 	else

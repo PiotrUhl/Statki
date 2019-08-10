@@ -2,8 +2,13 @@
 #include <ctime>
 #include <cstdlib>
 
+bool PlannerLocalAI::randomInitialized = false; //czy zainicjalizowano generator liczb losowych
+
 PlannerLocalAI::PlannerLocalAI(BoardLocal& _board) : PlannerLocal(_board), placeableMap(boost::extents[BOARDSIZE][BOARDSIZE]) {
-	srand((unsigned int)time(NULL));
+	if (randomInitialized == false) {
+		srand((unsigned int)time(NULL));
+		randomInitialized = true;
+	}
 }
 
 void PlannerLocalAI::initializeplaceableMap() {
