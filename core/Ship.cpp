@@ -1,7 +1,7 @@
 #include "Ship.h"
 #include "Square.h"
 //konstruktor
-Ship::Ship(int _size, Point _point, char _direction) : size(_size), startingPoint(_point), direction(_direction), damage(0), sunk(false) {}
+Ship::Ship(int _size, Point _point, Direction _direction) : size(_size), startingPoint(_point), direction(_direction), damage(0), sunk(false) {}
 
 //destruktor
 Ship::~Ship() {}
@@ -38,6 +38,10 @@ Point Ship::getPoint() const {
 //zwraca sunk
 bool Ship::getSunk() const {
 	return sunk;
+}
+//zwraca direction
+Direction Ship::getDirection() const {
+	return direction;
 }
 
 //dodaje informacje o polu na którym le¿y statek

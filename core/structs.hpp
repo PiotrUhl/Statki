@@ -4,6 +4,8 @@ enum class PlayerType : char { NONE = 0, HUMAN, AI, REMOTE };
 
 enum class ShotResult : char { NONE = 0, MISS, HIT, SUNK };
 
+enum class Direction : char { NONE = 0, HORIZONTAL = 'H', VERTICAL = 'V' };
+
 enum class MsgType : char { NONE = 0, INFO, WARNING, ERROR }; //typ wiadomoœci dla metody IUserInterface::msg()
 
 struct Point {
@@ -20,6 +22,6 @@ struct ShipInfo {
 	int size;
 	int x;
 	int y;
-	char direction;
+	Direction direction;
 	bool sunk;
 };

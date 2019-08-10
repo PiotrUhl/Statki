@@ -48,12 +48,12 @@ void UserDllInterface::runProgram(InitData init, IDllInterface::CallBacks callBa
 
 #include "PlannerLocal.h"
 //sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
-bool UserDllInterface::checkShipPlacement(int shipSize, int x, int y, char direction) {
+bool UserDllInterface::checkShipPlacement(int shipSize, int x, int y, Direction direction) {
 	return currentPlanner->checkPlacement(shipSize, x, y, direction);
 }
 
 //umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
-bool UserDllInterface::placeShip(int shipSize, int x, int y, char direction) {
+bool UserDllInterface::placeShip(int shipSize, int x, int y, Direction direction) {
 	return currentPlanner->place(shipSize, x, y, direction);
 }
 #include "PlannerLocalAI.h"

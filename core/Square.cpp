@@ -88,11 +88,15 @@ bool Square::getSunk() const {
 	else
 		return ship->getSunk();
 }
+//zwraca kierunek po³ozenia statku na danym polu
+Direction Square::getDirection() const {
+	return ship->getDirection();
+}
 
 //zwraca informacje o statku le¿¹cym na polu
 ShipInfo Square::getShipInfo() const {
 	if (ship == nullptr)
-		return ShipInfo{0,0,0,0,0};
+		return ShipInfo{ 0, 0, 0, Direction::NONE, false };
 	else
 		return ship->getShipInfo();
 }

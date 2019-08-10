@@ -30,13 +30,13 @@ namespace CsharpCLI {
 				DllImports.runProgram(initData, dllExports.callBacks);
 		}
 
-		//sprawdza możliwość położenia statku o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
-		static public bool checkShipPlacement(int shipSize, int x, int y, char direction) {
+		//sprawdza możliwość położenia statku o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction
+		static public bool checkShipPlacement(int shipSize, int x, int y, Direction direction) {
 			return DllImports.checkShipPlacement(shipSize, x, y, direction);
 		}
 
-		//umieszcza statkek o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
-		static public bool placeShip(int shipSize, int x, int y, char direction) {
+		//umieszcza statkek o rozmiarze "shipSize" w polu o współrzędnych ("x", "y"), w kierunku direction; zwraca rezultat
+		static public bool placeShip(int shipSize, int x, int y, Direction direction) {
 			return DllImports.placeShip(shipSize, x, y, direction);
 		}
 

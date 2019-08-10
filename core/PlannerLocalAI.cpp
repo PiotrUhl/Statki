@@ -102,12 +102,12 @@ BoardLocal& PlannerLocalAI::getBoard() const {
 
 //umieszcza na planszy statek o rozmiarze size
 bool PlannerLocalAI::placeShip(int size) {
-	char direction;
+	Direction direction;
 	ShipPlacement placement;
 	if (randomNumber(2) == 1)
-		direction = 'H';
+		direction = Direction::HORIZONTAL;
 	else
-		direction = 'V';
+		direction = Direction::VERTICAL;
 	placement = encode(size, direction);
 	if (placeableSquares[static_cast<int>(placement)] == 0)
 		return false;
@@ -145,9 +145,9 @@ Point PlannerLocalAI::convert(int r, ShipPlacement sp) {
 }
 
 //konwertuje rozmiar i kierunek na odpowiedni ShipPlacement
-PlannerLocalAI::ShipPlacement PlannerLocalAI::encode(int size, char direction) {
+PlannerLocalAI::ShipPlacement PlannerLocalAI::encode(int size, Direction direction) {
 	if (size == 5) {
-		if (direction == 'H') {
+		if (direction == Direction::HORIZONTAL) {
 			return ShipPlacement::H5;
 		}
 		else {
@@ -155,7 +155,7 @@ PlannerLocalAI::ShipPlacement PlannerLocalAI::encode(int size, char direction) {
 		}
 	}
 	else if (size == 4) {
-		if (direction == 'H') {
+		if (direction == Direction::HORIZONTAL) {
 			return ShipPlacement::H4;
 		}
 		else {
@@ -163,7 +163,7 @@ PlannerLocalAI::ShipPlacement PlannerLocalAI::encode(int size, char direction) {
 		}
 	}
 	else if (size == 3) {
-		if (direction == 'H') {
+		if (direction == Direction::HORIZONTAL) {
 			return ShipPlacement::H3;
 		}
 		else {
@@ -171,7 +171,7 @@ PlannerLocalAI::ShipPlacement PlannerLocalAI::encode(int size, char direction) {
 		}
 	}
 	else {
-		if (direction == 'H') {
+		if (direction == Direction::HORIZONTAL) {
 			return ShipPlacement::H2;
 		}
 		else {
@@ -181,10 +181,10 @@ PlannerLocalAI::ShipPlacement PlannerLocalAI::encode(int size, char direction) {
 }
 
 //aktualizuje tablicê placeableMap po postawieniu statku
-void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) {
+void PlannerLocalAI::updatePlaceableMap(int size, Direction direction, int x, int y) {
 	int ysize = 1;
 	int xsize = 1;
-	if (direction == 'H')
+	if (direction == Direction::HORIZONTAL)
 		xsize = size;
 	else
 		ysize = size;
@@ -206,51 +206,51 @@ void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) 
 		if (i < 0 || i >= BOARDSIZE) //sprawdzenie wykroczenia w pionie
 			continue;
 		if (!(x - 2 < 0)) {
-			if (placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))]) {
-				placeableMap[i][x - 2][static_cast<int>(encode(2, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(2, 'H'))]--;
+			if (placeableMap[i][x - 2][static_cast<int>(encode(2, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 2][static_cast<int>(encode(2, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(2, Direction::HORIZONTAL))]--;
 			}
-			if (placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))]) {
-				placeableMap[i][x - 2][static_cast<int>(encode(3, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(3, 'H'))]--;
+			if (placeableMap[i][x - 2][static_cast<int>(encode(3, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 2][static_cast<int>(encode(3, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(3, Direction::HORIZONTAL))]--;
 			}
-			if (placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))]) {
-				placeableMap[i][x - 2][static_cast<int>(encode(4, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
+			if (placeableMap[i][x - 2][static_cast<int>(encode(4, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 2][static_cast<int>(encode(4, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(4, Direction::HORIZONTAL))]--;
 			}
-			if (placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))]) {
-				placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
+			if (placeableMap[i][x - 2][static_cast<int>(encode(5, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 2][static_cast<int>(encode(5, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(5, Direction::HORIZONTAL))]--;
 			}
 		}
 		if (!(x - 3 < 0)) {
-			if (placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))]) {
-				placeableMap[i][x - 3][static_cast<int>(encode(3, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(3, 'H'))]--;
+			if (placeableMap[i][x - 3][static_cast<int>(encode(3, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 3][static_cast<int>(encode(3, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(3, Direction::HORIZONTAL))]--;
 			}
-			if (placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))]) {
-				placeableMap[i][x - 3][static_cast<int>(encode(4, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
+			if (placeableMap[i][x - 3][static_cast<int>(encode(4, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 3][static_cast<int>(encode(4, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(4, Direction::HORIZONTAL))]--;
 			}
-			if (placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))]) {
-				placeableMap[i][x - 3][static_cast<int>(encode(5, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
+			if (placeableMap[i][x - 3][static_cast<int>(encode(5, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 3][static_cast<int>(encode(5, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(5, Direction::HORIZONTAL))]--;
 			}
 		}
 		if (!(x - 4 < 0)) {
-			if (placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))]) {
-				placeableMap[i][x - 4][static_cast<int>(encode(4, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(4, 'H'))]--;
+			if (placeableMap[i][x - 4][static_cast<int>(encode(4, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 4][static_cast<int>(encode(4, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(4, Direction::HORIZONTAL))]--;
 			}
-			if (placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))]) {
-				placeableMap[i][x - 4][static_cast<int>(encode(5, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
+			if (placeableMap[i][x - 4][static_cast<int>(encode(5, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 4][static_cast<int>(encode(5, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(5, Direction::HORIZONTAL))]--;
 			}
 		}
 		if (!(x - 5 < 0)) {
-			if (placeableMap[i][x - 2][static_cast<int>(encode(5, 'H'))]) {
-				placeableMap[i][x - 5][static_cast<int>(encode(5, 'H'))] = false;
-				placeableSquares[static_cast<int>(encode(5, 'H'))]--;
+			if (placeableMap[i][x - 2][static_cast<int>(encode(5, Direction::HORIZONTAL))]) {
+				placeableMap[i][x - 5][static_cast<int>(encode(5, Direction::HORIZONTAL))] = false;
+				placeableSquares[static_cast<int>(encode(5, Direction::HORIZONTAL))]--;
 			}
 		}
 	}
@@ -259,51 +259,51 @@ void PlannerLocalAI::updatePlaceableMap(int size, char direction, int x, int y) 
 		if (j < 0 || j >= BOARDSIZE) //sprawdzenie wykroczenia w poziomie
 			continue;
 		if (!(y - 2 < 0)) {
-			if (placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))]) {
-				placeableMap[y - 2][j][static_cast<int>(encode(2, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(2, 'V'))]--;
+			if (placeableMap[y - 2][j][static_cast<int>(encode(2, Direction::VERTICAL))]) {
+				placeableMap[y - 2][j][static_cast<int>(encode(2, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(2, Direction::VERTICAL))]--;
 			}
-			if (placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))]) {
-				placeableMap[y - 2][j][static_cast<int>(encode(3, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(3, 'V'))]--;
+			if (placeableMap[y - 2][j][static_cast<int>(encode(3, Direction::VERTICAL))]) {
+				placeableMap[y - 2][j][static_cast<int>(encode(3, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(3, Direction::VERTICAL))]--;
 			}
-			if (placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))]) {
-				placeableMap[y - 2][j][static_cast<int>(encode(4, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
+			if (placeableMap[y - 2][j][static_cast<int>(encode(4, Direction::VERTICAL))]) {
+				placeableMap[y - 2][j][static_cast<int>(encode(4, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(4, Direction::VERTICAL))]--;
 			}
-			if (placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))]) {
-				placeableMap[y - 2][j][static_cast<int>(encode(5, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
+			if (placeableMap[y - 2][j][static_cast<int>(encode(5, Direction::VERTICAL))]) {
+				placeableMap[y - 2][j][static_cast<int>(encode(5, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(5, Direction::VERTICAL))]--;
 			}
 		}
 		if (!(y - 3 < 0)) {
-			if (placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))]) {
-				placeableMap[y - 3][j][static_cast<int>(encode(3, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(3, 'V'))]--;
+			if (placeableMap[y - 3][j][static_cast<int>(encode(3, Direction::VERTICAL))]) {
+				placeableMap[y - 3][j][static_cast<int>(encode(3, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(3, Direction::VERTICAL))]--;
 			}
-			if (placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))]) {
-				placeableMap[y - 3][j][static_cast<int>(encode(4, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
+			if (placeableMap[y - 3][j][static_cast<int>(encode(4, Direction::VERTICAL))]) {
+				placeableMap[y - 3][j][static_cast<int>(encode(4, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(4, Direction::VERTICAL))]--;
 			}
-			if (placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))]) {
-				placeableMap[y - 3][j][static_cast<int>(encode(5, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
+			if (placeableMap[y - 3][j][static_cast<int>(encode(5, Direction::VERTICAL))]) {
+				placeableMap[y - 3][j][static_cast<int>(encode(5, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(5, Direction::VERTICAL))]--;
 			}
 		}
 		if (!(y - 4 < 0)) {
-			if (placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))]) {
-				placeableMap[y - 4][j][static_cast<int>(encode(4, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(4, 'V'))]--;
+			if (placeableMap[y - 4][j][static_cast<int>(encode(4, Direction::VERTICAL))]) {
+				placeableMap[y - 4][j][static_cast<int>(encode(4, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(4, Direction::VERTICAL))]--;
 			}
-			if (placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))]) {
-				placeableMap[y - 4][j][static_cast<int>(encode(5, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
+			if (placeableMap[y - 4][j][static_cast<int>(encode(5, Direction::VERTICAL))]) {
+				placeableMap[y - 4][j][static_cast<int>(encode(5, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(5, Direction::VERTICAL))]--;
 			}
 		}
 		if (!(y - 5 < 0)) {
-			if (placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))]) {
-				placeableMap[y - 5][j][static_cast<int>(encode(5, 'V'))] = false;
-				placeableSquares[static_cast<int>(encode(5, 'V'))]--;
+			if (placeableMap[y - 5][j][static_cast<int>(encode(5, Direction::VERTICAL))]) {
+				placeableMap[y - 5][j][static_cast<int>(encode(5, Direction::VERTICAL))] = false;
+				placeableSquares[static_cast<int>(encode(5, Direction::VERTICAL))]--;
 			}
 		}
 	}

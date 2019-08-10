@@ -6,6 +6,8 @@ namespace CsharpCLI {
 
 	public enum ShotResult : byte { NONE = 0, MISS, HIT, SUNK };
 
+	public enum Direction : byte { NONE = 0, HORIZONTAL = (byte)'H', VERTICAL = (byte)'V' };
+
 	public enum MsgType : byte { NONE = 0, INFO, WARNING, ERROR }; //typ wiadomości dla metody IUserInterface::msg()
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -25,7 +27,7 @@ namespace CsharpCLI {
 		public int size;
 		public int x;
 		public int y;
-		public byte direction;
+		public Direction direction;
 		public bool sunk;
 	};
 }

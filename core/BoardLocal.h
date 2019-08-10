@@ -13,8 +13,8 @@ public:
 	~BoardLocal();
 	//przeci¹¿ony operator []
 	boost::multi_array<Square, 2>::array_view<1>::type operator[](size_t);
-	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
-	bool placeShip(int shipSize, int x, int y, char direction);
+	//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction; zwraca rezultat
+	bool placeShip(int shipSize, int x, int y, Direction direction);
 	//usuwa statkek z pola ("x", "y")
 	bool removeShip(int x, int y);
 	//zwraca obraz planszy
@@ -29,7 +29,4 @@ public:
 	ShipInfo getSquareShip(Point point) const override;
 	//usuwa ca³¹ zawartoœæ planszy
 	void clear();
-private:
-	//okreœla kierunek statku le¿¹cego na polu  ("x", "y")
-	char findDirection(int x, int y) const;
 };

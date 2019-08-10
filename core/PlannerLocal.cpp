@@ -4,16 +4,16 @@
 //konstruktor
 PlannerLocal::PlannerLocal(BoardLocal& _board) : board(_board) {}
 
-//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo)
-bool PlannerLocal::checkPlacement(int shipSize, int x, int y, char direction = 'H') {
+//sprawdza mo¿liwoœæ po³o¿enia statku o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction
+bool PlannerLocal::checkPlacement(int shipSize, int x, int y, Direction direction = Direction::HORIZONTAL) {
 	for (int i = 0; i < shipSize; i++) { //dla ka¿dego pola na którym ma le¿eæ statek
 		int _x; //wspó³rzêdna x œrodka sprawdzanego kwadratu
 		int _y; //wspó³rzêdna y œrodka sprawdzanego kwadratu
-		if (direction == 'H') {
+		if (direction == Direction::HORIZONTAL) {
 			_x = x + i;
 			_y = y;
 		}
-		else if (direction == 'V') {
+		else if (direction == Direction::VERTICAL) {
 			_x = x;
 			_y = y + i;
 		}
@@ -32,8 +32,8 @@ bool PlannerLocal::checkPlacement(int shipSize, int x, int y, char direction = '
 	}
 	return true;
 }
-//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
-bool PlannerLocal::place(int shipSize, int x, int y, char direction) {
+//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ; zwraca rezultat
+bool PlannerLocal::place(int shipSize, int x, int y, Direction direction) {
 	if (checkPlacement(shipSize, x, y, direction) == false)
 		return false;
 	return board.placeShip(shipSize, x, y, direction);

@@ -1,5 +1,5 @@
 #pragma once
-#include "structs.hpp"
+#include "structs.hpp" //Point, Direction
 #include <vector> //std::vector
 
 class Square;
@@ -10,11 +10,11 @@ private:
 	std::vector<Square*> location; //po³o¿enie statku (pola na których le¿y)
 	int damage; //iloœæ trafieñ przyjêtych przez statek
 	Point startingPoint; //punkt pocz¹tkowy statku (lewy górny)
-	char direction; //kierunek po³o¿enia statku {H, V}
+	Direction direction; //kierunek po³o¿enia statku
 	bool sunk; //czy statek jest zatopiony
 public:
 	//konstruktor
-	Ship(int _size, Point _point, char _direction);
+	Ship(int _size, Point _point, Direction _direction);
 	//destruktor
 	~Ship();
 	//trafiono w statek; zwraca czy zatopiono statek
@@ -27,6 +27,8 @@ public:
 	Point getPoint() const;
 	//zwraca sunk
 	bool getSunk() const;
+	//zwraca direction
+	Direction getDirection() const;
 	//dodaje informacje o polu na którym le¿y statek
 	void addLocation(Square*);
 	//zwraca strukturê z informacjami o statku

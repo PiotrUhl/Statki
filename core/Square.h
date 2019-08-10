@@ -34,6 +34,8 @@ public:
 	int getSize() const;
 	//zwraca czy statek na danym polu jest zatopiony
 	bool getSunk() const;
+	//zwraca kierunek po³ozenia statku na danym polu
+	Direction getDirection() const;
 	//zwraca informacje o statku le¿¹cym na polu
 	ShipInfo getShipInfo() const;
 };

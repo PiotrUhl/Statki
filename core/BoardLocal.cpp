@@ -13,17 +13,17 @@ boost::multi_array<Square, 2>::array_view<1>::type BoardLocal::operator[](size_t
 
 #include "Ship.h"
 
-//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction ('H' - poziomo, 'V' - pionowo); zwraca rezultat
-bool BoardLocal::placeShip(int shipSize, int x, int y, char direction) {
-	if ((x < 0) || (y < 0) || (direction == 'H' && x + shipSize - 1 >= BOARDSIZE) || (direction == 'V' && y + shipSize - 1 >= BOARDSIZE)) //próba umieszczenia statku poza plansz¹
+//umieszcza statkek o rozmiarze "shipSize" w polu o wspó³rzêdnych ("x", "y"), w kierunku direction; zwraca rezultat
+bool BoardLocal::placeShip(int shipSize, int x, int y, Direction direction) {
+	if ((x < 0) || (y < 0) || (direction == Direction::HORIZONTAL && x + shipSize - 1 >= BOARDSIZE) || (direction == Direction::VERTICAL && y + shipSize - 1 >= BOARDSIZE)) //próba umieszczenia statku poza plansz¹
 		return false;
 	std::shared_ptr<Ship> newShip = std::make_shared<Ship>(shipSize, Point{x, y}, direction);
-	if (direction == 'H')
+	if (direction == Direction::HORIZONTAL)
 		for (int i = 0; i < shipSize; i++) {
 			board[y][x + i].set(newShip);
 			newShip->addLocation(&(board[y][x + i]));
 		}
-	else if (direction == 'V')
+	else if (direction == Direction::VERTICAL)
 		for (int i = 0; i < shipSize; i++) {
 			board[y + i][x].set(newShip);
 			newShip->addLocation(&(board[y + i][x]));
@@ -80,7 +80,7 @@ unsigned char BoardLocal::getSquareImage(Point point) const {
 	}
 	else { //pole niepuste
 		char ret = 0;
-		if (findDirection(point.x, point.y) == 'H') { //statek poziomo
+		if (board[point.y][point.x].getDirection() == Direction::HORIZONTAL) { //statek poziomo
 			ret += 10;
 		}
 		else { //statek pionowo
@@ -97,19 +97,6 @@ unsigned char BoardLocal::getSquareImage(Point point) const {
 		ret += board[point.y][point.x].getSize();
 		return ret;
 	}
-}
-
-//okreœla kierunek statku le¿¹cego na polu  ("x", "y")
-char BoardLocal::findDirection(int x, int y) const {
-	if (x > 0 && board[y][x - 1] != nullptr)
-		return 'H';
-	if (x < BOARDSIZE - 1 && board[y][x + 1] != nullptr)
-		return 'H';
-	if (y > 0 && board[y - 1][x] != nullptr)
-		return 'V';
-	if (y < BOARDSIZE - 1 && board[y + 1][x] != nullptr)
-		return 'V';
-	return 255; //b³ad
 }
 
 //strzela w pole planszy o wspó³rzêdnych (x, y); zwraca rezultat
