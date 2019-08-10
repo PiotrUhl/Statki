@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace CsharpCLI {
-
+	using System.Collections.Generic;
 	using static Const;
 
 	static class Const { public const int BOARDSIZE = 10; }; //rozmiar planszy - stała globalna - C# jest upośledzony
@@ -26,6 +26,12 @@ namespace CsharpCLI {
 					Console.Write("{0,3} ", image[i, j]);
 				}
 				Console.WriteLine();
+			}
+		}
+
+		static void printShipList(List<ShipInfo> list) {
+			foreach (ShipInfo k in list) {
+				Console.WriteLine("Size: " + k.size + "; Point: (" + k.x + "," + k.y + "); Direction: " + Convert.ToChar(k.direction) + "; Sunk: " + k.sunk + ".");
 			}
 		}
 
@@ -59,7 +65,8 @@ namespace CsharpCLI {
 			Point point = DllInterface.getLastShotPoint();
 			ShotResult result = DllInterface.getLastShotResult();
 			Console.WriteLine("Player " + playerId + " shooted field (" + point.x + ", " + point.y + ") with result: " + result + ".");
-			printBoardImage(DllInterface.getBoardImage(DllInterface.getLastShotBoard()));
+			//printBoardImage(DllInterface.getBoardImage(DllInterface.getLastShotBoard()));
+			printShipList(DllInterface.getShipList(DllInterface.getLastShotBoard()));
 		}
 	}
 

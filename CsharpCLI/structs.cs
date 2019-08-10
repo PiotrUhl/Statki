@@ -25,7 +25,7 @@ namespace CsharpCLI {
 		public int size;
 		public int x;
 		public int y;
-		public char direction;
+		public byte direction;
 		public bool sunk;
 	};
 }

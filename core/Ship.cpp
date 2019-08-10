@@ -14,6 +14,7 @@ bool Ship::hit() {
 	if (checkSunk()) {
 		for (auto k : location)
 			 k->setToSunk(); //informuje pola na planszy o zatopieniu statku
+		sunk = true;
 		return true;
 	}
 	else

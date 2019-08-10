@@ -124,7 +124,7 @@ void UserDllInterface::getShipList(ShipInfo* outbuffer, int boardId) const {
 	std::list<ShipInfo> shipList = game->getShipList(boardId);
 	auto iter = shipList.begin(); //iterator
 	for (size_t i = 0; i < shipList.size(); i++) {
-		std::memcpy(&outbuffer[0], &*iter, sizeof(ShipInfo));
+		std::memcpy(&outbuffer[i], &*iter, sizeof(ShipInfo));
 		iter++;
 	}
 }
