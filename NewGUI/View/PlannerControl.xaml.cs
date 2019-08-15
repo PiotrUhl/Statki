@@ -14,14 +14,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace NewGUI.View {
-	public partial class MainWindow : Window {
-		public MainWindow() {
+	/// <summary>
+	/// Interaction logic for PlannerControl.xaml
+	/// </summary>
+	public partial class PlannerControl : UserControl {
+		public PlannerControl() {
 			InitializeComponent();
-			/*LeftGrid.addShip(new Point{	x = 1, y = 5}, 4, Direction.HORIZONTAL);
-			LeftGrid.addShip(new Point{	x = 6, y = 2}, 2, Direction.VERTICAL);
-			LeftGrid.addShip(new Point{	x = 9, y = 3}, 5, Direction.VERTICAL);
-			LeftGrid.removeShip(new Point { x = 1, y = 5 });
-			LeftGrid.clearShips();*/
 		}
 	}
 }

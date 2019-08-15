@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 
 using static NewGUI.Const;
 
-namespace NewGUI {
+namespace NewGUI.View {
 	[ContentProperty(nameof(Children))]
 	public partial class BoardControl : UserControl {
 

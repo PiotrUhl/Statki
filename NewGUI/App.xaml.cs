@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace NewGUI {
 
@@ -17,8 +18,9 @@ namespace NewGUI {
 		[STAThread]
 		static void Main(string[] args) {
 			App app = new App();
-			MainWindow wnd = new MainWindow();
-			app.Run(wnd);
+			View.MainWindow mainWindow = new View.MainWindow();
+			app.Run(mainWindow);
+
 		}
 
 	}

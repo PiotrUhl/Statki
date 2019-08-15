@@ -1,9 +1,9 @@
-﻿<Window x:Class="NewGUI.MainWindow"
+﻿<Window x:Class="NewGUI.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NewGUI"
+        xmlns:local="clr-namespace:NewGUI.View"
         mc:Ignorable="d"
         Title="Statki"
 		Width="Auto" Height="Auto" SizeToContent="WidthAndHeight"
@@ -16,6 +16,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="460"/>
 		</Grid.RowDefinitions>
-		<local:BoardControl x:Name="LeftGrid" Grid.Column="0" Grid.Row="0"/>
+		<local:BoardControl x:Name="leftGrid" Grid.Column="0" Grid.Row="0"/>
+		<local:MenuControl x:Name="starMenu" Grid.Column="1" Grid.Row="0"/>
 	</Grid>
 </Window>

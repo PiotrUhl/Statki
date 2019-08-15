@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace NewGUI {
 	class Board {
 
-		BoardControl view; //powiązana kontrolka w widoku
+		View.BoardControl view; //powiązana kontrolka w widoku
 		int boardId; //id planszy
 		List<ShipInfo> shipList; //lista statków na planszy
 
