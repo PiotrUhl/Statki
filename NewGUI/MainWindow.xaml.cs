@@ -17,6 +17,10 @@ namespace NewGUI {
 	public partial class MainWindow : Window {
 		public MainWindow() {
 			InitializeComponent();
+			Point point = new Point{
+				x = 1, y = 5
+			};
+			LeftGrid.addShip(point, 4, Direction.HORIZONTAL);
 		}
 	}
 }

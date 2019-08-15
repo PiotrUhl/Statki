@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace CsharpCLI {
+namespace NewGUI {
 
 	public enum PlayerType : byte { NONE = 0, HUMAN, AI, REMOTE };
 
