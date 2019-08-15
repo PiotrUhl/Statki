@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace CsharpCLI {
+namespace NewGUI {
 
 	class DllExports {
 

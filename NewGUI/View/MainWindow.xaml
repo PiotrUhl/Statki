@@ -16,8 +16,6 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="460"/>
 		</Grid.RowDefinitions>
-		<local:BoardControl x:Name="LeftGrid" Grid.Column="0" Grid.Row="0">
-
-		</local:BoardControl>
+		<local:BoardControl x:Name="LeftGrid" Grid.Column="0" Grid.Row="0"/>
 	</Grid>
 </Window>

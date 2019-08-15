@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace CsharpCLI {
+namespace NewGUI {
 
 	using static Const;
 
