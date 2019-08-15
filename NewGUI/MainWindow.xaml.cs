@@ -21,6 +21,7 @@ namespace NewGUI {
 				x = 1, y = 5
 			};
 			LeftGrid.addShip(point, 4, Direction.HORIZONTAL);
+			LeftGrid.removeShip(point);
 		}
 	}
 }
