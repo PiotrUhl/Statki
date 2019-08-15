@@ -54,6 +54,7 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Const.cs" />
     <Compile Include="structs.cs" />
     <Page Include="BoardControl.xaml">
       <SubType>Designer</SubType>

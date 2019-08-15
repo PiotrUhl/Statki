@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using static NewGUI.Const;
+
 namespace NewGUI {
 	[ContentProperty(nameof(Children))]
 	public partial class BoardControl : UserControl {
@@ -27,7 +29,7 @@ namespace NewGUI {
 		#endregion
 
 		#region pola
-		private UIElement[ , ] grid = new UIElement[10,10];
+		private UIElement[ , ] grid = new UIElement[BOARDSIZE, BOARDSIZE]; //statki na planszy
 		#endregion
 
 		//konstruktor
@@ -69,7 +71,19 @@ namespace NewGUI {
 
 		//usuwa z planszy statek leżący na polu point
 		public void removeShip(Point point) {
-			BoardGrid.Children.Remove(grid[point.x, point.y]);
+			if (grid[point.x, point.y] != null) {
+				BoardGrid.Children.Remove(grid[point.x, point.y]);
+				grid[point.x, point.y] = null;
+			}
+		}
+
+		//usuwa z planszy wszystkie statki
+		public void clearShips() {
+			for (int i = 0; i < BOARDSIZE; i++ ) {
+				for (int j = 0; j < BOARDSIZE; j++) {
+					removeShip(new Point { x = j, y = i });
+				}
+			}
 		}
     }
 }

@@ -17,11 +17,11 @@ namespace NewGUI {
 	public partial class MainWindow : Window {
 		public MainWindow() {
 			InitializeComponent();
-			Point point = new Point{
-				x = 1, y = 5
-			};
-			LeftGrid.addShip(point, 4, Direction.HORIZONTAL);
-			LeftGrid.removeShip(point);
+			LeftGrid.addShip(new Point{	x = 1, y = 5}, 4, Direction.HORIZONTAL);
+			LeftGrid.addShip(new Point{	x = 6, y = 2}, 2, Direction.VERTICAL);
+			LeftGrid.addShip(new Point{	x = 9, y = 3}, 5, Direction.VERTICAL);
+			LeftGrid.removeShip(new Point { x = 1, y = 5 });
+			LeftGrid.clearShips();
 		}
 	}
 }
