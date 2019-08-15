@@ -14,12 +14,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace NewGUI.View {
-	/// <summary>
-	/// Interaction logic for MenuControl.xaml
-	/// </summary>
 	public partial class MenuControl : UserControl {
 		public MenuControl() {
 			InitializeComponent();
+		}
+
+		private void StartGame_Click(object sender, RoutedEventArgs e) {
+			App.startGame();
 		}
 	}
 }

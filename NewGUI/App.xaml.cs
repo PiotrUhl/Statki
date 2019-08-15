@@ -20,7 +20,10 @@ namespace NewGUI {
 			App app = new App();
 			View.MainWindow mainWindow = new View.MainWindow();
 			app.Run(mainWindow);
+		}
 
+		public static void startGame() {
+			MessageBox.Show("Game started"); //debug
 		}
 
 	}
