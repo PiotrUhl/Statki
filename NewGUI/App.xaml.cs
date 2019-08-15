@@ -7,9 +7,20 @@ using System.Threading.Tasks;
 using System.Windows;
 
 namespace NewGUI {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
+
 	public partial class App : Application {
+
+		App() {
+			InitializeComponent();
+		}
+
+		[STAThread]
+		static void Main(string[] args) {
+			App app = new App();
+			MainWindow wnd = new MainWindow();
+			app.Run(wnd);
+		}
+
 	}
+
 }

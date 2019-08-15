@@ -52,9 +52,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="Board.cs" />
     <Compile Include="View\BoardControl.xaml.cs">
       <DependentUpon>BoardControl.xaml</DependentUpon>
