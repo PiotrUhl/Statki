@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,8 @@ namespace NewGUI.View {
 		#endregion
 
 		#region pola
-		private UIElement[ , ] grid = new UIElement[BOARDSIZE, BOARDSIZE]; //statki na planszy
+		private UIElement[ , ] grid = new UIElement[BOARDSIZE, BOARDSIZE]; 
+		List<Tuple<ShipInfo, UIElement>> list = new List<Tuple<ShipInfo, UIElement>>(); //statki na planszy
 		#endregion
 
 		//konstruktor
@@ -40,50 +42,66 @@ namespace NewGUI.View {
 		}
 
 		//dodaje statek na planszę
-		public void addShip(Point point, int size, Direction direction) {
-			if (grid[point.x, point.y] != null) {
-				throw new ArgumentException(string.Format("Square already occupied"));
+		public void addShip(ShipInfo ship) {
+			if (list.Exists(v => (v.Item1.point.x == ship.point.x && v.Item1.point.y == ship.point.y))) {
+				throw new ArgumentException("Square already occupied");
 			}
-			Rectangle ship = new Rectangle {
+			Rectangle drawObj = new Rectangle {
 				Margin = new Thickness(5),
 				Stroke = Brushes.Black,
 				Fill = Brushes.Black,
 				RadiusX = 30,
 				RadiusY = 30
 			};
-			ship.SetValue(Grid.ColumnProperty, point.x + 1);
-			ship.SetValue(Grid.RowProperty, point.y + 1);
-			switch (direction) {
+			drawObj.SetValue(Grid.ColumnProperty, ship.point.x + 1);
+			drawObj.SetValue(Grid.RowProperty, ship.point.y + 1);
+			switch (ship.direction) {
 				case Direction.HORIZONTAL:
-					ship.SetValue(Grid.ColumnSpanProperty, size);
-					ship.SetValue(Grid.RowSpanProperty, 1);
+					drawObj.SetValue(Grid.ColumnSpanProperty, ship.size);
+					drawObj.SetValue(Grid.RowSpanProperty, 1);
 					break;
 				case Direction.VERTICAL:
-					ship.SetValue(Grid.ColumnSpanProperty, 1);
-					ship.SetValue(Grid.RowSpanProperty, size);
+					drawObj.SetValue(Grid.ColumnSpanProperty, 1);
+					drawObj.SetValue(Grid.RowSpanProperty, ship.size);
 					break;
 				default:
-					throw new ArgumentException(string.Format("Invalid direction"));
+					throw new InvalidEnumArgumentException("Invalid direction");
 			}
-			grid[point.x, point.y] = ship;
-			BoardGrid.Children.Add(ship);
+			Tuple<ShipInfo, UIElement> pair = new Tuple<ShipInfo, UIElement>(ship, drawObj);
+			list.Add(pair);
+			BoardGrid.Children.Add(drawObj);
+		}
+		public void addShip(int _size, Point _point, Direction _direction, bool _sunk = false) {
+			ShipInfo ship = new ShipInfo {
+				size = _size,
+				point = _point,
+				direction = _direction,
+				sunk = _sunk
+			};
+			addShip(ship);
 		}
 
-		//usuwa z planszy statek leżący na polu point
-		public void removeShip(Point point) {
-			if (grid[point.x, point.y] != null) {
-				BoardGrid.Children.Remove(grid[point.x, point.y]);
-				grid[point.x, point.y] = null;
+		//usuwa z planszy statek 'ship'
+		public void removeShip(ShipInfo ship) {
+			List<Tuple<ShipInfo, UIElement>> removeList = list.FindAll(v => v.Item1.size == ship.size && v.Item1.point.x == ship.point.x && v.Item1.point.y == ship.point.y && v.Item1.direction == ship.direction);
+			foreach (Tuple<ShipInfo, UIElement> k in removeList) {
+				BoardGrid.Children.Remove(k.Item2);
+				list.Remove(k);
 			}
+		}
+		//usuwa z planszy statek leżący na polu 'point'
+		public void removeShip(Point point) {
+			Tuple<ShipInfo, UIElement> removeItem = list.Find(v => v.Item1.point.x == point.x && v.Item1.point.y == point.y);
+			BoardGrid.Children.Remove(removeItem.Item2);
+			list.Remove(removeItem);
 		}
 
 		//usuwa z planszy wszystkie statki
 		public void clearShips() {
-			for (int i = 0; i < BOARDSIZE; i++ ) {
-				for (int j = 0; j < BOARDSIZE; j++) {
-					removeShip(new Point { x = j, y = i });
-				}
+			foreach (Tuple<ShipInfo, UIElement> k in list) {
+				BoardGrid.Children.Remove(k.Item2);
 			}
+			list.Clear();
 		}
     }
 }
