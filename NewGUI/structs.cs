@@ -14,12 +14,16 @@ namespace NewGUI {
 	public struct Point {
 		public int x;
 		public int y;
-	};
-
-	[StructLayout(LayoutKind.Sequential)]
-	public struct InitData {
-		public PlayerType player1type;
-		public PlayerType player2type;
+		public Point(int _x, int _y) {
+			x = _x;
+			y = _y;
+		}
+		public static bool operator ==(Point left, Point right) {
+			return left.x == right.x && left.y == right.y;
+		}
+		public static bool operator !=(Point left, Point right) {
+			return left.x != right.x && left.y != right.y;
+		}
 	};
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -28,5 +32,29 @@ namespace NewGUI {
 		public Point point;
 		public Direction direction;
 		public bool sunk;
+		public ShipInfo(int _size, Point _point, Direction _direction, bool _sunk = false) {
+			size = _size;
+			point = _point;
+			direction = _direction;
+			sunk = _sunk;
+		}
+		public ShipInfo(int _size, int x, int y, Direction _direction, bool _sunk = false) {
+			size = _size;
+			point = new Point(x, y);
+			direction = _direction;
+			sunk = _sunk;
+		}
+		public static bool operator ==(ShipInfo left, ShipInfo right) {
+			return left.size == right.size && left.point == right.point && left.direction == right.direction && left.sunk == right.sunk;
+		}
+		public static bool operator !=(ShipInfo left, ShipInfo right) {
+			return left.size != right.size && left.point != right.point && left.direction != right.direction && left.sunk != right.sunk;
+		}
+	};
+
+	[StructLayout(LayoutKind.Sequential)]
+	public struct InitData {
+		public PlayerType player1type;
+		public PlayerType player2type;
 	};
 }
