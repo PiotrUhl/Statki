@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Statki"
 		Width="Auto" Height="Auto" SizeToContent="WidthAndHeight"
-		ResizeMode="CanMinimize">
-	<Grid Name="MainGrid">
+		ResizeMode="CanMinimize" x:Name="mainWindow">
+	<Grid x:Name="mainGrid">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="460"/>
 			<ColumnDefinition Width="460"/>
@@ -17,6 +17,6 @@
 			<RowDefinition Height="460"/>
 		</Grid.RowDefinitions>
 		<local:BoardControl x:Name="leftGrid" Grid.Column="0" Grid.Row="0"/>
-		<local:MenuControl x:Name="starMenu" Grid.Column="1" Grid.Row="0"/>
+		<local:MenuControl x:Name="startMenu" Grid.Column="1" Grid.Row="0"/>
 	</Grid>
 </Window>

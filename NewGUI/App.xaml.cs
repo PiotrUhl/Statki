@@ -11,6 +11,10 @@ namespace NewGUI {
 
 	public partial class App : Application {
 
+		static App app; //statyczny obiekt, niezbędny dla statycznych callbacków
+
+		View.MainWindow mainWindow;
+
 		Board board1;
 		Board board2;
 
@@ -20,14 +24,31 @@ namespace NewGUI {
 
 		[STAThread] //main
 		static void Main(string[] args) {
-			App app = new App();
-			View.MainWindow mainWindow = new View.MainWindow();
-			app.Run(mainWindow);
+			//toadd: testowanie biblioteki .dll
+
+			app = new App();
+			app.mainWindow = new View.MainWindow();
+			app.Run(app.mainWindow);
+		}
+
+		//inicjalizuje callbacki
+		private void initializeCallbacks() {
+			DllInterface.setCall_msg(msg);
+			DllInterface.setCall_enterPlannerMode(enterPlannerMode);
+			DllInterface.setCall_getCoords(getCoords);
+			DllInterface.setEvent_boardCreated(boardCreated);
+			DllInterface.setEvent_playerMoved(playerMoved);
 		}
 
 		//rozpoczyna grę
-		public static void startGame() {
+		public void startGame() {
+			initializeCallbacks();
+			InitData initData = new InitData {
+				player1type = PlayerType.HUMAN,
+				player2type = PlayerType.AI
+			};
 			MessageBox.Show("Game started"); //debug
+			DllInterface.runProgram(initData);
 		}
 
 		//zwraca referencję na planszę o danym id
@@ -39,14 +60,45 @@ namespace NewGUI {
 			else
 				throw new ArgumentException("Invalid boardId");
 		}
+
 		//callback do tworzenia front-endowej wersji planszy
-		public void boardCreated(int boardId) {
-			Board board = selectBoard(boardId);
-			board = new Board(boardId, new View.BoardControl());
+		public static void boardCreated(int boardId) {
+			View.BoardControl view = new View.BoardControl();
+			Board board = new Board(boardId, view);
 			List<ShipInfo> list = DllInterface.getShipList(boardId);
 			foreach (var k in list) {
 				board.add(k);
 			}
+			if (boardId == 1) {
+				app.board1 = board;
+				app.mainWindow.setLeftControl(view);
+			}
+			else if (boardId == 2) {
+				app.board2 = board;
+				app.mainWindow.setRightControl(view);
+			}
+			else
+				throw new ArgumentException("Invalid boardId");
+		}
+
+		//callback do włączenia trybu projektowania planszy
+		public static void enterPlannerMode() {
+			DllInterface.fillRandom();
+		}
+
+		//callback do pobierania współrzędnych strzału
+		public static Point getCoords() {
+			return new Point(0, 0); //temp
+		}
+
+		//callback
+		public static void msg(string msg, MsgType type, bool critical) {
+			MessageBox.Show(msg);
+		}
+
+		//callback
+		public static void playerMoved(int v1) {
+			;
 		}
 	}
 }

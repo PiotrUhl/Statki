@@ -30,7 +30,7 @@ namespace NewGUI.View {
 		#endregion
 
 		#region pola
-		private UIElement[ , ] grid = new UIElement[BOARDSIZE, BOARDSIZE]; 
+		//private UIElement[ , ] grid = new UIElement[BOARDSIZE, BOARDSIZE]; 
 		List<Tuple<ShipInfo, UIElement>> list = new List<Tuple<ShipInfo, UIElement>>(); //statki na planszy
 		#endregion
 

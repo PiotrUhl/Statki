@@ -15,12 +15,15 @@ using System.Windows.Shapes;
 
 namespace NewGUI.View {
 	public partial class MenuControl : UserControl {
+
 		public MenuControl() {
 			InitializeComponent();
 		}
 
+		#region events
 		private void StartGame_Click(object sender, RoutedEventArgs e) {
-			App.startGame();
+			((App)Application.Current).startGame();
 		}
+		#endregion
 	}
 }

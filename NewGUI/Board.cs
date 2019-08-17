@@ -13,6 +13,7 @@ namespace NewGUI {
 
 		//konstruktor
 		public Board(int _boardId, View.BoardControl _view) {
+			shipList = new List<ShipInfo>();
 			boardId = _boardId;
 			view = _view;
 		}

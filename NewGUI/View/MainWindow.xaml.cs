@@ -15,14 +15,29 @@ using System.Windows.Shapes;
 
 namespace NewGUI.View {
 	public partial class MainWindow : Window {
+
+		UIElement leftControl;
+		UIElement rightControl;
+
 		public MainWindow() {
 			InitializeComponent();
-			/*leftGrid.addShip(new ShipInfo { size = 4, point = new Point{ x = 1, y = 5 }, direction = Direction.HORIZONTAL, sunk = false });
-			leftGrid.addShip(2, new Point{ x = 6, y = 2 }, Direction.VERTICAL);
-			leftGrid.addShip(new ShipInfo { size = 5, point = new Point{ x = 9, y = 3 }, direction = Direction.VERTICAL, sunk = false });
-			leftGrid.removeShip(new Point { x = 1, y = 5 });
-			leftGrid.removeShip(new ShipInfo { size = 5, point = new Point { x = 9, y = 3 }, direction = Direction.VERTICAL, sunk = false });
-			leftGrid.clearShips();*/
+			leftControl = leftGrid;
+			rightControl = startMenu;
+		}
+
+		public void setLeftControl(UIElement control) {
+			control.SetValue(Grid.ColumnProperty, 0);
+			control.SetValue(Grid.RowProperty, 0);
+			setGridElement(control, leftControl);
+		}
+		public void setRightControl(UIElement control) {
+			control.SetValue(Grid.ColumnProperty, 1);
+			control.SetValue(Grid.RowProperty, 0);
+			setGridElement(control, rightControl);
+		}
+		private void setGridElement(UIElement control, UIElement old) {
+			mainGrid.Children.Remove(old);
+			mainGrid.Children.Add(control);
 		}
 	}
 }
