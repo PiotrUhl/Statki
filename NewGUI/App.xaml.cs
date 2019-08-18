@@ -113,5 +113,13 @@ namespace NewGUI {
 		public static void playerMoved(int v1) {
 			;
 		}
+
+
+
+		public static void debugShot(object sender, RoutedEventArgs e) {
+			int x = (int)((Button)sender).GetValue(Grid.ColumnProperty);
+			int y = (int)((Button)sender).GetValue(Grid.RowProperty);
+			MessageBox.Show("Kliknięto pole (" + x + "," + y + ").");
+		}
 	}
 }

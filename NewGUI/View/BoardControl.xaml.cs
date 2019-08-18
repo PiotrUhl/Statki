@@ -18,29 +18,31 @@ using System.Windows.Shapes;
 using static NewGUI.Const;
 
 namespace NewGUI.View {
-	[ContentProperty(nameof(Children))]
+	//[ContentProperty(nameof(Children))]
 	public partial class BoardControl : UserControl {
 
 		#region Obsługa potomków w .xaml
-		public static readonly DependencyPropertyKey ChildrenProperty = DependencyProperty.RegisterReadOnly(nameof(Children), typeof(UIElementCollection), typeof(BoardControl), new PropertyMetadata());
+		/*public static readonly DependencyPropertyKey ChildrenProperty = DependencyProperty.RegisterReadOnly(nameof(Children), typeof(UIElementCollection), typeof(BoardControl), new PropertyMetadata());
 		public UIElementCollection Children {
 			get { return (UIElementCollection)GetValue(ChildrenProperty.DependencyProperty); }
 			private set { SetValue(ChildrenProperty, value); }
-		}
+		}*/
 		#endregion
 
 		#region pola
-		//private UIElement[ , ] grid = new UIElement[BOARDSIZE, BOARDSIZE]; 
 		List<Tuple<ShipInfo, UIElement>> list = new List<Tuple<ShipInfo, UIElement>>(); //statki na planszy
+		Button[ , ] buttonTab = new Button[BOARDSIZE, BOARDSIZE];
 		#endregion
 
 		//konstruktor
 		public BoardControl()
         {
             InitializeComponent();
-			Children = BoardGrid.Children;
+			//Children = BoardGrid.Children;
+			generateButtons();
 		}
 
+		#region statki
 		//dodaje statek na planszę
 		public void addShip(ShipInfo ship) {
 			if (list.Exists(v => (v.Item1.point.x == ship.point.x && v.Item1.point.y == ship.point.y))) {
@@ -103,5 +105,37 @@ namespace NewGUI.View {
 			}
 			list.Clear();
 		}
-    }
+		#endregion
+
+		#region przyciski
+		//generuje niewidzialne przyciski na planszy wywołujące zdarzenie 'onClick'
+		private void generateButtons() {
+			for (int i = 0; i < BOARDSIZE; i++) {
+				for (int j = 0; j < BOARDSIZE; j++) {
+					Button button = new Button() {
+						Opacity = 0
+					};
+					button.SetValue(Panel.ZIndexProperty, 1);
+					button.SetValue(Grid.ColumnProperty, j + 1);
+					button.SetValue(Grid.RowProperty, i + 1);
+					buttonTab[i, j] = button;
+				}
+			}
+		}
+
+		//dodaje zdarzenie "onClick" do wszystkich przycisków
+		public void subscribeButtons(RoutedEventHandler onClick) {
+			foreach (var button in buttonTab) {
+				button.IsEnabled = true;
+				button.Click += onClick;
+			}
+		}
+		//usuwa zdarzenie "onClick" z wszystkich przycisków
+		public void unsubscribeButtons(RoutedEventHandler onClick) {
+			foreach (var button in buttonTab) {
+				button.Click -= onClick;
+			}
+		}
+		#endregion
+	}
 }
