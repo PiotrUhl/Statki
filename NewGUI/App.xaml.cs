@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
@@ -93,7 +94,19 @@ namespace NewGUI {
 
 		//callback
 		public static void msg(string msg, MsgType type, bool critical) {
-			MessageBox.Show(msg);
+			switch (type) {
+				case MsgType.INFO:
+					MessageBox.Show(msg, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+					break;
+				case MsgType.WARNING:
+					MessageBox.Show(msg, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+					break;
+				case MsgType.ERROR:
+					MessageBox.Show(msg, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					break;
+				default:
+					throw new InvalidEnumArgumentException("Invalid message type");
+			}
 		}
 
 		//callback
