@@ -110,11 +110,13 @@ namespace NewGUI {
 		}
 
 		//callback
-		public static void playerMoved(int v1) {
-			;
+		public static void playerMoved(int playerId) {
+			Point point = DllInterface.getLastShotPoint();
+			ShotResult result = DllInterface.getLastShotResult();
+			//MessageBox.Show("Player " + playerId + " shooted field (" + point.x + ", " + point.y + ") with result: " + result + ".");
+			Board board = app.selectBoard(DllInterface.getLastShotBoard());
+			board.setState(point, result);
 		}
-
-
 
 		public static void debugShot(object sender, RoutedEventArgs e) {
 			int x = (int)((Button)sender).GetValue(Grid.ColumnProperty);
