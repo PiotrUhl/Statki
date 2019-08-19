@@ -58,6 +58,9 @@
     <Compile Include="View\PlannerControl.xaml.cs">
       <DependentUpon>PlannerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShotMarkControl.xaml.cs">
+      <DependentUpon>ShotMarkControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -83,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PlannerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShotMarkControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
