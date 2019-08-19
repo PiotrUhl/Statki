@@ -32,6 +32,7 @@ namespace NewGUI.View {
 		#region pola
 		List<Tuple<ShipInfo, UIElement>> list = new List<Tuple<ShipInfo, UIElement>>(); //statki na planszy
 		Button[ , ] buttonTab = new Button[BOARDSIZE, BOARDSIZE];
+		ShotMarkControl[ , ] stateTab = new ShotMarkControl[BOARDSIZE, BOARDSIZE];
 		#endregion
 
 		//konstruktor
@@ -57,6 +58,7 @@ namespace NewGUI.View {
 			};
 			drawObj.SetValue(Grid.ColumnProperty, ship.point.x + 1);
 			drawObj.SetValue(Grid.RowProperty, ship.point.y + 1);
+			drawObj.SetValue(Panel.ZIndexProperty, 0);
 			switch (ship.direction) {
 				case Direction.HORIZONTAL:
 					drawObj.SetValue(Grid.ColumnSpanProperty, ship.size);
@@ -107,6 +109,16 @@ namespace NewGUI.View {
 		}
 		#endregion
 
+		#region stan pola
+		public void setState(Point point, ShotResult newState) {
+			stateTab[point.y, point.x] = new ShotMarkControl(newState);
+			stateTab[point.y, point.x].SetValue(Grid.ColumnProperty, point.x + 1);
+			stateTab[point.y, point.x].SetValue(Grid.RowProperty, point.y + 1);
+			stateTab[point.y, point.x].SetValue(Panel.ZIndexProperty, 1);
+			BoardGrid.Children.Add(stateTab[point.y, point.x]);
+		}
+		#endregion
+
 		#region przyciski
 		//generuje niewidzialne przyciski na planszy wywołujące zdarzenie 'onClick'
 		private void generateButtons() {
@@ -115,7 +127,7 @@ namespace NewGUI.View {
 					Button button = new Button() {
 						Opacity = 0
 					};
-					button.SetValue(Panel.ZIndexProperty, 1);
+					button.SetValue(Panel.ZIndexProperty, 2);
 					button.SetValue(Grid.ColumnProperty, j + 1);
 					button.SetValue(Grid.RowProperty, i + 1);
 					buttonTab[i, j] = button;
