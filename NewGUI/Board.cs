@@ -26,7 +26,7 @@ namespace NewGUI {
 		//dodaje statek do planszy
 		public void add(ShipInfo ship) {
 			shipList.Add(ship);
-			view.addShip(ship);
+			view.Dispatcher.Invoke(() => view.addShip(ship));
 		}
 
 		//usuwa statek z planszy
@@ -48,23 +48,23 @@ namespace NewGUI {
 				if (ship.direction == Direction.HORIZONTAL) {
 					for (int i = 0; i < ship.size; i++) {
 						shotMap[ship.point.y, ship.point.x + i] = state;
-						view.setState(ship.point.x + i, ship.point.y, state);
+						view.Dispatcher.Invoke(() => view.setState(ship.point.x + i, ship.point.y, state));
 					}
 				}
 				else if (ship.direction == Direction.VERTICAL) {
 					for (int i = 0; i < ship.size; i++) {
 						shotMap[ship.point.y + i, ship.point.x] = state;
-						view.setState(ship.point.x, ship.point.y + i, state);
+						view.Dispatcher.Invoke(() => view.setState(ship.point.x, ship.point.y + i, state));
 					}
 				}
 				else {
 					throw new InvalidEnumArgumentException("Invalid ShotResult state");
 				}
-				view.sinkShip(ship);
+				view.Dispatcher.Invoke(() => view.sinkShip(ship));
 			}
 			else {
 				shotMap[point.y, point.x] = state;
-				view.setState(point, state);
+				view.Dispatcher.Invoke(() => view.setState(point, state));
 			}
 		}
 	}

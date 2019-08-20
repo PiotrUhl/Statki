@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ namespace NewGUI {
 	public partial class App : Application {
 
 		static App app; //statyczny obiekt, niezbędny dla statycznych callbacków
+		static Thread coreThread;
 
 		View.MainWindow mainWindow;
 
@@ -49,7 +51,9 @@ namespace NewGUI {
 				player2type = PlayerType.AI
 			};
 			MessageBox.Show("Game started"); //debug
-			DllInterface.runProgram(initData);
+			coreThread = new Thread(() => DllInterface.runProgram(initData));
+			coreThread.IsBackground = true;
+			coreThread.Start();
 		}
 
 		//zwraca referencję na planszę o danym id
@@ -64,7 +68,9 @@ namespace NewGUI {
 
 		//callback do tworzenia front-endowej wersji planszy
 		public static void boardCreated(int boardId) {
-			View.BoardControl view = new View.BoardControl();
+			View.BoardControl view = app.mainWindow.Dispatcher.Invoke(() => {
+				 return new View.BoardControl();
+			});
 			Board board = new Board(boardId, view);
 			List<ShipInfo> list = DllInterface.getShipList(boardId);
 			foreach (var k in list) {
@@ -72,11 +78,11 @@ namespace NewGUI {
 			}
 			if (boardId == 1) {
 				app.board1 = board;
-				app.mainWindow.setLeftControl(view);
+				app.mainWindow.Dispatcher.Invoke(() => app.mainWindow.setLeftControl(view));
 			}
 			else if (boardId == 2) {
 				app.board2 = board;
-				app.mainWindow.setRightControl(view);
+				app.mainWindow.Dispatcher.Invoke(() => app.mainWindow.setRightControl(view));
 			}
 			else
 				throw new ArgumentException("Invalid boardId");
