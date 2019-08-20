@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,8 +43,28 @@ namespace NewGUI {
 
 		//ustawia stan pola 'point' na 'state'
 		public void setState(Point point, ShotResult state) {
-			shotMap[point.y, point.x] = state;
-			view.setState(point, state);
+			if (state == ShotResult.SUNK) {
+				ShipInfo ship = DllInterface.getSquareShip(boardId, point);
+				if (ship.direction == Direction.HORIZONTAL) {
+					for (int i = 0; i < ship.size; i++) {
+						shotMap[ship.point.y, ship.point.x + i] = state;
+						view.setState(ship.point.x + i, ship.point.y, state);
+					}
+				}
+				else if (ship.direction == Direction.VERTICAL) {
+					for (int i = 0; i < ship.size; i++) {
+						shotMap[ship.point.y + i, ship.point.x] = state;
+						view.setState(ship.point.x, ship.point.y + i, state);
+					}
+				}
+				else {
+					throw new InvalidEnumArgumentException("Invalid ShotResult state");
+				}
+			}
+			else {
+				shotMap[point.y, point.x] = state;
+				view.setState(point, state);
+			}
 		}
 	}
 }
