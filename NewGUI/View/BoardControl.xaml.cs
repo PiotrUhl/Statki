@@ -117,11 +117,14 @@ namespace NewGUI.View {
 			stateTab[point.y, point.x].SetValue(Panel.ZIndexProperty, 1);
 			BoardGrid.Children.Add(stateTab[point.y, point.x]);
 		}
-		#endregion
+		public void setState(int x, int y, ShotResult newState) {
+			setState(new Point(x, y), newState);
+		}
+			#endregion
 
-		#region przyciski
-		//generuje niewidzialne przyciski na planszy wywołujące zdarzenie 'onClick'
-		private void generateButtons() {
+			#region przyciski
+			//generuje niewidzialne przyciski na planszy wywołujące zdarzenie 'onClick'
+			private void generateButtons() {
 			for (int i = 0; i < BOARDSIZE; i++) {
 				for (int j = 0; j < BOARDSIZE; j++) {
 					Button button = new Button() {
