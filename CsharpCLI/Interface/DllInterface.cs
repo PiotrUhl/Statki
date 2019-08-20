@@ -71,9 +71,9 @@ namespace CsharpCLI {
 		}
 
 		//zwraca obraz planszy 'boardId'
-		static public unsafe byte[ , ] getBoardImage(int boardId) {
+		static public unsafe byte[,] getBoardImage(int boardId) {
 			byte[,] tab = new byte[BOARDSIZE, BOARDSIZE];
-			fixed (void* ptr = &tab[0,0]) {
+			fixed (void* ptr = &tab[0, 0]) {
 				DllImports.getBoardImage(new IntPtr(ptr), boardId);
 			}
 			return tab;
@@ -85,7 +85,7 @@ namespace CsharpCLI {
 		}
 
 		//zwraca mapę strzałów planszy 'boardId'
-		static public unsafe ShotResult[ , ] getShotMap(int boardId) {
+		static public unsafe ShotResult[,] getShotMap(int boardId) {
 			ShotResult[,] tab = new ShotResult[BOARDSIZE, BOARDSIZE];
 			fixed (void* ptr = &tab[0, 0]) {
 				DllImports.getShotMap(new IntPtr(ptr), boardId);
@@ -100,7 +100,9 @@ namespace CsharpCLI {
 
 		//zwraca informacje o statku leżącym na polu 'point' na planszy 'boardId'
 		static public ShipInfo getSquareShip(int boardId, Point point) {
-			return DllImports.getSquareShip(boardId, point);
+			ShipInfo ret = new ShipInfo();
+			DllImports.getSquareShip(ref ret, boardId, point);
+			return ret;
 		}
 
 		//zwraca listę informacji o wszystkich statkach na planszy 'boardId'

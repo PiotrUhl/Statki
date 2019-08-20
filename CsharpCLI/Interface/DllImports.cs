@@ -57,9 +57,9 @@ namespace CsharpCLI {
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern ShotResult getSquareShot(int boardId, Point point);
 
-		//zwraca informacje o statku leżącym na polu 'point' na planszy 'boardId'
+		//zwraca informacje o statku leżącym na polu 'point' na planszy 'boardId' poprzez parametr 'ret'
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ShipInfo getSquareShip(int boardId, Point point);
+		public static extern void getSquareShip(ref ShipInfo ret, int boardId, Point point);
 
 		//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
