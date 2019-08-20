@@ -117,6 +117,10 @@ namespace NewGUI.View {
 
 		#region stan pola
 		public void setState(Point point, ShotResult newState) {
+			if (stateTab[point.y, point.x] != null) {
+				BoardGrid.Children.Remove(stateTab[point.y, point.x]);
+				stateTab[point.y, point.x] = null;
+			}
 			stateTab[point.y, point.x] = new ShotMarkControl(newState);
 			stateTab[point.y, point.x].SetValue(Grid.ColumnProperty, point.x + 1);
 			stateTab[point.y, point.x].SetValue(Grid.RowProperty, point.y + 1);
