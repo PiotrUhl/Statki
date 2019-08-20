@@ -60,6 +60,7 @@ namespace NewGUI {
 				else {
 					throw new InvalidEnumArgumentException("Invalid ShotResult state");
 				}
+				view.sinkShip(ship);
 			}
 			else {
 				shotMap[point.y, point.x] = state;

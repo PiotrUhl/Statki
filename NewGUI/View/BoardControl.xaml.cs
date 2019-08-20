@@ -51,7 +51,7 @@ namespace NewGUI.View {
 			}
 			Rectangle drawObj = new Rectangle {
 				Margin = new Thickness(5),
-				Stroke = Brushes.Black,
+				//Stroke = Brushes.Black,
 				Fill = Brushes.Black,
 				RadiusX = 30,
 				RadiusY = 30
@@ -106,6 +106,12 @@ namespace NewGUI.View {
 				BoardGrid.Children.Remove(k.Item2);
 			}
 			list.Clear();
+		}
+
+		//zmienia stan statku 'ship' na zatopiony
+		public void sinkShip(ShipInfo ship) {
+			Rectangle drawObj = (Rectangle)list.Find(v => v.Item1.size == ship.size && v.Item1.point.x == ship.point.x && v.Item1.point.y == ship.point.y && v.Item1.direction == ship.direction).Item2;
+			drawObj.Fill = Brushes.LightSlateGray;
 		}
 		#endregion
 
