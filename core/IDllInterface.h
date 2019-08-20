@@ -47,8 +47,8 @@ namespace IDllInterface {
 		__declspec(dllexport) void getShotMap(unsigned char* outbuffer, int boardId);
 		//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
 		__declspec(dllexport) ShotResult getSquareShot(int boardId, Point point);
-		//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
-		__declspec(dllexport) ShipInfo getSquareShip(int boardId, Point point);
+		//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId' poprzez parametr 'ret'
+		__declspec(dllexport) void getSquareShip(ShipInfo& ret , int boardId, Point point);
 		//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
 		__declspec(dllexport) void getShipList(ShipInfo* outbuffer, int boardId);
 		//zwraca liczbê statków na planszy 'boardId'

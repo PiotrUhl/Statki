@@ -61,8 +61,8 @@ public:
 	void getShotMap(unsigned char* outbuffer, int boardId) const;
 	//zwraca informacjê o strzale w pole 'point' na planszy 'boardId'
 	ShotResult getSquareShot(int boardId, Point point) const;
-	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
-	ShipInfo getSquareShip(int boardId, Point point) const;
+	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId' poprzez parametr 'ret'
+	void getSquareShip(ShipInfo& ret, int boardId, Point point) const;
 	//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
 	void getShipList(ShipInfo* outbuffer, int boardId) const;
 	//zwraca liczbê statków na planszy 'boardId'

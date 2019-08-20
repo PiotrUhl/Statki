@@ -100,7 +100,9 @@ namespace NewGUI {
 
 		//zwraca informacje o statku leżącym na polu 'point' na planszy 'boardId'
 		static public ShipInfo getSquareShip(int boardId, Point point) {
-			return DllImports.getSquareShip(boardId, point);
+			ShipInfo ret = new ShipInfo();
+			DllImports.getSquareShip(ref ret, boardId, point);
+			return ret;
 		}
 
 		//zwraca listę informacji o wszystkich statkach na planszy 'boardId'

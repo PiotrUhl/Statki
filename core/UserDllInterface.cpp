@@ -116,8 +116,8 @@ ShotResult UserDllInterface::getSquareShot(int boardId, Point point) const {
 }
 
 //zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
-ShipInfo UserDllInterface::getSquareShip(int boardId, Point point) const {
-	return game->getSquareShip(boardId, point);
+void UserDllInterface::getSquareShip(ShipInfo& ret, int boardId, Point point) const {
+	ret = game->getSquareShip(boardId, point);
 }
 //zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
 void UserDllInterface::getShipList(ShipInfo* outbuffer, int boardId) const {

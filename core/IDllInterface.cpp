@@ -67,9 +67,9 @@ namespace IDllInterface {
 		return UserDllInterface::getInstance().getSquareShot(boardId, point);
 	}
 
-	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId'
-	ShipInfo getSquareShip(int boardId, Point point) {
-		return UserDllInterface::getInstance().getSquareShip(boardId, point);
+	//zwraca informacje o statku le¿¹cym na polu 'point' na planszy 'boardId' poprzez parametr 'ret'
+	void getSquareShip(ShipInfo& ret, int boardId, Point point) {
+		UserDllInterface::getInstance().getSquareShip(ret, boardId, point);
 	}
 	//zapisuje informacje o wszystkich statkach na planszy 'boardId' do bufora 'outbuffer'
 	void getShipList(ShipInfo* outbuffer, int boardId) {
