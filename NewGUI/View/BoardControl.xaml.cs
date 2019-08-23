@@ -132,9 +132,9 @@ namespace NewGUI.View {
 		}
 			#endregion
 
-			#region przyciski
-			//generuje niewidzialne przyciski na planszy wywołujące zdarzenie 'onClick'
-			private void generateButtons() {
+		#region przyciski
+		//generuje niewidzialne przyciski na planszy wywołujące zdarzenie 'onClick'
+		private void generateButtons() {
 			for (int i = 0; i < BOARDSIZE; i++) {
 				for (int j = 0; j < BOARDSIZE; j++) {
 					Button button = new Button() {
@@ -148,10 +148,22 @@ namespace NewGUI.View {
 			}
 		}
 
+
+		//dodaje zdarzenie "onClick" do przycisku w punkcie 'point'
+		public void subscribeButton(Point point, RoutedEventHandler onClick) {
+			foreach (var button in buttonTab) {
+				buttonTab[point.y, point.x].Click += onClick;
+			}
+		}
+		//usuwa zdarzenie "onClick" z przycisku w punkcie 'point'
+		public void unsubscribeButton(Point point, RoutedEventHandler onClick) {
+			foreach (var button in buttonTab) {
+				buttonTab[point.y, point.x].Click -= onClick;
+			}
+		}
 		//dodaje zdarzenie "onClick" do wszystkich przycisków
 		public void subscribeButtons(RoutedEventHandler onClick) {
 			foreach (var button in buttonTab) {
-				button.IsEnabled = true;
 				button.Click += onClick;
 			}
 		}
@@ -159,6 +171,26 @@ namespace NewGUI.View {
 		public void unsubscribeButtons(RoutedEventHandler onClick) {
 			foreach (var button in buttonTab) {
 				button.Click -= onClick;
+			}
+		}
+		//wyłącza przycisk w punkcie 'point'
+		public void disableButton(Point point) {
+			buttonTab[point.y, point.x].IsEnabled = false;
+		}
+		//włącza przycisk w punkcie 'point'
+		public void enableButton(Point point) {
+			buttonTab[point.y, point.x].IsEnabled = true;
+		}
+		//wyłącza wszystkie przyciski
+		public void disableButtons() {
+			foreach (var button in buttonTab) {
+				button.IsEnabled = false;
+			}
+		}
+		//włącza wszystkie przyciski
+		public void enableButtons() {
+			foreach (var button in buttonTab) {
+				button.IsEnabled = true;
 			}
 		}
 		#endregion
