@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 using static NewGUI.Const;
 
 namespace NewGUI {
@@ -66,6 +66,12 @@ namespace NewGUI {
 				shotMap[point.y, point.x] = state;
 				view.Dispatcher.Invoke(() => view.setState(point, state));
 			}
+		}
+
+		//pobiera i zwraca współrzędne strzału w planszę od użytkownika
+		public Point getCoords() {
+			//return view.Dispatcher.Invoke(() => { return view.getCoords(); });
+			return view.getCoords();
 		}
 	}
 }

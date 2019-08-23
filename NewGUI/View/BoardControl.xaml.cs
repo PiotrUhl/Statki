@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,6 +34,9 @@ namespace NewGUI.View {
 		List<Tuple<ShipInfo, UIElement>> list = new List<Tuple<ShipInfo, UIElement>>(); //statki na planszy
 		Button[ , ] buttonTab = new Button[BOARDSIZE, BOARDSIZE];
 		ShotMarkControl[ , ] stateTab = new ShotMarkControl[BOARDSIZE, BOARDSIZE];
+
+		Point lastShot;
+		public AutoResetEvent waitingForCoords = new AutoResetEvent(false);
 		#endregion
 
 		//konstruktor
@@ -41,6 +45,7 @@ namespace NewGUI.View {
             InitializeComponent();
 			//Children = BoardGrid.Children;
 			generateButtons();
+			lastShot = new Point(BOARDSIZE, BOARDSIZE);
 		}
 
 		#region statki
@@ -144,8 +149,10 @@ namespace NewGUI.View {
 					button.SetValue(Grid.ColumnProperty, j + 1);
 					button.SetValue(Grid.RowProperty, i + 1);
 					buttonTab[i, j] = button;
+					BoardGrid.Children.Add(button);
 				}
 			}
+			//subscribeButtons(App.debugShot); //debug
 		}
 
 
@@ -194,5 +201,24 @@ namespace NewGUI.View {
 			}
 		}
 		#endregion
+
+		//pobiera współrzędne strzału od użytkownika
+		public Point getCoords() {
+			if (lastShot == new Point(BOARDSIZE, BOARDSIZE)) {
+				subscribeButtons(eventShot);
+			}
+			Dispatcher.Invoke(() => enableButtons());
+			waitingForCoords.WaitOne();
+			Dispatcher.Invoke(() => disableButtons());
+			unsubscribeButton(lastShot, eventShot);
+			return lastShot;
+		}
+		private void eventShot(object sender, RoutedEventArgs e) {
+			Button target = (Button)sender;
+			lastShot.x = (int)target.GetValue(Grid.ColumnProperty) - 1;
+			lastShot.y = (int)target.GetValue(Grid.RowProperty) - 1;
+			unsubscribeButton(lastShot, eventShot);
+			waitingForCoords.Set();
+		}
 	}
 }

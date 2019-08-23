@@ -65,6 +65,16 @@ namespace NewGUI {
 			else
 				throw new ArgumentException("Invalid boardId");
 		}
+		//zwraca referencję na planszę NIE o danym id
+		private Board notSelectBoard(int boardId) {
+			if (boardId == 1)
+				return board2;
+			else if (boardId == 2)
+				return board1;
+			else
+				throw new ArgumentException("Invalid boardId");
+		}
+
 
 		//callback do tworzenia front-endowej wersji planszy
 		public static void boardCreated(int boardId) {
@@ -95,7 +105,8 @@ namespace NewGUI {
 
 		//callback do pobierania współrzędnych strzału
 		public static Point getCoords() {
-			return new Point(0, 0); //temp
+			//return new Point(0, 0);
+			return app.notSelectBoard(DllInterface.getCurrentPlayer()).getCoords();
 		}
 
 		//callback
@@ -127,7 +138,7 @@ namespace NewGUI {
 		public static void debugShot(object sender, RoutedEventArgs e) {
 			int x = (int)((Button)sender).GetValue(Grid.ColumnProperty);
 			int y = (int)((Button)sender).GetValue(Grid.RowProperty);
-			MessageBox.Show("Kliknięto pole (" + x + "," + y + ").");
+			MessageBox.Show("Kliknięto pole (" + x + "," + y + ").", "Shot debug");
 		}
 	}
 }
