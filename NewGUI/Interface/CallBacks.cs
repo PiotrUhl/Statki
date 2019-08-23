@@ -24,6 +24,10 @@ namespace NewGUI {
 		//event - ukończono tworzenie planszy 'boardId'
 		[MarshalAs(UnmanagedType.FunctionPtr)]
 		public DllExports.Dg_void_int dll_event_boardCreated;
+
+		//event - gra zakończona wynikiem 'result'
+		[MarshalAs(UnmanagedType.FunctionPtr)]
+		public DllExports.Dg_void_int dll_event_gameEnded;
 	}
 
 }

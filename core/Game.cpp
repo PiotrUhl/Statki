@@ -140,9 +140,9 @@ void Game::initialization() {
 
 //czêœæ gry - g³ówna pêtla
 char Game::loop() {
-	char winner = 0;
+	char winner = -1;
 	//toadd: losowy wybór rozpoczynaj¹cego gracza
-	while (winner == 0) {
+	while (winner == -1) {
 		currentPlayer = 1;
 		player1->move();
 		lastShotBoard = 2;
@@ -155,7 +155,7 @@ char Game::loop() {
 		//mainInterface.sendShotInfo(1, player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
-				winner = 3; //remis
+				winner = 0; //remis
 			}
 			else {
 				winner = 1; //wygrywa gracz 1
@@ -171,12 +171,13 @@ char Game::loop() {
 
 //czêœæ gry - zakoñczenie
 void Game::ending(char winner) {
-	if (winner == 1)
+	/*if (winner == 1)
 		mainInterface.msg("Wygrana", MsgType::INFO, false);
 	else if (winner == 2)
 		mainInterface.msg("Przegrana", MsgType::INFO, false);
 	else
-		mainInterface.msg("Remis", MsgType::INFO, false);
+		mainInterface.msg("Remis", MsgType::INFO, false);*/
+	mainInterface.event_gameEnded(winner);
 }
 
 //#include "UserDllInterface.h"

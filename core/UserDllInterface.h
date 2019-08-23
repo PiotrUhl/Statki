@@ -32,6 +32,8 @@ public:
 	void event_playerMoved(int playerId) override;
 	//event - ukoñczono tworzenie planszy 'boardId'
 	void event_boardCreated(int boardId) override;
+	//event - gra zakoñczona wynikiem 'result'
+	void event_gameEnded(int result) override;
 #pragma endregion
 #pragma region IDLLInterface
 	//uruchamia grê

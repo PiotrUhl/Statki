@@ -14,6 +14,7 @@ namespace NewGUI {
 			callBacks.dll_call_getCoords = ov_call_getCoords;
 			callBacks.dll_event_playerMoved = ov_event_playerMoved;
 			callBacks.dll_event_boardCreated = ov_event_boardCreated;
+			callBacks.dll_event_gameEnded = ov_event_gameEnded;
 		}
 
 		#region delegates
@@ -27,6 +28,8 @@ namespace NewGUI {
 		public DllExports.Dg_void_int event_playerMoved;
 		//event - ukończono tworzenie planszy 'boardId'
 		public DllExports.Dg_void_int event_boardCreated;
+		//event - gra zakończona wynikiem 'result'
+		public DllExports.Dg_void_int event_gameEnded;
 		#endregion
 
 		#region overwriters
@@ -46,6 +49,9 @@ namespace NewGUI {
 		}
 		public void ov_event_boardCreated(int boardId) {
 			event_boardCreated(boardId);
+		}
+		public void ov_event_gameEnded(int result) {
+			event_gameEnded(result);
 		}
 		#endregion
 

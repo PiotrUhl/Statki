@@ -36,6 +36,12 @@ void UserDllInterface::event_boardCreated(int boardId) {
 		callBack.out_event_boardCreated(boardId);
 }
 
+//event - gra zakoñczona wynikiem 'result'
+void UserDllInterface::event_gameEnded(int result) {
+	if (callBack.out_event_gameEnded != nullptr)
+		callBack.out_event_gameEnded(result);
+}
+
 #pragma endregion
 #pragma region IDLLInterface
 

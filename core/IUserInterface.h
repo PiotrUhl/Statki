@@ -16,4 +16,6 @@ public:
 	virtual void event_playerMoved(int playerId) = 0;
 	//event - ukoñczono tworzenie planszy 'boardId'
 	virtual void event_boardCreated(int boardId) = 0;
+	//event - gra zakoñczona wynikiem 'result'
+	virtual void event_gameEnded(int result) = 0;
 };

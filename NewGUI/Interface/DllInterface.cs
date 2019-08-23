@@ -19,6 +19,7 @@ namespace NewGUI {
 		static public void setCall_enterPlannerMode(DllExports.Dg_void_void dg) { dllExports.call_enterPlannerMode = dg; }
 		static public void setEvent_playerMoved(DllExports.Dg_void_int dg) { dllExports.event_playerMoved = dg; }
 		static public void setEvent_boardCreated(DllExports.Dg_void_int dg) { dllExports.event_boardCreated = dg; }
+		static public void setEvent_gameEnded(DllExports.Dg_void_int dg) { dllExports.event_gameEnded = dg; }
 		#endregion
 
 		#region dllFunctions

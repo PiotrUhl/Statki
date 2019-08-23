@@ -45,6 +45,7 @@ namespace NewGUI {
 			DllInterface.setCall_getCoords(getCoords);
 			DllInterface.setEvent_boardCreated(boardCreated);
 			DllInterface.setEvent_playerMoved(playerMoved);
+			DllInterface.setEvent_gameEnded(gameEnded);
 		}
 
 		//rozpoczyna grę
@@ -138,6 +139,21 @@ namespace NewGUI {
 					break;
 				default:
 					throw new InvalidEnumArgumentException("Invalid message type");
+			}
+		}
+
+		//callback
+		public static void gameEnded(int winner) {
+			app.board1.showAllShips();
+			app.board2.showAllShips();
+			if (winner == 1) {
+				MessageBox.Show("Wygrana", "Koniec gry", MessageBoxButton.OK, MessageBoxImage.Information);
+			}
+			else if (winner == 2) {
+				MessageBox.Show("Przegrana", "Koniec gry", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			else {
+				MessageBox.Show("Remis", "Koniec gry", MessageBoxButton.OK, MessageBoxImage.Warning);
 			}
 		}
 

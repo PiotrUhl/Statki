@@ -17,6 +17,8 @@ namespace IDllInterface {
 		void(__stdcall *out_event_playerMoved)(int playerId);
 		//event - ukoñczono tworzenie planszy 'boardId'
 		void(__stdcall *out_event_boardCreated)(int boardId);
+		//event - gra zakoñczona wynikiem 'result'
+		void(__stdcall *out_event_gameEnded)(int result);
 	};
 
 	extern "C" {
