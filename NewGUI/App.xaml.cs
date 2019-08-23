@@ -21,6 +21,10 @@ namespace NewGUI {
 		Board board1;
 		Board board2;
 
+		//widoczność plansz
+		bool board1visibility;
+		bool board2visibility;
+
 		App() {
 			InitializeComponent();
 		}
@@ -50,6 +54,8 @@ namespace NewGUI {
 				player1type = PlayerType.HUMAN,
 				player2type = PlayerType.AI
 			};
+			board1visibility = true;
+			board2visibility = false;
 			MessageBox.Show("Game started"); //debug
 			coreThread = new Thread(() => DllInterface.runProgram(initData));
 			coreThread.IsBackground = true;
@@ -75,13 +81,22 @@ namespace NewGUI {
 				throw new ArgumentException("Invalid boardId");
 		}
 
-
 		//callback do tworzenia front-endowej wersji planszy
 		public static void boardCreated(int boardId) {
 			View.BoardControl view = app.mainWindow.Dispatcher.Invoke(() => {
 				 return new View.BoardControl();
 			});
-			Board board = new Board(boardId, view);
+			bool visibility;
+			if (boardId == 1) {
+				visibility = app.board1visibility;
+			}
+			else if (boardId == 2) {
+				visibility = app.board2visibility;
+			}
+			else {
+				throw new ArgumentException("Incorrect board id");
+			}
+			Board board = new Board(boardId, visibility, view);
 			List<ShipInfo> list = DllInterface.getShipList(boardId);
 			foreach (var k in list) {
 				board.add(k);

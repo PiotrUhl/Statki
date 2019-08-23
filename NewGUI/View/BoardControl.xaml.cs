@@ -51,7 +51,10 @@ namespace NewGUI.View {
 		#region statki
 		//dodaje statek na planszę
 		public void addShip(ShipInfo ship) {
-			if (list.Exists(v => (v.Item1.point.x == ship.point.x && v.Item1.point.y == ship.point.y))) {
+			if (list.Exists(v => v.Item1 == ship)) {
+				return;
+			}
+			else if (list.Exists(v => (v.Item1.point.x == ship.point.x && v.Item1.point.y == ship.point.y))) {
 				throw new ArgumentException("Square already occupied");
 			}
 			Rectangle drawObj = new Rectangle {
@@ -143,7 +146,8 @@ namespace NewGUI.View {
 			for (int i = 0; i < BOARDSIZE; i++) {
 				for (int j = 0; j < BOARDSIZE; j++) {
 					Button button = new Button() {
-						Opacity = 0
+						Opacity = 0,
+						IsEnabled = false
 					};
 					button.SetValue(Panel.ZIndexProperty, 2);
 					button.SetValue(Grid.ColumnProperty, j + 1);
