@@ -34,6 +34,10 @@ public:
 	void event_boardCreated(int boardId) override;
 	//event - gra zakoñczona wynikiem 'result'
 	void event_gameEnded(int result) override;
+	//event - rozpoczêto pierwsz¹ fazê gry - tworzenie plansz
+	void out_event_faze1Started() override;
+	//event - rozpoczêto drug¹ fazê gry - strzelanie
+	void out_event_faze2Started() override;
 #pragma endregion
 #pragma region IDLLInterface
 	//uruchamia grê

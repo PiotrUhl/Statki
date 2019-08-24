@@ -42,6 +42,18 @@ void UserDllInterface::event_gameEnded(int result) {
 		callBack.out_event_gameEnded(result);
 }
 
+//event - rozpoczêto pierwsz¹ fazê gry - tworzenie plansz
+void UserDllInterface::out_event_faze1Started() {
+	if (callBack.out_event_faze1Started != nullptr)
+		callBack.out_event_faze1Started();
+}
+
+//event - rozpoczêto drug¹ fazê gry - strzelanie
+void UserDllInterface::out_event_faze2Started() {
+	if (callBack.out_event_faze2Started != nullptr)
+		callBack.out_event_faze2Started();
+}
+
 #pragma endregion
 #pragma region IDLLInterface
 

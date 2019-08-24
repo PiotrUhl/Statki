@@ -15,6 +15,8 @@ namespace NewGUI {
 			callBacks.dll_event_playerMoved = ov_event_playerMoved;
 			callBacks.dll_event_boardCreated = ov_event_boardCreated;
 			callBacks.dll_event_gameEnded = ov_event_gameEnded;
+			callBacks.dll_event_faze1Started = ov_event_faze1Started;
+			callBacks.dll_event_faze2Started = ov_event_faze2Started;
 		}
 
 		#region delegates
@@ -30,6 +32,10 @@ namespace NewGUI {
 		public DllExports.Dg_void_int event_boardCreated;
 		//event - gra zakończona wynikiem 'result'
 		public DllExports.Dg_void_int event_gameEnded;
+		//event - rozpoczęto pierwszą fazę gry - tworzenie plansz
+		public DllExports.Dg_void_void event_faze1Started;
+		//event - rozpoczęto drugą fazę gry - strzelanie
+		public DllExports.Dg_void_void event_faze2Started;
 		#endregion
 
 		#region overwriters
@@ -45,13 +51,19 @@ namespace NewGUI {
 			call_enterPlannerMode();
 		}
 		public void ov_event_playerMoved(int playerId) {
-			event_playerMoved(playerId);
+			event_playerMoved?.Invoke(playerId);
 		}
 		public void ov_event_boardCreated(int boardId) {
-			event_boardCreated(boardId);
+			event_boardCreated?.Invoke(boardId);
 		}
 		public void ov_event_gameEnded(int result) {
-			event_gameEnded(result);
+			event_gameEnded?.Invoke(result);
+		}
+		public void ov_event_faze1Started() {
+			event_faze1Started?.Invoke();
+		}
+		public void ov_event_faze2Started() {
+			event_faze2Started?.Invoke();
 		}
 		#endregion
 

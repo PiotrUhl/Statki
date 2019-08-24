@@ -28,6 +28,14 @@ namespace NewGUI {
 		//event - gra zakończona wynikiem 'result'
 		[MarshalAs(UnmanagedType.FunctionPtr)]
 		public DllExports.Dg_void_int dll_event_gameEnded;
+
+		//event - rozpoczęto pierwszą fazę gry - tworzenie plansz
+		[MarshalAs(UnmanagedType.FunctionPtr)]
+		public DllExports.Dg_void_void dll_event_faze1Started;
+
+		//event - rozpoczęto drugą fazę gry - strzelanie
+		[MarshalAs(UnmanagedType.FunctionPtr)]
+		public DllExports.Dg_void_void dll_event_faze2Started;
 	}
 
 }

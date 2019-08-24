@@ -119,6 +119,7 @@ int Game::getShipCount(int boardId) const {
 //czêœæ gry - inicjalizacja
 void Game::initialization() {
 	//Tworzenie plansz graczy i kontrola poprawnoœci
+	mainInterface.out_event_faze1Started(); //informacja o rozpoczêciu fazy pierwszej
 	board1 = CreatorBoard(mainInterface).makeBoard(player1Type);
 	if (board1 == nullptr)
 		mainInterface.msg("An error has occured during initialization board for player 1", MsgType::ERROR, true);
@@ -140,6 +141,7 @@ void Game::initialization() {
 
 //czêœæ gry - g³ówna pêtla
 char Game::loop() {
+	mainInterface.out_event_faze2Started(); //informacja o rozpoczêciu fazy drugiej
 	char winner = -1;
 	//toadd: losowy wybór rozpoczynaj¹cego gracza
 	while (winner == -1) {
@@ -147,12 +149,10 @@ char Game::loop() {
 		player1->move();
 		lastShotBoard = 2;
 		mainInterface.event_playerMoved(1);
-		//mainInterface.sendShotInfo(2, player1->getLastShotPoint(), player1->getLastShotResult());
 		currentPlayer = 2;
 		player2->move();
 		lastShotBoard = 1;
 		mainInterface.event_playerMoved(2);
-		//mainInterface.sendShotInfo(1, player2->getLastShotPoint(), player2->getLastShotResult());
 		if (board2->getUnsunkShips() == 0) { //je¿eli wszystkie statki na planszy 2 s¹ zatopione
 			if (board1->getUnsunkShips() == 0) { //oraz wszystkie statki na planszy 1 s¹ zatopione
 				winner = 0; //remis
@@ -171,12 +171,6 @@ char Game::loop() {
 
 //czêœæ gry - zakoñczenie
 void Game::ending(char winner) {
-	/*if (winner == 1)
-		mainInterface.msg("Wygrana", MsgType::INFO, false);
-	else if (winner == 2)
-		mainInterface.msg("Przegrana", MsgType::INFO, false);
-	else
-		mainInterface.msg("Remis", MsgType::INFO, false);*/
 	mainInterface.event_gameEnded(winner);
 }
 

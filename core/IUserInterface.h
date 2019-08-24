@@ -18,4 +18,8 @@ public:
 	virtual void event_boardCreated(int boardId) = 0;
 	//event - gra zakoñczona wynikiem 'result'
 	virtual void event_gameEnded(int result) = 0;
+	//event - rozpoczêto pierwsz¹ fazê gry - tworzenie plansz
+	virtual void out_event_faze1Started() = 0;
+	//event - rozpoczêto drug¹ fazê gry - strzelanie
+	virtual void out_event_faze2Started() = 0;
 };
