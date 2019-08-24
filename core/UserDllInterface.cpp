@@ -26,32 +26,27 @@ Point UserDllInterface::getShotCoords() {
 
 //event - ruch gracza 'playerId'
 void UserDllInterface::event_playerMoved(int playerId) {
-	if (callBack.out_event_playerMoved != nullptr)
-		callBack.out_event_playerMoved(playerId);
+	callBack.out_event_playerMoved(playerId);
 }
 
 //event - ukoñczono tworzenie planszy 'boardId'
 void UserDllInterface::event_boardCreated(int boardId) {
-	if (callBack.out_event_boardCreated != nullptr)
-		callBack.out_event_boardCreated(boardId);
+	callBack.out_event_boardCreated(boardId);
 }
 
 //event - gra zakoñczona wynikiem 'result'
 void UserDllInterface::event_gameEnded(int result) {
-	if (callBack.out_event_gameEnded != nullptr)
-		callBack.out_event_gameEnded(result);
+	callBack.out_event_gameEnded(result);
 }
 
 //event - rozpoczêto pierwsz¹ fazê gry - tworzenie plansz
 void UserDllInterface::out_event_faze1Started() {
-	if (callBack.out_event_faze1Started != nullptr)
-		callBack.out_event_faze1Started();
+	callBack.out_event_faze1Started();
 }
 
 //event - rozpoczêto drug¹ fazê gry - strzelanie
 void UserDllInterface::out_event_faze2Started() {
-	if (callBack.out_event_faze2Started != nullptr)
-		callBack.out_event_faze2Started();
+	callBack.out_event_faze2Started();
 }
 
 #pragma endregion
