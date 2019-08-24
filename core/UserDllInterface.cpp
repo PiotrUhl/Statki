@@ -69,10 +69,15 @@ bool UserDllInterface::checkShipPlacement(int shipSize, Point point, Direction d
 bool UserDllInterface::placeShip(int shipSize, Point point, Direction direction) {
 	return currentPlanner->place(shipSize, point, direction);
 }
+
+//usuwa statek z punktu 'point'
+bool UserDllInterface::removeShip(Point point) {
+	return currentPlanner->remove(point);
+}
+
 #include "PlannerLocalAI.h"
 //wype³nia planszê losowo u¿ywaj¹c algorytmu
 void UserDllInterface::fillRandom() {
-	//throw "Not yet implemented!"; //undone: UserDllInterface::fillRandom()
 	PlannerLocalAI temp(currentPlanner->getBoard());
 	temp.makeBoard();
 }

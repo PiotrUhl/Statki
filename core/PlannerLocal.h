@@ -11,6 +11,8 @@ public:
 	bool checkPlacement(int shipSize, Point point, Direction direction);
 	//umieszcza statkek o rozmiarze 'shipSize' w 'point', w kierunku 'direction'; zwraca rezultat
 	bool place(int shipSize, Point point, Direction direction);
+	//usuwa statek le¿¹cy na polu 'point'
+	bool remove(Point point);
 	//zwraca obraz tworzonej planszy
 	boost::multi_array<unsigned char, 2> getImage();
 	//zwraca tworzon¹ planszê

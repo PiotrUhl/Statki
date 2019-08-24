@@ -46,6 +46,8 @@ public:
 	bool checkShipPlacement(int shipSize, Point point, Direction direction);
 	//umieszcza statkek o rozmiarze 'shipSize' w polu 'point', w kierunku 'direction'; zwraca rezultat
 	bool placeShip(int shipSize, Point point, Direction direction);
+	//usuwa statek z punktu 'point'
+	bool removeShip(Point point);
 	//wype³nia planszê losowo u¿ywaj¹c algorytmu
 	void fillRandom();
 

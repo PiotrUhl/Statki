@@ -19,6 +19,13 @@ namespace IDllInterface {
 		return ret;
 	}
 
+	//usuwa statek z punktu 'point'
+	bool removeShip(Point point) {
+		bool ret = UserDllInterface::getInstance().removeShip(point);
+		__asm XOR EAX, EAX;
+		return ret;
+	}
+
 	//wype³nia planszê losowo u¿ywaj¹c algorytmu
 	void fillRandom() {
 		UserDllInterface::getInstance().fillRandom();

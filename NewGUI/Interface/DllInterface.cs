@@ -41,6 +41,11 @@ namespace NewGUI {
 			return DllImports.placeShip(shipSize, point, direction);
 		}
 
+		//usuwa statek z punktu 'point'
+		static public bool removeShip(Point point) {
+			return DllImports.removeShip(point);
+		}
+
 		//wypełnia planszę losowo używając algorytmu
 		static public void fillRandom() {
 			DllImports.fillRandom();

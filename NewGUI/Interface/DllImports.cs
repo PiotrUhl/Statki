@@ -17,6 +17,11 @@ namespace NewGUI {
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern bool placeShip(int shipSize, Point point, Direction direction);
 
+		//usuwa statek z punktu 'point'
+		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
+		public static extern bool removeShip(Point point);
+
+
 		//wypełnia planszę losowo używając algorytmu
 		[DllImport("core.dll", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void fillRandom();

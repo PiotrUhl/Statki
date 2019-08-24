@@ -38,6 +38,11 @@ bool PlannerLocal::place(int shipSize, Point point, Direction direction) {
 	return board.placeShip(shipSize, point, direction);
 }
 
+//usuwa statek le¿¹cy na polu 'point'
+bool PlannerLocal::remove(Point point) {
+	return board.removeShip(point);
+}
+
 //zwraca obraz tworzonej planszy
 boost::multi_array<unsigned char, 2> PlannerLocal::getImage() {
 	return board.getImage();
